@@ -1,0 +1,95 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "nullworx-g5a",
+  "homepage": "http://127.0.0.1:3102",
+  "items": [
+    {
+      "name": "living-type-01",
+      "type": "registry:block",
+      "title": "NULLWORX / Living Type 01",
+      "description": "An installable procedural wordmark: editable type, three Paper Shaders art directions, validated recipes, accessible text and a static WebGL fallback. EXPERIMENTAL / OWNER_REVIEW.",
+      "author": "Nullworx",
+      "dependencies": [
+        "@paper-design/shaders-react@0.0.82"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/nullworx/living-type-01/living-type.tsx",
+          "type": "registry:file",
+          "target": "components/living-type-01/living-type.tsx"
+        },
+        {
+          "path": "registry/nullworx/living-type-01/living-type.module.css",
+          "type": "registry:file",
+          "target": "components/living-type-01/living-type.module.css"
+        },
+        {
+          "path": "registry/nullworx/living-type-01/living-type-font.css",
+          "type": "registry:file",
+          "target": "components/living-type-01/living-type-font.css"
+        },
+        {
+          "path": "registry/nullworx/living-type-01/living-type-recipe.ts",
+          "type": "registry:file",
+          "target": "components/living-type-01/living-type-recipe.ts"
+        },
+        {
+          "path": "registry/nullworx/living-type-01/living-type-mask.ts",
+          "type": "registry:file",
+          "target": "components/living-type-01/living-type-mask.ts"
+        },
+        {
+          "path": "registry/nullworx/living-type-01/living-type.recipe.example.json",
+          "type": "registry:file",
+          "target": "components/living-type-01/living-type.recipe.example.json"
+        },
+        {
+          "path": "registry/nullworx/living-type-01/living-type.recipe.schema.json",
+          "type": "registry:file",
+          "target": "components/living-type-01/living-type.recipe.schema.json"
+        },
+        {
+          "path": "registry/nullworx/living-type-01/README.md",
+          "type": "registry:file",
+          "target": "components/living-type-01/README.md"
+        },
+        {
+          "path": "registry/nullworx/living-type-01/THIRD_PARTY_NOTICES.md",
+          "type": "registry:file",
+          "target": "components/living-type-01/THIRD_PARTY_NOTICES.md"
+        },
+        {
+          "path": "registry/nullworx/living-type-01/PAPER_SHADERS_LICENSE.txt",
+          "type": "registry:file",
+          "target": "components/living-type-01/PAPER_SHADERS_LICENSE.txt"
+        },
+        {
+          "path": "registry/nullworx/living-type-01/PAPER_SHADERS_NOTICE.txt",
+          "type": "registry:file",
+          "target": "components/living-type-01/PAPER_SHADERS_NOTICE.txt"
+        },
+        {
+          "path": "registry/nullworx/living-type-01/UNBOUNDED_OFL.txt",
+          "type": "registry:file",
+          "target": "components/living-type-01/UNBOUNDED_OFL.txt"
+        }
+      ],
+      "docs": "Installable wordmark composition. Read components/living-type-01/README.md before use. EXPERIMENTAL / OWNER_REVIEW; no public registry admission.",
+      "categories": [
+        "text",
+        "effects",
+        "experimental"
+      ],
+      "meta": {
+        "status": "EXPERIMENTAL",
+        "ownerReview": true,
+        "product": "NULLWORX / LIVING TYPE 01",
+        "schemaVersion": "1.0.0",
+        "effectVersion": "1.0.0",
+        "font": "Unbounded Variable 5.3.0 ASCII subset (OFL-1.1), embedded",
+        "material": "@paper-design/shaders-react 0.0.82 (Apache-2.0)"
+      }
+    }
+  ]
+}

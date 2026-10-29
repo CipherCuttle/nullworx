@@ -1,0 +1,80 @@
+{
+  "generatedAt": "2026-10-29T21:52:22.297Z",
+  "viewport": {
+    "width": 390,
+    "height": 844,
+    "deviceScaleFactor": 2
+  },
+  "consumers": [
+    {
+      "label": "next",
+      "url": "http://127.0.0.1:3201/",
+      "info": {
+        "attrs": {
+          "data-living-type": "living-type-01",
+          "data-preset": "night-bloom",
+          "data-renderer": "shader",
+          "data-webgl": "ready",
+          "data-mask-state": "ready",
+          "data-mask-support": "supported",
+          "data-mask-key": "2d342272",
+          "data-font-state": "loaded",
+          "data-paused": "false",
+          "data-reduced": "false",
+          "data-text": "NULLWORX",
+          "data-mask-engine": "canvas-letter-spacing",
+          "data-mask-width": "652",
+          "data-mask-height": "207"
+        },
+        "rect": {
+          "x": 32,
+          "width": 326,
+          "height": 103.484375
+        },
+        "dpr": 2,
+        "scrollWidth": 390,
+        "innerWidth": 390,
+        "canvas": {
+          "width": 326,
+          "height": 103
+        }
+      },
+      "errors": []
+    },
+    {
+      "label": "vite",
+      "url": "http://127.0.0.1:3202/",
+      "info": {
+        "attrs": {
+          "data-living-type": "living-type-01",
+          "data-preset": "night-bloom",
+          "data-renderer": "shader",
+          "data-webgl": "ready",
+          "data-mask-state": "ready",
+          "data-mask-support": "supported",
+          "data-mask-key": "2d342272",
+          "data-font-state": "loaded",
+          "data-paused": "false",
+          "data-reduced": "false",
+          "data-text": "NULLWORX",
+          "data-mask-engine": "canvas-letter-spacing",
+          "data-mask-width": "652",
+          "data-mask-height": "207"
+        },
+        "rect": {
+          "x": 32,
+          "width": 326,
+          "height": 103.484375
+        },
+        "dpr": 2,
+        "scrollWidth": 390,
+        "innerWidth": 390,
+        "canvas": {
+          "width": 326,
+          "height": 103
+        }
+      },
+      "errors": []
+    }
+  ]
+}

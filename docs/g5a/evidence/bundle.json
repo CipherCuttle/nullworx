@@ -1,0 +1,34 @@
+{
+  "generatedAt": "2026-10-29T22:02:41.174Z",
+  "consumers": {
+    "next": {
+      "jsTransferBytes": 197452,
+      "jsDecodedBytes": 651929,
+      "cssTransferBytes": 29990,
+      "cssDecodedBytes": 41353,
+      "paperLazyChunkTransferBytes": 83245,
+      "firstLoadJsKb": 111,
+      "fonts": [],
+      "faviconBytesExcluded": 9592
+    },
+    "vite": {
+      "jsTransferBytes": 74980,
+      "jsDecodedBytes": 234164,
+      "cssTransferBytes": 29549,
+      "cssDecodedBytes": 41078,
+      "paperLazyChunkTransferBytes": 8461,
+      "fonts": []
+    },
+    "hostDemo": {
+      "jsTransferBytes": 205629,
+      "cssTransferBytes": 37614,
+      "fontRequests": 2,
+      "fontTransferBytes": 52996,
+      "note": "Host demo also serves Geist fonts; not the customer bundle."
+    }
+  },
+  "fontCssBytes": 36582,
+  "fontSubsetBytes": 27892,
+  "registryItemBytes": 139265,
+  "note": "Browser resource timing after shader ready; compression is served by the local production servers. No blanket performance claim."
+}

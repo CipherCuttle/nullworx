@@ -1,0 +1,123 @@
+{
+  "generatedAt": "2026-10-29T21:53:39.604Z",
+  "method": "Headed Chromium on DISPLAY :0, same browser, 1440x900 viewport, DPR1, alternating rounds, 1s warmup + 5000ms rAF cadence. rAF cadence is not GPU frame time.",
+  "browser": "156.0.8078.47",
+  "baseline": {
+    "origin": "http://127.0.0.1:3300/labs/composition",
+    "recipe": "d-wordmark-paper",
+    "stage": {
+      "width": 745,
+      "height": 166.59375
+    },
+    "gpu": {
+      "webgl2": true,
+      "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4060 Laptop GPU/PCIe/SSE2, OpenGL ES 3.2)",
+      "vendor": "Google Inc. (NVIDIA Corporation)",
+      "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
+    },
+    "rounds": [
+      {
+        "samples": 719,
+        "medianMs": 7,
+        "p95Ms": 7.1,
+        "p99Ms": 7.2,
+        "maxMs": 9.2,
+        "over33ms": 0,
+        "over50ms": 0,
+        "over100ms": 0,
+        "averageFps": 143.7,
+        "impliedHz": 142.9
+      },
+      {
+        "samples": 713,
+        "medianMs": 7,
+        "p95Ms": 7.1,
+        "p99Ms": 9.4,
+        "maxMs": 20.9,
+        "over33ms": 0,
+        "over50ms": 0,
+        "over100ms": 0,
+        "averageFps": 142.4,
+        "impliedHz": 142.9
+      },
+      {
+        "samples": 710,
+        "medianMs": 7,
+        "p95Ms": 7.1,
+        "p99Ms": 7.1,
+        "maxMs": 48.6,
+        "over33ms": 1,
+        "over50ms": 0,
+        "over100ms": 0,
+        "averageFps": 141.9,
+        "impliedHz": 142.9
+      }
+    ],
+    "medianOfMediansMs": 7,
+    "over50Total": 0,
+    "sustainedOver50": false
+  },
+  "exported": {
+    "origin": "http://127.0.0.1:3201/measure",
+    "recipe": "D-equivalent recipe through the shadcn-installed Living Type 01",
+    "stage": {
+      "width": 738,
+      "height": 147.59375
+    },
+    "gpu": {
+      "webgl2": true,
+      "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4060 Laptop GPU/PCIe/SSE2, OpenGL ES 3.2)",
+      "vendor": "Google Inc. (NVIDIA Corporation)",
+      "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
+    },
+    "rounds": [
+      {
+        "samples": 715,
+        "medianMs": 7,
+        "p95Ms": 7.1,
+        "p99Ms": 8,
+        "maxMs": 27.7,
+        "over33ms": 0,
+        "over50ms": 0,
+        "over100ms": 0,
+        "averageFps": 142.8,
+        "impliedHz": 142.9
+      },
+      {
+        "samples": 719,
+        "medianMs": 7,
+        "p95Ms": 7.1,
+        "p99Ms": 7.1,
+        "maxMs": 13.9,
+        "over33ms": 0,
+        "over50ms": 0,
+        "over100ms": 0,
+        "averageFps": 143.7,
+        "impliedHz": 142.9
+      },
+      {
+        "samples": 722,
+        "medianMs": 6.9,
+        "p95Ms": 7,
+        "p99Ms": 7.1,
+        "maxMs": 7.2,
+        "over33ms": 0,
+        "over50ms": 0,
+        "over100ms": 0,
+        "averageFps": 144.2,
+        "impliedHz": 144.9
+      }
+    ],
+    "medianOfMediansMs": 7,
+    "over50Total": 0,
+    "sustainedOver50": false
+  },
+  "comparison": {
+    "medianRegressionPct": 0,
+    "over25PctMedianRegression": false,
+    "newSustainedLongFrames": false,
+    "note": "A negative regression means the exported composition had a lower median frame interval. No display-refresh or FPS claim is made."
+  },
+  "errors": [],
+  "pass": true
+}

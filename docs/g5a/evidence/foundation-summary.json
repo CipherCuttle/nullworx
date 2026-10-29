@@ -1,0 +1,21 @@
+{
+  "generatedAt": "2026-10-29T22:02:41.174Z",
+  "gallery": {
+    "checks": 43,
+    "passed": 43
+  },
+  "effects": {
+    "checks": 62,
+    "passed": 62
+  },
+  "composition": {
+    "checks": 149,
+    "passed": 149
+  },
+  "contracts": {
+    "effect": 24,
+    "composition": 26,
+    "g5a": 45
+  },
+  "note": "Final frozen-build rerun against the G5-A production build."
+}

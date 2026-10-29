@@ -1,0 +1,94 @@
+{
+  "generatedAt": "2026-10-29T21:50:47.872Z",
+  "engine": "chromium",
+  "mode": "full",
+  "checks": 137,
+  "failures": 0,
+  "passed": true,
+  "failureDetails": [],
+  "findings": [
+    {
+      "name": "chromium-next-frame-cadence",
+      "detail": "headless virtual clock; {\"samples\":133,\"medianMs\":16.7,\"p95Ms\":16.7,\"p99Ms\":16.8,\"maxMs\":16.8,\"over33\":0,\"over50\":0,\"over100\":0,\"impliedHz\":59.9}"
+    },
+    {
+      "name": "chromium-next-lifecycle",
+      "detail": "{\"before\":{\"created\":4,\"lost\":3,\"live\":1},\"after\":{\"created\":14,\"lost\":13,\"live\":1},\"heap\":7572976}"
+    },
+    {
+      "name": "chromium-vite-frame-cadence",
+      "detail": "headless virtual clock; {\"samples\":133,\"medianMs\":16.7,\"p95Ms\":16.8,\"p99Ms\":16.8,\"maxMs\":16.8,\"over33\":0,\"over50\":0,\"over100\":0,\"impliedHz\":59.9}"
+    },
+    {
+      "name": "chromium-vite-lifecycle",
+      "detail": "{\"before\":{\"created\":4,\"lost\":3,\"live\":1},\"after\":{\"created\":14,\"lost\":13,\"live\":1},\"heap\":6112371}"
+    }
+  ],
+  "artifacts": {
+    "chromium-next-desktop.png": "evidence/g5a/browser/chromium/chromium-next-desktop.png",
+    "chromium-next-stage.png": "evidence/g5a/browser/chromium/chromium-next-stage.png",
+    "chromium-next-atlas.png": "evidence/g5a/browser/chromium/chromium-next-atlas.png",
+    "chromium-next-long-boundary-on.png": "evidence/g5a/browser/chromium/chromium-next-long-boundary-on.png",
+    "chromium-next-long-boundary-off.png": "evidence/g5a/browser/chromium/chromium-next-long-boundary-off.png",
+    "chromium-next-paused-a.png": "evidence/g5a/browser/chromium/chromium-next-paused-a.png",
+    "chromium-next-paused-b.png": "evidence/g5a/browser/chromium/chromium-next-paused-b.png",
+    "chromium-next-resumed-a.png": "evidence/g5a/browser/chromium/chromium-next-resumed-a.png",
+    "chromium-next-resumed-b.png": "evidence/g5a/browser/chromium/chromium-next-resumed-b.png",
+    "chromium-next-reduced-a.png": "evidence/g5a/browser/chromium/chromium-next-reduced-a.png",
+    "chromium-next-reduced-b.png": "evidence/g5a/browser/chromium/chromium-next-reduced-b.png",
+    "chromium-next-mobile.png": "evidence/g5a/browser/chromium/chromium-next-mobile.png",
+    "chromium-next-mobile-stage.png": "evidence/g5a/browser/chromium/chromium-next-mobile-stage.png",
+    "chromium-next-desktop-boundary-on.png": "evidence/g5a/browser/chromium/chromium-next-desktop-boundary-on.png",
+    "chromium-next-desktop-boundary-off.png": "evidence/g5a/browser/chromium/chromium-next-desktop-boundary-off.png",
+    "chromium-next-boundary.json": {
+      "name": "chromium-next-desktop",
+      "outsideSamples": 3649,
+      "outsideViolations": 0,
+      "maxOutside": 1,
+      "insideSamples": 597,
+      "insideVisible": 597,
+      "bbox": {
+        "left": 0.05,
+        "right": 0.9479,
+        "top": 0.3541,
+        "bottom": 0.6492
+      }
+    },
+    "chromium-next-invalid.png": "evidence/g5a/browser/chromium/chromium-next-invalid.png",
+    "chromium-next-context-lost.png": "evidence/g5a/browser/chromium/chromium-next-context-lost.png",
+    "chromium-vite-desktop.png": "evidence/g5a/browser/chromium/chromium-vite-desktop.png",
+    "chromium-vite-stage.png": "evidence/g5a/browser/chromium/chromium-vite-stage.png",
+    "chromium-vite-atlas.png": "evidence/g5a/browser/chromium/chromium-vite-atlas.png",
+    "chromium-vite-long-boundary-on.png": "evidence/g5a/browser/chromium/chromium-vite-long-boundary-on.png",
+    "chromium-vite-long-boundary-off.png": "evidence/g5a/browser/chromium/chromium-vite-long-boundary-off.png",
+    "chromium-vite-paused-a.png": "evidence/g5a/browser/chromium/chromium-vite-paused-a.png",
+    "chromium-vite-paused-b.png": "evidence/g5a/browser/chromium/chromium-vite-paused-b.png",
+    "chromium-vite-resumed-a.png": "evidence/g5a/browser/chromium/chromium-vite-resumed-a.png",
+    "chromium-vite-resumed-b.png": "evidence/g5a/browser/chromium/chromium-vite-resumed-b.png",
+    "chromium-vite-reduced-a.png": "evidence/g5a/browser/chromium/chromium-vite-reduced-a.png",
+    "chromium-vite-reduced-b.png": "evidence/g5a/browser/chromium/chromium-vite-reduced-b.png",
+    "chromium-vite-mobile.png": "evidence/g5a/browser/chromium/chromium-vite-mobile.png",
+    "chromium-vite-mobile-stage.png": "evidence/g5a/browser/chromium/chromium-vite-mobile-stage.png",
+    "chromium-vite-desktop-boundary-on.png": "evidence/g5a/browser/chromium/chromium-vite-desktop-boundary-on.png",
+    "chromium-vite-desktop-boundary-off.png": "evidence/g5a/browser/chromium/chromium-vite-desktop-boundary-off.png",
+    "chromium-vite-boundary.json": {
+      "name": "chromium-vite-desktop",
+      "outsideSamples": 3649,
+      "outsideViolations": 0,
+      "maxOutside": 1,
+      "insideSamples": 597,
+      "insideVisible": 597,
+      "bbox": {
+        "left": 0.05,
+        "right": 0.9479,
+        "top": 0.3541,
+        "bottom": 0.6492
+      }
+    },
+    "chromium-vite-invalid.png": "evidence/g5a/browser/chromium/chromium-vite-invalid.png",
+    "chromium-vite-context-lost.png": "evidence/g5a/browser/chromium/chromium-vite-context-lost.png",
+    "chromium-no-webgl.png": "evidence/g5a/browser/chromium/chromium-no-webgl.png",
+    "chromium-no-css-mask.png": "evidence/g5a/browser/chromium/chromium-no-css-mask.png",
+    "chromium-font-fallback.png": "evidence/g5a/browser/chromium/chromium-font-fallback.png"
+  }
+}

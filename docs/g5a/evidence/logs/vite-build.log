@@ -1,0 +1,15 @@
+
+> g5a-vite-consumer@0.0.0 build
+> tsc -b && vite build
+
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 97 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.42 kB │ gzip:  0.30 kB
+dist/assets/index-CQv53p3r.css   41.07 kB │ gzip: 29.25 kB
+dist/assets/dist-DllFDUej.js     25.12 kB │ gzip:  8.16 kB
+dist/assets/index-T-SyJ_Tt.js   209.31 kB │ gzip: 66.96 kB
+
+✓ built in 147ms
