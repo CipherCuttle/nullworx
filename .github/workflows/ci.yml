@@ -59,5 +59,8 @@ jobs:
       - name: Run the effect contract checks
         run: pnpm verify:contract
 
+      - name: Run the composition contract checks
+        run: pnpm verify:composition-contract
+
       - name: Production build
         run: pnpm build

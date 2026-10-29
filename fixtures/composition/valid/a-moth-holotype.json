@@ -1,0 +1,28 @@
+{
+  "id": "a-moth-holotype",
+  "version": "1.0.0",
+  "title": "A — Moth × HoloType",
+  "mask": {
+    "id": "nullworx-moth",
+    "version": "1.0.0"
+  },
+  "material": {
+    "id": "holotype-foil",
+    "version": "0.1.0"
+  },
+  "params": {
+    "preset": "platinum",
+    "tone": "dark",
+    "motion": "auto",
+    "spectral": 0.55,
+    "metallic": 0.92,
+    "grain": 0.24,
+    "speed": 0.4,
+    "pointer": 0.7,
+    "animated": true
+  },
+  "playback": {
+    "paused": false
+  },
+  "notes": "Native SVG geometry through the existing HoloGlyph interface."
+}

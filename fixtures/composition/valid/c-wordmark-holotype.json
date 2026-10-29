@@ -1,0 +1,28 @@
+{
+  "id": "c-wordmark-holotype",
+  "version": "1.0.0",
+  "title": "C — Wordmark × HoloType",
+  "mask": {
+    "id": "nullworx-wordmark",
+    "version": "1.0.0"
+  },
+  "material": {
+    "id": "holotype-foil",
+    "version": "0.1.0"
+  },
+  "params": {
+    "preset": "aurora",
+    "tone": "dark",
+    "motion": "auto",
+    "spectral": 0.85,
+    "metallic": 0.7,
+    "grain": 0.18,
+    "speed": 0.55,
+    "pointer": 0.8,
+    "animated": true
+  },
+  "playback": {
+    "paused": false
+  },
+  "notes": "Live DOM text through the existing HoloText interface."
+}

@@ -86,6 +86,9 @@ was moved out of `dependencies` in G2.1; it is not imported by any application c
 
 ## Media and fonts
 
-No third-party media is imported or served. No font file is bundled or fetched at runtime
-(UI Forge uses `next/font/google` at build time; the generated font assets are served
-same-origin). No Pexels, NASA, React Bits, Theatre.js or AGPL material is present.
+No third-party media is imported or served. No font file is vendored in this repository.
+UI Forge uses `next/font/google` at build time to fetch **Geist** and **Geist Mono** and
+serves the generated font assets same-origin. Geist is distributed by Vercel under the
+SIL Open Font License 1.1 (<https://github.com/vercel/geist-font>). G3-A's wordmark mask
+uses that same Geist variable in DOM and Canvas 2D; it adds no font file and no external
+font request. No Pexels, NASA, React Bits, Theatre.js or AGPL material is present.

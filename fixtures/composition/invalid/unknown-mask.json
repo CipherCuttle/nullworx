@@ -1,0 +1,19 @@
+{
+  "id": "invalid-unknown-mask",
+  "version": "1.0.0",
+  "title": "Unknown mask",
+  "mask": { "id": "missing-mask", "version": "1.0.0" },
+  "material": { "id": "holotype-foil", "version": "0.1.0" },
+  "params": {
+    "preset": "platinum",
+    "tone": "dark",
+    "motion": "auto",
+    "spectral": 0.4,
+    "metallic": 0.9,
+    "grain": 0.27,
+    "speed": 0.45,
+    "pointer": 0.7,
+    "animated": true
+  },
+  "playback": { "paused": false }
+}

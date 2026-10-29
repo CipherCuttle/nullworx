@@ -14,7 +14,9 @@
     "verify:contract": "tsx scripts/effect-contract.ts",
     "verify:gallery": "node scripts/verify-gallery.mjs",
     "verify:effects": "node scripts/verify-effects.mjs",
-    "verify:consumer": "node scripts/verify-consumer.mjs"
+    "verify:consumer": "node scripts/verify-consumer.mjs",
+    "verify:composition-contract": "tsx scripts/composition-contract.ts",
+    "verify:composition": "node scripts/verify-composition.mjs"
   },
   "dependencies": {
     "@paper-design/shaders-react": "0.0.82",

@@ -1,0 +1,15 @@
+{
+  "id": "invalid-version-mismatch",
+  "version": "1.0.0",
+  "title": "Mask version mismatch",
+  "mask": { "id": "nullworx-moth", "version": "9.9.9" },
+  "material": { "id": "paper-mesh-gradient", "version": "0.1.0" },
+  "params": {
+    "preset": "beach",
+    "speed": 0.3,
+    "distortion": 0.75,
+    "swirl": 0.12,
+    "paused": false
+  },
+  "playback": { "paused": false }
+}
