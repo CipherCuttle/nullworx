@@ -110,7 +110,7 @@ After: **12 findings — 0 critical, 9 high, 2 moderate, 1 low**.
 
 | Severity | Package | Path | Reachability | Decision |
 | --- | --- | --- | --- | --- |
-| High | `postcss` (3 advisories) | `next > postcss` | Build-time CSS parser for repository-owned CSS. No runtime CSS input. | **Not applicable at runtime.** Next pins `postcss@8.4.31`; overriding a framework-pinned build dependency is not part of a minimal security repair. Track upstream. |
+| High | `postcss` (2 advisories) | `next > postcss` | Build-time CSS parser for repository-owned CSS. No runtime CSS input. | **Not applicable at runtime.** Next pins `postcss@8.4.31`; overriding a framework-pinned build dependency is not part of a minimal security repair. Track upstream. |
 | High | `nanoid` (3 advisories) | `next > postcss > nanoid` | Build-time only; no runtime generator calls. | **Not applicable at runtime.** Same Next-pinned chain. |
 | High | `source-map-js` | `next > postcss > source-map-js` | Build-time source maps only. | **Not applicable at runtime.** Same chain. |
 | High | `browserslist` (2 advisories) | `next > styled-jsx > @babel/core > … > browserslist` | Build-time target resolution for repository-owned config. | **Not applicable at runtime.** Same chain. |
