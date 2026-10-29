@@ -9,6 +9,8 @@ Base: G3-A `feat/g3a-composition-proof` at
 `e5e4119e791e7815b8b6e8efe4439b123fc61225`
 Date: 2026-10-29, Europe/Stockholm
 Product: **NULLWORX / LIVING TYPE 01**, experimental and owner-review-only.
+Draft PR: [#5](https://github.com/CipherCuttle/nullworx/pull/5) (draft, stacked on
+`feat/g3a-composition-proof`, unmerged).
 No merge, release, package publication, public registry admission or deployment.
 
 This report records **technical acceptance**. It is not visual approval. The
@@ -124,7 +126,8 @@ worktree was created.
 - G3-A.1 harness files copied as described in Gate 0.
 
 No existing UI Forge component file was edited. `public/r/registry.json` remains
-the three-item UI Forge index. No PR #1/#3/#4 was modified.
+the three-item UI Forge index. No PR #1/#2/#3/#4 was modified; PR #5 is the new
+draft receipt for this branch.
 
 ### Installable item
 

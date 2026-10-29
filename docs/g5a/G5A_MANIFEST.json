@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-29T22:06:29.166Z",
+  "generatedAt": "2026-10-29T22:07:27.173Z",
   "branch": "feat/g5a-living-type-01",
   "baseHead": "e5e4119e791e7815b8b6e8efe4439b123fc61225",
   "source": [
@@ -220,8 +220,8 @@
     },
     {
       "path": "G5A_REPORT.md",
-      "bytes": 26229,
-      "sha256": "64e3b3cb026a56951cdff2fac1a691bc2597af06cdfe5acc80428323749f981c"
+      "bytes": 26404,
+      "sha256": "e26e5ef1e50c37c4ee67a8484accef342a0683ded40ea5f6fe2ea9c8f74b20ae"
     },
     {
       "path": "package.json",
@@ -439,7 +439,7 @@
       "sha256": "592ba8e410a858bf2617357d1b34cbda1898dfff854b5fb0f50b9429128bcd6f"
     }
   ],
-  "sourceBytes": 6193899,
+  "sourceBytes": 6194074,
   "consumers": {
     "next": {
       "root": "/home/swirky/Documents/deepseek-harness/default-workspace/g5a-consumers/next",
