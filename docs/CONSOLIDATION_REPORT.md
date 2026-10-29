@@ -10,7 +10,7 @@ deployment/publication/marketplace/payment/newsletter activation was performed.
 
 - Repository: <https://github.com/CipherCuttle/nullworx>
 - Base: `feat/nullworx-v0-1-foundation` at `4884b2b`
-- Worktree: `feat/consolidation-01` at `034231b` in `/home/swirky/Documents/deepseek-harness/default-workspace/nullworx-consolidation-01`
+- Worktree: `feat/consolidation-01` in `/home/swirky/Documents/deepseek-harness/default-workspace/nullworx-consolidation-01` (branch tip includes this handoff doc; run `git rev-parse HEAD`)
 - One local origin: `http://127.0.0.1:3200`
 - Public catalogue: **00 released**, **01 owner-review** (ASCII Waves, unchanged)
 - Lab index: `http://127.0.0.1:3200/lab` (noindex, unreleased)

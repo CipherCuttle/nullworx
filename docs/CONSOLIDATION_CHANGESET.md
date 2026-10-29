@@ -2,7 +2,8 @@
 
 - Base: `feat/nullworx-v0-1-foundation` at `4884b2b`
 - Branch: `feat/consolidation-01`
-- Head: `034231b`
+- Implementation commit: `5423300`
+- Branch tip (includes this handoff doc): run `git rev-parse HEAD`
 - Worktree: `/home/swirky/Documents/deepseek-harness/default-workspace/nullworx-consolidation-01`
 - No existing PR/branch was merged. No public page was released.
 
