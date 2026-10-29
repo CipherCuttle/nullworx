@@ -1,0 +1,154 @@
+.preview {
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+}
+.stage {
+  position: relative;
+  container-type: inline-size;
+  overflow: hidden;
+  border: 1px solid #2b2d31;
+  border-radius: 12px;
+  background:
+    radial-gradient(circle at 72% 18%, #29313d 0%, transparent 38%),
+    radial-gradient(circle at 20% 80%, #2a211c 0%, transparent 42%),
+    linear-gradient(145deg, #111318 0%, #0a0b0e 100%);
+  color: #f1eee6;
+  padding: 18px 20px 20px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 14px;
+  min-height: 380px;
+}
+.stage[data-tone="light"] {
+  border-color: #ddd8cc;
+  background:
+    radial-gradient(circle at 78% 16%, #ffffff 0%, transparent 40%),
+    radial-gradient(circle at 16% 82%, #f1e6db 0%, transparent 48%),
+    linear-gradient(145deg, #f7f4ed 0%, #e9e3d8 100%);
+  color: #28271f;
+}
+.stageMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  align-items: center;
+  color: #9b9a90;
+  font: 8px/1.5 var(--font-geist-mono), monospace;
+  letter-spacing: 1.1px;
+}
+.stage[data-tone="light"] .stageMeta {
+  color: #817d72;
+}
+.review {
+  margin-left: auto;
+  color: #e6a27f;
+  border: 1px solid #6e4938;
+  border-radius: 999px;
+  padding: 3px 8px;
+}
+.stage[data-tone="light"] .review {
+  color: #9d4a2f;
+  border-color: #d9b9a8;
+}
+.hero {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  text-align: center;
+  gap: 12px;
+  padding: 24px 0 18px;
+  min-width: 0;
+}
+.eyebrow {
+  margin: 0;
+  color: #c07a58;
+  font: 8px/1.5 var(--font-geist-mono), monospace;
+  letter-spacing: 1.4px;
+}
+.heroNote {
+  max-width: 46ch;
+  margin: 0;
+  color: #9d9b92;
+  font-size: 11px;
+  line-height: 1.8;
+}
+.stage[data-tone="light"] .heroNote {
+  color: #777267;
+}
+.glyphRow {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
+  align-items: center;
+  gap: 22px;
+  border-top: 1px solid #2b2d31;
+  padding-top: 16px;
+}
+.stage[data-tone="light"] .glyphRow {
+  border-top-color: #ddd6c9;
+}
+.glyphBox {
+  width: 110px;
+  max-width: 100%;
+}
+.glyphCopy {
+  min-width: 0;
+}
+.glyphCopy strong {
+  display: block;
+  font-size: 12px;
+  font-weight: 550;
+  letter-spacing: -0.01em;
+}
+.glyphCopy p {
+  max-width: 52ch;
+  margin: 5px 0 8px;
+  color: #96948a;
+  font-size: 10px;
+  line-height: 1.8;
+}
+.stage[data-tone="light"] .glyphCopy p {
+  color: #736e63;
+}
+.factLine {
+  color: #c28a6d;
+  font: 8px/1.5 var(--font-geist-mono), monospace;
+  letter-spacing: 0.4px;
+}
+.controls {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px 20px;
+  padding: 18px;
+  border: 1px solid #e0dcd2;
+  border-radius: 10px;
+  background: #fffefa;
+}
+.validationSlot {
+  grid-column: 1 / -1;
+  border-top: 1px solid #eceae3;
+  padding-top: 10px;
+}
+
+@media (max-width: 900px) {
+  .controls {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 620px) {
+  .stage {
+    min-height: 340px;
+    padding: 15px;
+  }
+  .controls {
+    grid-template-columns: 1fr;
+    padding: 15px;
+  }
+  .glyphRow {
+    grid-template-columns: 78px minmax(0, 1fr);
+    gap: 14px;
+  }
+  .glyphBox {
+    width: 78px;
+  }
+}

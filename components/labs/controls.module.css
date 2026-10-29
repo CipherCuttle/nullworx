@@ -1,0 +1,131 @@
+.group {
+  display: grid;
+  gap: 8px;
+}
+.groupHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+.groupLabel {
+  color: #77766d;
+  font: 9px/1.4 var(--font-geist-mono), monospace;
+  letter-spacing: 0.9px;
+  text-transform: uppercase;
+}
+.groupHint {
+  color: #9a988f;
+  font-size: 10px;
+}
+.slider {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 4px 10px;
+}
+.sliderLabel {
+  color: #4f4e46;
+  font-size: 11px;
+}
+.sliderValue {
+  color: #8a5a42;
+  font: 10px var(--font-geist-mono), monospace;
+}
+.range {
+  grid-column: 1 / -1;
+  width: 100%;
+  accent-color: #b54d2f;
+  height: 18px;
+  cursor: pointer;
+}
+.segmented {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.segment {
+  border: 1px solid #ddd9d0;
+  border-radius: 5px;
+  background: #fbfaf7;
+  color: #65645b;
+  font: 10px/1.4 var(--font-geist-mono), monospace;
+  padding: 7px 9px;
+  cursor: pointer;
+}
+.segment:hover {
+  border-color: #c9c3b7;
+  color: #2d2c27;
+}
+.segment[aria-pressed="true"] {
+  background: #2c2c27;
+  border-color: #2c2c27;
+  color: #faf9f6;
+}
+.toggle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #4f4e46;
+  font-size: 11px;
+  cursor: pointer;
+}
+.toggle input {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.toggleTrack {
+  pointer-events: none;
+}
+.toggleTrack {
+  position: relative;
+  width: 32px;
+  height: 18px;
+  margin-left: auto;
+  border-radius: 999px;
+  background: #d9d5cb;
+  transition: background 160ms ease;
+}
+.toggleTrack::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fffefa;
+  box-shadow: 0 1px 2px #29292426;
+  transition: transform 160ms ease;
+}
+.toggle input:checked + .toggleTrack {
+  background: #2f6d62;
+}
+.toggle input:checked + .toggleTrack::after {
+  transform: translateX(14px);
+}
+.toggle input:focus-visible + .toggleTrack {
+  outline: 2px solid #b54d2f;
+  outline-offset: 3px;
+}
+.validation {
+  margin: 0;
+  color: #6b7a63;
+  font: 9px/1.6 var(--font-geist-mono), monospace;
+}
+.validation[data-valid="false"] {
+  color: #a23f2c;
+}
+@media (prefers-reduced-motion: reduce) {
+  .toggleTrack,
+  .toggleTrack::after {
+    transition: none;
+  }
+}
