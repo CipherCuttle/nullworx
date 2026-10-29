@@ -1,0 +1,3 @@
+> **INTERNAL REVIEW DRAFT — NOT FOR DISTRIBUTION.** This effect is not released and has no public effect page or sitemap entry. Do not send, post or publish this copy.
+
+No sitemap entry may be created for /effects/ascii-waves while status is OWNER_REVIEW.

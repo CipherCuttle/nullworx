@@ -1,0 +1,102 @@
+$ tsx scripts/verify-seo.ts
+PASS  / 200  [200]
+PASS  / unique title  [Nullworx — Procedural visual effects for the web]
+PASS  / unique description  [An experimental library of procedural visual effects for developers and creative]
+PASS  / canonical  [https://nulllworx.site]
+PASS  / one h1  [The screen is a living surface.]
+PASS  / server copy  [body copy present]
+PASS  / no local origin  [production canonical]
+PASS  / social title
+PASS  / social image
+PASS  / social URL  [https://nulllworx.site]
+PASS  / twitter card  [summary_large_image]
+PASS  / JSON-LD 1 parses
+PASS  /effects 200  [200]
+PASS  /effects unique title  [Effects — Nullworx]
+PASS  /effects unique description  [The Nullworx effects catalogue is release-gated. No effect is public until its a]
+PASS  /effects canonical  [https://nulllworx.site/effects]
+PASS  /effects one h1  [What is public has earned it.]
+PASS  /effects server copy  [body copy present]
+PASS  /effects no local origin  [production canonical]
+PASS  /effects social title
+PASS  /effects social image
+PASS  /effects social URL  [https://nulllworx.site/effects]
+PASS  /effects twitter card  [summary_large_image]
+PASS  /effects JSON-LD 1 parses
+PASS  /drops 200  [200]
+PASS  /drops unique title  [Drops — Nullworx]
+PASS  /drops unique description  [Nullworx Drops is an optional, double opt-in letter about released effects, code]
+PASS  /drops canonical  [https://nulllworx.site/drops]
+PASS  /drops one h1  [Drops from the lab.]
+PASS  /drops server copy  [body copy present]
+PASS  /drops no local origin  [production canonical]
+PASS  /drops social title
+PASS  /drops social image
+PASS  /drops social URL  [https://nulllworx.site/drops]
+PASS  /drops twitter card  [summary_large_image]
+PASS  /about 200  [200]
+PASS  /about unique title  [About — Nullworx]
+PASS  /about unique description  [Nullworx is an independent experimental lab for procedural visual effects, built]
+PASS  /about canonical  [https://nulllworx.site/about]
+PASS  /about one h1  [A lab for surfaces that won’t sit still.]
+PASS  /about server copy  [body copy present]
+PASS  /about no local origin  [production canonical]
+PASS  /about social title
+PASS  /about social image
+PASS  /about social URL  [https://nulllworx.site/about]
+PASS  /about twitter card  [summary_large_image]
+PASS  /about JSON-LD 1 parses
+PASS  /privacy 200  [200]
+PASS  /privacy unique title  [Privacy — Nullworx]
+PASS  /privacy unique description  [How Nullworx handles email consent, the double opt-in newsletter, anonymous anal]
+PASS  /privacy canonical  [https://nulllworx.site/privacy]
+PASS  /privacy one h1  [Little data. Clear choices.]
+PASS  /privacy server copy  [body copy present]
+PASS  /privacy no local origin  [production canonical]
+PASS  /privacy social title
+PASS  /privacy social image
+PASS  /privacy social URL  [https://nulllworx.site/privacy]
+PASS  /privacy twitter card  [summary_large_image]
+PASS  /privacy JSON-LD 1 parses
+PASS  /licenses 200  [200]
+PASS  /licenses unique title  [Licenses — Nullworx]
+PASS  /licenses unique description  [Nullworx code, Flower media, typefaces and direct dependencies: MIT code, CC0 me]
+PASS  /licenses canonical  [https://nulllworx.site/licenses]
+PASS  /licenses one h1  [Take the code. Keep the credit.]
+PASS  /licenses server copy  [body copy present]
+PASS  /licenses no local origin  [production canonical]
+PASS  /licenses social title
+PASS  /licenses social image
+PASS  /licenses social URL  [https://nulllworx.site/licenses]
+PASS  /licenses twitter card  [summary_large_image]
+PASS  /licenses JSON-LD 1 parses
+PASS  titles are unique  [6/6]
+PASS  descriptions are unique  [6/6]
+PASS  canonicals are unique  [6/6]
+PASS  /lab/ascii-waves noindex header  [200 noindex, nofollow]
+PASS  /lab/ascii-waves noindex meta  [noindex, nofollow, nocache]
+PASS  /drops/confirmed?preview=1 noindex header  [200 noindex, nofollow]
+PASS  /drops/confirmed?preview=1 noindex meta  [noindex, nofollow, nocache]
+PASS  /drops/unsubscribed?preview=1 noindex header  [200 noindex, nofollow]
+PASS  /drops/unsubscribed?preview=1 noindex meta  [noindex, nofollow, nocache]
+PASS  unreleased effect has no public page  [404]
+PASS  sitemap 200  [200]
+PASS  sitemap matches indexable routes  [6 URLs]
+PASS  sitemap excludes lab  [no lab route]
+PASS  sitemap excludes unreleased effect pages  [release gate holds]
+PASS  robots.txt 200  [200]
+PASS  robots sitemap
+PASS  OAI-SearchBot allowed
+PASS  GPTBot training blocked
+PASS  lab not blocked from noindex discovery
+PASS  archive binaries disallowed
+PASS  download archive noindex  [noindex, nofollow]
+PASS  llms.txt 200  [200]
+PASS  llms.txt plain text
+PASS  llms.txt hides lab preview
+PASS  llms.txt states release count  [Released: 0]
+PASS  unknown route is 404  [404]
+PASS  OG image 200 PNG
+PASS  OG image 1200 x 630  [73577 bytes]
+
+99/99 SEO checks passed. Report: evidence/seo/report.json

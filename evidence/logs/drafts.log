@@ -1,0 +1,4 @@
+$ tsx scripts/draft-release.ts -- --review --slug=ascii-waves --date=2026-10-29
+Draft written: drafts/2026-10-29/ascii-waves-review
+  mode: internal review
+  external actions: none

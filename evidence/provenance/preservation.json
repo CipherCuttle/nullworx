@@ -1,0 +1,68 @@
+{
+  "generatedAt": "2026-10-29T11:57:42.471Z",
+  "baselineGeneratedAt": "2026-10-28T23:30:41.783Z",
+  "comparedSources": 4,
+  "unchangedSources": 4,
+  "comparisons": [
+    {
+      "name": "ui-forge",
+      "path": "/home/swirky/DevHub/experiments/ui-forge",
+      "before": {
+        "fileCount": 81,
+        "treeSha256": "ea017baf4e90903201a044853d8b64d8ab88026cc9901bbae345e3083af2485d",
+        "gitHead": "906f859db0125965cba71c51da1707c0a4c6d045"
+      },
+      "after": {
+        "fileCount": 81,
+        "treeSha256": "ea017baf4e90903201a044853d8b64d8ab88026cc9901bbae345e3083af2485d",
+        "gitHead": "906f859db0125965cba71c51da1707c0a4c6d045"
+      },
+      "unchanged": true
+    },
+    {
+      "name": "ui-forge-flower-integration-01",
+      "path": "/home/swirky/DevHub/experiments/ui-forge-flower-integration-01",
+      "before": {
+        "fileCount": 158,
+        "treeSha256": "74d607a897d94d53887119267e405dfa7f8534e3f651a486ede6b18fd4180367",
+        "gitHead": "906f859db0125965cba71c51da1707c0a4c6d045"
+      },
+      "after": {
+        "fileCount": 158,
+        "treeSha256": "74d607a897d94d53887119267e405dfa7f8534e3f651a486ede6b18fd4180367",
+        "gitHead": "906f859db0125965cba71c51da1707c0a4c6d045"
+      },
+      "unchanged": true
+    },
+    {
+      "name": "ascii-waves-react-01",
+      "path": "/home/swirky/DevHub/experiments/ascii-waves-react-01",
+      "before": {
+        "fileCount": 115,
+        "treeSha256": "7cd1e697a51ac60b49552f4961ebed90933098a15caa5f7b862c4f1d18e9c100",
+        "gitHead": null
+      },
+      "after": {
+        "fileCount": 115,
+        "treeSha256": "7cd1e697a51ac60b49552f4961ebed90933098a15caa5f7b862c4f1d18e9c100",
+        "gitHead": null
+      },
+      "unchanged": true
+    },
+    {
+      "name": "living-stencils-proof01",
+      "path": "/home/swirky/DevHub/experiments/living-stencils-proof01",
+      "before": {
+        "fileCount": 159,
+        "treeSha256": "d027c81c7d0ad0a76264c129818940da68fae60b14c58ce220a684b7cd76be51",
+        "gitHead": null
+      },
+      "after": {
+        "fileCount": 159,
+        "treeSha256": "d027c81c7d0ad0a76264c129818940da68fae60b14c58ce220a684b7cd76be51",
+        "gitHead": null
+      },
+      "unchanged": true
+    }
+  ]
+}

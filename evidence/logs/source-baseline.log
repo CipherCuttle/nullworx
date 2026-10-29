@@ -1,0 +1,5 @@
+$ node scripts/source-provenance.mjs
+UNCHANGED  ui-forge  81 files  ea017baf4e90903201a044853d8b64d8ab88026cc9901bbae345e3083af2485d
+UNCHANGED  ui-forge-flower-integration-01  158 files  74d607a897d94d53887119267e405dfa7f8534e3f651a486ede6b18fd4180367
+UNCHANGED  ascii-waves-react-01  115 files  7cd1e697a51ac60b49552f4961ebed90933098a15caa5f7b862c4f1d18e9c100
+UNCHANGED  living-stencils-proof01  159 files  d027c81c7d0ad0a76264c129818940da68fae60b14c58ce220a684b7cd76be51

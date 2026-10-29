@@ -1,0 +1,508 @@
+{
+  "generatedAt": "2026-10-29T12:43:08.124Z",
+  "baseUrl": "http://127.0.0.1:3300",
+  "canonicalOrigin": "https://nulllworx.site",
+  "deployed": false,
+  "indexed": false,
+  "note": "Local production-equivalent verification. No search engine indexing was observed or claimed.",
+  "totalChecks": 99,
+  "passedChecks": 99,
+  "failedChecks": 0,
+  "checks": [
+    {
+      "name": "/ 200",
+      "pass": true,
+      "detail": "200"
+    },
+    {
+      "name": "/ unique title",
+      "pass": true,
+      "detail": "Nullworx — Procedural visual effects for the web"
+    },
+    {
+      "name": "/ unique description",
+      "pass": true,
+      "detail": "An experimental library of procedural visual effects for developers and creative"
+    },
+    {
+      "name": "/ canonical",
+      "pass": true,
+      "detail": "https://nulllworx.site"
+    },
+    {
+      "name": "/ one h1",
+      "pass": true,
+      "detail": "The screen is a living surface."
+    },
+    {
+      "name": "/ server copy",
+      "pass": true,
+      "detail": "body copy present"
+    },
+    {
+      "name": "/ no local origin",
+      "pass": true,
+      "detail": "production canonical"
+    },
+    {
+      "name": "/ social title",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "/ social image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "/ social URL",
+      "pass": true,
+      "detail": "https://nulllworx.site"
+    },
+    {
+      "name": "/ twitter card",
+      "pass": true,
+      "detail": "summary_large_image"
+    },
+    {
+      "name": "/ JSON-LD 1 parses",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "/effects 200",
+      "pass": true,
+      "detail": "200"
+    },
+    {
+      "name": "/effects unique title",
+      "pass": true,
+      "detail": "Effects — Nullworx"
+    },
+    {
+      "name": "/effects unique description",
+      "pass": true,
+      "detail": "The Nullworx effects catalogue is release-gated. No effect is public until its a"
+    },
+    {
+      "name": "/effects canonical",
+      "pass": true,
+      "detail": "https://nulllworx.site/effects"
+    },
+    {
+      "name": "/effects one h1",
+      "pass": true,
+      "detail": "What is public has earned it."
+    },
+    {
+      "name": "/effects server copy",
+      "pass": true,
+      "detail": "body copy present"
+    },
+    {
+      "name": "/effects no local origin",
+      "pass": true,
+      "detail": "production canonical"
+    },
+    {
+      "name": "/effects social title",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "/effects social image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "/effects social URL",
+      "pass": true,
+      "detail": "https://nulllworx.site/effects"
+    },
+    {
+      "name": "/effects twitter card",
+      "pass": true,
+      "detail": "summary_large_image"
+    },
+    {
+      "name": "/effects JSON-LD 1 parses",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "/drops 200",
+      "pass": true,
+      "detail": "200"
+    },
+    {
+      "name": "/drops unique title",
+      "pass": true,
+      "detail": "Drops — Nullworx"
+    },
+    {
+      "name": "/drops unique description",
+      "pass": true,
+      "detail": "Nullworx Drops is an optional, double opt-in letter about released effects, code"
+    },
+    {
+      "name": "/drops canonical",
+      "pass": true,
+      "detail": "https://nulllworx.site/drops"
+    },
+    {
+      "name": "/drops one h1",
+      "pass": true,
+      "detail": "Drops from the lab."
+    },
+    {
+      "name": "/drops server copy",
+      "pass": true,
+      "detail": "body copy present"
+    },
+    {
+      "name": "/drops no local origin",
+      "pass": true,
+      "detail": "production canonical"
+    },
+    {
+      "name": "/drops social title",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "/drops social image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "/drops social URL",
+      "pass": true,
+      "detail": "https://nulllworx.site/drops"
+    },
+    {
+      "name": "/drops twitter card",
+      "pass": true,
+      "detail": "summary_large_image"
+    },
+    {
+      "name": "/about 200",
+      "pass": true,
+      "detail": "200"
+    },
+    {
+      "name": "/about unique title",
+      "pass": true,
+      "detail": "About — Nullworx"
+    },
+    {
+      "name": "/about unique description",
+      "pass": true,
+      "detail": "Nullworx is an independent experimental lab for procedural visual effects, built"
+    },
+    {
+      "name": "/about canonical",
+      "pass": true,
+      "detail": "https://nulllworx.site/about"
+    },
+    {
+      "name": "/about one h1",
+      "pass": true,
+      "detail": "A lab for surfaces that won’t sit still."
+    },
+    {
+      "name": "/about server copy",
+      "pass": true,
+      "detail": "body copy present"
+    },
+    {
+      "name": "/about no local origin",
+      "pass": true,
+      "detail": "production canonical"
+    },
+    {
+      "name": "/about social title",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "/about social image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "/about social URL",
+      "pass": true,
+      "detail": "https://nulllworx.site/about"
+    },
+    {
+      "name": "/about twitter card",
+      "pass": true,
+      "detail": "summary_large_image"
+    },
+    {
+      "name": "/about JSON-LD 1 parses",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "/privacy 200",
+      "pass": true,
+      "detail": "200"
+    },
+    {
+      "name": "/privacy unique title",
+      "pass": true,
+      "detail": "Privacy — Nullworx"
+    },
+    {
+      "name": "/privacy unique description",
+      "pass": true,
+      "detail": "How Nullworx handles email consent, the double opt-in newsletter, anonymous anal"
+    },
+    {
+      "name": "/privacy canonical",
+      "pass": true,
+      "detail": "https://nulllworx.site/privacy"
+    },
+    {
+      "name": "/privacy one h1",
+      "pass": true,
+      "detail": "Little data. Clear choices."
+    },
+    {
+      "name": "/privacy server copy",
+      "pass": true,
+      "detail": "body copy present"
+    },
+    {
+      "name": "/privacy no local origin",
+      "pass": true,
+      "detail": "production canonical"
+    },
+    {
+      "name": "/privacy social title",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "/privacy social image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "/privacy social URL",
+      "pass": true,
+      "detail": "https://nulllworx.site/privacy"
+    },
+    {
+      "name": "/privacy twitter card",
+      "pass": true,
+      "detail": "summary_large_image"
+    },
+    {
+      "name": "/privacy JSON-LD 1 parses",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "/licenses 200",
+      "pass": true,
+      "detail": "200"
+    },
+    {
+      "name": "/licenses unique title",
+      "pass": true,
+      "detail": "Licenses — Nullworx"
+    },
+    {
+      "name": "/licenses unique description",
+      "pass": true,
+      "detail": "Nullworx code, Flower media, typefaces and direct dependencies: MIT code, CC0 me"
+    },
+    {
+      "name": "/licenses canonical",
+      "pass": true,
+      "detail": "https://nulllworx.site/licenses"
+    },
+    {
+      "name": "/licenses one h1",
+      "pass": true,
+      "detail": "Take the code. Keep the credit."
+    },
+    {
+      "name": "/licenses server copy",
+      "pass": true,
+      "detail": "body copy present"
+    },
+    {
+      "name": "/licenses no local origin",
+      "pass": true,
+      "detail": "production canonical"
+    },
+    {
+      "name": "/licenses social title",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "/licenses social image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "/licenses social URL",
+      "pass": true,
+      "detail": "https://nulllworx.site/licenses"
+    },
+    {
+      "name": "/licenses twitter card",
+      "pass": true,
+      "detail": "summary_large_image"
+    },
+    {
+      "name": "/licenses JSON-LD 1 parses",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "titles are unique",
+      "pass": true,
+      "detail": "6/6"
+    },
+    {
+      "name": "descriptions are unique",
+      "pass": true,
+      "detail": "6/6"
+    },
+    {
+      "name": "canonicals are unique",
+      "pass": true,
+      "detail": "6/6"
+    },
+    {
+      "name": "/lab/ascii-waves noindex header",
+      "pass": true,
+      "detail": "200 noindex, nofollow"
+    },
+    {
+      "name": "/lab/ascii-waves noindex meta",
+      "pass": true,
+      "detail": "noindex, nofollow, nocache"
+    },
+    {
+      "name": "/drops/confirmed?preview=1 noindex header",
+      "pass": true,
+      "detail": "200 noindex, nofollow"
+    },
+    {
+      "name": "/drops/confirmed?preview=1 noindex meta",
+      "pass": true,
+      "detail": "noindex, nofollow, nocache"
+    },
+    {
+      "name": "/drops/unsubscribed?preview=1 noindex header",
+      "pass": true,
+      "detail": "200 noindex, nofollow"
+    },
+    {
+      "name": "/drops/unsubscribed?preview=1 noindex meta",
+      "pass": true,
+      "detail": "noindex, nofollow, nocache"
+    },
+    {
+      "name": "unreleased effect has no public page",
+      "pass": true,
+      "detail": "404"
+    },
+    {
+      "name": "sitemap 200",
+      "pass": true,
+      "detail": "200"
+    },
+    {
+      "name": "sitemap matches indexable routes",
+      "pass": true,
+      "detail": "6 URLs"
+    },
+    {
+      "name": "sitemap excludes lab",
+      "pass": true,
+      "detail": "no lab route"
+    },
+    {
+      "name": "sitemap excludes unreleased effect pages",
+      "pass": true,
+      "detail": "release gate holds"
+    },
+    {
+      "name": "robots.txt 200",
+      "pass": true,
+      "detail": "200"
+    },
+    {
+      "name": "robots sitemap",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "OAI-SearchBot allowed",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "GPTBot training blocked",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "lab not blocked from noindex discovery",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "archive binaries disallowed",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "download archive noindex",
+      "pass": true,
+      "detail": "noindex, nofollow"
+    },
+    {
+      "name": "llms.txt 200",
+      "pass": true,
+      "detail": "200"
+    },
+    {
+      "name": "llms.txt plain text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "llms.txt hides lab preview",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "llms.txt states release count",
+      "pass": true,
+      "detail": "Released: 0"
+    },
+    {
+      "name": "unknown route is 404",
+      "pass": true,
+      "detail": "404"
+    },
+    {
+      "name": "OG image 200 PNG",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "OG image 1200 x 630",
+      "pass": true,
+      "detail": "73577 bytes"
+    }
+  ]
+}
