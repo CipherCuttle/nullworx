@@ -1,0 +1,246 @@
+.header {
+  position: relative;
+  z-index: 100;
+  border-bottom: 1px solid var(--line);
+  background: rgb(9 10 8 / 0.88);
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: minmax(230px, 1fr) auto minmax(270px, 1fr);
+  align-items: center;
+  min-height: var(--header-height);
+  gap: clamp(20px, 3vw, 50px);
+}
+
+.brand {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 11px;
+}
+
+.mark {
+  width: 31px;
+  height: 31px;
+  color: var(--paper);
+  flex: 0 0 auto;
+}
+
+.word {
+  color: var(--paper);
+  font-size: 20px;
+  font-weight: 350;
+  letter-spacing: -0.055em;
+  line-height: 1;
+}
+
+.word > span {
+  font-weight: 650;
+}
+
+.brandMeta {
+  display: none;
+  margin-left: 4px;
+  padding-left: 13px;
+  border-left: 1px solid var(--line);
+  color: var(--paper-dim);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  line-height: 1.55;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.navLink {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding-block: 28px;
+  color: var(--paper-soft);
+  font-size: 12px;
+  letter-spacing: 0.01em;
+}
+
+.navLink small {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 7px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.navLink:hover {
+  color: var(--acid);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 18px;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--paper-dim);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.status > span:first-child {
+  width: 5px;
+  height: 5px;
+}
+
+.headerCta {
+  min-height: 37px;
+  padding-inline: 13px;
+  border-color: var(--line-strong);
+  color: var(--paper);
+  background: transparent;
+}
+
+.headerCta:hover {
+  border-color: var(--acid);
+}
+
+.mobile {
+  display: none;
+}
+
+@media (min-width: 1180px) {
+  .brandMeta {
+    display: block;
+  }
+}
+
+@media (max-width: 880px) {
+  .inner {
+    grid-template-columns: 1fr auto;
+  }
+
+  .nav,
+  .status,
+  .headerCta {
+    display: none;
+  }
+
+  .actions {
+    grid-column: 2;
+  }
+
+  .mobile {
+    display: block;
+    position: relative;
+  }
+
+  .mobile summary {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0 10px 14px;
+    color: var(--paper);
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .mobile summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .mobileIcon {
+    display: grid;
+    gap: 5px;
+    width: 20px;
+  }
+
+  .mobileIcon i {
+    display: block;
+    height: 1px;
+    background: var(--paper);
+    transition: transform 180ms ease;
+  }
+
+  .mobile[open] .mobileIcon i:first-child {
+    transform: translateY(3px) rotate(45deg);
+  }
+
+  .mobile[open] .mobileIcon i:last-child {
+    transform: translateY(-3px) rotate(-45deg);
+  }
+
+  .mobilePanel {
+    position: absolute;
+    top: calc(100% + 1px);
+    right: 0;
+    display: grid;
+    width: min(88vw, 360px);
+    padding: 22px var(--gutter) 26px;
+    border: 1px solid var(--line-strong);
+    border-top: 0;
+    background: var(--ink-raised);
+    box-shadow: 0 22px 60px rgb(0 0 0 / 0.45);
+  }
+
+  .mobilePanel > p {
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  .mobilePanel > a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-block: 13px;
+    border-top: 1px solid var(--line);
+    color: var(--paper);
+    font-size: 16px;
+  }
+
+  .mobilePanel > a > span {
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 8px;
+  }
+
+  .mobilePanel > a > i {
+    margin-left: auto;
+    color: var(--acid);
+    font-style: normal;
+  }
+
+  .mobilePanel > a:nth-last-child(-n + 2) {
+    color: var(--paper-dim);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+}
+
+@media (max-width: 460px) {
+  .mark {
+    width: 27px;
+    height: 27px;
+  }
+
+  .word {
+    font-size: 18px;
+  }
+}

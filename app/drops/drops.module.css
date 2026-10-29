@@ -1,0 +1,313 @@
+.intro {
+  position: relative;
+  padding-top: clamp(76px, 10vw, 132px);
+  padding-bottom: clamp(56px, 8vw, 105px);
+  border-bottom: 1px solid var(--line);
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: clamp(48px, 7vw, 96px);
+}
+
+.meta > span {
+  color: var(--muted);
+  font-size: 8px;
+}
+
+.heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.54fr);
+  align-items: end;
+  gap: clamp(34px, 7vw, 120px);
+}
+
+.heading h1 {
+  font-size: clamp(68px, 11.5vw, 172px);
+  line-height: 0.8;
+}
+
+.heading > p {
+  max-width: 380px;
+  padding-bottom: 8px;
+  color: var(--paper-soft);
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.stamp {
+  position: absolute;
+  right: var(--gutter);
+  bottom: -36px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  z-index: 2;
+}
+
+.stampInner {
+  display: grid;
+  place-items: center;
+  width: 86px;
+  height: 86px;
+  border: 1px solid var(--acid);
+  border-radius: 50%;
+  color: var(--acid);
+  background: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 7px;
+  line-height: 1.5;
+  letter-spacing: 0.12em;
+  text-align: center;
+  transform: rotate(-9deg);
+}
+
+.stampInner i {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-style: normal;
+  line-height: 1;
+}
+
+.stamp > p {
+  color: var(--muted);
+  font-size: 7px;
+}
+
+.body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 0.68fr);
+  gap: clamp(50px, 9vw, 150px);
+  align-items: start;
+  padding-block: clamp(82px, 10vw, 136px);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(56px, 8vw, 96px);
+}
+
+.dispatchList > .eyebrow,
+.consentNotes > .eyebrow {
+  margin-bottom: 20px;
+}
+
+.dispatchList article {
+  display: grid;
+  grid-template-columns: 45px 1fr;
+  gap: 20px;
+  padding-block: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.dispatchList article:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.dispatchList article > span {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 8px;
+}
+
+.dispatchList h2 {
+  color: var(--paper);
+  font-family: var(--font-display);
+  font-size: clamp(27px, 3vw, 38px);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.dispatchList p {
+  max-width: 450px;
+  margin-top: 8px;
+  color: var(--paper-dim);
+  font-size: 12px;
+  line-height: 1.75;
+}
+
+.consentNotes {
+  max-width: 560px;
+}
+
+.consentNotes h2 {
+  color: var(--paper);
+  font-family: var(--font-display);
+  font-size: clamp(37px, 4.4vw, 61px);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  line-height: 0.95;
+}
+
+.consentNotes > p {
+  margin-top: 21px;
+  color: var(--paper-soft);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.noteGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  margin-block: 29px;
+  border: 1px solid var(--line);
+  background: var(--line);
+}
+
+.noteGrid > div {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 15px;
+  background: var(--ink);
+}
+
+.noteGrid span {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 7px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.noteGrid strong {
+  color: var(--paper-soft);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.consentNotes > a {
+  margin-top: 7px;
+}
+
+.formSide {
+  position: sticky;
+  top: calc(var(--header-height) + 24px);
+}
+
+.faq {
+  margin-top: 27px;
+}
+
+.faq > div {
+  padding-block: 15px;
+  border-bottom: 1px solid var(--line);
+}
+
+.faq dt {
+  color: var(--paper-soft);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.faq dd {
+  max-width: 390px;
+  margin: 7px 0 0;
+  color: var(--paper-dim);
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.manifesto {
+  padding-block: clamp(70px, 9vw, 120px);
+  border-top: 1px solid var(--line);
+  text-align: center;
+}
+
+.manifesto p {
+  max-width: 850px;
+  margin-inline: auto;
+  color: var(--paper);
+  font-family: var(--font-display);
+  font-size: clamp(34px, 4.2vw, 62px);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.manifesto > span {
+  display: block;
+  margin-top: 22px;
+  color: var(--muted);
+  font-size: 8px;
+}
+
+@media (max-width: 940px) {
+  .body {
+    grid-template-columns: 1fr;
+    gap: 55px;
+  }
+
+  .formSide {
+    position: static;
+    width: min(100%, 620px);
+  }
+
+  .content {
+    gap: 58px;
+  }
+}
+
+@media (max-width: 760px) {
+  .intro {
+    padding-top: 62px;
+    padding-bottom: 74px;
+  }
+
+  .meta {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 9px;
+    margin-bottom: 45px;
+  }
+
+  .meta > span {
+    font-size: 7px;
+  }
+
+  .heading {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .heading h1 {
+    font-size: clamp(64px, 18vw, 105px);
+  }
+
+  .heading > p {
+    max-width: 500px;
+    font-size: 13px;
+  }
+
+  .stamp {
+    display: none;
+  }
+
+  .body {
+    padding-block: 66px;
+  }
+
+  .dispatchList article {
+    grid-template-columns: 28px 1fr;
+    gap: 12px;
+  }
+
+  .consentNotes h2 {
+    font-size: clamp(41px, 10vw, 58px);
+  }
+
+  .noteGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .manifesto p {
+    font-size: clamp(32px, 8vw, 48px);
+  }
+}

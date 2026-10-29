@@ -1,0 +1,30 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 30px;
+  padding: 0 9px;
+  border: 1px solid var(--line);
+  color: var(--paper-dim);
+  background: transparent;
+  font-family: var(--font-mono);
+  font-size: 7px;
+  line-height: 1.4;
+  letter-spacing: 0.06em;
+  text-align: left;
+  text-transform: uppercase;
+  transition:
+    color 150ms ease,
+    border-color 150ms ease;
+}
+
+.button:hover {
+  color: var(--paper);
+  border-color: var(--paper-dim);
+}
+
+.icon {
+  color: var(--acid);
+  font-size: 10px;
+  line-height: 1;
+}
