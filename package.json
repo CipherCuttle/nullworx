@@ -22,12 +22,19 @@
     "drafts": "tsx scripts/draft-release.ts",
     "provenance": "node scripts/source-provenance.mjs",
     "verify": "pnpm lint && pnpm typecheck && pnpm validate:effects && pnpm test && pnpm build && pnpm check:secrets",
-    "bundle:effects": "tsx scripts/build-effect-bundles.ts"
+    "bundle:effects": "tsx scripts/build-effect-bundles.ts",
+    "verify:home": "node scripts/verify-home.mjs",
+    "verify:labs": "node scripts/verify-labs.mjs",
+    "verify:consolidation": "node scripts/verify-home.mjs && node scripts/verify-labs.mjs",
+    "capture:media": "node scripts/capture-media.mjs",
+    "preservation": "node scripts/source-preservation.mjs --output evidence/g0/source-preservation-final.json"
   },
   "dependencies": {
     "@fontsource-variable/space-grotesk": "5.3.0",
     "@fontsource/instrument-serif": "5.3.0",
     "@fontsource/space-mono": "5.3.0",
+    "@paper-design/shaders-react": "0.0.82",
+    "motion": "14.7.1",
     "next": "16.4.3",
     "react": "19.3.1",
     "react-dom": "19.3.1",

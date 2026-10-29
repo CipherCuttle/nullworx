@@ -1,0 +1,304 @@
+.crt {
+  --crt-noise-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.72'/%3E%3C/svg%3E");
+  width: 100%;
+  color: var(--crt-phosphor);
+  font-synthesis: none;
+}
+
+.bezel {
+  position: relative;
+  padding: clamp(7px, 0.9vw, 12px);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: calc(var(--crt-radius) + 15px);
+  background:
+    linear-gradient(155deg, rgba(255, 255, 255, 0.08), transparent 18%),
+    linear-gradient(160deg, #1c1f1d 0%, var(--crt-bezel) 34%, #010202 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -2px 8px rgba(0, 0, 0, 0.9),
+    0 34px 70px rgba(0, 0, 0, 0.46);
+}
+
+.screen {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: var(--crt-radius);
+  background:
+    radial-gradient(
+      ellipse at 50% 48%,
+      rgb(var(--crt-phosphor-rgb) / calc(var(--crt-glow-alpha) * 0.22)) 0%,
+      transparent 62%
+    ),
+    linear-gradient(
+      116deg,
+      rgba(255, 255, 255, 0.07) 0%,
+      transparent 16%,
+      transparent 72%,
+      rgba(255, 255, 255, 0.035) 100%
+    ),
+    radial-gradient(
+      ellipse at 50% 42%,
+      var(--crt-screen-glow) 0%,
+      var(--crt-screen) 68%,
+      #000000 120%
+    );
+  box-shadow:
+    inset 0 0 calc(34px + var(--crt-radius) * 2.4)
+      rgba(0, 0, 0, var(--crt-vignette)),
+    inset 0 0 55px rgba(0, 0, 0, 0.82),
+    inset 0 0 16px rgb(var(--crt-phosphor-rgb) / 0.06),
+    0 0 0 1px rgba(0, 0, 0, 0.9),
+    0 0 42px rgb(var(--crt-phosphor-rgb) / 0.045);
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  color: var(--crt-phosphor);
+  /* Text shadows are far cheaper than a raster filter across the whole panel.
+     The image/media grade remains a one-pass filter on the media itself. */
+  text-shadow: 0 0 var(--crt-glow)
+    rgb(var(--crt-phosphor-rgb) / var(--crt-glow-alpha));
+}
+
+.content img,
+.content video {
+  display: block;
+  max-width: 100%;
+  filter: var(--crt-media-filter);
+}
+
+.content svg {
+  filter:
+    drop-shadow(
+      calc(var(--crt-shift) * -1) 0 0
+        rgb(var(--crt-fringe-a) / var(--crt-fringe-alpha))
+    )
+    drop-shadow(
+      var(--crt-shift) 0 0 rgb(var(--crt-fringe-b) / var(--crt-fringe-alpha))
+    );
+}
+
+.scanlines,
+.noise,
+.tearA,
+.tearB {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.scanlines {
+  z-index: 4;
+  background-image:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, var(--crt-scan-alpha)) 0,
+      rgba(0, 0, 0, var(--crt-scan-alpha)) calc(var(--crt-pitch) * 0.42),
+      transparent calc(var(--crt-pitch) * 0.42),
+      transparent var(--crt-pitch)
+    ),
+    repeating-linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.09) 0,
+      rgba(0, 0, 0, 0.09) 1px,
+      transparent 1px,
+      transparent 3px
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      rgb(var(--crt-phosphor-rgb) / 0.02) 0,
+      rgb(var(--crt-phosphor-rgb) / 0.02) 1px,
+      transparent 1px,
+      transparent calc(var(--crt-pitch) * 0.7)
+    );
+}
+
+.noise {
+  inset: -24%;
+  z-index: 5;
+  background-image: var(--crt-noise-image);
+  background-size: 174px 174px;
+  opacity: var(--crt-noise);
+}
+
+.tearA,
+.tearB,
+.tearStatic {
+  left: -7%;
+  width: 114%;
+  height: calc(2px + var(--crt-distort) * 14px);
+  z-index: 6;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(var(--crt-fringe-a) / 0.24) 18%,
+    rgba(255, 255, 255, 0.2) 47%,
+    rgb(var(--crt-fringe-b) / 0.26) 68%,
+    transparent 100%
+  );
+  opacity: 0;
+  mix-blend-mode: screen;
+  filter: blur(0.35px);
+}
+
+.tearA {
+  top: 19%;
+}
+
+.tearB {
+  top: 62%;
+}
+
+.tearStatic {
+  position: absolute;
+  top: 37.4%;
+  z-index: 6;
+  width: 114%;
+  height: calc(1px + var(--crt-distort) * 4px);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(var(--crt-fringe-a) / 0.3) 18%,
+    rgba(255, 255, 255, 0.24) 48%,
+    rgb(var(--crt-fringe-b) / 0.32) 76%,
+    transparent 100%
+  );
+  mix-blend-mode: screen;
+  opacity: 0;
+  filter: blur(0.25px);
+}
+
+.crt[data-preset="broken"] .tearStatic {
+  opacity: calc(var(--crt-distort) * 0.4);
+}
+
+.crt[data-preset="broken"] .content {
+  text-shadow:
+    calc(var(--crt-shift) * -1) 0 0
+      rgb(var(--crt-fringe-a) / var(--crt-fringe-alpha)),
+    var(--crt-shift) 0 0 rgb(var(--crt-fringe-b) / var(--crt-fringe-alpha)),
+    0 0 var(--crt-glow) rgb(var(--crt-phosphor-rgb) / var(--crt-glow-alpha));
+}
+
+.vignette {
+  z-index: 7;
+  background:
+    radial-gradient(
+      ellipse at 50% 50%,
+      transparent 42%,
+      rgba(0, 0, 0, var(--crt-vignette)) 100%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.035) 0%,
+      transparent 8%,
+      transparent 92%,
+      rgba(0, 0, 0, 0.36) 100%
+    );
+}
+
+.crt[data-preset="broken"] .content {
+  animation: signalJitter var(--crt-jitter-duration) steps(1, end) infinite;
+}
+
+.crt[data-preset="broken"][data-motion="full"] .tearA,
+.crt[data-preset="broken"][data-motion="auto"] .tearA {
+  animation: tearA var(--crt-tear-duration) steps(1, end) infinite;
+}
+
+.crt[data-preset="broken"][data-motion="full"] .tearB,
+.crt[data-preset="broken"][data-motion="auto"] .tearB {
+  animation: tearB calc(var(--crt-tear-duration) * 1.37) steps(1, end)
+    infinite;
+}
+
+.crt[data-motion="off"] .tearA,
+.crt[data-motion="off"] .tearB,
+.crt[data-motion="off"] .content {
+  animation: none !important;
+}
+
+.crt[data-motion="off"] .tearA,
+.crt[data-motion="off"] .tearB {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .crt[data-motion="auto"] .tearA,
+  .crt[data-motion="auto"] .tearB,
+  .crt[data-motion="auto"] .content {
+    animation: none !important;
+  }
+
+  .crt[data-motion="auto"] .tearA,
+  .crt[data-motion="auto"] .tearB {
+    display: none;
+  }
+}
+
+
+
+
+
+@keyframes signalJitter {
+  0%,
+  88.7%,
+  100% {
+    transform: translate3d(0, 0, 0) skewX(0deg);
+  }
+  88.9% {
+    transform: translate3d(calc(var(--crt-distort) * -5px), 0, 0) skewX(0.18deg);
+  }
+  89.1% {
+    transform: translate3d(calc(var(--crt-distort) * 4px), 0, 0) skewX(-0.12deg);
+  }
+  89.4% {
+    transform: translate3d(calc(var(--crt-distort) * -2px), 0, 0);
+  }
+  89.6% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes tearA {
+  0%,
+  82%,
+  100% {
+    opacity: 0;
+    transform: translate3d(-2%, 0, 0) scaleX(0.98);
+  }
+  82.5% {
+    opacity: calc(var(--crt-distort) * 0.62);
+    transform: translate3d(2%, 0, 0) scaleX(1.04);
+  }
+  83.1% {
+    opacity: calc(var(--crt-distort) * 0.2);
+    transform: translate3d(-1%, 0.9%, 0) scaleX(1);
+  }
+  83.5% {
+    opacity: 0;
+  }
+}
+
+@keyframes tearB {
+  0%,
+  70%,
+  100% {
+    opacity: 0;
+    transform: translate3d(3%, 0, 0) scaleX(1.02);
+  }
+  70.5% {
+    opacity: calc(var(--crt-distort) * 0.46);
+    transform: translate3d(-3%, 0, 0) scaleX(1.06);
+  }
+  71.2% {
+    opacity: calc(var(--crt-distort) * 0.15);
+    transform: translate3d(1%, 0, 0) scaleX(1);
+  }
+  71.8% {
+    opacity: 0;
+  }
+}

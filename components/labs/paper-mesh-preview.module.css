@@ -1,0 +1,27 @@
+.stage {
+  position: relative;
+  min-height: clamp(400px, 45vw, 580px);
+  overflow: hidden;
+  background: #0a0a08;
+}
+
+.shader {
+  position: absolute;
+  inset: 0;
+}
+
+.shader > div {
+  position: absolute !important;
+  inset: 0;
+}
+
+.stage::after {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  content: "";
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgb(7 8 6 / 0.24), transparent 24%, transparent 62%, rgb(7 8 6 / 0.78)),
+    radial-gradient(120% 80% at 50% 45%, transparent 48%, rgb(7 8 6 / 0.45) 100%);
+}

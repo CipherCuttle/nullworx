@@ -2,15 +2,18 @@
 
 An experimental library of procedural visual effects for developers and creative coders.
 
-**Status: V0.1 foundation / prelaunch.** One effect is complete enough for owner review.
-No effect has been approved or released. The public catalogue is intentionally empty, the
-effect detail route exists but has no released entries, and the newsletter is disabled
-unless the owner configures a provider. Nothing on this branch is deployed or indexed.
+**Status: V0.1 foundation / prelaunch / consolidated lab.** One effect is complete enough
+for owner review. Nine effect and composition families now have working, noindexed lab
+previews in the branded shell. No effect has been approved or released. The public
+catalogue is intentionally empty, the effect detail route exists but has no released
+entries, and the newsletter is disabled unless the owner configures a provider. Nothing
+on this branch is deployed or indexed.
 
 - Canonical origin supplied for the build: `https://nulllworx.site` (three `l`s; confirm
   ownership before any deployment).
 - Source experiments: preserved, read-only inputs under `~/DevHub/experiments/`.
-- Current candidate: **ASCII Waves / Flower field** — `OWNER_REVIEW`.
+- Current public candidate: **ASCII Waves / Flower field** — `OWNER_REVIEW`.
+- Consolidated developer preview index: `/lab` (noindex; not in primary navigation).
 - Framework: Next.js 16 App Router, React 19, TypeScript, CSS Modules.
 - Newsletter: provider interface with a local mock; Brevo adapter prepared; no credentials.
 
@@ -24,6 +27,8 @@ unless the owner configures a provider. Nothing on this branch is deployed or in
 | Original homepage, catalogue gate, about, privacy, licenses | Implemented |
 | Typed and versioned effect manifest with release gate | Implemented |
 | ASCII Waves WebGL 2 lab preview with live controls | Implemented, `OWNER_REVIEW` |
+| Unified developer lab index and branded preview shell | Implemented, noindex |
+| HoloType, Paper Mesh, Motion, Signal UI, CRT, Pearl, Terminal Rain, Material × Mask | Implemented, experimental/owner-review lab routes |
 | Reusable public effect page template | Implemented; no `RELEASED` entries yet |
 | Configurable Drops signup with separate premium consent | Implemented |
 | Brevo adapter and in-memory mock provider | Implemented; live collection disabled |
@@ -65,7 +70,12 @@ until a provider mode is configured; that is intentional.
 | `pnpm test` | Vitest unit and integrity suite |
 | `pnpm validate:effects` | Schema, hashes, archive, component and release-gate checks |
 | `pnpm check:secrets` | Scan source and built client assets for credential patterns |
-| `pnpm test:e2e` | Playwright production smoke and screenshot suite |
+| `pnpm test:e2e` | Playwright production smoke and screenshot suite (port override via `E2E_PORT`) |
+| `pnpm verify:home` | G1 temporal homepage harness; requires a production server on `BASE_URL` |
+| `pnpm verify:labs` | Route, interaction, cross-browser and resource harness |
+| `pnpm verify:consolidation` | Runs both consolidation harnesses |
+| `pnpm capture:media` | Records before/after homepage and per-effect motion clips |
+| `pnpm preservation` | Re-hash preserved source roots (read-only) |
 | `pnpm verify` | Lint + typecheck + validate + unit tests + production build + secret scan |
 | `pnpm bundle:effects` | Rebuild the deterministic review archive (reviewed inputs only) |
 | `pnpm drafts -- --review --slug=ascii-waves` | Generate internal release drafts |
@@ -96,7 +106,16 @@ Noindexed or non-public:
 
 | Route | Why |
 | --- | --- |
-| `/lab/ascii-waves` | Owner-review preview; `noindex, nofollow`, excluded from sitemap |
+| `/lab` | Consolidated developer preview index; `noindex, nofollow`, not in the sitemap |
+| `/lab/ascii-waves` | Owner-review ASCII Waves preview; `noindex, nofollow` |
+| `/lab/holotype` | HoloType owner-review preview; noindex |
+| `/lab/paper-mesh` | Paper Shaders MeshGradient experimental preview; noindex |
+| `/lab/motion-signal` | Motion signal behaviour experimental preview; noindex |
+| `/lab/signal-ui` | UI Forge primitives on a real interactive surface; noindex |
+| `/lab/composition` | Material × Mask compositions A–D; experimental; noindex |
+| `/lab/crt-material` | CRT Material Lab owner-review preview; noindex |
+| `/lab/pearl-caustics` | Pearl Caustics V2 owner-review preview; noindex |
+| `/lab/terminal-rain` | Terminal Rain owner-review preview; noindex |
 | `/drops/confirmed` | Status page; noindex |
 | `/drops/unsubscribed` | Status page; noindex |
 | `/api/*` | JSON endpoints; disallowed in robots and noindexed |
@@ -109,16 +128,23 @@ The `/effects/[slug]` route uses `dynamicParams = false` and generates params fr
 ```text
 app/                      Next.js App Router routes and API handlers
   effects/[slug]/         Public effect template (RELEASED only)
-  lab/[slug]/             Unreviewed owner preview (noindex)
+  lab/                    Unified noindex lab index and routes
+  lab/[slug]/             Manifest-driven owner preview (ASCII Waves)
 components/
   effects/                Preserved ASCII Waves source + page/preview shells
+  labs/                   Branded lab shell, controls and effect adapters
   newsletter/             Drops form
   site/                   Header, footer, support link
 lib/
   effects/                Schema, camera-ready manifest, release filtering, integrity
+  labs/                   Lab catalog/admission matrix and effect metadata adapters
+  composition/            Mask, material and recipe contracts from G3-A
   newsletter/             Provider interface, Brevo adapter, mock, service, limiter
   publishing/             Deterministic release-draft builder
   analytics/              Allowlisted event schema and client sender
+experiments/              Preserved HoloType, CRT, Pearl and Terminal Rain source
+registry/new-york/        Byte-identical UI Forge primitives
+third_party/              Paper Shaders and Motion licences/notices
 emails/                   Prepared Brevo copy; never sent by this repository
 scripts/                  Validation, SEO report, provenance, drafts, bundles, secrets
 tests/unit/               Registry, SEO, newsletter, archive, analytics, publishing
@@ -132,10 +158,15 @@ library does not need a second islands framework. Astro remains a credible futur
 if the content surface grows enough to justify a migration. See
 [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) and [`docs/RESEARCH.md`](docs/RESEARCH.md).
 
-The effect is isolated behind a client dynamic import and an `IntersectionObserver`.
-The gallery and server-rendered pages do not eagerly execute WebGL. The source effect
-lives in `components/effects/ascii-waves/` and is kept byte-identical to the reviewed
-integration copy; the site wrapper lives outside that directory.
+Each effect is isolated behind a client dynamic import and an `IntersectionObserver`.
+Server-rendered pages do not eagerly execute WebGL. Preserved renderers live in
+`components/effects/ascii-waves/` and `experiments/`; the site wrappers and the shared lab
+shell live outside those directories. The ASCII Waves homepage now observes actual video
+timeline and renderer-frame progress before showing `LIVE`; a blocked autoplay becomes a
+recoverable `START` state, reduced motion is labelled `REDUCED MOTION / STILL`, and a
+context loss becomes `FALLBACK / POSTER`. See
+[`docs/CONSOLIDATION_G0.md`](docs/CONSOLIDATION_G0.md) and
+[`docs/CONSOLIDATION_INVENTORY.md`](docs/CONSOLIDATION_INVENTORY.md).
 
 ## Release gate
 
@@ -243,8 +274,11 @@ and deployment rollback, not data surgery. See [`docs/ROLLBACK.md`](docs/ROLLBAC
 
 ## License and provenance
 
-Site and effect code: MIT, copyright 2026 CipherCuttle. Flower video/poster: CC0 1.0 (MDN
-sample media). Fonts: SIL OFL 1.1 via Fontsource. Third-party package licenses are
+Site and effect code: MIT, copyright 2026 CipherCuttle. Flower video/poster and the VP9
+WebM browser fallback: CC0 1.0 (MDN sample media derivative). Paper Shaders: Apache-2.0.
+Motion: MIT. Fonts: SIL OFL 1.1 via Fontsource. HoloType, CRT, Pearl, Terminal Rain, the
+UI Forge primitives and the composition masks remain owner-authored and
+redistribution-restricted until the owner assigns terms. Third-party package licenses are
 inventoried in `evidence/dependencies/`. The original experiments are not re-licensed by
 this repository; see [`docs/SOURCE-PROVENANCE.md`](docs/SOURCE-PROVENANCE.md) and the
 `/licenses` route.
@@ -261,13 +295,23 @@ this repository; see [`docs/SOURCE-PROVENANCE.md`](docs/SOURCE-PROVENANCE.md) an
 - [`docs/ANALYTICS.md`](docs/ANALYTICS.md) — event catalog and privacy
 - [`docs/PUBLISHING.md`](docs/PUBLISHING.md) — deterministic drafts and approval gates
 - [`docs/TESTING.md`](docs/TESTING.md) — commands, coverage and screenshot inventory
+- [`docs/CONSOLIDATION_G0.md`](docs/CONSOLIDATION_G0.md) — app reconciliation and source preservation
+- [`docs/CONSOLIDATION_INVENTORY.md`](docs/CONSOLIDATION_INVENTORY.md) — effect admission matrix
+- [`docs/CONSOLIDATION_DEPENDENCIES.md`](docs/CONSOLIDATION_DEPENDENCIES.md) — dependency/security report
+- [`docs/CONSOLIDATION_VERIFICATION.md`](docs/CONSOLIDATION_VERIFICATION.md) — final commands and receipts
+- [`docs/CONSOLIDATION_REPORT.md`](docs/CONSOLIDATION_REPORT.md) — handoff report and verdict
 - [`docs/DEPENDENCIES.md`](docs/DEPENDENCIES.md) — runtime and tooling inventory
 - [`docs/RELEASE-RUNBOOK.md`](docs/RELEASE-RUNBOOK.md) — exact owner release procedure
 - [`docs/ROLLBACK.md`](docs/ROLLBACK.md) — rollback and recovery
 
 ## Known blockers before launch
 
-1. Owner visual approval of the React extraction is still open (Gate E).
+1. Owner visual approval of the React extraction and every lab material is still open.
+2. The full Living Stencils compositor is not integrated; Terminal Rain is the standalone
+   admitted material. See the inventory for the explicit blocker.
+3. Firefox/WebKit expose generic WebGL renderer strings; hardware GPU identity is proven in
+   Chromium on the RTX 4060. Cross-browser rendering is verified but not claimed as a
+   per-browser hardware receipt.
 2. The three-`l` domain must be confirmed as owned and the deployment target chosen.
 3. Newsletter collection has no live credentials; Brevo setup, DPA, sender authentication
    and a privacy mailbox are not complete.

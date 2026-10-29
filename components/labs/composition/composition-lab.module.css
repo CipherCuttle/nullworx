@@ -1,0 +1,87 @@
+/* Scoped classes used by the preserved HoloType and Paper composition surfaces. */
+.holotypeSurface {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  container-type: inline-size;
+}
+
+.holotypeText {
+  max-width: 100%;
+  font-size: 16cqi;
+  line-height: 1 !important;
+  letter-spacing: 0 !important;
+}
+
+.holotypeGlyph {
+  width: 100%;
+  height: auto;
+}
+
+.paperStage {
+  position: absolute;
+  inset: 0;
+}
+
+.paperMask {
+  position: absolute;
+  inset: 0;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-mode: alpha;
+  mask-mode: alpha;
+}
+
+.surfaceError {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 22px;
+  background: #1a0d0a;
+  color: #ffb4a2;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.maskOverlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 22px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  line-height: 1.7;
+  letter-spacing: 0.1em;
+  text-align: center;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.maskLoading,
+.surfaceFallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 22px;
+  background: var(--stage-bg, #0a0c09);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  line-height: 1.7;
+  letter-spacing: 0.1em;
+  text-align: center;
+  text-transform: uppercase;
+}

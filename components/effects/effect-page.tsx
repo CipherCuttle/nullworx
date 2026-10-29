@@ -38,7 +38,8 @@ export function EffectPage({ effect, mode }: { effect: EffectManifest; mode: Mod
               This is an owner-review page, not a public release. It is noindexed, excluded from
               the sitemap and absent from the public catalogue.
             </p>
-            <Link href="/effects">Back to the release gate <span aria-hidden="true">↗</span></Link>
+            <Link href="/effects">Release gate <span aria-hidden="true">↗</span></Link>
+            <Link href="/lab">All lab previews <span aria-hidden="true">↗</span></Link>
           </div>
         </div>
       ) : null}

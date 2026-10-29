@@ -1,7 +1,7 @@
 import { expect, test, type Page } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
-const baseURL = "http://127.0.0.1:3300";
+const baseURL = process.env.E2E_BASE_URL ?? "http://127.0.0.1:3300";
 
 async function waitForFontsAndField(page: Page) {
   await page.evaluate(() => document.fonts.ready);

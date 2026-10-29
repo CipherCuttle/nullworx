@@ -1,0 +1,2838 @@
+{
+  "generatedAt": "2026-10-29T22:33:18.674Z",
+  "baseUrl": "http://127.0.0.1:3200",
+  "checks": [
+    {
+      "name": "route/index: HTTP 200",
+      "pass": true,
+      "detail": 200
+    },
+    {
+      "name": "route/index: one h1",
+      "pass": true,
+      "detail": [
+        "The consolidated lab."
+      ]
+    },
+    {
+      "name": "route/index: h1 matches",
+      "pass": true,
+      "detail": "The consolidated lab."
+    },
+    {
+      "name": "route/index: no horizontal overflow",
+      "pass": true,
+      "detail": {
+        "scrollWidth": 1440,
+        "clientWidth": 1440
+      }
+    },
+    {
+      "name": "route/index: brand banner/main/footer",
+      "pass": true,
+      "detail": {
+        "banner": true,
+        "main": true,
+        "footer": true
+      }
+    },
+    {
+      "name": "route/index: integrated preview links",
+      "pass": true,
+      "detail": 9
+    },
+    {
+      "name": "route/index: no console errors",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "route/index: no page errors",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "route/index: no failed requests",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "route/index: no external requests",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "route/ascii-waves: HTTP 200",
+      "pass": true,
+      "detail": 200
+    },
+    {
+      "name": "route/ascii-waves: one h1",
+      "pass": true,
+      "detail": [
+        "ASCII WavesFlower field"
+      ]
+    },
+    {
+      "name": "route/ascii-waves: h1 matches",
+      "pass": true,
+      "detail": "ASCII WavesFlower field"
+    },
+    {
+      "name": "route/ascii-waves: no horizontal overflow",
+      "pass": true,
+      "detail": {
+        "scrollWidth": 1440,
+        "clientWidth": 1440
+      }
+    },
+    {
+      "name": "route/ascii-waves: brand banner/main/footer",
+      "pass": true,
+      "detail": {
+        "banner": true,
+        "main": true,
+        "footer": true
+      }
+    },
+    {
+      "name": "route/ascii-waves: no release approval copy",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "route/ascii-waves: preview stage present",
+      "pass": true,
+      "detail": "[data-testid='effect-preview']"
+    },
+    {
+      "name": "route/ascii-waves: no console errors",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "route/ascii-waves: no page errors",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "route/ascii-waves: no failed requests",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "route/ascii-waves: no external requests",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "route/holotype: HTTP 200",
+      "pass": true,
+      "detail": 200
+    },
+    {
+      "name": "route/holotype: one h1",
+      "pass": true,
+      "detail": [
+        "HoloTypeHolographic foil material"
+      ]
+    },
+    {
+      "name": "route/holotype: h1 matches",
+      "pass": true,
+      "detail": "HoloTypeHolographic foil material"
+    },
+    {
+      "name": "route/holotype: no horizontal overflow",
+      "pass": true,
+      "detail": {
+        "scrollWidth": 1440,
+        "clientWidth": 1440
+      }
+    },
+    {
+      "name": "route/holotype: brand banner/main/footer",
+      "pass": true,
+      "detail": {
+        "banner": true,
+        "main": true,
+        "footer": true
+      }
+    },
+    {
+      "name": "route/holotype: no release approval copy",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "route/holotype: preview stage present",
+      "pass": true,
+      "detail": "[data-testid='holotype-preview']"
+    },
+    {
+      "name": "route/holotype: no console errors",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "route/holotype: no page errors",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "route/holotype: no failed requests",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "route/holotype: no external requests",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "route/paper-mesh: HTTP 200",
+      "pass": true,
+      "detail": 200
+    },
+    {
+      "name": "route/paper-mesh: one h1",
+      "pass": true,
+      "detail": [
+        "Paper MeshGradientUpstream Paper Shaders material"
+      ]
+    },
+    {
+      "name": "route/paper-mesh: h1 matches",
+      "pass": true,
+      "detail": "Paper MeshGradientUpstream Paper Shaders material"
+    },
+    {
+      "name": "route/paper-mesh: no horizontal overflow",
+      "pass": true,
+      "detail": {
+        "scrollWidth": 1440,
+        "clientWidth": 1440
+      }
+    },
+    {
+      "name": "route/paper-mesh: brand banner/main/footer",
+      "pass": true,
+      "detail": {
+        "banner": true,
+        "main": true,
+        "footer": true
+      }
+    },
+    {
+      "name": "route/paper-mesh: no release approval copy",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "route/paper-mesh: preview stage present",
+      "pass": true,
+      "detail": "[data-testid='paper-mesh-preview']"
+    },
+    {
+      "name": "route/paper-mesh: no console errors",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "route/paper-mesh: no page errors",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "route/paper-mesh: no failed requests",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "route/paper-mesh: no external requests",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "route/motion-signal: HTTP 200",
+      "pass": true,
+      "detail": 200
+    },
+    {
+      "name": "route/motion-signal: one h1",
+      "pass": true,
+      "detail": [
+        "Motion Signal BehaviorStateful interaction behaviour"
+      ]
+    },
+    {
+      "name": "route/motion-signal: h1 matches",
+      "pass": true,
+      "detail": "Motion Signal BehaviorStateful interaction behaviour"
+    },
+    {
+      "name": "route/motion-signal: no horizontal overflow",
+      "pass": true,
+      "detail": {
+        "scrollWidth": 1440,
+        "clientWidth": 1440
+      }
+    },
+    {
+      "name": "route/motion-signal: brand banner/main/footer",
+      "pass": true,
+      "detail": {
+        "banner": true,
+        "main": true,
+        "footer": true
+      }
+    },
+    {
+      "name": "route/motion-signal: no release approval copy",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "route/motion-signal: preview stage present",
+      "pass": true,
+      "detail": "[data-testid='motion-signal-preview']"
+    },
+    {
+      "name": "route/motion-signal: no console errors",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "route/motion-signal: no page errors",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "route/motion-signal: no failed requests",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "route/motion-signal: no external requests",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "route/signal-ui: HTTP 200",
+      "pass": true,
+      "detail": 200
+    },
+    {
+      "name": "route/signal-ui: one h1",
+      "pass": true,
+      "detail": [
+        "Signal UI primitivesCommandButton, SignalCard, RevealHeading"
+      ]
+    },
+    {
+      "name": "route/signal-ui: h1 matches",
+      "pass": true,
+      "detail": "Signal UI primitivesCommandButton, SignalCard, RevealHeading"
+    },
+    {
+      "name": "route/signal-ui: no horizontal overflow",
+      "pass": true,
+      "detail": {
+        "scrollWidth": 1440,
+        "clientWidth": 1440
+      }
+    },
+    {
+      "name": "route/signal-ui: brand banner/main/footer",
+      "pass": true,
+      "detail": {
+        "banner": true,
+        "main": true,
+        "footer": true
+      }
+    },
+    {
+      "name": "route/signal-ui: no release approval copy",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "route/signal-ui: preview stage present",
+      "pass": true,
+      "detail": "[data-testid='signal-ui-preview']"
+    },
+    {
+      "name": "route/signal-ui: no console errors",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "route/signal-ui: no page errors",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "route/signal-ui: no failed requests",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "route/signal-ui: no external requests",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "route/composition: HTTP 200",
+      "pass": true,
+      "detail": 200
+    },
+    {
+      "name": "route/composition: one h1",
+      "pass": true,
+      "detail": [
+        "Material × MaskCompositions A–D"
+      ]
+    },
+    {
+      "name": "route/composition: h1 matches",
+      "pass": true,
+      "detail": "Material × MaskCompositions A–D"
+    },
+    {
+      "name": "route/composition: no horizontal overflow",
+      "pass": true,
+      "detail": {
+        "scrollWidth": 1440,
+        "clientWidth": 1440
+      }
+    },
+    {
+      "name": "route/composition: brand banner/main/footer",
+      "pass": true,
+      "detail": {
+        "banner": true,
+        "main": true,
+        "footer": true
+      }
+    },
+    {
+      "name": "route/composition: no release approval copy",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "route/composition: preview stage present",
+      "pass": true,
+      "detail": "[data-testid='composition-stage']"
+    },
+    {
+      "name": "route/composition: no console errors",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "route/composition: no page errors",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "route/composition: no failed requests",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "route/composition: no external requests",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "route/crt-material: HTTP 200",
+      "pass": true,
+      "detail": 200
+    },
+    {
+      "name": "route/crt-material: one h1",
+      "pass": true,
+      "detail": [
+        "CRT Material LabPhosphor signal treatment"
+      ]
+    },
+    {
+      "name": "route/crt-material: h1 matches",
+      "pass": true,
+      "detail": "CRT Material LabPhosphor signal treatment"
+    },
+    {
+      "name": "route/crt-material: no horizontal overflow",
+      "pass": true,
+      "detail": {
+        "scrollWidth": 1440,
+        "clientWidth": 1440
+      }
+    },
+    {
+      "name": "route/crt-material: brand banner/main/footer",
+      "pass": true,
+      "detail": {
+        "banner": true,
+        "main": true,
+        "footer": true
+      }
+    },
+    {
+      "name": "route/crt-material: no release approval copy",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "route/crt-material: preview stage present",
+      "pass": true,
+      "detail": "[data-testid='crt-preview']"
+    },
+    {
+      "name": "route/crt-material: no console errors",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "route/crt-material: no page errors",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "route/crt-material: no failed requests",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "route/crt-material: no external requests",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "route/pearl-caustics: HTTP 200",
+      "pass": true,
+      "detail": 200
+    },
+    {
+      "name": "route/pearl-caustics: one h1",
+      "pass": true,
+      "detail": [
+        "Pearl CausticsPhysically inspired caustic field"
+      ]
+    },
+    {
+      "name": "route/pearl-caustics: h1 matches",
+      "pass": true,
+      "detail": "Pearl CausticsPhysically inspired caustic field"
+    },
+    {
+      "name": "route/pearl-caustics: no horizontal overflow",
+      "pass": true,
+      "detail": {
+        "scrollWidth": 1440,
+        "clientWidth": 1440
+      }
+    },
+    {
+      "name": "route/pearl-caustics: brand banner/main/footer",
+      "pass": true,
+      "detail": {
+        "banner": true,
+        "main": true,
+        "footer": true
+      }
+    },
+    {
+      "name": "route/pearl-caustics: no release approval copy",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "route/pearl-caustics: preview stage present",
+      "pass": true,
+      "detail": "[data-testid='pearl-preview']"
+    },
+    {
+      "name": "route/pearl-caustics: no console errors",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "route/pearl-caustics: no page errors",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "route/pearl-caustics: no failed requests",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "route/pearl-caustics: no external requests",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "route/terminal-rain: HTTP 200",
+      "pass": true,
+      "detail": 200
+    },
+    {
+      "name": "route/terminal-rain: one h1",
+      "pass": true,
+      "detail": [
+        "Terminal RainGlyph-stream material"
+      ]
+    },
+    {
+      "name": "route/terminal-rain: h1 matches",
+      "pass": true,
+      "detail": "Terminal RainGlyph-stream material"
+    },
+    {
+      "name": "route/terminal-rain: no horizontal overflow",
+      "pass": true,
+      "detail": {
+        "scrollWidth": 1440,
+        "clientWidth": 1440
+      }
+    },
+    {
+      "name": "route/terminal-rain: brand banner/main/footer",
+      "pass": true,
+      "detail": {
+        "banner": true,
+        "main": true,
+        "footer": true
+      }
+    },
+    {
+      "name": "route/terminal-rain: no release approval copy",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "route/terminal-rain: preview stage present",
+      "pass": true,
+      "detail": "[data-testid='terminal-rain-preview']"
+    },
+    {
+      "name": "route/terminal-rain: no console errors",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "route/terminal-rain: no page errors",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "route/terminal-rain: no failed requests",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "route/terminal-rain: no external requests",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "ascii-lab: temporal movement",
+      "pass": true,
+      "detail": {
+        "width": 952,
+        "height": 596,
+        "meanAbs": 5.316,
+        "channelMean": [
+          6.0568,
+          5.2,
+          3.9727
+        ],
+        "diffPixels": 70975,
+        "diffPercent": 12.509,
+        "bbox": [
+          3,
+          1,
+          952,
+          595
+        ]
+      }
+    },
+    {
+      "name": "ascii-lab: toolbar reports live",
+      "pass": true,
+      "detail": {
+        "playback": "live",
+        "ready": "true",
+        "readout": "WEBGL2 / ACTIVE"
+      }
+    },
+    {
+      "name": "ascii-lab: pause is stable",
+      "pass": true,
+      "detail": {
+        "width": 952,
+        "height": 596,
+        "meanAbs": 0,
+        "channelMean": [
+          0,
+          0,
+          0
+        ],
+        "diffPixels": 0,
+        "diffPercent": 0,
+        "bbox": null
+      }
+    },
+    {
+      "name": "ascii-lab: paused label is not live",
+      "pass": true,
+      "detail": "paused"
+    },
+    {
+      "name": "ascii-lab: reduced motion state",
+      "pass": true,
+      "detail": "reduced"
+    },
+    {
+      "name": "holotype: animated material changes",
+      "pass": true,
+      "detail": {
+        "width": 966,
+        "height": 621,
+        "meanAbs": 0.3786,
+        "channelMean": [
+          0.3633,
+          0.4091,
+          0.2551
+        ],
+        "diffPixels": 18282,
+        "diffPercent": 3.0476,
+        "bbox": [
+          51,
+          142,
+          880,
+          565
+        ]
+      }
+    },
+    {
+      "name": "holotype: explicit still is stable",
+      "pass": true,
+      "detail": {
+        "width": 966,
+        "height": 621,
+        "meanAbs": 0,
+        "channelMean": [
+          0,
+          0,
+          0
+        ],
+        "diffPixels": 0,
+        "diffPercent": 0,
+        "bbox": null
+      }
+    },
+    {
+      "name": "holotype: still state is exposed",
+      "pass": true,
+      "detail": "true"
+    },
+    {
+      "name": "paper: upstream shader animates",
+      "pass": true,
+      "detail": {
+        "width": 966,
+        "height": 581,
+        "meanAbs": 7.8262,
+        "channelMean": [
+          9.777,
+          6.9905,
+          6.9757
+        ],
+        "diffPixels": 283226,
+        "diffPercent": 50.4638,
+        "bbox": [
+          0,
+          1,
+          965,
+          581
+        ]
+      }
+    },
+    {
+      "name": "paper: canvas exists",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "paper: pause holds the shader",
+      "pass": true,
+      "detail": {
+        "width": 966,
+        "height": 581,
+        "meanAbs": 0,
+        "channelMean": [
+          0,
+          0,
+          0
+        ],
+        "diffPixels": 0,
+        "diffPercent": 0,
+        "bbox": null
+      }
+    },
+    {
+      "name": "paper: paused state is exposed",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "motion: scan pulse is running",
+      "pass": true,
+      "detail": 2
+    },
+    {
+      "name": "motion: hold stops the pulse",
+      "pass": true,
+      "detail": 0
+    },
+    {
+      "name": "motion: mode attribute",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "motion: reduced motion removes pulse",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "composition: preset A is moth × HoloType",
+      "pass": true,
+      "detail": {
+        "mask": "nullworx-moth",
+        "material": "holotype-foil",
+        "recipe": "a-moth-holotype",
+        "paused": "false",
+        "reduced": "false"
+      }
+    },
+    {
+      "name": "composition: preset B is moth × Paper",
+      "pass": true,
+      "detail": {
+        "mask": "nullworx-moth",
+        "material": "paper-mesh-gradient",
+        "recipe": "b-moth-paper",
+        "paused": "false",
+        "reduced": "false"
+      }
+    },
+    {
+      "name": "composition: preset B mounts a canvas",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "composition: preset D is wordmark × Paper",
+      "pass": true,
+      "detail": {
+        "mask": "nullworx-wordmark",
+        "material": "paper-mesh-gradient",
+        "recipe": "d-wordmark-paper",
+        "paused": "false",
+        "reduced": "false"
+      }
+    },
+    {
+      "name": "composition: switching back to A removes the Paper canvas",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "composition: pause is stable",
+      "pass": true,
+      "detail": {
+        "width": 966,
+        "height": 589,
+        "meanAbs": 0,
+        "channelMean": [
+          0,
+          0,
+          0
+        ],
+        "diffPixels": 0,
+        "diffPercent": 0,
+        "bbox": null
+      }
+    },
+    {
+      "name": "composition: force reduced state",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "composition: no application errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "crt: broken preset starts CSS animations",
+      "pass": true,
+      "detail": [
+        "ewOakG_signalJitter",
+        "NqJAiW_blink",
+        "ewOakG_tearA",
+        "ewOakG_tearB"
+      ]
+    },
+    {
+      "name": "crt: animated treatment changes at the tear phase",
+      "pass": true,
+      "detail": {
+        "width": 966,
+        "height": 651,
+        "meanAbs": 0.0244,
+        "channelMean": [
+          0.0239,
+          0.0246,
+          0.025
+        ],
+        "diffPixels": 278,
+        "diffPercent": 0.0442,
+        "bbox": [
+          234,
+          302,
+          261,
+          333
+        ]
+      }
+    },
+    {
+      "name": "crt: still state is stable",
+      "pass": true,
+      "detail": {
+        "width": 966,
+        "height": 651,
+        "meanAbs": 0,
+        "channelMean": [
+          0,
+          0,
+          0
+        ],
+        "diffPixels": 0,
+        "diffPercent": 0,
+        "bbox": null
+      }
+    },
+    {
+      "name": "crt: still attribute",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "crt: broken preset switches",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "pearl: WebGL render state",
+      "pass": true,
+      "detail": "webgl"
+    },
+    {
+      "name": "pearl: caustic field animates",
+      "pass": true,
+      "detail": {
+        "width": 966,
+        "height": 621,
+        "meanAbs": 2.5954,
+        "channelMean": [
+          2.6944,
+          2.5908,
+          2.5072
+        ],
+        "diffPixels": 100778,
+        "diffPercent": 16.7995,
+        "bbox": [
+          0,
+          1,
+          965,
+          621
+        ]
+      }
+    },
+    {
+      "name": "pearl: pause holds phase",
+      "pass": true,
+      "detail": {
+        "width": 966,
+        "height": 621,
+        "meanAbs": 0,
+        "channelMean": [
+          0,
+          0,
+          0
+        ],
+        "diffPixels": 0,
+        "diffPercent": 0,
+        "bbox": null
+      }
+    },
+    {
+      "name": "rain: stream animates",
+      "pass": true,
+      "detail": {
+        "width": 966,
+        "height": 621,
+        "meanAbs": 2.4565,
+        "channelMean": [
+          2.337,
+          2.5125,
+          2.462
+        ],
+        "diffPixels": 32610,
+        "diffPercent": 5.436,
+        "bbox": [
+          2,
+          1,
+          961,
+          621
+        ]
+      }
+    },
+    {
+      "name": "rain: pause is stable",
+      "pass": true,
+      "detail": {
+        "width": 966,
+        "height": 621,
+        "meanAbs": 0,
+        "channelMean": [
+          0,
+          0,
+          0
+        ],
+        "diffPixels": 0,
+        "diffPercent": 0,
+        "bbox": null
+      }
+    },
+    {
+      "name": "signal-ui: button interaction increments",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "signal-ui: loading state sets aria-busy",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "chromium/desktop: homepage live",
+      "pass": true,
+      "detail": {
+        "playback": "live",
+        "ready": "true",
+        "videoTime": 3.711,
+        "frames": 229,
+        "videoSrc": "http://127.0.0.1:3200/media/flower.mp4",
+        "videoPaused": false,
+        "readout": "LIVE MATERIAL / WEBGL 2",
+        "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4060 Laptop GPU/PCIe/SSE2, OpenGL ES 3.2)",
+        "scrollWidth": 1440,
+        "clientWidth": 1440
+      }
+    },
+    {
+      "name": "chromium/desktop: video timeline advances",
+      "pass": true,
+      "detail": 3.711
+    },
+    {
+      "name": "chromium/desktop: renderer frame count advances",
+      "pass": true,
+      "detail": 229
+    },
+    {
+      "name": "chromium/desktop: readout is LIVE",
+      "pass": true,
+      "detail": "LIVE MATERIAL / WEBGL 2"
+    },
+    {
+      "name": "chromium/desktop: no horizontal overflow",
+      "pass": true,
+      "detail": {
+        "scrollWidth": 1440,
+        "clientWidth": 1440
+      }
+    },
+    {
+      "name": "chromium/desktop: no application errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "chromium/desktop: ascii-waves stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "chromium/desktop: ascii-waves no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "chromium/desktop: ascii-waves no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "chromium/desktop: holotype stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "chromium/desktop: holotype no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "chromium/desktop: holotype no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "chromium/desktop: paper-mesh stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "chromium/desktop: paper-mesh no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "chromium/desktop: paper-mesh no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "chromium/desktop: paper WebGL ready",
+      "pass": true,
+      "detail": "ready"
+    },
+    {
+      "name": "chromium/desktop: motion-signal stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "chromium/desktop: motion-signal no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "chromium/desktop: motion-signal no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "chromium/desktop: signal-ui stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "chromium/desktop: signal-ui no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "chromium/desktop: signal-ui no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "chromium/desktop: composition stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "chromium/desktop: composition no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "chromium/desktop: composition no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "chromium/desktop: crt-material stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "chromium/desktop: crt-material no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "chromium/desktop: crt-material no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "chromium/desktop: pearl-caustics stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "chromium/desktop: pearl-caustics no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "chromium/desktop: pearl-caustics no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "chromium/desktop: pearl render state",
+      "pass": true,
+      "detail": "webgl"
+    },
+    {
+      "name": "chromium/desktop: terminal-rain stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "chromium/desktop: terminal-rain no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "chromium/desktop: terminal-rain no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "chromium/mobile: homepage live",
+      "pass": true,
+      "detail": {
+        "playback": "live",
+        "ready": "true",
+        "videoTime": 3.711,
+        "frames": 229,
+        "videoSrc": "http://127.0.0.1:3200/media/flower.mp4",
+        "videoPaused": false,
+        "readout": "LIVE MATERIAL / WEBGL 2",
+        "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4060 Laptop GPU/PCIe/SSE2, OpenGL ES 3.2)",
+        "scrollWidth": 390,
+        "clientWidth": 390
+      }
+    },
+    {
+      "name": "chromium/mobile: video timeline advances",
+      "pass": true,
+      "detail": 3.711
+    },
+    {
+      "name": "chromium/mobile: renderer frame count advances",
+      "pass": true,
+      "detail": 229
+    },
+    {
+      "name": "chromium/mobile: readout is LIVE",
+      "pass": true,
+      "detail": "LIVE MATERIAL / WEBGL 2"
+    },
+    {
+      "name": "chromium/mobile: no horizontal overflow",
+      "pass": true,
+      "detail": {
+        "scrollWidth": 390,
+        "clientWidth": 390
+      }
+    },
+    {
+      "name": "chromium/mobile: no application errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "chromium/mobile: ascii-waves stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "chromium/mobile: ascii-waves no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "chromium/mobile: ascii-waves no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "chromium/mobile: holotype stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "chromium/mobile: holotype no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "chromium/mobile: holotype no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "chromium/mobile: paper-mesh stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "chromium/mobile: paper-mesh no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "chromium/mobile: paper-mesh no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "chromium/mobile: paper WebGL ready",
+      "pass": true,
+      "detail": "ready"
+    },
+    {
+      "name": "chromium/mobile: motion-signal stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "chromium/mobile: motion-signal no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "chromium/mobile: motion-signal no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "chromium/mobile: signal-ui stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "chromium/mobile: signal-ui no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "chromium/mobile: signal-ui no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "chromium/mobile: composition stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "chromium/mobile: composition no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "chromium/mobile: composition no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "chromium/mobile: crt-material stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "chromium/mobile: crt-material no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "chromium/mobile: crt-material no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "chromium/mobile: pearl-caustics stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "chromium/mobile: pearl-caustics no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "chromium/mobile: pearl-caustics no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "chromium/mobile: pearl render state",
+      "pass": true,
+      "detail": "webgl"
+    },
+    {
+      "name": "chromium/mobile: terminal-rain stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "chromium/mobile: terminal-rain no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "chromium/mobile: terminal-rain no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "firefox/desktop: homepage live",
+      "pass": true,
+      "detail": {
+        "playback": "live",
+        "ready": "true",
+        "videoTime": 3.869,
+        "frames": 214,
+        "videoSrc": "http://127.0.0.1:3200/media/flower.mp4",
+        "videoPaused": false,
+        "readout": "LIVE MATERIAL / WEBGL 2",
+        "renderer": "NVIDIA GeForce GTX 980, or similar",
+        "scrollWidth": 1440,
+        "clientWidth": 1440
+      }
+    },
+    {
+      "name": "firefox/desktop: video timeline advances",
+      "pass": true,
+      "detail": 3.869
+    },
+    {
+      "name": "firefox/desktop: renderer frame count advances",
+      "pass": true,
+      "detail": 214
+    },
+    {
+      "name": "firefox/desktop: readout is LIVE",
+      "pass": true,
+      "detail": "LIVE MATERIAL / WEBGL 2"
+    },
+    {
+      "name": "firefox/desktop: no horizontal overflow",
+      "pass": true,
+      "detail": {
+        "scrollWidth": 1440,
+        "clientWidth": 1440
+      }
+    },
+    {
+      "name": "firefox/desktop: no application errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "firefox/desktop: ascii-waves stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "firefox/desktop: ascii-waves no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "firefox/desktop: ascii-waves no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "firefox/desktop: holotype stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "firefox/desktop: holotype no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "firefox/desktop: holotype no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "firefox/desktop: paper-mesh stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "firefox/desktop: paper-mesh no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "firefox/desktop: paper-mesh no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "firefox/desktop: paper WebGL ready",
+      "pass": true,
+      "detail": "ready"
+    },
+    {
+      "name": "firefox/desktop: motion-signal stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "firefox/desktop: motion-signal no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "firefox/desktop: motion-signal no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "firefox/desktop: signal-ui stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "firefox/desktop: signal-ui no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "firefox/desktop: signal-ui no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "firefox/desktop: composition stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "firefox/desktop: composition no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "firefox/desktop: composition no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "firefox/desktop: crt-material stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "firefox/desktop: crt-material no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "firefox/desktop: crt-material no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "firefox/desktop: pearl-caustics stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "firefox/desktop: pearl-caustics no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "firefox/desktop: pearl-caustics no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "firefox/desktop: pearl render state",
+      "pass": true,
+      "detail": "webgl"
+    },
+    {
+      "name": "firefox/desktop: terminal-rain stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "firefox/desktop: terminal-rain no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "firefox/desktop: terminal-rain no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "firefox/mobile: homepage live",
+      "pass": true,
+      "detail": {
+        "playback": "live",
+        "ready": "true",
+        "videoTime": 3.868,
+        "frames": 238,
+        "videoSrc": "http://127.0.0.1:3200/media/flower.mp4",
+        "videoPaused": false,
+        "readout": "LIVE MATERIAL / WEBGL 2",
+        "renderer": "NVIDIA GeForce GTX 980, or similar",
+        "scrollWidth": 390,
+        "clientWidth": 390
+      }
+    },
+    {
+      "name": "firefox/mobile: video timeline advances",
+      "pass": true,
+      "detail": 3.868
+    },
+    {
+      "name": "firefox/mobile: renderer frame count advances",
+      "pass": true,
+      "detail": 238
+    },
+    {
+      "name": "firefox/mobile: readout is LIVE",
+      "pass": true,
+      "detail": "LIVE MATERIAL / WEBGL 2"
+    },
+    {
+      "name": "firefox/mobile: no horizontal overflow",
+      "pass": true,
+      "detail": {
+        "scrollWidth": 390,
+        "clientWidth": 390
+      }
+    },
+    {
+      "name": "firefox/mobile: no application errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "firefox/mobile: ascii-waves stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "firefox/mobile: ascii-waves no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "firefox/mobile: ascii-waves no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "firefox/mobile: holotype stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "firefox/mobile: holotype no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "firefox/mobile: holotype no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "firefox/mobile: paper-mesh stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "firefox/mobile: paper-mesh no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "firefox/mobile: paper-mesh no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "firefox/mobile: paper WebGL ready",
+      "pass": true,
+      "detail": "ready"
+    },
+    {
+      "name": "firefox/mobile: motion-signal stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "firefox/mobile: motion-signal no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "firefox/mobile: motion-signal no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "firefox/mobile: signal-ui stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "firefox/mobile: signal-ui no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "firefox/mobile: signal-ui no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "firefox/mobile: composition stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "firefox/mobile: composition no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "firefox/mobile: composition no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "firefox/mobile: crt-material stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "firefox/mobile: crt-material no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "firefox/mobile: crt-material no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "firefox/mobile: pearl-caustics stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "firefox/mobile: pearl-caustics no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "firefox/mobile: pearl-caustics no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "firefox/mobile: pearl render state",
+      "pass": true,
+      "detail": "webgl"
+    },
+    {
+      "name": "firefox/mobile: terminal-rain stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "firefox/mobile: terminal-rain no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "firefox/mobile: terminal-rain no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "webkit/desktop: homepage live",
+      "pass": true,
+      "detail": {
+        "playback": "live",
+        "ready": "true",
+        "videoTime": 3.814,
+        "frames": 243,
+        "videoSrc": "http://127.0.0.1:3200/media/flower.webm",
+        "videoPaused": false,
+        "readout": "LIVE MATERIAL / WEBGL 2",
+        "renderer": "Apple GPU",
+        "scrollWidth": 1440,
+        "clientWidth": 1440
+      }
+    },
+    {
+      "name": "webkit/desktop: video timeline advances",
+      "pass": true,
+      "detail": 3.814
+    },
+    {
+      "name": "webkit/desktop: renderer frame count advances",
+      "pass": true,
+      "detail": 243
+    },
+    {
+      "name": "webkit/desktop: readout is LIVE",
+      "pass": true,
+      "detail": "LIVE MATERIAL / WEBGL 2"
+    },
+    {
+      "name": "webkit/desktop: no horizontal overflow",
+      "pass": true,
+      "detail": {
+        "scrollWidth": 1440,
+        "clientWidth": 1440
+      }
+    },
+    {
+      "name": "webkit/desktop: no application errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "webkit/desktop: ascii-waves stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "webkit/desktop: ascii-waves no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "webkit/desktop: ascii-waves no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "webkit/desktop: holotype stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "webkit/desktop: holotype no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "webkit/desktop: holotype no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "webkit/desktop: paper-mesh stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "webkit/desktop: paper-mesh no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "webkit/desktop: paper-mesh no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "webkit/desktop: paper WebGL ready",
+      "pass": true,
+      "detail": "ready"
+    },
+    {
+      "name": "webkit/desktop: motion-signal stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "webkit/desktop: motion-signal no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "webkit/desktop: motion-signal no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "webkit/desktop: signal-ui stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "webkit/desktop: signal-ui no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "webkit/desktop: signal-ui no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "webkit/desktop: composition stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "webkit/desktop: composition no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "webkit/desktop: composition no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "webkit/desktop: crt-material stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "webkit/desktop: crt-material no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "webkit/desktop: crt-material no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "webkit/desktop: pearl-caustics stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "webkit/desktop: pearl-caustics no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "webkit/desktop: pearl-caustics no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "webkit/desktop: pearl render state",
+      "pass": true,
+      "detail": "webgl"
+    },
+    {
+      "name": "webkit/desktop: terminal-rain stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "webkit/desktop: terminal-rain no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "webkit/desktop: terminal-rain no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "webkit/mobile: homepage live",
+      "pass": true,
+      "detail": {
+        "playback": "live",
+        "ready": "true",
+        "videoTime": 3.779,
+        "frames": 241,
+        "videoSrc": "http://127.0.0.1:3200/media/flower.webm",
+        "videoPaused": false,
+        "readout": "LIVE MATERIAL / WEBGL 2",
+        "renderer": "Apple GPU",
+        "scrollWidth": 390,
+        "clientWidth": 390
+      }
+    },
+    {
+      "name": "webkit/mobile: video timeline advances",
+      "pass": true,
+      "detail": 3.779
+    },
+    {
+      "name": "webkit/mobile: renderer frame count advances",
+      "pass": true,
+      "detail": 241
+    },
+    {
+      "name": "webkit/mobile: readout is LIVE",
+      "pass": true,
+      "detail": "LIVE MATERIAL / WEBGL 2"
+    },
+    {
+      "name": "webkit/mobile: no horizontal overflow",
+      "pass": true,
+      "detail": {
+        "scrollWidth": 390,
+        "clientWidth": 390
+      }
+    },
+    {
+      "name": "webkit/mobile: no application errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "webkit/mobile: ascii-waves stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "webkit/mobile: ascii-waves no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "webkit/mobile: ascii-waves no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "webkit/mobile: holotype stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "webkit/mobile: holotype no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "webkit/mobile: holotype no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "webkit/mobile: paper-mesh stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "webkit/mobile: paper-mesh no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "webkit/mobile: paper-mesh no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "webkit/mobile: paper WebGL ready",
+      "pass": true,
+      "detail": "ready"
+    },
+    {
+      "name": "webkit/mobile: motion-signal stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "webkit/mobile: motion-signal no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "webkit/mobile: motion-signal no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "webkit/mobile: signal-ui stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "webkit/mobile: signal-ui no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "webkit/mobile: signal-ui no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "webkit/mobile: composition stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "webkit/mobile: composition no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "webkit/mobile: composition no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "webkit/mobile: crt-material stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "webkit/mobile: crt-material no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "webkit/mobile: crt-material no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "webkit/mobile: pearl-caustics stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "webkit/mobile: pearl-caustics no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "webkit/mobile: pearl-caustics no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "webkit/mobile: pearl render state",
+      "pass": true,
+      "detail": "webgl"
+    },
+    {
+      "name": "webkit/mobile: terminal-rain stage mounts",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "webkit/mobile: terminal-rain no overflow",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "webkit/mobile: terminal-rain no errors",
+      "pass": true,
+      "detail": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "name": "resources: WebGL contexts are explicitly released",
+      "pass": true,
+      "detail": {
+        "before": {
+          "gl": {
+            "created": 0,
+            "lost": 0
+          },
+          "nodes": 404,
+          "heap": 4346962
+        },
+        "after": {
+          "gl": {
+            "created": 15,
+            "lost": 15
+          },
+          "nodes": 424,
+          "canvases": 0,
+          "heap": 8842456
+        },
+        "mounted": [
+          {
+            "path": "/lab/paper-mesh",
+            "gl": {
+              "created": 2,
+              "lost": 1
+            },
+            "canvases": 1
+          },
+          {
+            "path": "/lab/pearl-caustics",
+            "gl": {
+              "created": 3,
+              "lost": 2
+            },
+            "canvases": 1
+          },
+          {
+            "path": "/lab/terminal-rain",
+            "gl": {
+              "created": 3,
+              "lost": 3
+            },
+            "canvases": 1
+          },
+          {
+            "path": "/lab/composition",
+            "gl": {
+              "created": 5,
+              "lost": 4
+            },
+            "canvases": 1
+          },
+          {
+            "path": "/lab/paper-mesh",
+            "gl": {
+              "created": 7,
+              "lost": 6
+            },
+            "canvases": 1
+          },
+          {
+            "path": "/lab/pearl-caustics",
+            "gl": {
+              "created": 8,
+              "lost": 7
+            },
+            "canvases": 1
+          },
+          {
+            "path": "/lab/terminal-rain",
+            "gl": {
+              "created": 8,
+              "lost": 8
+            },
+            "canvases": 1
+          },
+          {
+            "path": "/lab/composition",
+            "gl": {
+              "created": 10,
+              "lost": 9
+            },
+            "canvases": 1
+          },
+          {
+            "path": "/lab/paper-mesh",
+            "gl": {
+              "created": 12,
+              "lost": 11
+            },
+            "canvases": 1
+          },
+          {
+            "path": "/lab/pearl-caustics",
+            "gl": {
+              "created": 13,
+              "lost": 12
+            },
+            "canvases": 1
+          },
+          {
+            "path": "/lab/terminal-rain",
+            "gl": {
+              "created": 13,
+              "lost": 13
+            },
+            "canvases": 1
+          },
+          {
+            "path": "/lab/composition",
+            "gl": {
+              "created": 15,
+              "lost": 14
+            },
+            "canvases": 1
+          }
+        ]
+      }
+    },
+    {
+      "name": "resources: every navigated route leaves no canvas on the index",
+      "pass": true,
+      "detail": 0
+    },
+    {
+      "name": "resources: DOM node count bounded",
+      "pass": true,
+      "detail": {
+        "before": 404,
+        "after": 424
+      }
+    },
+    {
+      "name": "resources: heap bounded",
+      "pass": true,
+      "detail": {
+        "before": 4346962,
+        "after": 8842456
+      }
+    }
+  ],
+  "total": 359,
+  "passed": 359,
+  "failed": 0,
+  "errors": [],
+  "crossBrowser": [
+    {
+      "engine": "chromium",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "home": {
+        "playback": "live",
+        "ready": "true",
+        "videoTime": 3.711,
+        "frames": 229,
+        "videoSrc": "http://127.0.0.1:3200/media/flower.mp4",
+        "videoPaused": false,
+        "readout": "LIVE MATERIAL / WEBGL 2",
+        "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4060 Laptop GPU/PCIe/SSE2, OpenGL ES 3.2)",
+        "scrollWidth": 1440,
+        "clientWidth": 1440
+      },
+      "logs": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "engine": "chromium",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "home": {
+        "playback": "live",
+        "ready": "true",
+        "videoTime": 3.711,
+        "frames": 229,
+        "videoSrc": "http://127.0.0.1:3200/media/flower.mp4",
+        "videoPaused": false,
+        "readout": "LIVE MATERIAL / WEBGL 2",
+        "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4060 Laptop GPU/PCIe/SSE2, OpenGL ES 3.2)",
+        "scrollWidth": 390,
+        "clientWidth": 390
+      },
+      "logs": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "engine": "firefox",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "home": {
+        "playback": "live",
+        "ready": "true",
+        "videoTime": 3.869,
+        "frames": 214,
+        "videoSrc": "http://127.0.0.1:3200/media/flower.mp4",
+        "videoPaused": false,
+        "readout": "LIVE MATERIAL / WEBGL 2",
+        "renderer": "NVIDIA GeForce GTX 980, or similar",
+        "scrollWidth": 1440,
+        "clientWidth": 1440
+      },
+      "logs": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "engine": "firefox",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "home": {
+        "playback": "live",
+        "ready": "true",
+        "videoTime": 3.868,
+        "frames": 238,
+        "videoSrc": "http://127.0.0.1:3200/media/flower.mp4",
+        "videoPaused": false,
+        "readout": "LIVE MATERIAL / WEBGL 2",
+        "renderer": "NVIDIA GeForce GTX 980, or similar",
+        "scrollWidth": 390,
+        "clientWidth": 390
+      },
+      "logs": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "engine": "webkit",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "home": {
+        "playback": "live",
+        "ready": "true",
+        "videoTime": 3.814,
+        "frames": 243,
+        "videoSrc": "http://127.0.0.1:3200/media/flower.webm",
+        "videoPaused": false,
+        "readout": "LIVE MATERIAL / WEBGL 2",
+        "renderer": "Apple GPU",
+        "scrollWidth": 1440,
+        "clientWidth": 1440
+      },
+      "logs": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    },
+    {
+      "engine": "webkit",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "home": {
+        "playback": "live",
+        "ready": "true",
+        "videoTime": 3.779,
+        "frames": 241,
+        "videoSrc": "http://127.0.0.1:3200/media/flower.webm",
+        "videoPaused": false,
+        "readout": "LIVE MATERIAL / WEBGL 2",
+        "renderer": "Apple GPU",
+        "scrollWidth": 390,
+        "clientWidth": 390
+      },
+      "logs": {
+        "console": [],
+        "page": [],
+        "request": [],
+        "external": [],
+        "cancellation": []
+      }
+    }
+  ]
+}

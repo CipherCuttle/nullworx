@@ -1,0 +1,63 @@
+.stage {
+  position: relative;
+  min-height: clamp(440px, 50vw, 620px);
+  overflow: hidden;
+  background: #e6e1d6;
+}
+
+.stage > div:first-child {
+  position: absolute !important;
+  inset: 0;
+}
+
+.stage::after {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  content: "";
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgb(10 12 10 / 0.08), transparent 24%, transparent 62%, rgb(10 12 10 / 0.58)),
+    radial-gradient(120% 80% at 50% 44%, transparent 50%, rgb(10 12 10 / 0.22) 100%);
+}
+
+.stage[data-surface="dusk"]::after {
+  background:
+    linear-gradient(180deg, rgb(5 8 8 / 0.2), transparent 24%, transparent 62%, rgb(5 8 8 / 0.78)),
+    radial-gradient(120% 80% at 50% 44%, transparent 46%, rgb(5 8 8 / 0.4) 100%);
+}
+
+.stageCopy {
+  position: absolute;
+  z-index: 5;
+  left: clamp(18px, 3vw, 32px);
+  bottom: 42px;
+  max-width: min(390px, calc(100% - 36px));
+  pointer-events: none;
+}
+
+.stageCopy strong {
+  display: block;
+  color: #1c1d18;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.4vw, 4rem);
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+}
+
+.stageCopy p {
+  margin-top: 7px;
+  color: rgb(28 29 24 / 0.66);
+  font-size: 9px;
+  line-height: 1.7;
+}
+
+.stage[data-surface="dusk"] .stageCopy strong {
+  color: var(--paper);
+}
+
+.stage[data-surface="dusk"] .stageCopy p {
+  color: rgb(241 237 223 / 0.68);
+}
+

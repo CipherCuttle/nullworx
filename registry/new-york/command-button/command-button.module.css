@@ -1,0 +1,43 @@
+.button {
+  --_accent: var(--forge-accent, #b54d2f);
+  box-sizing: border-box;
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  min-height: 44px;
+  padding: 0.75rem 1.15rem;
+  border: 1px solid transparent;
+  border-radius: var(--forge-radius-control, 8px);
+  background: var(--_accent);
+  color: #fff;
+  font-family: var(--forge-font, inherit);
+  font-size: 0.875rem;
+  font-weight: 550;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+.button[data-accent="teal"] { --_accent: var(--forge-accent, #246b62); }
+.button[data-accent="violet"] { --_accent: var(--forge-accent, #6b50a0); }
+.button[data-variant="outline"] { border-color: var(--_accent); background: transparent; color: var(--_accent); }
+.button[data-variant="ghost"] { background: transparent; color: var(--_accent); }
+.button[data-size="sm"] { padding: 0.6rem 0.85rem; font-size: 0.8rem; }
+.button[data-size="lg"] { min-height: 52px; padding: 1rem 1.5rem; font-size: 1rem; }
+.button:not(:disabled):hover { transform: translateY(-2px); box-shadow: 0 6px 16px color-mix(in srgb, var(--_accent) 18%, transparent); }
+.button:not(:disabled):active { transform: translateY(0); box-shadow: none; }
+.button:focus-visible { outline: 3px solid var(--_accent); outline-offset: 4px; }
+.button:disabled { opacity: 0.48; cursor: not-allowed; }
+.button[aria-busy="true"] { opacity: 0.75; cursor: wait; }
+.arrow { display: inline-block; font-size: 1.15em; transition: transform 180ms ease; }
+.button:not(:disabled):hover .arrow { transform: translate(2px, -2px); }
+.spinner { width: 0.9em; height: 0.9em; border: 1.5px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: spin 700ms linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .button, .arrow { transition: none; }
+  .button:not(:disabled):hover, .button:not(:disabled):hover .arrow { transform: none; }
+  .spinner { animation: none; }
+}
