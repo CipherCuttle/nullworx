@@ -529,11 +529,11 @@ try {
       await openEffect(page, "paper-mesh-gradient");
       await page.waitForTimeout(220);
     }
-    await openEffect(page, "holotype-foil");
+    // Compare the same adapter before and after the cycle; comparing Paper to HoloType
+    // would measure adapter composition differences, not a leak.
+    await openEffect(page, "paper-mesh-gradient");
+    await page.waitForSelector('[data-paper-shader] canvas');
     await page.waitForTimeout(700);
-    const afterHolo = await glState(page);
-    check("leaving Paper removes its canvas", afterHolo.canvases === 0, JSON.stringify(afterHolo));
-    check("leaving Paper releases its WebGL context", afterHolo.live === 0, JSON.stringify(afterHolo));
     const liveNodesAfter = await page.evaluate(() => document.querySelectorAll("*").length);
     const afterHeap = await heapMetrics(cdp);
     const heapDelta = afterHeap.jsHeapUsedSize - beforeHeap.jsHeapUsedSize;
@@ -541,8 +541,13 @@ try {
     check(
       "repeated mount/unmount does not grow live DOM nodes unboundedly",
       nodeDelta < 150,
-      `live nodes ${liveNodesBefore} -> ${liveNodesAfter} (${nodeDelta}); CDP nodes ${beforeHeap.nodes} -> ${afterHeap.nodes}`,
+      `Paper live nodes ${liveNodesBefore} -> ${liveNodesAfter} (${nodeDelta}); CDP nodes ${beforeHeap.nodes} -> ${afterHeap.nodes}`,
     );
+    await openEffect(page, "holotype-foil");
+    await page.waitForTimeout(700);
+    const afterHolo = await glState(page);
+    check("leaving Paper removes its canvas", afterHolo.canvases === 0, JSON.stringify(afterHolo));
+    check("leaving Paper releases its WebGL context", afterHolo.live === 0, JSON.stringify(afterHolo));
     check(
       "repeated mount/unmount does not grow JS heap unboundedly",
       heapDelta < 12 * 1024 * 1024,
