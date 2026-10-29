@@ -1,0 +1,89 @@
+{
+  "generatedAt": "2026-10-29T21:54:02.881Z",
+  "origin": "http://127.0.0.1:3102",
+  "recipe": {
+    "schemaVersion": "1.0.0",
+    "effect": {
+      "id": "living-type-01",
+      "version": "1.0.0"
+    },
+    "id": "nullworx-living-type-01",
+    "version": "1.0.0",
+    "title": "KILN/07 / Kiln",
+    "config": {
+      "text": "KILN/07",
+      "preset": "kiln",
+      "font": {
+        "family": "Unbounded Variable",
+        "version": "5.3.0",
+        "weight": 800,
+        "fit": 0.88,
+        "tracking": -0.018
+      },
+      "layout": {
+        "aspect": 3.35
+      },
+      "colors": [
+        "#7C2D12",
+        "#C2410C",
+        "#F59E0B",
+        "#FFF7ED"
+      ],
+      "material": {
+        "speed": 0.13,
+        "distortion": 0.55,
+        "swirl": 0.15,
+        "grainMixer": 0.22,
+        "grainOverlay": 0.18,
+        "scale": 1.45,
+        "rotation": 340
+      },
+      "playback": {
+        "paused": true,
+        "reducedMotion": "auto"
+      }
+    }
+  },
+  "storageKey": "g5a-recipe-proof",
+  "mountA": {
+    "text": "KILN/07",
+    "preset": "kiln",
+    "paused": "true",
+    "reduced": "false",
+    "maskKey": "d840be65",
+    "maskWidth": "960",
+    "maskHeight": "287",
+    "renderer": "shader",
+    "rect": {
+      "width": 960,
+      "height": 286.5625
+    }
+  },
+  "mountB": {
+    "text": "KILN/07",
+    "preset": "kiln",
+    "paused": "true",
+    "reduced": "false",
+    "maskKey": "d840be65",
+    "maskWidth": "960",
+    "maskHeight": "287",
+    "renderer": "shader",
+    "rect": {
+      "width": 960,
+      "height": 286.5625
+    }
+  },
+  "settingsEqual": true,
+  "visual": {
+    "width": 960,
+    "height": 288,
+    "maxChannelDelta": 1,
+    "changedPixels": 13,
+    "totalPixels": 276480,
+    "visualEquivalent": true
+  },
+  "errors": [],
+  "failedRequests": [],
+  "pass": true,
+  "note": "The recipe has no time value. Both mounts are paused at frame 0. This proves configuration and paused-still equivalence, not frame-perfect animation replay."
+}

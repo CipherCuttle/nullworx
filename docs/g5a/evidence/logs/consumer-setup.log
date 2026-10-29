@@ -1,0 +1,7 @@
+$ (next) npm install --ignore-scripts --no-audit --no-fund
+$ (next) npx -y shadcn@4.23.0 add http://127.0.0.1:3102/r/living-type-01.json --yes --cwd /home/swirky/Documents/deepseek-harness/default-workspace/g5a-consumers/next
+$ (vite) npm install --ignore-scripts --no-audit --no-fund
+$ (vite) npx -y shadcn@4.23.0 add http://127.0.0.1:3102/r/living-type-01.json --yes --cwd /home/swirky/Documents/deepseek-harness/default-workspace/g5a-consumers/vite
+PASS next: shadcn installed 12/12 files with source parity
+PASS vite: shadcn installed 12/12 files with source parity
+CONSUMERS=/home/swirky/Documents/deepseek-harness/default-workspace/g5a-consumers

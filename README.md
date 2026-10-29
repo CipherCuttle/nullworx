@@ -12,10 +12,14 @@ contains:
 - a G3-A experimental **material × mask composition proof** at `/labs/composition`: the
   existing HoloType material and the Paper Shaders MeshGradient applied to an original moth
   silhouette and the NULLWORX wordmark.
+- G5-A **NULLWORX / Living Type 01**, a separate experimental product demo at `/living-type`
+  and one installable shadcn item, `living-type-01`, with editable wordmark, three art
+  directions and validated recipes.
 
 The home gallery is unchanged. The experimental labs are **`/labs/effects`** and
-**`/labs/composition`**; neither is linked from the gallery and both are `noindex`. Nothing
-here is owner visually approved, merged to a release branch, deployed, or published.
+**`/labs/composition`**; the G5-A demo is **`/living-type`**. None is linked from the gallery
+and all are `noindex`. Nothing here is owner visually approved, merged to a release branch,
+deployed, or published.
 
 ## Status
 
@@ -26,9 +30,10 @@ here is owner visually approved, merged to a release branch, deployed, or publis
 | Paper Shaders adapter | `EXPERIMENTAL` — upstream `@paper-design/shaders-react@0.0.82` (Apache-2.0) |
 | Motion adapter | `EXPERIMENTAL` — upstream `motion@14.7.1` (MIT) |
 | Owner visual approval | **Not granted** |
-| Registry item for effects | **None** (G5 is design-only) |
+| Effect registry | **`living-type-01`** only, G5-A, local direct install; no public admission |
 | Framework security | `next@15.5.28`, `react@19.1.10`, `sharp@0.35.5`; production audit triaged |
 | G3-A composition proof | **Experimental** — 2 masks × 2 materials, four presets, lab-only |
+| G5-A Living Type 01 | **EXPERIMENTAL / OWNER_REVIEW** — one installable effect item; embedded OFL font; 137/124/124 browser checks; 0% headed median frame-interval regression |
 | Deploy / publish / merge | **None** |
 
 ## Security
@@ -52,6 +57,8 @@ Routes:
 - `/` — the existing UI Forge gallery, unchanged.
 - `/labs/effects` — the experimental adapter lab (`noindex`, not in navigation).
 - `/labs/composition` — the G3-A material × mask proof (`noindex`, not in navigation).
+- `/living-type` — the G5-A product demo and recipe workbench (`noindex`, not in navigation).
+- `/living-type/recipe-proof` — noindex paused-recipe evidence route, not linked from the demo.
 
 ## Verify
 
@@ -62,6 +69,7 @@ pnpm registry:validate
 pnpm build
 pnpm verify:contract     # 24 runtime EffectDefinition assertions, no browser needed
 pnpm verify:composition-contract  # 26 composition contract assertions
+pnpm verify:living-type-contract  # 45 recipe/mask/security contract assertions
 ```
 
 Existing UI Forge checks and browser evidence run against a production server:
@@ -73,6 +81,26 @@ EVIDENCE_DIR=evidence pnpm verify:gallery   # 43 gallery assertions + clipboard 
 EVIDENCE_DIR=evidence pnpm verify:effects   # 62 G2 browser assertions
 EVIDENCE_DIR=evidence/g3a pnpm verify:composition  # 149 G3-A browser assertions
 ```
+
+G5-A has its own clean-consumer setup and evidence path:
+
+```sh
+# terminal 1: the local registry/demo build
+pnpm build && pnpm start --hostname 127.0.0.1 --port 3102
+
+# terminal 2: create the two consumers outside this repo
+pnpm setup:living-type-consumers
+# then build them and run the browser suites against ports 3201/3202
+ENGINE=chromium MODE=full pnpm verify:living-type-browser
+ENGINE=firefox MODE=full pnpm verify:living-type-browser
+ENGINE=webkit MODE=full pnpm verify:living-type-browser
+pnpm verify:living-type-recipe
+DISPLAY=:0 pnpm measure:living-type
+```
+
+The install command is `npx shadcn@4.23.0 add <registry>/r/living-type-01.json --yes`.
+shadcn 3.0.0 corrupts installed files (see `G5A_REPORT.md`); 4.23.0 is required for this
+item. The existing UI Forge CLI dependency and install command are intentionally untouched.
 
 After `node scripts/smoke-consumer.mjs` prints a consumer path, start it on port 3101 and
 run `EVIDENCE_DIR=evidence pnpm verify:consumer` for the 53 clean-consumer assertions.
@@ -92,6 +120,9 @@ app/                         Next.js App Router; gallery + /labs/effects + /labs
 components/forge-gallery.*   Existing UI Forge gallery (unchanged)
 registry/new-york/           3 accepted UI Forge registry items
 experiments/holotype/        Existing effect, imported unchanged (REVIEW_PENDING)
+registry.g5a.json            Separate one-item G5-A registry manifest (direct item URL)
+registry/nullworx/           Shadcn-installable Living Type 01 source, assets, docs, licences
+components/living-type-demo/ Product demo + paused recipe evidence route
 lib/effects/                 EffectDefinition metadata, schemas, validators
 lib/composition/             MaskDefinition, MaterialDefinition, recipe + compatibility contracts
 components/labs/             G2 preview adapters + G3-A composition surfaces
@@ -120,6 +151,7 @@ Runtime additions are pinned exactly:
 | `@paper-design/shaders-react` | `0.0.82` | Apache-2.0 |
 | `@paper-design/shaders` (transitive) | `0.0.82` | Apache-2.0 |
 | `motion` | `14.7.1` | MIT |
+| Unbounded Variable 5.3.0 ASCII subset | embedded WOFF2 | OFL-1.1 |
 | `framer-motion` (transitive) | `14.7.1` | MIT |
 
 Evidence-only devDependencies: `playwright-core@1.64.1` (Apache-2.0) and `tsx@4.23.15`
@@ -140,7 +172,8 @@ integration is present. No media is imported by this pass.
 
 ## Known limits
 
-- Chromium-only browser evidence; no Firefox/WebKit pass.
+- Chromium, Firefox and WebKit browser evidence exists for G5-A; the G2/G3-A harness remains
+  Chromium-first where documented.
 - Headless Chrome uses SwiftShader software WebGL. Frame-time numbers are host/software
   cadence observations, not a universal 60 fps claim.
 - HoloType is single-line by design.
@@ -149,7 +182,24 @@ integration is present. No media is imported by this pass.
 - No image/video/PNG export, composition graph, marketplace, newsletter or video pipeline is
   implemented.
 - The repository has no assigned project license. Third-party licenses and notices still
-  apply; do not redistribute the owner-authored source without the owner's decision.
+  apply; do not redistribute the owner-authored source without the owner's decision. The
+  G5-A item is local-verification-only until the owner assigns a source license.
+- The G5-A registry item is not in the shared registry index because the existing gallery
+  assumes exactly three UI Forge items. Install it by direct item URL.
+- The embedded data-URI font can be blocked by a restrictive `font-src` CSP; the component
+  falls back to system type. Self-host the WOFF2 separately if the consumer needs a strict
+  CSP and the exact face.
+- G5-A recipes restore configuration and paused stills, not frame-perfect animation.
+
+## G5-A documentation
+
+- [G5A_REPORT.md](G5A_REPORT.md) — gates, evidence, hostile review, verdict.
+- [docs/G5A_BROWSER_MATRIX.md](docs/G5A_BROWSER_MATRIX.md)
+- [docs/G5A_PERFORMANCE.md](docs/G5A_PERFORMANCE.md)
+- [docs/G5A_SECURITY.md](docs/G5A_SECURITY.md)
+- [docs/G5A_MANIFEST.md](docs/G5A_MANIFEST.md)
+- [docs/G5A_ROLLBACK.md](docs/G5A_ROLLBACK.md)
+- [registry/nullworx/living-type-01/README.md](registry/nullworx/living-type-01/README.md) — customer usage.
 
 ## Rollback
 

@@ -950,12 +950,26 @@ try {
       composition: await bundleFor("/labs/composition/page"),
     };
 
+    const rendererName = renderer?.renderer ?? "";
+    // A renderer string is the only app-visible GPU truth. Classify it instead
+    // of assuming software: the SwiftShader default and a real GPU both report
+    // through WEBGL_debug_renderer_info.
+    const softwareRenderer =
+      !rendererName || /swiftshader|llvmpipe|softpipe|software rasterizer|software webgl/i.test(rendererName);
+    const rendererClass = !rendererName ? "unknown" : softwareRenderer ? "software" : "hardware";
+
     const performance = {
       generatedAt: new Date().toISOString(),
       method:
         "Chromium headless, production build, 1440x900 DPR1, alternating A/B rounds, PERF_WARMUP_MS warmup + PERF_SAMPLE_MS rAF cadence per round, median of per-round medians.",
       warmupMs: PERF_WARMUP_MS,
       sampleMs: PERF_SAMPLE_MS,
+      launch: {
+        executablePath: CHROME,
+        chromeWrapper: process.env.CHROME_PATH ?? null,
+        headless: true,
+      },
+      rendererClass,
       renderer,
       userAgent: await page.evaluate(() => navigator.userAgent),
       devicePixelRatio: await page.evaluate(() => window.devicePixelRatio),
@@ -977,10 +991,17 @@ try {
     };
     await writeFile(path.join(EVIDENCE, "performance.json"), JSON.stringify(performance, null, 2) + "\n");
 
-    finding(
-      "software-or-unknown-webgl",
-      `WebGL renderer reported as ${renderer?.renderer ?? "unknown"} (${renderer?.vendor ?? "unknown"}). No GPU-backed 60 fps claim is made.`,
-    );
+    if (rendererClass === "hardware") {
+      finding(
+        "hardware-webgl",
+        `WebGL renderer reported as ${renderer.renderer} (${renderer.vendor}); ${renderer.version}. Hardware acceleration was selected by the launch configuration, not substituted.`,
+      );
+    } else {
+      finding(
+        "software-or-unknown-webgl",
+        `WebGL renderer reported as ${renderer?.renderer ?? "unknown"} (${renderer?.vendor ?? "unknown"}). No GPU-backed 60 fps claim is made.`,
+      );
+    }
     check("performance: HoloType median frame time recorded", holotype.medianMs > 0, String(holotype.medianMs));
     check("performance: Paper median frame time recorded", paper.medianMs > 0, String(paper.medianMs));
     check("performance: heap growth is bounded after five switch cycles", heapAfter.usedSize - heapBefore.usedSize < 40 * 1024 * 1024, `${((heapAfter.usedSize - heapBefore.usedSize) / 1024 / 1024).toFixed(2)} MiB`);

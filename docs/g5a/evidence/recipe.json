@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "effect": {
+    "id": "living-type-01",
+    "version": "1.0.0"
+  },
+  "id": "nullworx-living-type-01",
+  "version": "1.0.0",
+  "title": "KILN/07 / Kiln",
+  "config": {
+    "text": "KILN/07",
+    "preset": "kiln",
+    "font": {
+      "family": "Unbounded Variable",
+      "version": "5.3.0",
+      "weight": 800,
+      "fit": 0.88,
+      "tracking": -0.018
+    },
+    "layout": {
+      "aspect": 3.35
+    },
+    "colors": [
+      "#7C2D12",
+      "#C2410C",
+      "#F59E0B",
+      "#FFF7ED"
+    ],
+    "material": {
+      "speed": 0.13,
+      "distortion": 0.55,
+      "swirl": 0.15,
+      "grainMixer": 0.22,
+      "grainOverlay": 0.18,
+      "scale": 1.45,
+      "rotation": 340
+    },
+    "playback": {
+      "paused": true,
+      "reducedMotion": "auto"
+    }
+  }
+}

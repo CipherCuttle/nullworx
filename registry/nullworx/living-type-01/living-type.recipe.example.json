@@ -1,0 +1,44 @@
+{
+  "$schema": "./living-type.recipe.schema.json",
+  "schemaVersion": "1.0.0",
+  "effect": {
+    "id": "living-type-01",
+    "version": "1.0.0"
+  },
+  "id": "nullworx-living-type-01",
+  "version": "1.0.0",
+  "title": "NULLWORX / Night Bloom",
+  "config": {
+    "text": "NULLWORX",
+    "preset": "night-bloom",
+    "font": {
+      "family": "Unbounded Variable",
+      "version": "5.3.0",
+      "weight": 700,
+      "fit": 0.9,
+      "tracking": 0.012
+    },
+    "layout": {
+      "aspect": 3.15
+    },
+    "colors": [
+      "#E9D5FF",
+      "#7C3AED",
+      "#F97316",
+      "#22D3EE"
+    ],
+    "material": {
+      "speed": 0.22,
+      "distortion": 1.1,
+      "swirl": 0.35,
+      "grainMixer": 0.08,
+      "grainOverlay": 0.08,
+      "scale": 1.25,
+      "rotation": 20
+    },
+    "playback": {
+      "paused": false,
+      "reducedMotion": "auto"
+    }
+  }
+}

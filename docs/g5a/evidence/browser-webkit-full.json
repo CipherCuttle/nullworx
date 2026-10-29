@@ -1,0 +1,91 @@
+{
+  "generatedAt": "2026-10-29T21:52:00.565Z",
+  "engine": "webkit",
+  "mode": "full",
+  "checks": 124,
+  "failures": 0,
+  "passed": true,
+  "failureDetails": [],
+  "findings": [
+    {
+      "name": "webkit-next-frame-cadence",
+      "detail": "headless virtual clock; {\"samples\":137,\"medianMs\":16,\"p95Ms\":17,\"p99Ms\":17,\"maxMs\":18,\"over33\":0,\"over50\":0,\"over100\":0,\"impliedHz\":62.5}"
+    },
+    {
+      "name": "webkit-next-lifecycle",
+      "detail": "{\"before\":{\"created\":4,\"lost\":3,\"live\":1},\"after\":{\"created\":14,\"lost\":13,\"live\":1},\"heap\":null}"
+    },
+    {
+      "name": "webkit-vite-frame-cadence",
+      "detail": "headless virtual clock; {\"samples\":137,\"medianMs\":16,\"p95Ms\":17,\"p99Ms\":17,\"maxMs\":17,\"over33\":0,\"over50\":0,\"over100\":0,\"impliedHz\":62.5}"
+    },
+    {
+      "name": "webkit-vite-lifecycle",
+      "detail": "{\"before\":{\"created\":4,\"lost\":3,\"live\":1},\"after\":{\"created\":14,\"lost\":13,\"live\":1},\"heap\":null}"
+    }
+  ],
+  "artifacts": {
+    "webkit-next-desktop.png": "evidence/g5a/browser/webkit/webkit-next-desktop.png",
+    "webkit-next-stage.png": "evidence/g5a/browser/webkit/webkit-next-stage.png",
+    "webkit-next-atlas.png": "evidence/g5a/browser/webkit/webkit-next-atlas.png",
+    "webkit-next-long-boundary-on.png": "evidence/g5a/browser/webkit/webkit-next-long-boundary-on.png",
+    "webkit-next-long-boundary-off.png": "evidence/g5a/browser/webkit/webkit-next-long-boundary-off.png",
+    "webkit-next-paused-a.png": "evidence/g5a/browser/webkit/webkit-next-paused-a.png",
+    "webkit-next-paused-b.png": "evidence/g5a/browser/webkit/webkit-next-paused-b.png",
+    "webkit-next-resumed-a.png": "evidence/g5a/browser/webkit/webkit-next-resumed-a.png",
+    "webkit-next-resumed-b.png": "evidence/g5a/browser/webkit/webkit-next-resumed-b.png",
+    "webkit-next-reduced-a.png": "evidence/g5a/browser/webkit/webkit-next-reduced-a.png",
+    "webkit-next-reduced-b.png": "evidence/g5a/browser/webkit/webkit-next-reduced-b.png",
+    "webkit-next-mobile.png": "evidence/g5a/browser/webkit/webkit-next-mobile.png",
+    "webkit-next-mobile-stage.png": "evidence/g5a/browser/webkit/webkit-next-mobile-stage.png",
+    "webkit-next-desktop-boundary-on.png": "evidence/g5a/browser/webkit/webkit-next-desktop-boundary-on.png",
+    "webkit-next-desktop-boundary-off.png": "evidence/g5a/browser/webkit/webkit-next-desktop-boundary-off.png",
+    "webkit-next-boundary.json": {
+      "name": "webkit-next-desktop",
+      "outsideSamples": 3641,
+      "outsideViolations": 0,
+      "maxOutside": 0,
+      "insideSamples": 602,
+      "insideVisible": 602,
+      "bbox": {
+        "left": 0.0583,
+        "right": 0.9479,
+        "top": 0.3541,
+        "bottom": 0.6492
+      }
+    },
+    "webkit-next-invalid.png": "evidence/g5a/browser/webkit/webkit-next-invalid.png",
+    "webkit-next-context-lost.png": "evidence/g5a/browser/webkit/webkit-next-context-lost.png",
+    "webkit-vite-desktop.png": "evidence/g5a/browser/webkit/webkit-vite-desktop.png",
+    "webkit-vite-stage.png": "evidence/g5a/browser/webkit/webkit-vite-stage.png",
+    "webkit-vite-atlas.png": "evidence/g5a/browser/webkit/webkit-vite-atlas.png",
+    "webkit-vite-long-boundary-on.png": "evidence/g5a/browser/webkit/webkit-vite-long-boundary-on.png",
+    "webkit-vite-long-boundary-off.png": "evidence/g5a/browser/webkit/webkit-vite-long-boundary-off.png",
+    "webkit-vite-paused-a.png": "evidence/g5a/browser/webkit/webkit-vite-paused-a.png",
+    "webkit-vite-paused-b.png": "evidence/g5a/browser/webkit/webkit-vite-paused-b.png",
+    "webkit-vite-resumed-a.png": "evidence/g5a/browser/webkit/webkit-vite-resumed-a.png",
+    "webkit-vite-resumed-b.png": "evidence/g5a/browser/webkit/webkit-vite-resumed-b.png",
+    "webkit-vite-reduced-a.png": "evidence/g5a/browser/webkit/webkit-vite-reduced-a.png",
+    "webkit-vite-reduced-b.png": "evidence/g5a/browser/webkit/webkit-vite-reduced-b.png",
+    "webkit-vite-mobile.png": "evidence/g5a/browser/webkit/webkit-vite-mobile.png",
+    "webkit-vite-mobile-stage.png": "evidence/g5a/browser/webkit/webkit-vite-mobile-stage.png",
+    "webkit-vite-desktop-boundary-on.png": "evidence/g5a/browser/webkit/webkit-vite-desktop-boundary-on.png",
+    "webkit-vite-desktop-boundary-off.png": "evidence/g5a/browser/webkit/webkit-vite-desktop-boundary-off.png",
+    "webkit-vite-boundary.json": {
+      "name": "webkit-vite-desktop",
+      "outsideSamples": 3641,
+      "outsideViolations": 0,
+      "maxOutside": 0,
+      "insideSamples": 602,
+      "insideVisible": 602,
+      "bbox": {
+        "left": 0.0583,
+        "right": 0.9479,
+        "top": 0.3541,
+        "bottom": 0.6492
+      }
+    },
+    "webkit-vite-invalid.png": "evidence/g5a/browser/webkit/webkit-vite-invalid.png",
+    "webkit-vite-context-lost.png": "evidence/g5a/browser/webkit/webkit-vite-context-lost.png"
+  }
+}

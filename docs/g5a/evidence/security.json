@@ -1,0 +1,98 @@
+{
+  "generatedAt": "2026-10-29T22:02:41.174Z",
+  "commands": [
+    "pnpm audit --prod",
+    "npm audit --omit=dev (fresh consumers)"
+  ],
+  "root": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 1,
+      "moderate": 2,
+      "high": 7,
+      "critical": 0
+    },
+    "advisories": {
+      "1117015": {
+        "severity": "moderate",
+        "module": "postcss",
+        "title": "PostCSS has XSS via Unescaped </style> in its CSS Stringify Output"
+      },
+      "1123528": {
+        "severity": "low",
+        "module": "@babel/core",
+        "title": "@babel/core: Arbitrary File Read via sourceMappingURL Comment"
+      },
+      "1124252": {
+        "severity": "high",
+        "module": "postcss",
+        "title": "PostCSS: Arbitrary file read and information disclosure via attacker-controlled sourceMappingURL in CSS comments"
+      },
+      "1130709": {
+        "severity": "moderate",
+        "module": "postcss",
+        "title": "PostCSS: incomplete fix of GHSA-6g55-p6wh-862q — attacker-controlled sourceMappingURL reads arbitrary .map files when `from` is unset"
+      },
+      "1138811": {
+        "severity": "high",
+        "module": "nanoid",
+        "title": "nanoid: non-secure generators can loop indefinitely with negative size"
+      },
+      "1139427": {
+        "severity": "high",
+        "module": "nanoid",
+        "title": "nanoid: custom generators can loop indefinitely when size is zero"
+      },
+      "1139510": {
+        "severity": "high",
+        "module": "postcss",
+        "title": "PostCSS: Path Traversal in Previous Source Map Auto-Loading (sourceMappingURL) leads to Arbitrary .map File Disclosure"
+      },
+      "1153189": {
+        "severity": "high",
+        "module": "nanoid",
+        "title": "nanoid: Integer Overflow or Wraparound"
+      },
+      "1241209": {
+        "severity": "high",
+        "module": "source-map-js",
+        "title": "source-map-js allows event-loop denial of service through indexed source-map section offsets"
+      },
+      "1243066": {
+        "severity": "high",
+        "module": "zod",
+        "title": "Zod can exhaust memory while validating oversized constrained collections"
+      }
+    }
+  },
+  "nextConsumer": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 1,
+      "high": 1,
+      "critical": 0,
+      "total": 2
+    },
+    "packages": {
+      "next": {
+        "severity": "moderate"
+      },
+      "postcss": {
+        "severity": "high"
+      }
+    }
+  },
+  "viteConsumer": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "packages": {}
+  },
+  "triage": "Root and Next findings are build-time Next/PostCSS/nanoid/source-map-js chains or the existing lab zod path. Vite consumer has zero. No postcss string found in the Next client chunks. Paper 0.0.82 returned no advisory. See docs/G5A_SECURITY.md."
+}

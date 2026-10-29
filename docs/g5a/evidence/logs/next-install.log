@@ -1,0 +1,13 @@
+  - components/living-type-01/living-type.tsx
+  - components/living-type-01/living-type.module.css
+  - components/living-type-01/living-type-font.css
+  - components/living-type-01/living-type-recipe.ts
+  - components/living-type-01/living-type-mask.ts
+  - components/living-type-01/living-type.recipe.example.json
+  - components/living-type-01/living-type.recipe.schema.json
+  - components/living-type-01/README.md
+  - components/living-type-01/THIRD_PARTY_NOTICES.md
+  - components/living-type-01/PAPER_SHADERS_LICENSE.txt
+  - components/living-type-01/PAPER_SHADERS_NOTICE.txt
+  - components/living-type-01/UNBOUNDED_OFL.txt
+Installable wordmark composition. Read components/living-type-01/README.md before use. EXPERIMENTAL / OWNER_REVIEW; no public registry admission.

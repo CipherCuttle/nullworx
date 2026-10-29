@@ -1,0 +1,99 @@
+{
+  "generatedAt": "2026-10-29T21:51:24.047Z",
+  "engine": "firefox",
+  "mode": "full",
+  "checks": 124,
+  "failures": 0,
+  "passed": true,
+  "failureDetails": [],
+  "findings": [
+    {
+      "name": "firefox-next-frame-cadence",
+      "detail": "headless virtual clock; {\"samples\":133,\"medianMs\":17.04,\"p95Ms\":17.14,\"p99Ms\":17.18,\"maxMs\":17.22,\"over33\":0,\"over50\":0,\"over100\":0,\"impliedHz\":58.7}"
+    },
+    {
+      "name": "firefox-next-lifecycle",
+      "detail": "{\"before\":{\"created\":4,\"lost\":3,\"live\":1},\"after\":{\"created\":14,\"lost\":13,\"live\":1},\"heap\":null}"
+    },
+    {
+      "name": "firefox-next-console-warnings",
+      "detail": "[{\"type\":\"warning\",\"text\":\"[JavaScript Warning: \\\"WebGL context was lost.\\\" {file: \\\"debugger eval code\\\" line: 50}]\"},{\"type\":\"warning\",\"text\":\"[JavaScript Warning: \\\"WebGL context was lost.\\\" {file: \\\"debugger eval code\\\" line: 50}]\"},{\"type\":\"warning\",\"text\":\"[JavaScript Warning: \\\"WebGL context was lost.\\\" {file: \\\"debugger eval code\\\" line: 50}]\"},{\"type\":\"warning\",\"text\":\"[JavaScript Warning: \\\"WebGL context was lost.\\\" {file: \\\"debugger eval code\\\" line: 50}]\"},{\"type\":\"warning\",\"text\":\"[JavaScript Warning: \\\"WebGL context was lost.\\\" {file: \\\"debugger eval code\\\" line: 50}]\"},{\"type\":\"warning\",\"text\":\"[JavaScript Warning: \\\"WebGL context was lost.\\\" {file: \\\"debugger eval code\\\" line: 50}]\"},{\"type\":\"warning\",\"text\":\"[JavaScript Warning: \\\"WebGL context was lost.\\\" {file: \\\"debugger eval code\\\" line: 50}]\"},{\"type\":\"warning\",\"text\":\"[JavaScript Warning: \\\"WebGL context was lost.\\\" {file: \\\"debugger eval code\\\" line: 50}]\"},{\"type\":\"warning\",\"text\":\"[JavaScript Warning: \\\"WebGL context was lost.\\\" {file: \\\"debugger eval code\\\" line: 50}]\"},{\"type\":\"warning\",\"text\":\"[JavaScript Warning: \\\"WebGL context was lost.\\\" {file: \\\"debugger eval code\\\" line: 50}]\"},{\"type\":\"warning\",\"text\":\"[JavaScript Warning: \\\"WebGL context was lost.\\\" {file: \\\"debugger eval code\\\" line: 50}]\"},{\"type\":\"warning\",\"text\":\"[JavaScript Warning: \\\"WebGL context was lost.\\\" {file: \\\"debugger eval code\\\" line: 50}]\"},{\"type\":\"warning\",\"text\":\"[JavaScript Warning: \\\"WebGL context was lost.\\\" {file: \\\"debugger eval code\\\" line: 50}]\"},{\"type\":\"warning\",\"text\":\"[JavaScript Warning: \\\"WebGL context was lost.\\\" {file: \\\"debugger eval code\\\" line: 50}]\"},{\"type\":\"warning\",\"text\":\"[JavaScript Warning: \\\"WebGL context was lost.\\\" {file: \\\"debugger eval code\\\" line: 50}]\"}]"
+    },
+    {
+      "name": "firefox-vite-frame-cadence",
+      "detail": "headless virtual clock; {\"samples\":132,\"medianMs\":17.08,\"p95Ms\":17.14,\"p99Ms\":17.2,\"maxMs\":21.94,\"over33\":0,\"over50\":0,\"over100\":0,\"impliedHz\":58.5}"
+    },
+    {
+      "name": "firefox-vite-lifecycle",
+      "detail": "{\"before\":{\"created\":4,\"lost\":3,\"live\":1},\"after\":{\"created\":14,\"lost\":13,\"live\":1},\"heap\":null}"
+    },
+    {
+      "name": "firefox-vite-console-warnings",
+      "detail": "[{\"type\":\"warning\",\"text\":\"[JavaScript Warning: \\\"WebGL context was lost.\\\" {file: \\\"debugger eval code\\\" line: 50}]\"},{\"type\":\"warning\",\"text\":\"[JavaScript Warning: \\\"WebGL context was lost.\\\" {file: \\\"debugger eval code\\\" line: 50}]\"},{\"type\":\"warning\",\"text\":\"[JavaScript Warning: \\\"WebGL context was lost.\\\" {file: \\\"debugger eval code\\\" line: 50}]\"},{\"type\":\"warning\",\"text\":\"[JavaScript Warning: \\\"WebGL context was lost.\\\" {file: \\\"debugger eval code\\\" line: 50}]\"},{\"type\":\"warning\",\"text\":\"[JavaScript Warning: \\\"WebGL context was lost.\\\" {file: \\\"debugger eval code\\\" line: 50}]\"},{\"type\":\"warning\",\"text\":\"[JavaScript Warning: \\\"WebGL context was lost.\\\" {file: \\\"debugger eval code\\\" line: 50}]\"},{\"type\":\"warning\",\"text\":\"[JavaScript Warning: \\\"WebGL context was lost.\\\" {file: \\\"debugger eval code\\\" line: 50}]\"},{\"type\":\"warning\",\"text\":\"[JavaScript Warning: \\\"WebGL context was lost.\\\" {file: \\\"debugger eval code\\\" line: 50}]\"},{\"type\":\"warning\",\"text\":\"[JavaScript Warning: \\\"WebGL context was lost.\\\" {file: \\\"debugger eval code\\\" line: 50}]\"},{\"type\":\"warning\",\"text\":\"[JavaScript Warning: \\\"WebGL context was lost.\\\" {file: \\\"debugger eval code\\\" line: 50}]\"},{\"type\":\"warning\",\"text\":\"[JavaScript Warning: \\\"WebGL context was lost.\\\" {file: \\\"debugger eval code\\\" line: 50}]\"},{\"type\":\"warning\",\"text\":\"[JavaScript Warning: \\\"WebGL context was lost.\\\" {file: \\\"debugger eval code\\\" line: 50}]\"},{\"type\":\"warning\",\"text\":\"[JavaScript Warning: \\\"WebGL context was lost.\\\" {file: \\\"debugger eval code\\\" line: 50}]\"},{\"type\":\"warning\",\"text\":\"[JavaScript Warning: \\\"WebGL context was lost.\\\" {file: \\\"debugger eval code\\\" line: 50}]\"},{\"type\":\"warning\",\"text\":\"[JavaScript Warning: \\\"WebGL context was lost.\\\" {file: \\\"debugger eval code\\\" line: 50}]\"}]"
+    }
+  ],
+  "artifacts": {
+    "firefox-next-desktop.png": "evidence/g5a/browser/firefox/firefox-next-desktop.png",
+    "firefox-next-stage.png": "evidence/g5a/browser/firefox/firefox-next-stage.png",
+    "firefox-next-atlas.png": "evidence/g5a/browser/firefox/firefox-next-atlas.png",
+    "firefox-next-long-boundary-on.png": "evidence/g5a/browser/firefox/firefox-next-long-boundary-on.png",
+    "firefox-next-long-boundary-off.png": "evidence/g5a/browser/firefox/firefox-next-long-boundary-off.png",
+    "firefox-next-paused-a.png": "evidence/g5a/browser/firefox/firefox-next-paused-a.png",
+    "firefox-next-paused-b.png": "evidence/g5a/browser/firefox/firefox-next-paused-b.png",
+    "firefox-next-resumed-a.png": "evidence/g5a/browser/firefox/firefox-next-resumed-a.png",
+    "firefox-next-resumed-b.png": "evidence/g5a/browser/firefox/firefox-next-resumed-b.png",
+    "firefox-next-reduced-a.png": "evidence/g5a/browser/firefox/firefox-next-reduced-a.png",
+    "firefox-next-reduced-b.png": "evidence/g5a/browser/firefox/firefox-next-reduced-b.png",
+    "firefox-next-mobile.png": "evidence/g5a/browser/firefox/firefox-next-mobile.png",
+    "firefox-next-mobile-stage.png": "evidence/g5a/browser/firefox/firefox-next-mobile-stage.png",
+    "firefox-next-desktop-boundary-on.png": "evidence/g5a/browser/firefox/firefox-next-desktop-boundary-on.png",
+    "firefox-next-desktop-boundary-off.png": "evidence/g5a/browser/firefox/firefox-next-desktop-boundary-off.png",
+    "firefox-next-boundary.json": {
+      "name": "firefox-next-desktop",
+      "outsideSamples": 3653,
+      "outsideViolations": 0,
+      "maxOutside": 0,
+      "insideSamples": 594,
+      "insideVisible": 594,
+      "bbox": {
+        "left": 0.0521,
+        "right": 0.9458,
+        "top": 0.3541,
+        "bottom": 0.6492
+      }
+    },
+    "firefox-next-invalid.png": "evidence/g5a/browser/firefox/firefox-next-invalid.png",
+    "firefox-next-context-lost.png": "evidence/g5a/browser/firefox/firefox-next-context-lost.png",
+    "firefox-vite-desktop.png": "evidence/g5a/browser/firefox/firefox-vite-desktop.png",
+    "firefox-vite-stage.png": "evidence/g5a/browser/firefox/firefox-vite-stage.png",
+    "firefox-vite-atlas.png": "evidence/g5a/browser/firefox/firefox-vite-atlas.png",
+    "firefox-vite-long-boundary-on.png": "evidence/g5a/browser/firefox/firefox-vite-long-boundary-on.png",
+    "firefox-vite-long-boundary-off.png": "evidence/g5a/browser/firefox/firefox-vite-long-boundary-off.png",
+    "firefox-vite-paused-a.png": "evidence/g5a/browser/firefox/firefox-vite-paused-a.png",
+    "firefox-vite-paused-b.png": "evidence/g5a/browser/firefox/firefox-vite-paused-b.png",
+    "firefox-vite-resumed-a.png": "evidence/g5a/browser/firefox/firefox-vite-resumed-a.png",
+    "firefox-vite-resumed-b.png": "evidence/g5a/browser/firefox/firefox-vite-resumed-b.png",
+    "firefox-vite-reduced-a.png": "evidence/g5a/browser/firefox/firefox-vite-reduced-a.png",
+    "firefox-vite-reduced-b.png": "evidence/g5a/browser/firefox/firefox-vite-reduced-b.png",
+    "firefox-vite-mobile.png": "evidence/g5a/browser/firefox/firefox-vite-mobile.png",
+    "firefox-vite-mobile-stage.png": "evidence/g5a/browser/firefox/firefox-vite-mobile-stage.png",
+    "firefox-vite-desktop-boundary-on.png": "evidence/g5a/browser/firefox/firefox-vite-desktop-boundary-on.png",
+    "firefox-vite-desktop-boundary-off.png": "evidence/g5a/browser/firefox/firefox-vite-desktop-boundary-off.png",
+    "firefox-vite-boundary.json": {
+      "name": "firefox-vite-desktop",
+      "outsideSamples": 3653,
+      "outsideViolations": 0,
+      "maxOutside": 0,
+      "insideSamples": 594,
+      "insideVisible": 594,
+      "bbox": {
+        "left": 0.0521,
+        "right": 0.9458,
+        "top": 0.3541,
+        "bottom": 0.6492
+      }
+    },
+    "firefox-vite-invalid.png": "evidence/g5a/browser/firefox/firefox-vite-invalid.png",
+    "firefox-vite-context-lost.png": "evidence/g5a/browser/firefox/firefox-vite-context-lost.png"
+  }
+}

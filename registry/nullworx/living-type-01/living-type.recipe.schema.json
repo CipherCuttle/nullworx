@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "living-type.recipe.schema.json",
+  "title": "NULLWORX / Living Type 01 recipe",
+  "description": "Validated configuration for one Living Type 01 wordmark composition. It does not contain a time value and cannot reproduce an animation frame-for-frame.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "effect", "id", "version", "title", "config"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "maxLength": 300
+    },
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "effect": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version"],
+      "properties": {
+        "id": { "const": "living-type-01" },
+        "version": { "const": "1.0.0" }
+      }
+    },
+    "id": {
+      "type": "string",
+      "maxLength": 64,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "config": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text", "preset", "font", "layout", "colors", "material", "playback"],
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 24,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9 .&'!?+\\-/]*$",
+          "description": "One line, Latin A-Z/a-z, digits, space, and . & ' ! ? + - /. No Unicode or markup."
+        },
+        "preset": {
+          "enum": ["night-bloom", "kiln", "low-tide"]
+        },
+        "font": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["family", "version", "weight", "fit", "tracking"],
+          "properties": {
+            "family": { "const": "Unbounded Variable" },
+            "version": { "const": "5.3.0" },
+            "weight": {
+              "type": "integer",
+              "minimum": 200,
+              "maximum": 900,
+              "multipleOf": 100
+            },
+            "fit": {
+              "type": "number",
+              "minimum": 0.55,
+              "maximum": 0.94
+            },
+            "tracking": {
+              "type": "number",
+              "minimum": -0.04,
+              "maximum": 0.14
+            }
+          }
+        },
+        "layout": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["aspect"],
+          "properties": {
+            "aspect": {
+              "type": "number",
+              "minimum": 2,
+              "maximum": 5,
+              "description": "Frame width divided by height."
+            }
+          }
+        },
+        "colors": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": {
+            "type": "string",
+            "pattern": "^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$"
+          }
+        },
+        "material": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["speed", "distortion", "swirl", "grainMixer", "grainOverlay", "scale", "rotation"],
+          "properties": {
+            "speed": { "type": "number", "minimum": 0, "maximum": 2 },
+            "distortion": { "type": "number", "minimum": 0, "maximum": 2 },
+            "swirl": { "type": "number", "minimum": 0, "maximum": 1.5 },
+            "grainMixer": { "type": "number", "minimum": 0, "maximum": 1 },
+            "grainOverlay": { "type": "number", "minimum": 0, "maximum": 1 },
+            "scale": { "type": "number", "minimum": 0.5, "maximum": 2 },
+            "rotation": { "type": "number", "minimum": 0, "maximum": 360 }
+          }
+        },
+        "playback": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["paused", "reducedMotion"],
+          "properties": {
+            "paused": { "type": "boolean" },
+            "reducedMotion": { "enum": ["auto", "force"] }
+          }
+        }
+      }
+    }
+  }
+}

@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "registry:build": "shadcn build && node scripts/registry.mjs --sync",
+    "registry:build": "shadcn build && shadcn build registry.g5a.json --output public/r && node scripts/registry.mjs --sync",
     "typecheck": "tsc --noEmit",
     "registry:validate": "node scripts/registry.mjs",
     "verify:contract": "tsx scripts/effect-contract.ts",
@@ -16,7 +16,14 @@
     "verify:effects": "node scripts/verify-effects.mjs",
     "verify:consumer": "node scripts/verify-consumer.mjs",
     "verify:composition-contract": "tsx scripts/composition-contract.ts",
-    "verify:composition": "node scripts/verify-composition.mjs"
+    "verify:composition": "node scripts/verify-composition.mjs",
+    "registry:build:forge": "shadcn build && node scripts/registry.mjs --sync",
+    "registry:build:g5a": "shadcn build registry.g5a.json --output public/r && node scripts/registry.mjs",
+    "verify:living-type-contract": "tsx scripts/living-type-contract.ts",
+    "verify:living-type-browser": "node scripts/g5a/verify-browser.mjs",
+    "verify:living-type-recipe": "node scripts/g5a/verify-recipe-roundtrip.mjs",
+    "measure:living-type": "node scripts/g5a/measure-performance.mjs",
+    "setup:living-type-consumers": "node scripts/g5a/setup-consumers.mjs"
   },
   "dependencies": {
     "@paper-design/shaders-react": "0.0.82",

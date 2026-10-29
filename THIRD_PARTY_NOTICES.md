@@ -83,12 +83,20 @@ this pass. Re-run `pnpm licenses list --prod` before shipping a bundled artifact
 
 These are not included in the production bundle. `shadcn` is a build-time registry CLI and
 was moved out of `dependencies` in G2.1; it is not imported by any application code.
+G5-A invokes `npx shadcn@4.23.0` for the two consumer installs. The repository's existing
+3.0.0 CLI transforms every installed registry file as TSX and corrupted comments and
+string literals (`join(" ")` → `join("")`). 4.23.0 preserved all 12 installed files
+byte-for-byte. The UI Forge CLI/devDependency and its tests are left unchanged.
 
 ## Media and fonts
 
-No third-party media is imported or served. No font file is vendored in this repository.
-UI Forge uses `next/font/google` at build time to fetch **Geist** and **Geist Mono** and
-serves the generated font assets same-origin. Geist is distributed by Vercel under the
-SIL Open Font License 1.1 (<https://github.com/vercel/geist-font>). G3-A's wordmark mask
-uses that same Geist variable in DOM and Canvas 2D; it adds no font file and no external
-font request. No Pexels, NASA, React Bits, Theatre.js or AGPL material is present.
+No third-party media is imported or served. G5-A vendors an upstream **Unbounded Variable
+5.3.0** source WOFF2 and an ASCII subset under `third_party/unbounded/`. The subset is
+embedded as a base64 WOFF2 in the installable Living Type font CSS. Copyright 2022 The
+Unbounded Project Authors; SIL Open Font License 1.1, full text in
+`third_party/unbounded/OFL.txt`. Original and subset SHA-256 hashes are in
+`third_party/unbounded/README.md` and the registry notices. UI Forge continues to use
+`next/font/google` at build time for **Geist** and **Geist Mono**; Geist is distributed by
+Vercel under the SIL Open Font License 1.1
+(<https://github.com/vercel/geist-font>). G3-A's wordmark mask uses the Geist variable in
+DOM and Canvas 2D. No Pexels, NASA, React Bits, Theatre.js or AGPL material is present.
