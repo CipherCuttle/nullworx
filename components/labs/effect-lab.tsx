@@ -34,7 +34,7 @@ export function EffectLab() {
         Skip to effect preview
       </a>
       <header className={styles.header}>
-        <Link className={styles.brand} href="/" aria-label="Nullworx UI Forge gallery">
+        <Link className={styles.brand} href="/" aria-label="Nullworx UI Forge gallery" prefetch={false}>
           <span className={styles.brandMark} aria-hidden="true">
             N
           </span>
@@ -46,7 +46,13 @@ export function EffectLab() {
         <div className={styles.headerRight}>
           <span className={styles.version}>G2</span>
           <span className={styles.headerNote}>Experimental lab · not linked from the gallery</span>
-          <Link className={styles.galleryLink} href="/">
+          {/*
+            Next 15.5.28 prefetches in-viewport links and emits a Chromium
+            warning when the gallery route CSS is preloaded but never applied
+            on the lab route. These two links are the only route prefetches on
+            this page, so opt them out instead of weakening the console gate.
+          */}
+          <Link className={styles.galleryLink} href="/" prefetch={false}>
             UI Forge gallery <span aria-hidden="true">↗</span>
           </Link>
         </div>

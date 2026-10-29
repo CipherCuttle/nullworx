@@ -1,3 +1,12 @@
+# pnpm 12 ignores package.json#pnpm. Workspace-wide settings live here.
+overrides:
+  '@types/react': 19.1.2
+  '@types/react-dom': 19.1.2
+  # GHSA-2464-fhr4-w9xw / CVE-2026-96889: Next.js Image Optimization uses
+  # sharp; 0.35.5 is the first patched release. Next 15.5.28 accepts
+  # ^0.34.3 || ^0.35.5, so the override is required to leave the old range.
+  sharp: 0.35.5
+
 allowBuilds:
   '@tailwindcss/oxide': true
   esbuild: true

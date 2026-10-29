@@ -24,7 +24,14 @@ branch, deployed, or published.
 | Motion adapter | `EXPERIMENTAL` — upstream `motion@14.7.1` (MIT) |
 | Owner visual approval | **Not granted** |
 | Registry item for effects | **None** (G5 is design-only) |
+| Framework security | `next@15.5.28`, `react@19.1.10`, `sharp@0.35.5`; production audit triaged |
 | Deploy / publish / merge | **None** |
+
+## Security
+
+G2.1 patches the October 2026 Next.js and React Server Components advisories without
+migrating to Next.js 16. The advisory review, the production-audit triage and the sharp
+override are recorded in [docs/G21_SECURITY.md](docs/G21_SECURITY.md).
 
 ## Run
 
