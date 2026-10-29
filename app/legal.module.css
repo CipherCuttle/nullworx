@@ -1,0 +1,141 @@
+.layout {
+  display: grid;
+  grid-template-columns: minmax(165px, 0.25fr) minmax(0, 1fr);
+  gap: clamp(35px, 8vw, 130px);
+  align-items: start;
+  padding-block: clamp(58px, 8vw, 100px);
+}
+
+.aside {
+  position: sticky;
+  top: calc(var(--header-height) + 24px);
+}
+
+.aside > p {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.aside nav {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  margin-top: 18px;
+  padding-top: 17px;
+  border-top: 1px solid var(--line);
+}
+
+.aside nav a {
+  color: var(--paper-dim);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.aside nav a:hover {
+  color: var(--acid);
+}
+
+.aside .contact {
+  margin-top: 30px;
+  padding-top: 17px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  line-height: 1.8;
+}
+
+.aside .contact a {
+  color: var(--paper-soft);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.updated {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 23px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.updated > span {
+  width: 22px;
+  height: 1px;
+  background: var(--acid);
+}
+
+.dataTable {
+  width: 100%;
+  margin-top: 1.8em;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.dataTable th {
+  padding: 9px 10px 9px 0;
+  border-bottom: 1px solid var(--line-strong);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.dataTable td {
+  padding: 12px 10px 12px 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--paper-soft);
+  line-height: 1.65;
+  vertical-align: top;
+}
+
+.dataTable td:first-child {
+  width: 23%;
+  color: var(--paper);
+}
+
+.notice {
+  margin-top: 2.3em;
+  padding: 15px 17px;
+  border-left: 2px solid var(--acid);
+  color: var(--paper-soft);
+  background: rgb(216 255 74 / 0.045);
+  font-size: 12px;
+  line-height: 1.75;
+}
+
+.notice strong {
+  color: var(--paper);
+}
+
+.packageTable td:first-child {
+  font-family: var(--font-mono);
+  font-size: 10px;
+}
+
+@media (max-width: 830px) {
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .aside {
+    position: static;
+    display: none;
+  }
+
+  .dataTable {
+    display: block;
+    overflow-x: auto;
+  }
+}

@@ -1,0 +1,39 @@
+$ playwright test
+[WebServer] (node:59080) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] $ next start --hostname 127.0.0.1 --port 3300
+[WebServer] (node:59128) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 26 tests using 1 worker
+
+(node:59165) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/e2e/experience.spec.ts:17:7 › core experience › homepage renders its copy in HTML and a real WebGL field in the browser (2.3s)
+  ✓   2 tests/e2e/experience.spec.ts:33:7 › core experience › lab preview exposes live controls, copies reviewed config and uses reduced motion (2.0s)
+  ✓   3 tests/e2e/experience.spec.ts:64:7 › core experience › reduced motion freezes the field and still exposes the accessible label (1.6s)
+  ✓   4 tests/e2e/experience.spec.ts:78:7 › core experience › desktop and mobile layouts do not overflow and the mobile menu navigates (1.0s)
+  ✓   5 tests/e2e/experience.spec.ts:104:7 › core experience › page-level structure and landmarks are accessible (1.8s)
+  ✓   6 tests/e2e/experience.spec.ts:114:7 › core experience › no third-party cookies are set and the footer does not invent a support URL (1.1s)
+  ✓   7 tests/e2e/experience.spec.ts:126:7 › core experience › serious accessibility violations are absent on core routes (5.6s)
+  ✓   8 tests/e2e/newsletter.spec.ts:26:7 › Nullworx Drops mock flow › form ships with two unchecked, separate consent choices (816ms)
+  ✓   9 tests/e2e/newsletter.spec.ts:32:7 › Nullworx Drops mock flow › effect detail page carries the same independent Drops signup (1.6s)
+  ✓  10 tests/e2e/newsletter.spec.ts:48:7 › Nullworx Drops mock flow › form submits free consent only, shows the local mock confirmation, and confirms (2.2s)
+  ✓  11 tests/e2e/newsletter.spec.ts:77:7 › Nullworx Drops mock flow › premium marketing is a separate opt-in and does not get implied by Drops (36ms)
+  ✓  12 tests/e2e/newsletter.spec.ts:92:7 › Nullworx Drops mock flow › server rejects missing free consent, malformed email, unknown fields and cross-origin requests (14ms)
+  ✓  13 tests/e2e/newsletter.spec.ts:120:7 › Nullworx Drops mock flow › duplicate signup and idempotency stay generic and do not expose subscriber state (13ms)
+  ✓  14 tests/e2e/newsletter.spec.ts:138:7 › Nullworx Drops mock flow › honeypot submissions receive a generic acceptance and never a confirmation link (6ms)
+  ✓  15 tests/e2e/newsletter.spec.ts:150:7 › Nullworx Drops mock flow › analytics endpoint only accepts allowlisted, identity-free events (9ms)
+  ✓  16 tests/e2e/seo.spec.ts:41:7 › technical SEO and crawlability › indexable routes have unique titles, descriptions, canonicals, social cards and server-rendered content (45ms)
+  ✓  17 tests/e2e/seo.spec.ts:82:7 › technical SEO and crawlability › unreleased review and status pages are noindex and excluded from the sitemap (51ms)
+  ✓  18 tests/e2e/seo.spec.ts:105:7 › technical SEO and crawlability › robots policy separates retrieval from training and points to the sitemap (7ms)
+  ✓  19 tests/e2e/seo.spec.ts:116:7 › technical SEO and crawlability › llms.txt is a plain navigation aid and does not expose the review preview (7ms)
+  ✓  20 tests/e2e/seo.spec.ts:127:7 › technical SEO and crawlability › social card is a real 1200x630 PNG (14ms)
+  ✓  21 tests/e2e/seo.spec.ts:141:7 › technical SEO and crawlability › structured data parses and contains no invented ratings or offers (23ms)
+  ✓  22 tests/e2e/seo.spec.ts:156:7 › technical SEO and crawlability › 404 renders the designed page with a 404 status (18ms)
+  ✓  23 tests/e2e/seo.spec.ts:164:7 › technical SEO and crawlability › all internal links on public pages resolve (63ms)
+  ✓  24 tests/e2e/seo.spec.ts:182:7 › technical SEO and crawlability › download and media assets are served with real bytes (27ms)
+  ✓  25 tests/e2e/visual.spec.ts:31:7 › evidence screenshots › capture requested desktop and mobile layouts (22.9s)
+  ✓  26 tests/e2e/visual.spec.ts:80:7 › evidence screenshots › capture reduced-motion still and mobile gallery (3.6s)
+
+  26 passed (47.9s)

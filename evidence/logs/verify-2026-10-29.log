@@ -1,0 +1,86 @@
+$ pnpm lint && pnpm typecheck && pnpm validate:effects && pnpm test && pnpm build && pnpm check:secrets
+$ eslint .
+$ tsc --noEmit
+$ tsx scripts/validate-effects.ts
+Nullworx effect manifest validation
+schema: 1.1.0
+effects: 1
+{"total":1,"experimental":0,"ownerReview":1,"approved":0,"released":0}
+publicly released: (none)
+lab previews: ascii-waves
+
+PASS: schema, source hashes, archive presence, uniqueness and release gate.
+$ vitest run
+
+ RUN  v4.1.12 /home/swirky/DevHub/nullworx
+
+ ✓ tests/unit/analytics.test.ts (3 tests) 4ms
+ ✓ tests/unit/brevo.test.ts (7 tests) 36ms
+ ✓ tests/unit/newsletter.test.ts (16 tests) 12ms
+ ✓ tests/unit/effects.test.ts (10 tests) 12ms
+ ✓ tests/unit/archive.test.ts (2 tests) 26ms
+ ✓ tests/unit/publishing.test.ts (4 tests) 10ms
+ ✓ tests/unit/seo.test.ts (9 tests) 21ms
+
+ Test Files  7 passed (7)
+      Tests  51 passed (51)
+   Start at  13:39:37
+   Duration  280ms (transform 262ms, setup 0ms, import 733ms, tests 121ms, environment 1ms)
+
+$ pnpm validate:effects && next build
+$ tsx scripts/validate-effects.ts
+Nullworx effect manifest validation
+schema: 1.1.0
+effects: 1
+{"total":1,"experimental":0,"ownerReview":1,"approved":0,"released":0}
+publicly released: (none)
+lab previews: ascii-waves
+
+PASS: schema, source hashes, archive presence, uniqueness and release gate.
+▲ Next.js 16.4.3 (Turbopack)
+✓ Running next.config.ts took 25ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 129ms
+  Running TypeScript ...
+  Finished TypeScript in 956ms ...
+  Collecting page data using 15 workers ...
+  Generating static pages using 15 workers (0/17) ...
+  Generating static pages using 15 workers (4/17)
+  Generating static pages using 15 workers (8/17)
+  Generating static pages using 15 workers (12/17)
+✓ Generating static pages using 15 workers (17/17) in 676ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /about
+├ ƒ /api/events
+├ ƒ /api/newsletter
+├ ƒ /api/newsletter/confirm
+├ ƒ /api/newsletter/unsubscribe
+├ ○ /drops
+├ ƒ /drops/confirmed
+├ ƒ /drops/unsubscribed
+├ ○ /effects
+├ ● /effects/[slug]
+├ ○ /icon.svg
+├   /lab/[slug]
+│ └ ● /lab/ascii-waves
+├ ○ /licenses
+├ ○ /llms.txt
+├ ○ /opengraph-image
+├ ○ /privacy
+├ ○ /robots.txt
+├ ○ /sitemap.xml
+└ ○ /twitter-image
+
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+
+$ tsx scripts/check-secrets.ts
+Scanned /home/swirky/DevHub/nullworx and built .next/static client assets for credential patterns.
+PASS: no credential patterns found in source or built client assets.
