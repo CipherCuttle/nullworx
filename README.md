@@ -51,13 +51,17 @@ pnpm build
 pnpm verify:contract     # 24 runtime EffectDefinition assertions, no browser needed
 ```
 
-Browser evidence is produced separately against a production server:
+Existing UI Forge checks and browser evidence run against a production server:
 
 ```sh
 pnpm start --hostname 127.0.0.1 --port 3100
 # in another terminal
-EVIDENCE_DIR=evidence pnpm verify:effects
+EVIDENCE_DIR=evidence pnpm verify:gallery   # 43 gallery assertions + clipboard fixtures
+EVIDENCE_DIR=evidence pnpm verify:effects   # 62 G2 browser assertions
 ```
+
+After `node scripts/smoke-consumer.mjs` prints a consumer path, start it on port 3101 and
+run `EVIDENCE_DIR=evidence pnpm verify:consumer` for the 53 clean-consumer assertions.
 
 `pnpm verify:effects` uses `playwright-core` against the system Chrome (no browser download)
 and writes screenshots, console/network logs, mount/unmount checks and performance samples

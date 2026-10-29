@@ -59,3 +59,32 @@ outside the committed tree (default `evidence/`, gitignored).
 Delete the branch (`feat/forge-foundation-g2`) or revert its commits. The base repository
 had only `README.md`; no migration, runtime data or production resource needs rollback.
 The source roots remain byte-identical to the G0 snapshots.
+
+## Verified results (2026-10-29)
+
+| Check | Result |
+| --- | --- |
+| `pnpm lint` | exit 0 |
+| `pnpm typecheck` | exit 0 |
+| `pnpm registry:validate` | 3/3 items pass |
+| `pnpm verify:contract` | 24/24 |
+| `pnpm build` | exit 0; `/` and `/labs/effects` static |
+| UI Forge gallery callback | 43/43 |
+| Clean consumer build (fresh Next app + shadcn CLI) | pass |
+| Clean consumer browser callback | 53/53 |
+| G2 browser harness | 62/62 |
+| WebGL contexts after 8 mount/unmount cycles | 0 live; 0 canvases |
+| Live DOM / heap after cycles | +52 nodes; +630 KiB |
+| Console / page / request / HTTP / external errors | 0 |
+| Final performance run (1440×900 DPR1, SwiftShader) | control 33.4 ms / 29.94 fps; candidate 16.7 ms / 59.88 fps; no 25% candidate regression |
+
+Performance is host-dependent: an earlier alternating run measured control 50 ms / 20 fps
+and candidate 33.3 ms / 30 fps. The candidate was never slower than the control. Both
+effects produced long frames over 25 ms; the final run flagged
+`software-renderer-frame-drops`. Static HoloType and Motion hold/scan states behave as
+designed. No universal 60 fps claim is made.
+
+## G3–G5
+
+See [G3_G5_PLAN.md](G3_G5_PLAN.md). No composition graph, additional renderer, registry
+export or clean-room packaging was implemented in this pass.
