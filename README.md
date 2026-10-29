@@ -8,11 +8,14 @@ contains:
 - one existing but **owner-review-pending** effect, **HoloType**, imported unchanged from
   UI Forge Expansion 02;
 - two third-party adapters behind a small typed `EffectDefinition` contract: one
-  **Paper Shaders** MeshGradient and one **Motion**-driven behavior.
+  **Paper Shaders** MeshGradient and one **Motion**-driven behavior;
+- a G3-A experimental **material × mask composition proof** at `/labs/composition`: the
+  existing HoloType material and the Paper Shaders MeshGradient applied to an original moth
+  silhouette and the NULLWORX wordmark.
 
-The home gallery is unchanged. The experimental preview lives at **`/labs/effects`** and is
-not linked from the gallery. Nothing here is owner visually approved, merged to a release
-branch, deployed, or published.
+The home gallery is unchanged. The experimental labs are **`/labs/effects`** and
+**`/labs/composition`**; neither is linked from the gallery and both are `noindex`. Nothing
+here is owner visually approved, merged to a release branch, deployed, or published.
 
 ## Status
 
@@ -24,7 +27,15 @@ branch, deployed, or published.
 | Motion adapter | `EXPERIMENTAL` — upstream `motion@14.7.1` (MIT) |
 | Owner visual approval | **Not granted** |
 | Registry item for effects | **None** (G5 is design-only) |
+| Framework security | `next@15.5.28`, `react@19.1.10`, `sharp@0.35.5`; production audit triaged |
+| G3-A composition proof | **Experimental** — 2 masks × 2 materials, four presets, lab-only |
 | Deploy / publish / merge | **None** |
+
+## Security
+
+G2.1 patches the October 2026 Next.js and React Server Components advisories without
+migrating to Next.js 16. The advisory review, the production-audit triage and the sharp
+override are recorded in [docs/G21_SECURITY.md](docs/G21_SECURITY.md).
 
 ## Run
 
@@ -40,6 +51,7 @@ Routes:
 
 - `/` — the existing UI Forge gallery, unchanged.
 - `/labs/effects` — the experimental adapter lab (`noindex`, not in navigation).
+- `/labs/composition` — the G3-A material × mask proof (`noindex`, not in navigation).
 
 ## Verify
 
@@ -49,6 +61,7 @@ pnpm typecheck
 pnpm registry:validate
 pnpm build
 pnpm verify:contract     # 24 runtime EffectDefinition assertions, no browser needed
+pnpm verify:composition-contract  # 26 composition contract assertions
 ```
 
 Existing UI Forge checks and browser evidence run against a production server:
@@ -58,28 +71,31 @@ pnpm start --hostname 127.0.0.1 --port 3100
 # in another terminal
 EVIDENCE_DIR=evidence pnpm verify:gallery   # 43 gallery assertions + clipboard fixtures
 EVIDENCE_DIR=evidence pnpm verify:effects   # 62 G2 browser assertions
+EVIDENCE_DIR=evidence/g3a pnpm verify:composition  # 149 G3-A browser assertions
 ```
 
 After `node scripts/smoke-consumer.mjs` prints a consumer path, start it on port 3101 and
 run `EVIDENCE_DIR=evidence pnpm verify:consumer` for the 53 clean-consumer assertions.
 
-`pnpm verify:effects` uses `playwright-core` against the system Chrome (no browser download)
-and writes screenshots, console/network logs, mount/unmount checks and performance samples
-to the evidence directory. It is not part of the production bundle. The G2 evidence and the
-full report live outside this repository's committed tree.
+`pnpm verify:effects` and `pnpm verify:composition` use `playwright-core` against the system
+Chrome (no browser download) and write screenshots, console/network logs, boundary samples,
+mount/unmount checks and performance samples to the evidence directory. They are not part of
+the production bundle. Evidence lives outside the committed tree under `evidence/`.
+
+The G3-A design, provenance and known gaps are recorded in
+[docs/G3A_COMPOSITION.md](docs/G3A_COMPOSITION.md).
 
 ## Architecture
 
 ```
-app/                         Next.js App Router; gallery + /labs/effects
+app/                         Next.js App Router; gallery + /labs/effects + /labs/composition
 components/forge-gallery.*   Existing UI Forge gallery (unchanged)
 registry/new-york/           3 accepted UI Forge registry items
 experiments/holotype/        Existing effect, imported unchanged (REVIEW_PENDING)
-lib/effects/types.ts         Minimal EffectDefinition metadata contract
-lib/effects/schemas.ts       Zod runtime parameter validators
-lib/effects/definitions.ts   Stable IDs, versions, loaders, capabilities, licenses
-lib/effects/validate.ts      Runtime validation helper
-components/labs/             Three self-contained preview adapters + lab shell
+lib/effects/                 EffectDefinition metadata, schemas, validators
+lib/composition/             MaskDefinition, MaterialDefinition, recipe + compatibility contracts
+components/labs/             G2 preview adapters + G3-A composition surfaces
+fixtures/composition/        Valid and invalid recipe fixtures
 third_party/                 Paper Shaders and Motion license/notice texts
 ```
 
@@ -88,6 +104,12 @@ renderer, no shared effect prop interface and no per-combination renderer switch
 `EffectDefinition` describes metadata, validation, a lazy preview loader, capabilities,
 reduced-motion behavior, export targets and licensing/provenance; it does not impose a
 renderer.
+
+G3-A adds one seam: a material surface receives a `MaskDefinition`, the canonical mask
+image, its own validated params and playback flags. HoloType maps the two mask kinds to its
+existing `HoloGlyph` / `HoloText` interfaces; Paper consumes the same mask image through a
+container CSS alpha mask. Compatibility is one advertised-capability check, not a branch per
+material × mask pair.
 
 ## Dependencies
 

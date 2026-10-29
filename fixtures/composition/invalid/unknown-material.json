@@ -1,0 +1,9 @@
+{
+  "id": "invalid-unknown-material",
+  "version": "1.0.0",
+  "title": "Unknown material",
+  "mask": { "id": "nullworx-moth", "version": "1.0.0" },
+  "material": { "id": "missing-material", "version": "1.0.0" },
+  "params": {},
+  "playback": { "paused": false }
+}

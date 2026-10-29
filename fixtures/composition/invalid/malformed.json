@@ -1,0 +1,10 @@
+{
+  "id": "Invalid Recipe With Spaces",
+  "version": "1",
+  "title": "",
+  "mask": { "id": "nullworx-moth" },
+  "material": { "id": "holotype-foil", "version": "0.1.0" },
+  "params": [],
+  "playback": { "paused": "no" },
+  "extra": true
+}

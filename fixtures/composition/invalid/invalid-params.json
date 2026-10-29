@@ -1,0 +1,15 @@
+{
+  "id": "invalid-params",
+  "version": "1.0.0",
+  "title": "Out-of-range material params",
+  "mask": { "id": "nullworx-wordmark", "version": "1.0.0" },
+  "material": { "id": "paper-mesh-gradient", "version": "0.1.0" },
+  "params": {
+    "preset": "purple",
+    "speed": 99,
+    "distortion": 0.9,
+    "swirl": 0.08,
+    "paused": false
+  },
+  "playback": { "paused": false }
+}

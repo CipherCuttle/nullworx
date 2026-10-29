@@ -1,0 +1,24 @@
+{
+  "id": "d-wordmark-paper",
+  "version": "1.0.0",
+  "title": "D — Wordmark × Paper MeshGradient",
+  "mask": {
+    "id": "nullworx-wordmark",
+    "version": "1.0.0"
+  },
+  "material": {
+    "id": "paper-mesh-gradient",
+    "version": "0.1.0"
+  },
+  "params": {
+    "preset": "purple",
+    "speed": 0.32,
+    "distortion": 0.9,
+    "swirl": 0.08,
+    "paused": false
+  },
+  "playback": {
+    "paused": false
+  },
+  "notes": "Canvas-rasterized wordmark mask over the unmodified upstream canvas."
+}

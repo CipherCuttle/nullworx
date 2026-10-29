@@ -1,0 +1,36 @@
+[
+  {
+    "id": "duplicate-recipe",
+    "version": "1.0.0",
+    "title": "Duplicate one",
+    "mask": { "id": "nullworx-moth", "version": "1.0.0" },
+    "material": { "id": "holotype-foil", "version": "0.1.0" },
+    "params": {
+      "preset": "platinum",
+      "tone": "dark",
+      "motion": "auto",
+      "spectral": 0.4,
+      "metallic": 0.9,
+      "grain": 0.27,
+      "speed": 0.45,
+      "pointer": 0.7,
+      "animated": true
+    },
+    "playback": { "paused": false }
+  },
+  {
+    "id": "duplicate-recipe",
+    "version": "1.0.0",
+    "title": "Duplicate two",
+    "mask": { "id": "nullworx-wordmark", "version": "1.0.0" },
+    "material": { "id": "paper-mesh-gradient", "version": "0.1.0" },
+    "params": {
+      "preset": "purple",
+      "speed": 0.32,
+      "distortion": 0.9,
+      "swirl": 0.08,
+      "paused": false
+    },
+    "playback": { "paused": false }
+  }
+]
