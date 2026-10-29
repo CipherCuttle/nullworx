@@ -140,7 +140,12 @@ Pinned environment: Node `24.20.0`, pnpm `12.15.0`, Ubuntu runner.
 Browser tests are deliberately **not** in CI: no browser binary is pinned and no
 server lifecycle is provisioned. The 43 gallery, 53 clean-consumer, 62 G2
 browser and 24 contract checks were reproduced locally against the patched
-build; remote CI is pending its first run.
+build.
+
+The workflow's first remote run passed on `f61a3fe` (G3-A commit, which contains
+the G2.1 workflow): all steps, including the frozen install, lint, typecheck,
+registry validation, both contract suites and the production build.
+<https://github.com/CipherCuttle/nullworx/actions/runs/40927784469>
 
 The build uses `next/font/google` for Geist, so CI needs outbound network to
 Google Fonts on a cold cache. This is inherited from the preserved UI Forge
@@ -191,3 +196,4 @@ Animated screenshots differ only by animation phase; dimensions and layout match
 4. CI has not run remotely yet.
 5. Chromium-only evidence; no GPU-backed frame-rate claim.
 6. No Next.js 16 migration was performed or implied.
+7. Remote CI passed on the G3-A commit; browser evidence remains local.

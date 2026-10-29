@@ -218,6 +218,11 @@ switches, 5 cross-route unmount cycles, resize 1440→1024→390→1440.
 `pnpm verify:composition`: **149/149**, 0 failed, 0 application console errors,
 0 page errors, 0 failed requests, 0 external requests, 0 horizontal overflow.
 
+Remote GitHub Actions CI passed on the pushed G3-A commit `f61a3fe` in 1m04s
+(<https://github.com/CipherCuttle/nullworx/actions/runs/40927784469>), including
+the frozen install, lint, typecheck, registry validation, both contract suites
+and the production build. Browser evidence remains local.
+
 A mask-only switch with Paper mounted keeps the same canvas element and creates no
 additional WebGL context (`created 2 → 2`, `live 1`, `sameCanvas: true`). The
 material is not remounted when only the mask changes.
