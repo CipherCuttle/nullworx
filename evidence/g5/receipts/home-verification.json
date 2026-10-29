@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-29T22:37:33.138Z",
+  "generatedAt": "2026-10-29T22:48:29.788Z",
   "baseUrl": "http://127.0.0.1:3200",
   "renderer": {
     "tag": "CANVAS",
@@ -23,16 +23,16 @@
       "name": "home/live: renderer frame count advances",
       "pass": true,
       "detail": {
-        "from": 21,
-        "to": 95
+        "from": 19,
+        "to": 90
       }
     },
     {
       "name": "home/live: wave clock advances",
       "pass": true,
       "detail": {
-        "from": 0.333,
-        "to": 1.583
+        "from": 0.3,
+        "to": 1.546
       }
     },
     {
@@ -65,7 +65,7 @@
       "detail": {
         "src": "http://127.0.0.1:3200/media/flower.mp4",
         "paused": false,
-        "time": 1.667028,
+        "time": 1.705169,
         "readyState": 4,
         "error": null,
         "muted": true
@@ -77,14 +77,14 @@
       "detail": {
         "width": 493,
         "height": 440,
-        "meanAbs": 5.3711,
+        "meanAbs": 5.3363,
         "channelMean": [
-          6.1229,
-          5.255,
-          3.9964
+          6.0744,
+          5.2266,
+          3.9653
         ],
-        "diffPixels": 27330,
-        "diffPercent": 12.5991,
+        "diffPixels": 27276,
+        "diffPercent": 12.5742,
         "bbox": [
           2,
           1,
@@ -104,12 +104,12 @@
     {
       "name": "home/pointer: pointer increases eddy strength",
       "pass": true,
-      "detail": 0.987
+      "detail": 0.985
     },
     {
       "name": "home/pointer: pointer settles after leave",
       "pass": true,
-      "detail": 0.01
+      "detail": 0.012
     },
     {
       "name": "home/pause: readout is not LIVE",
@@ -120,16 +120,16 @@
       "name": "home/pause: video timeline stops",
       "pass": true,
       "detail": {
-        "a": 3.72,
-        "b": 3.72
+        "a": 3.739,
+        "b": 3.739
       }
     },
     {
       "name": "home/pause: wave clock freezes",
       "pass": true,
       "detail": {
-        "a": 3.78,
-        "b": 3.78
+        "a": 3.776,
+        "b": 3.776
       }
     },
     {
@@ -138,19 +138,19 @@
       "detail": {
         "width": 493,
         "height": 440,
-        "meanAbs": 0.0049,
+        "meanAbs": 0.0051,
         "channelMean": [
-          0.0073,
-          0.0035,
-          0.0061
+          0.0121,
+          0.0022,
+          0.0016
         ],
         "diffPixels": 22,
         "diffPercent": 0.0101,
         "bbox": [
-          184,
-          64,
-          489,
-          405
+          183,
+          52,
+          488,
+          417
         ]
       }
     },
@@ -163,8 +163,8 @@
       "name": "home/resume: timeline advances after resume",
       "pass": true,
       "detail": {
-        "paused": 3.72,
-        "resumed": 4.488
+        "paused": 3.739,
+        "resumed": 4.509
       }
     },
     {
@@ -193,7 +193,7 @@
       "detail": {
         "src": "http://127.0.0.1:3200/media/flower.mp4",
         "paused": true,
-        "time": 0,
+        "time": 0.000584,
         "readyState": 4,
         "error": null,
         "muted": true
@@ -203,16 +203,16 @@
       "name": "home/reduced: video timeline does not advance",
       "pass": true,
       "detail": {
-        "a": 0,
-        "b": 0
+        "a": 0.001,
+        "b": 0.001
       }
     },
     {
       "name": "home/reduced: wave clock is frozen",
       "pass": true,
       "detail": {
-        "a": 0.017,
-        "b": 0.017
+        "a": 0,
+        "b": 0
       }
     },
     {
@@ -302,7 +302,7 @@
     {
       "name": "home/blocked: recovered video advances",
       "pass": true,
-      "detail": 0.962
+      "detail": 1.14
     },
     {
       "name": "home/blocked: no application console errors",
@@ -350,14 +350,14 @@
         "playback": "hidden",
         "ready": "true",
         "live": "false",
-        "videoTime": 0.469,
+        "videoTime": 0.459,
         "frameCount": 33,
         "waveClock": 0.533,
         "pointerStrength": 0,
         "video": {
           "src": "http://127.0.0.1:3200/media/flower.mp4",
           "paused": true,
-          "time": 0.468566,
+          "time": 0.458526,
           "readyState": 4,
           "error": null,
           "muted": true
@@ -395,14 +395,14 @@
       "detail": {
         "width": 704,
         "height": 672,
-        "meanAbs": 5.2868,
+        "meanAbs": 5.1866,
         "channelMean": [
-          6.0345,
-          5.1773,
-          3.9039
+          5.9327,
+          5.0684,
+          3.8486
         ],
-        "diffPixels": 73586,
-        "diffPercent": 15.5544,
+        "diffPixels": 72992,
+        "diffPercent": 15.4288,
         "bbox": [
           3,
           2,
@@ -415,8 +415,8 @@
       "name": "home/mobile: video timeline advances",
       "pass": true,
       "detail": {
-        "a": 0.211,
-        "b": 1.461
+        "a": 0.212,
+        "b": 1.462
       }
     },
     {
