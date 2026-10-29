@@ -74,7 +74,7 @@ The source roots remain byte-identical to the G0 snapshots.
 | Clean consumer browser callback | 53/53 |
 | G2 browser harness | 62/62 |
 | WebGL contexts after 8 mount/unmount cycles | 0 live; 0 canvases |
-| Live DOM / heap after cycles | +52 nodes; +630 KiB |
+| Live DOM / heap after cycles (Paper→Paper) | 190 → 190 live nodes; +614 KiB heap |
 | Console / page / request / HTTP / external errors | 0 |
 | Final performance run (1440×900 DPR1, SwiftShader) | control 33.4 ms / 29.94 fps; candidate 16.7 ms / 59.88 fps; no 25% candidate regression |
 
