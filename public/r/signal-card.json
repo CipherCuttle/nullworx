@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "signal-card",
+  "type": "registry:ui",
+  "title": "SignalCard",
+  "description": "A semantic metric card with an optional status, composable actions and restrained hover feedback. React and CSS Modules only.",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/signal-card/signal-card.tsx",
+      "content": "\"use client\";\n\nimport { useId, type HTMLAttributes, type ReactNode } from \"react\";\nimport styles from \"./signal-card.module.css\";\n\nexport interface SignalCardProps extends HTMLAttributes<HTMLElement> {\n  heading: string;\n  metric: ReactNode;\n  description?: string;\n  status?: \"positive\" | \"neutral\" | \"warning\";\n  statusLabel?: string;\n  headingLevel?: 2 | 3 | 4;\n  actions?: ReactNode;\n}\n\n/** A semantic metric card. Pass native buttons or links through actions. */\nexport function SignalCard({\n  heading,\n  metric,\n  description,\n  status,\n  statusLabel,\n  headingLevel = 3,\n  actions,\n  className = \"\",\n  children,\n  ...props\n}: SignalCardProps) {\n  const headingId = useId();\n  const Heading = `h${headingLevel}` as \"h2\" | \"h3\" | \"h4\";\n  const labels = { positive: \"On track\", neutral: \"Steady\", warning: \"Needs attention\" };\n\n  return (\n    <article {...props} className={`${styles.card} ${className}`.trim()} aria-labelledby={headingId}>\n      <div className={styles.topline}>\n        <span className={styles.signal} aria-hidden=\"true\">↗</span>\n        {status ? (\n          <span className={styles.status} data-status={status}>\n            <span className={styles.dot} aria-hidden=\"true\" />\n            {statusLabel || labels[status]}\n          </span>\n        ) : null}\n      </div>\n      <Heading id={headingId} className={styles.heading}>{heading}</Heading>\n      <div className={styles.metric}>{metric}</div>\n      {description ? <p className={styles.description}>{description}</p> : null}\n      {children}\n      {actions ? <div className={styles.actions}>{actions}</div> : null}\n    </article>\n  );\n}\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/new-york/signal-card/signal-card.module.css",
+      "content": ".card {\n  box-sizing: border-box;\n  width: 100%;\n  max-width: 360px;\n  min-width: 0;\n  padding: 1.5rem;\n  border: 1px solid var(--forge-border, #e3e0d9);\n  border-radius: var(--forge-radius-surface, 14px);\n  background: var(--forge-surface, #fffefa);\n  color: var(--forge-ink, #292924);\n  font-family: var(--forge-font, inherit);\n  text-align: start;\n  overflow-wrap: anywhere;\n  box-shadow: 0 3px 5px #29292404;\n  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;\n}\n.card:hover { transform: translateY(-3px); border-color: #c7c2b7; box-shadow: 0 12px 32px #2929240b; }\n.topline { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; min-height: 30px; margin-bottom: 1.4rem; }\n.signal { display: grid; place-items: center; width: 32px; height: 32px; border: 1px solid var(--forge-border, #e3e0d9); border-radius: 8px; font-size: 1.1rem; }\n.status { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.3rem 0.55rem; border-radius: 30px; color: #246b50; background: #eaf3eb; font-size: 0.7rem; line-height: 1.3; font-weight: 550; }\n.status[data-status=\"neutral\"] { color: #55584f; background: #eeeee9; }\n.status[data-status=\"warning\"] { color: #875017; background: #fff0d6; }\n.dot { flex-shrink: 0; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }\n.heading { margin: 0 0 0.5rem; color: var(--forge-muted, #696960); font-size: 0.85rem; font-weight: 450; line-height: 1.4; }\n.metric { font-size: clamp(2rem, 5vw, 2.65rem); font-weight: 550; line-height: 1.15; letter-spacing: -0.065em; font-variant-numeric: tabular-nums; }\n.description { margin: 0.8rem 0 0; color: var(--forge-muted, #696960); font-size: 0.78rem; line-height: 1.6; }\n.actions { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.35rem; padding-top: 1.1rem; border-top: 1px solid var(--forge-border, #e3e0d9); }\n@media (prefers-reduced-motion: reduce) {\n  .card { transition: none; }\n  .card:hover { transform: none; }\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}

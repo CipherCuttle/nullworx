@@ -1,0 +1,304 @@
+{
+  "generatedAt": "2026-10-29T12:10:23.516Z",
+  "target": {
+    "repository": "https://github.com/CipherCuttle/nullworx",
+    "baseCommit": "b1673f449394feb305a8e79625c535b01c902776",
+    "branch": "feat/forge-foundation-g2"
+  },
+  "uiForge": {
+    "sourceRoot": "/home/swirky/DevHub/experiments/ui-forge",
+    "gitHead": "906f859db0125965cba71c51da1707c0a4c6d045",
+    "treeSha256": "1c0cffb0ef160043aa908ff422376f83331039c9ab259f38cb2495443e1caad3",
+    "fileCount": 81,
+    "files": [
+      {
+        "target": "app/favicon.ico",
+        "source": "snapshots/ui-forge/app/favicon.ico",
+        "sourceSha256": "2b8ad2d33455a8f736fc3a8ebf8f0bdea8848ad4c0db48a2833bd0f9cd775932",
+        "targetSha256": "2b8ad2d33455a8f736fc3a8ebf8f0bdea8848ad4c0db48a2833bd0f9cd775932",
+        "identical": true
+      },
+      {
+        "target": "app/globals.css",
+        "source": "snapshots/ui-forge/app/globals.css",
+        "sourceSha256": "42fd06cb5ccf12227e18c48913da993317f8548aed1bbc8305a273c26dfba422",
+        "targetSha256": "42fd06cb5ccf12227e18c48913da993317f8548aed1bbc8305a273c26dfba422",
+        "identical": true
+      },
+      {
+        "target": "app/layout.tsx",
+        "source": "snapshots/ui-forge/app/layout.tsx",
+        "sourceSha256": "9592e6d5a63ae609d12e2443725dfc4492305a7fa6bfdeea7aa8283e71ad7ac6",
+        "targetSha256": "9592e6d5a63ae609d12e2443725dfc4492305a7fa6bfdeea7aa8283e71ad7ac6",
+        "identical": true
+      },
+      {
+        "target": "app/page.tsx",
+        "source": "snapshots/ui-forge/app/page.tsx",
+        "sourceSha256": "d79c5220b9e458028d1292352eb66d07b1ed07ca4bb6aa1ee4fa1d75ed2a7ede",
+        "targetSha256": "d79c5220b9e458028d1292352eb66d07b1ed07ca4bb6aa1ee4fa1d75ed2a7ede",
+        "identical": true
+      },
+      {
+        "target": "components/forge-gallery.tsx",
+        "source": "snapshots/ui-forge/components/forge-gallery.tsx",
+        "sourceSha256": "0ac8805186354f26f0d358a0a4e8d97b46e4974eea29a7307e8b9e56cf4c8efb",
+        "targetSha256": "0ac8805186354f26f0d358a0a4e8d97b46e4974eea29a7307e8b9e56cf4c8efb",
+        "identical": true
+      },
+      {
+        "target": "components/forge-gallery.module.css",
+        "source": "snapshots/ui-forge/components/forge-gallery.module.css",
+        "sourceSha256": "d900c2a4d8517fc0f68509e0b38b7ccc700f5a5e565d9cbb433110f860a669ff",
+        "targetSha256": "d900c2a4d8517fc0f68509e0b38b7ccc700f5a5e565d9cbb433110f860a669ff",
+        "identical": true
+      },
+      {
+        "target": "components.json",
+        "source": "snapshots/ui-forge/components.json",
+        "sourceSha256": "14fa3cd5351177123b96afcb9b74fb38df977cc8bbf1defccfefaa4b69af3002",
+        "targetSha256": "14fa3cd5351177123b96afcb9b74fb38df977cc8bbf1defccfefaa4b69af3002",
+        "identical": true
+      },
+      {
+        "target": "eslint.config.mjs",
+        "source": "snapshots/ui-forge/eslint.config.mjs",
+        "sourceSha256": "ebc2852d6311a407fa1555ad8f98f57f41a499e822eceb3594ad70a2a201e7f6",
+        "targetSha256": "ebc2852d6311a407fa1555ad8f98f57f41a499e822eceb3594ad70a2a201e7f6",
+        "identical": true
+      },
+      {
+        "target": "lib/forge.ts",
+        "source": "snapshots/ui-forge/lib/forge.ts",
+        "sourceSha256": "ad1e4954f5c73be8ca1bd1c3c5cf8dba7101252635e322e0d146fb96741e32a2",
+        "targetSha256": "ad1e4954f5c73be8ca1bd1c3c5cf8dba7101252635e322e0d146fb96741e32a2",
+        "identical": true
+      },
+      {
+        "target": "lib/usage.ts",
+        "source": "snapshots/ui-forge/lib/usage.ts",
+        "sourceSha256": "59b1b52243c715e76cbb595d429c5d3024c70c326f043dd59e911c5c65a0d184",
+        "targetSha256": "59b1b52243c715e76cbb595d429c5d3024c70c326f043dd59e911c5c65a0d184",
+        "identical": true
+      },
+      {
+        "target": "postcss.config.mjs",
+        "source": "snapshots/ui-forge/postcss.config.mjs",
+        "sourceSha256": "141ef24ca27a99d08962210fdf20212d3435fdcfa21b46cd88b44d22f751dfae",
+        "targetSha256": "141ef24ca27a99d08962210fdf20212d3435fdcfa21b46cd88b44d22f751dfae",
+        "identical": true
+      },
+      {
+        "target": "tsconfig.json",
+        "source": "snapshots/ui-forge/tsconfig.json",
+        "sourceSha256": "6c82044e43334e36ed84d468da87c7084ff5d7f05de7d79a6d0b1f484b8fdba5",
+        "targetSha256": "6c82044e43334e36ed84d468da87c7084ff5d7f05de7d79a6d0b1f484b8fdba5",
+        "identical": true
+      },
+      {
+        "target": "registry.json",
+        "source": "snapshots/ui-forge/registry.json",
+        "sourceSha256": "adecf63893bec4538ce30270872cc0434a264d14f0fd6e481474a89af779c123",
+        "targetSha256": "adecf63893bec4538ce30270872cc0434a264d14f0fd6e481474a89af779c123",
+        "identical": true
+      },
+      {
+        "target": "public/r/command-button.json",
+        "source": "snapshots/ui-forge/public/r/command-button.json",
+        "sourceSha256": "a2537ae6caf8dce29b1389c0f31d732ccd2a1d59981e6b19b02ce1254777337a",
+        "targetSha256": "a2537ae6caf8dce29b1389c0f31d732ccd2a1d59981e6b19b02ce1254777337a",
+        "identical": true
+      },
+      {
+        "target": "public/r/registry.json",
+        "source": "snapshots/ui-forge/public/r/registry.json",
+        "sourceSha256": "adecf63893bec4538ce30270872cc0434a264d14f0fd6e481474a89af779c123",
+        "targetSha256": "adecf63893bec4538ce30270872cc0434a264d14f0fd6e481474a89af779c123",
+        "identical": true
+      },
+      {
+        "target": "public/r/reveal-heading.json",
+        "source": "snapshots/ui-forge/public/r/reveal-heading.json",
+        "sourceSha256": "87c1af23d85f390fb1eb0db984e6871d21d1453f553b89f5cf5b859d9bb23225",
+        "targetSha256": "87c1af23d85f390fb1eb0db984e6871d21d1453f553b89f5cf5b859d9bb23225",
+        "identical": true
+      },
+      {
+        "target": "public/r/signal-card.json",
+        "source": "snapshots/ui-forge/public/r/signal-card.json",
+        "sourceSha256": "40c4db250a3c4162b0d3d9d1fdf6e30599730cb92e463f3324ac24e9e7f23142",
+        "targetSha256": "40c4db250a3c4162b0d3d9d1fdf6e30599730cb92e463f3324ac24e9e7f23142",
+        "identical": true
+      },
+      {
+        "target": "registry/new-york/command-button/command-button.module.css",
+        "source": "snapshots/ui-forge/registry/new-york/command-button/command-button.module.css",
+        "sourceSha256": "b7af94e5eeee1b37f475688f87b1fa1542c18b2cc372124d37f3e981e12578e7",
+        "targetSha256": "b7af94e5eeee1b37f475688f87b1fa1542c18b2cc372124d37f3e981e12578e7",
+        "identical": true
+      },
+      {
+        "target": "registry/new-york/command-button/command-button.tsx",
+        "source": "snapshots/ui-forge/registry/new-york/command-button/command-button.tsx",
+        "sourceSha256": "2d0e3afc734775b671d509a475502ef83820233c2250ca35bd22d898cb1726af",
+        "targetSha256": "2d0e3afc734775b671d509a475502ef83820233c2250ca35bd22d898cb1726af",
+        "identical": true
+      },
+      {
+        "target": "registry/new-york/signal-card/signal-card.module.css",
+        "source": "snapshots/ui-forge/registry/new-york/signal-card/signal-card.module.css",
+        "sourceSha256": "4b2ca078087b750a0fdef0e4b157a47d9afece543f3a585e8f6310769472a67a",
+        "targetSha256": "4b2ca078087b750a0fdef0e4b157a47d9afece543f3a585e8f6310769472a67a",
+        "identical": true
+      },
+      {
+        "target": "registry/new-york/signal-card/signal-card.tsx",
+        "source": "snapshots/ui-forge/registry/new-york/signal-card/signal-card.tsx",
+        "sourceSha256": "a92653f687c7e2ccaa996de9bfe9a7371969e599d50e554208b33d6003942a55",
+        "targetSha256": "a92653f687c7e2ccaa996de9bfe9a7371969e599d50e554208b33d6003942a55",
+        "identical": true
+      },
+      {
+        "target": "registry/new-york/reveal-heading/reveal-heading.module.css",
+        "source": "snapshots/ui-forge/registry/new-york/reveal-heading/reveal-heading.module.css",
+        "sourceSha256": "09ed2d0e8fc0fbad963f2096b1054289dc56403ae091e71263bfe391cc3db636",
+        "targetSha256": "09ed2d0e8fc0fbad963f2096b1054289dc56403ae091e71263bfe391cc3db636",
+        "identical": true
+      },
+      {
+        "target": "registry/new-york/reveal-heading/reveal-heading.tsx",
+        "source": "snapshots/ui-forge/registry/new-york/reveal-heading/reveal-heading.tsx",
+        "sourceSha256": "ae7cfd52a889244fe666e18d92357398f5ff13f71876327a2daf254aa14def01",
+        "targetSha256": "ae7cfd52a889244fe666e18d92357398f5ff13f71876327a2daf254aa14def01",
+        "identical": true
+      },
+      {
+        "target": "scripts/browser-consumer.mjs",
+        "source": "snapshots/ui-forge/scripts/browser-consumer.mjs",
+        "sourceSha256": "dbcdde57b447efcbb0a7e8260e2cee774c1666830355062903346bbb1c1c333f",
+        "targetSha256": "dbcdde57b447efcbb0a7e8260e2cee774c1666830355062903346bbb1c1c333f",
+        "identical": true
+      },
+      {
+        "target": "scripts/browser-gallery.mjs",
+        "source": "snapshots/ui-forge/scripts/browser-gallery.mjs",
+        "sourceSha256": "ccb6bf35e153d7223037584e02f96ed3f156bb08b42256745476e65b226c3433",
+        "targetSha256": "ccb6bf35e153d7223037584e02f96ed3f156bb08b42256745476e65b226c3433",
+        "identical": true
+      },
+      {
+        "target": "scripts/registry.mjs",
+        "source": "snapshots/ui-forge/scripts/registry.mjs",
+        "sourceSha256": "a42fc0b2b61bc2c9ad36e71faabe3b094c1039f16613eff6187d8e41cb4f0494",
+        "targetSha256": "a42fc0b2b61bc2c9ad36e71faabe3b094c1039f16613eff6187d8e41cb4f0494",
+        "identical": true
+      },
+      {
+        "target": "scripts/smoke-consumer.mjs",
+        "source": "snapshots/ui-forge/scripts/smoke-consumer.mjs",
+        "sourceSha256": "303894bce140da54c4d8df0382788a194a9a0767619e292a2ab5ec0df86e2ee8",
+        "targetSha256": "303894bce140da54c4d8df0382788a194a9a0767619e292a2ab5ec0df86e2ee8",
+        "identical": true
+      },
+      {
+        "target": "docs/upstream/UI_FORGE_README.md",
+        "source": "snapshots/ui-forge/README.md",
+        "sourceSha256": "7d3bc220381534e3f679bac8e8f862548fc0f6d082c0c82fb88ec27acceb40fd",
+        "targetSha256": "7d3bc220381534e3f679bac8e8f862548fc0f6d082c0c82fb88ec27acceb40fd",
+        "identical": true
+      },
+      {
+        "target": "docs/upstream/UI_FORGE_VERIFICATION.md",
+        "source": "snapshots/ui-forge/docs/VERIFICATION.md",
+        "sourceSha256": "51209312197e9593a715c486edb1922d51529ed67be21c394463d81332d9079d",
+        "targetSha256": "51209312197e9593a715c486edb1922d51529ed67be21c394463d81332d9079d",
+        "identical": true
+      }
+    ]
+  },
+  "holotype": {
+    "sourceRoot": "/home/swirky/DevHub/experiments/ui-forge-expansion-02/experiments/holotype",
+    "commit": "847b85d8e74a2ca1d1eea9a55de320bbdc587059",
+    "treeSha256": "b0b4f17307c22c1c5d37defecfd5363095aaa19e67e5b3ff126856b0d8bf7eb9",
+    "fileCount": 8,
+    "files": [
+      {
+        "target": "experiments/holotype/HoloGlyph.tsx",
+        "source": "ui-forge-expansion-02/experiments/holotype/HoloGlyph.tsx",
+        "sourceSha256": "f6e458ef2c66c2658b731c3c2eafd71a2c7893f71f99d8934bbf81d66b09f674",
+        "targetSha256": "f6e458ef2c66c2658b731c3c2eafd71a2c7893f71f99d8934bbf81d66b09f674",
+        "identical": true
+      },
+      {
+        "target": "experiments/holotype/HoloText.tsx",
+        "source": "ui-forge-expansion-02/experiments/holotype/HoloText.tsx",
+        "sourceSha256": "a8a3f23f9399af923aeafe9bfe2274ddfe4515a62d657950484319205b5daaee",
+        "targetSha256": "a8a3f23f9399af923aeafe9bfe2274ddfe4515a62d657950484319205b5daaee",
+        "identical": true
+      },
+      {
+        "target": "experiments/holotype/README.md",
+        "source": "ui-forge-expansion-02/experiments/holotype/README.md",
+        "sourceSha256": "825927f4899ddd0c3c39b333f7a91a234fe008b29e4fbd54710d4b7486640390",
+        "targetSha256": "825927f4899ddd0c3c39b333f7a91a234fe008b29e4fbd54710d4b7486640390",
+        "identical": true
+      },
+      {
+        "target": "experiments/holotype/holotype.module.css",
+        "source": "ui-forge-expansion-02/experiments/holotype/holotype.module.css",
+        "sourceSha256": "4def437ec0b72407b81ab7d3f5064c11e797ff5d7819af1f4b687940bd2c8453",
+        "targetSha256": "4def437ec0b72407b81ab7d3f5064c11e797ff5d7819af1f4b687940bd2c8453",
+        "identical": true
+      },
+      {
+        "target": "experiments/holotype/index.ts",
+        "source": "ui-forge-expansion-02/experiments/holotype/index.ts",
+        "sourceSha256": "7f3c68538868e97536c2b97db479b45649aaeade53aacbe942c41f131f1d28bf",
+        "targetSha256": "7f3c68538868e97536c2b97db479b45649aaeade53aacbe942c41f131f1d28bf",
+        "identical": true
+      },
+      {
+        "target": "experiments/holotype/pointer.ts",
+        "source": "ui-forge-expansion-02/experiments/holotype/pointer.ts",
+        "sourceSha256": "c29a4a61cfd518a5e7cfb9bcda217e062b7ee35b7ead9a0ef59d83a56c6e2ce1",
+        "targetSha256": "c29a4a61cfd518a5e7cfb9bcda217e062b7ee35b7ead9a0ef59d83a56c6e2ce1",
+        "identical": true
+      },
+      {
+        "target": "experiments/holotype/presets.ts",
+        "source": "ui-forge-expansion-02/experiments/holotype/presets.ts",
+        "sourceSha256": "fbe6029131d9ed35aeb655c2f557b10d855d06e91cf6a2ce539e9b3dcaac3506",
+        "targetSha256": "fbe6029131d9ed35aeb655c2f557b10d855d06e91cf6a2ce539e9b3dcaac3506",
+        "identical": true
+      },
+      {
+        "target": "experiments/holotype/types.ts",
+        "source": "ui-forge-expansion-02/experiments/holotype/types.ts",
+        "sourceSha256": "f765ba24f066a45b08f1698465e91e1982fe85416fc12b5d3ef0a6e1d7ca0e60",
+        "targetSha256": "f765ba24f066a45b08f1698465e91e1982fe85416fc12b5d3ef0a6e1d7ca0e60",
+        "identical": true
+      }
+    ]
+  },
+  "modifiedFoundationFiles": [
+    "package.json",
+    "pnpm-lock.yaml",
+    "pnpm-workspace.yaml",
+    "next.config.ts",
+    ".gitignore"
+  ],
+  "dependencyAdditions": {
+    "@paper-design/shaders-react": "0.0.82",
+    "@paper-design/shaders": "0.0.82 (transitive)",
+    "motion": "14.7.1",
+    "framer-motion": "14.7.1 (transitive)"
+  },
+  "evidenceDevDependencies": {
+    "playwright-core": "1.64.1",
+    "tsx": "4.23.15"
+  },
+  "media": {
+    "imported": false,
+    "note": "No image, video, font or audio asset from the experimental roots is copied."
+  }
+}
