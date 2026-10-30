@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Nullworx — Golden Flower owner review</title>
+<style>
+  :root{color-scheme:dark;font:16px/1.6 system-ui,sans-serif;background:#111514;color:#edf0e8}
+  body{max-width:1500px;margin:auto;padding:28px}h1{font-size:clamp(24px,4vw,44px);line-height:1.2}h2{margin-top:40px}
+  a{color:#d8ff4a}p{max-width:1050px}video,img{display:block;width:100%;height:auto;background:#000;border:1px solid #343b33}
+  .gate{padding:18px;border:1px solid #d8ff4a;background:#20251b}.grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  figure{margin:0}figcaption{font-size:14px;color:#b4bdae;margin:10px 0 20px}.links{display:flex;flex-wrap:wrap;gap:20px}
+  summary{cursor:pointer;padding:15px;background:#20251f}details{margin:20px 0}.controls{max-width:390px}
+  @media(max-width:760px){body{padding:16px}.grid{grid-template-columns:1fr}}
+</style>
+<body>
+<p>NULLWORX / ASCII WAVES / 2026-10-30</p>
+<h1>Does it preserve the Flower you loved?</h1>
+<div class="gate"><strong>FEATURE_PARITY_INCOMPLETE — owner visual review open</strong><br>
+Tested Flower rendering and native motion match under controlled conditions. The original controls, mobile tray and full-screen review view are incomplete. No experimental reel has been promoted.</div>
+<p>The renderer, shaders, glyph atlas, media and presets are untouched. The audit fixes the wrapper's lost 2.2-second source offset and misleading playback labels. Existing High-quality edits were preserved.</p>
+<p class="links"><a href="../../ASCII_GOLDEN_MASTER_AUDIT.md">Full audit and feature table</a><a href="source/HASH_MATRIX.md">Exact source hashes</a><a href="receipts/performance-rtx4060.json">RTX 4060 receipts</a><a href="preservation/final.json">Preservation</a></p>
+
+<h2>1. Compare the movement</h2>
+<figure>
+<video controls preload="metadata" poster="screenshots/motion-comparison-poster.png" src="motion/golden-versus-current-motion.mp4"></video>
+<figcaption>Left: archived loved Flower. Right: actual consolidated component, temporarily expanded on the homepage. Same browser/GPU, 1440 × 900 CSS, DPR2, cell16, MP4, source seed 2.2 s, wave seed 0. Pointer at (0.70, 0.35) at 2 s; release at 4 s. These are independent real-time recordings; exact live per-frame synchronization is unsupported. The clocks advance at native speed. Export is 30 fps; unrecorded rendering measured about 143.6 fps.</figcaption>
+</figure>
+
+<h2>2. Review the actual integration framing</h2>
+<p>The homepage has far fewer glyphs than the full-screen original. The lab is larger but still embedded. Darker edge overlays and different proportions remain visible here. Matching raw renders does not approve this presentation.</p>
+<div class="grid">
+<figure><video controls preload="metadata" src="motion/home-presentation-native-6s.mp4"></video><figcaption>Actual consolidated homepage, including the existing framing and labels.</figcaption></figure>
+<figure><video controls preload="metadata" src="motion/lab-presentation-native-6s.mp4"></video><figcaption>Actual ASCII lab, including live controls. The last help-text wording is shown in the current local app and final smoke receipt.</figcaption></figure>
+</div>
+<details open><summary>Desktop and mobile presentation sheet</summary><a href="screenshots/native-presentation-sheet.png"><img src="screenshots/native-presentation-sheet.png" alt="Original full-viewport Flower and actual consolidated homepage and lab at desktop and mobile sizes"></a></details>
+
+<h2>3. Inspect the controlled image comparison</h2>
+<p>Seven DPR2 pairs match exactly at corresponding decoded frames and wave phases, including mobile and a settled pointer. The audit also retains separate DPR1 and native DPR2 device-pixel pairs. Open the full PNGs to inspect glyph strokes at their captured resolution.</p>
+<details><summary>Controlled multi-frame screenshot sheet</summary><a href="screenshots/golden-versus-current-screenshot-sheet.png"><img src="screenshots/golden-versus-current-screenshot-sheet.png" alt="Five desktop and two mobile matched Golden Flower versus consolidated frame pairs"></a></details>
+<p class="links"><a href="receipts/pixel-comparisons.json">Pixel measurements</a><a href="screenshots/final-device2-golden.png">Golden 2880 × 1800 PNG</a><a href="screenshots/final-device2-consolidated.png">Current 2880 × 1800 PNG</a></p>
+
+<h2>4. Compare the controls you had</h2>
+<div class="grid">
+<figure><a href="screenshots/golden-controls-desktop.png"><img src="screenshots/golden-controls-desktop.png" alt="Original desktop Flower controls"></a><figcaption>Original controls: local video, procedural mode, transport, glyphs, color, inversion, density, wave parameters and pointer strength.</figcaption></figure>
+<figure><a href="screenshots/golden-controls-mobile.png"><img class="controls" src="screenshots/golden-controls-mobile.png" alt="Original mobile bottom control tray"></a><figcaption>The original mobile dock and tray are absent from the current embedded experience. The later five-reel shelf was added after this checkpoint and is a separate approval decision.</figcaption></figure>
+</div>
+<p class="links"><a href="screenshots/final-home-mobile-full.png">Current mobile homepage</a><a href="screenshots/final-lab-mobile-full.png">Current mobile lab and controls</a><a href="screenshots/home-webgl.png">Homepage fallback</a><a href="screenshots/lab-webgl.png">Lab fallback</a></p>
+
+<h2>Owner review decision</h2>
+<p>Assess flower legibility, wave rhythm, pointer feel and the smaller desktop/mobile fields. Decide whether to keep this framing and whether the proposed Flower-only focus view and restored tuning controls are wanted. Jellyfish, Koi, Smoke and Orion remain unapproved experiments; uncertain-rights media stays excluded.</p>
+<p><strong>No merge, publication, deployment or G5-A integration. Stopped for your visual review.</strong></p>
+</body>
+</html>

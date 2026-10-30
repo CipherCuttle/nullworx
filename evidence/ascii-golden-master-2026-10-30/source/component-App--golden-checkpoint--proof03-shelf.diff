@@ -1,0 +1,114 @@
+--- golden-checkpoint/component/App
++++ proof03-shelf/component/App
+@@ -1,6 +1,7 @@
+ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+ import { ControlPanel, type SourceMode } from './components/ControlPanel';
+ import { Icon } from './components/Icon';
++import { DEFAULT_MOTIF, MOTIFS, type Motif } from './motifs';
+ import {
+   AsciiWavesRenderer,
+   DEFAULT_SETTINGS,
+@@ -8,7 +9,7 @@
+ } from './renderer';
+ 
+ const params = new URLSearchParams(window.location.search);
+-const demoUrl = '/media/flower.mp4';
++const initialMotif = MOTIFS.find((motif) => motif.id === params.get('motif')) ?? DEFAULT_MOTIF;
+ const initialSource: SourceMode = params.get('source') === 'none' ? 'none' : 'demo';
+ const initialPaused = params.get('paused') === '1' || params.has('freeze');
+ function viewportDefaultCell(): number {
+@@ -28,7 +29,7 @@
+   const value = Number(params.get('time'));
+   return Number.isFinite(value) && value >= 0 ? value : null;
+ })();
+-const demoStart = initialTime ?? 2.2;
++const initialStart = initialTime ?? initialMotif.startTime;
+ const initialFreeze = (() => {
+   if (!params.has('freeze')) return null;
+   const value = Number(params.get('freeze'));
+@@ -67,14 +68,16 @@
+   const rendererRef = useRef<AsciiWavesRenderer | null>(null);
+   const objectUrlRef = useRef<string | null>(null);
+   const autoPlayRef = useRef(initialSource !== 'none' && !initialPaused);
+-  const pendingSeekRef = useRef<number | null>(initialSource === 'demo' ? demoStart : null);
++  const pendingSeekRef = useRef<number | null>(initialSource === 'demo' ? initialStart : null);
+   const noticeTimer = useRef<number | null>(null);
+   const dragDepth = useRef(0);
+   const settingsRef = useRef(demoSettings);
+   const [settings, setSettings] = useState<WavesSettings>(demoSettings);
++  const [activeMotifId, setActiveMotifId] = useState(initialMotif.id);
++  const activeMotif = MOTIFS.find((motif) => motif.id === activeMotifId) ?? DEFAULT_MOTIF;
+   const [source, setSource] = useState<SourceState>(() => initialSource === 'none'
+     ? { mode: 'none', url: null, name: '' }
+-    : { mode: 'demo', url: demoUrl, name: 'flower.mp4' });
++    : { mode: 'demo', url: initialMotif.file, name: initialMotif.title });
+   const [fileName, setFileName] = useState('');
+   const [videoReady, setVideoReady] = useState(false);
+   const [videoError, setVideoError] = useState('');
+@@ -223,13 +226,23 @@
+     if (objectUrlRef.current) URL.revokeObjectURL(objectUrlRef.current);
+   }, []);
+ 
+-  const useDemo = useCallback(() => {
+-    autoPlayRef.current = true;
+-    pendingSeekRef.current = demoStart;
+-    setSource({ mode: 'demo', url: demoUrl, name: 'flower.mp4' });
+-    setFileName('');
+-    setControlsOpen(false);
+-  }, []);
++  const playMotif = useCallback((motif: Motif) => {
++    const video = videoRef.current;
++    if (source.mode === 'demo' && activeMotif.id === motif.id && video) {
++      // Re-selecting the playing reel restarts it from its chosen offset.
++      video.currentTime = motif.startTime;
++      video.play().catch(() => setPlaying(false));
++    } else {
++      autoPlayRef.current = true;
++      pendingSeekRef.current = motif.startTime;
++      setActiveMotifId(motif.id);
++      setSource({ mode: 'demo', url: motif.file, name: motif.title });
++      setFileName('');
++    }
++    // The shelf is a quick-look control on phones; close the sheet so the
++    // field fills the screen. Desktop keeps the panel open for the next reel.
++    if (window.matchMedia('(max-width: 820px)').matches) setControlsOpen(false);
++  }, [activeMotif.id, source.mode]);
+ 
+   const clearSource = useCallback(() => {
+     const video = videoRef.current;
+@@ -342,7 +355,7 @@
+   const sourceLabel = source.mode === 'none'
+     ? 'PROCEDURAL FIELD'
+     : source.mode === 'demo'
+-      ? 'FLOWER.MP4'
++      ? activeMotif.title.toUpperCase()
+       : (fileName || 'LOCAL VIDEO').toUpperCase();
+   const panelOpen = chromeVisible && controlsOpen;
+ 
+@@ -385,12 +398,13 @@
+       setSettings: (patch: Partial<WavesSettings>) => setSettings((current) => ({ ...current, ...patch })),
+       setControlsOpen: (value: boolean) => setControlsOpen(value),
+       sourceMode: source.mode,
++      motifId: activeMotif.id,
+     };
+     window.__asciiWaves = api;
+     return () => {
+       if (window.__asciiWaves === api) delete window.__asciiWaves;
+     };
+-  }, [source.mode]);
++  }, [source.mode, activeMotif.id]);
+ 
+   return (
+     <div
+@@ -588,8 +602,10 @@
+             onClose={() => setControlsOpen(false)}
+             source={source.mode}
+             fileName={fileName}
++            activeMotif={source.mode === 'demo' ? activeMotif : null}
++            motifs={MOTIFS}
++            onMotif={playMotif}
+             onUpload={openUpload}
+-            onDemo={useDemo}
+             onClear={clearSource}
+             videoReady={videoReady}
+             videoTimeLabel={source.mode === 'none' ? 'Generated in the shader' : secondsLabel}

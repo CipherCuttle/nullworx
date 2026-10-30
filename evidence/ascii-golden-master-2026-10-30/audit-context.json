@@ -1,0 +1,23 @@
+{
+  "consolidated": "/home/swirky/Documents/deepseek-harness/default-workspace/nullworx-consolidation-01",
+  "output": "/home/swirky/Documents/deepseek-harness/default-workspace/nullworx-consolidation-01/evidence/ascii-golden-master-2026-10-30",
+  "scratch": "/tmp/nullworx-ascii-golden-20261030-a83xij4m",
+  "golden": "/tmp/nullworx-ascii-golden-20261030-a83xij4m/golden",
+  "archive": "/home/swirky/DevHub/experiments/ascii-waves-proof03/checkpoints/ascii-waves-proof03-loved-flower-2026-10-24.tar.gz",
+  "checkpointSha256": "422482e98569aeda9e4254a9ef98b4cd42ca5b9f9ede75e7d17fca6d61114012",
+  "roots": {
+    "proof03": "/home/swirky/DevHub/experiments/ascii-waves-proof03",
+    "react01": "/home/swirky/DevHub/experiments/ascii-waves-react-01",
+    "ui-forge": "/home/swirky/DevHub/experiments/ui-forge-flower-integration-01",
+    "branded": "/home/swirky/DevHub/nullworx",
+    "branded-preview": "/home/swirky/DevHub/experiments/nullworx-site-preview",
+    "consolidated": "/home/swirky/Documents/deepseek-harness/default-workspace/nullworx-consolidation-01"
+  },
+  "origins": {
+    "golden": "http://127.0.0.1:3217",
+    "proof03": "http://127.0.0.1:3218",
+    "react01": "http://127.0.0.1:3219",
+    "consolidated": "http://127.0.0.1:3220",
+    "ui-forge": "http://127.0.0.1:3221"
+  }
+}

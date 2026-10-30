@@ -1,0 +1,50 @@
+{
+  "dpr1": [
+    {
+      "variant": "golden",
+      "canvas": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 900,
+        "backingWidth": 1440,
+        "backingHeight": 900
+      },
+      "errors": []
+    },
+    {
+      "variant": "consolidated",
+      "canvas": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 900,
+        "backingWidth": 1440,
+        "backingHeight": 900
+      },
+      "errors": []
+    }
+  ],
+  "compatibility": [
+    {
+      "path": "/",
+      "pass": true
+    },
+    {
+      "path": "/lab/ascii-waves",
+      "pass": true
+    }
+  ],
+  "finalSmoke": [
+    {
+      "path": "/",
+      "pass": true,
+      "errors": []
+    },
+    {
+      "path": "/lab/ascii-waves",
+      "pass": true,
+      "errors": []
+    }
+  ]
+}

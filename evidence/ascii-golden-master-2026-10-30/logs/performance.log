@@ -1,0 +1,6 @@
+0 golden: 143.6 fps median 7.00 p95 7.10 ms
+1 consolidated: 143.6 fps median 7.00 p95 7.10 ms
+2 consolidated: 143.6 fps median 7.00 p95 7.00 ms
+3 golden: 143.6 fps median 7.00 p95 7.00 ms
+home native: 143.6 fps median 7.00 p95 8.10 ms
+lab native: 143.6 fps median 7.00 p95 7.70 ms

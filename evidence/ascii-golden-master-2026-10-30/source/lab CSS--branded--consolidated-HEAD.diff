@@ -1,0 +1,20 @@
+--- branded/lab CSS
++++ consolidated-HEAD/lab CSS
+@@ -300,3 +300,17 @@
+     max-width: 140px;
+   }
+ }
++
++.liveDot[data-phase="paused"],
++.liveDot[data-phase="reduced"],
++.liveDot[data-phase="offscreen"],
++.liveDot[data-phase="loading"] {
++  background: var(--paper-dim);
++  box-shadow: 0 0 0 4px rgb(241 237 223 / 0.07);
++}
++
++.liveDot[data-phase="blocked"],
++.liveDot[data-phase="error"] {
++  background: var(--ember);
++  box-shadow: 0 0 0 4px rgb(255 94 56 / 0.1);
++}

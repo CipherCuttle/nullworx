@@ -1,0 +1,370 @@
+--- react01/component/App
++++ ui-forge/component/App
+@@ -1,3 +1,5 @@
++"use client";
++
+ import {
+   forwardRef,
+   useCallback,
+@@ -7,24 +9,24 @@
+   useRef,
+   useState,
+   type CSSProperties,
+-} from 'react';
++} from "react";
+ import {
+   AsciiWavesRenderer,
+   DEFAULT_SETTINGS,
+   type RendererMetrics,
+   type RendererSnapshot,
+   type WavesSettings,
+-} from './renderer';
++} from "./renderer";
+ import {
+   ASCII_WAVES_PRESETS,
+   DEFAULT_ASCII_WAVES_PRESET,
+   resolvePreset,
+   type AsciiWavesPresetId,
+-} from './presets';
+-import styles from './AsciiWaves.module.css';
+-
+-export type AsciiWavesQuality = 'high' | 'balanced' | 'efficient';
+-export type AsciiWavesReducedMotion = 'system' | 'play';
++} from "./presets";
++import styles from "./ascii-waves.module.css";
++
++export type AsciiWavesQuality = "high" | "balanced" | "efficient";
++export type AsciiWavesReducedMotion = "system" | "play";
+ 
+ export interface AsciiWavesProps {
+   /** Named, bundled reel. Flower is the default. */
+@@ -32,7 +34,7 @@
+   /** Optional custom video URL. Overrides the preset's video, but not its poster. */
+   src?: string;
+   /** Glyph cell pitch in CSS pixels, or a responsive 12/14/16 default. */
+-  cellSize?: number | 'auto';
++  cellSize?: number | "auto";
+   /** Ordered characters from darkest to brightest. 48 characters max. */
+   characters?: string;
+   /** Ink tint as a three- or six-digit hex colour. */
+@@ -100,7 +102,7 @@
+ }
+ 
+ function cleanCharacters(value: string | undefined): string {
+-  const characters = Array.from(value ?? DEFAULT_SETTINGS.characters).slice(0, 48).join('');
++  const characters = Array.from(value ?? DEFAULT_SETTINGS.characters).slice(0, 48).join("");
+   return characters.length > 0 ? characters : DEFAULT_SETTINGS.characters;
+ }
+ 
+@@ -111,7 +113,7 @@
+ }
+ 
+ function isCrossOrigin(src: string): boolean {
+-  if (src.startsWith('data:') || src.startsWith('blob:')) return false;
++  if (src.startsWith("data:") || src.startsWith("blob:")) return false;
+   try {
+     return new URL(src, window.location.href).origin !== window.location.origin;
+   } catch {
+@@ -123,23 +125,23 @@
+   {
+     preset = DEFAULT_ASCII_WAVES_PRESET,
+     src,
+-    cellSize = 'auto',
++    cellSize = "auto",
+     characters = DEFAULT_SETTINGS.characters,
+     color = DEFAULT_SETTINGS.color,
+     invert = false,
+     speed = DEFAULT_SETTINGS.speed,
+     interactionIntensity = DEFAULT_SETTINGS.interactionIntensity,
+     pointerInteraction = true,
+-    quality = 'high',
++    quality = "high",
+     playing = true,
+     muted = true,
+     loop = true,
+     startTime,
+-    reducedMotion = 'system',
++    reducedMotion = "system",
+     fallbackImage,
+     className,
+     style,
+-    ariaLabel = 'ASCII wave field',
++    ariaLabel = "ASCII wave field",
+     onReady,
+     onError,
+   },
+@@ -163,15 +165,15 @@
+   const [mediaReady, setMediaReady] = useState(false);
+   const [autoCell, setAutoCell] = useState(16);
+   const [inView, setInView] = useState(true);
+-  const [pageHidden, setPageHidden] = useState(() => typeof document !== 'undefined' && document.hidden);
++  const [pageHidden, setPageHidden] = useState(() => typeof document !== "undefined" && document.hidden);
+   const [systemReduced, setSystemReduced] = useState(false);
+ 
+   const selectedPreset = resolvePreset(preset);
+   const resolvedSrc = src !== undefined ? src : selectedPreset.src;
+   const resolvedStartTime = startTime ?? (src !== undefined ? 0 : selectedPreset.startTime);
+   const fallbackSrc = fallbackImage !== undefined ? fallbackImage : selectedPreset.poster;
+-  const reduced = reducedMotion === 'system' && systemReduced;
+-  const effectiveCell = typeof cellSize === 'number' && Number.isFinite(cellSize)
++  const reduced = reducedMotion === "system" && systemReduced;
++  const effectiveCell = typeof cellSize === "number" && Number.isFinite(cellSize)
+     ? clamp(cellSize, 8, 32)
+     : autoCell;
+   const qualityDpr = QUALITY_DPR[quality] ?? 2;
+@@ -223,19 +225,19 @@
+       rendererRef.current?.setRunning(false);
+       videoRef.current?.pause();
+       setContextLost(true);
+-      reportError(new Error('The WebGL context was lost.'));
++      reportError(new Error("The WebGL context was lost."));
+     };
+     const onContextRestored = () => {
+       if (unmounting || contextEventsSuppressed.current) return;
+       setContextLost(false);
+       setCanvasVersion((value) => value + 1);
+     };
+-    canvas.addEventListener('webglcontextlost', onContextLost);
+-    canvas.addEventListener('webglcontextrestored', onContextRestored);
++    canvas.addEventListener("webglcontextlost", onContextLost);
++    canvas.addEventListener("webglcontextrestored", onContextRestored);
+     return () => {
+       unmounting = true;
+-      canvas.removeEventListener('webglcontextlost', onContextLost);
+-      canvas.removeEventListener('webglcontextrestored', onContextRestored);
++      canvas.removeEventListener("webglcontextlost", onContextLost);
++      canvas.removeEventListener("webglcontextrestored", onContextRestored);
+     };
+   }, [canvasVersion, reportError]);
+ 
+@@ -254,7 +256,7 @@
+       setRendererFailure(null);
+       setRendererEpoch((value) => value + 1);
+     } catch (error) {
+-      const failure = error instanceof Error ? error : new Error('The WebGL renderer could not start.');
++      const failure = error instanceof Error ? error : new Error("The WebGL renderer could not start.");
+       setRendererFailure(failure.message);
+       reportError(failure);
+     }
+@@ -279,28 +281,28 @@
+     const root = rootRef.current;
+     if (!root) return undefined;
+     const measure = () => {
+-      if (typeof cellSize !== 'number') {
++      if (typeof cellSize !== "number") {
+         const next = responsiveCell(root.clientWidth || window.innerWidth);
+         setAutoCell((value) => (value === next ? value : next));
+       }
+       rendererRef.current?.resize();
+     };
+-    const observer = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(measure) : null;
++    const observer = typeof ResizeObserver !== "undefined" ? new ResizeObserver(measure) : null;
+     observer?.observe(root);
+-    window.addEventListener('resize', measure, { passive: true });
+-    window.addEventListener('orientationchange', measure, { passive: true });
++    window.addEventListener("resize", measure, { passive: true });
++    window.addEventListener("orientationchange", measure, { passive: true });
+     measure();
+     return () => {
+       observer?.disconnect();
+-      window.removeEventListener('resize', measure);
+-      window.removeEventListener('orientationchange', measure);
++      window.removeEventListener("resize", measure);
++      window.removeEventListener("orientationchange", measure);
+     };
+   }, [cellSize, rendererEpoch]);
+ 
+   useEffect(() => {
+     const root = rootRef.current;
+     if (!root) return undefined;
+-    if (typeof IntersectionObserver === 'undefined') return undefined;
++    if (typeof IntersectionObserver === "undefined") return undefined;
+     const observer = new IntersectionObserver((entries) => {
+       const entry = entries[0];
+       if (entry) setInView(entry.isIntersecting);
+@@ -311,16 +313,16 @@
+ 
+   useEffect(() => {
+     const onVisibility = () => setPageHidden(document.hidden);
+-    document.addEventListener('visibilitychange', onVisibility);
+-    return () => document.removeEventListener('visibilitychange', onVisibility);
++    document.addEventListener("visibilitychange", onVisibility);
++    return () => document.removeEventListener("visibilitychange", onVisibility);
+   }, []);
+ 
+   useEffect(() => {
+-    const query = window.matchMedia('(prefers-reduced-motion: reduce)');
++    const query = window.matchMedia("(prefers-reduced-motion: reduce)");
+     const update = () => setSystemReduced(query.matches);
+     update();
+-    query.addEventListener('change', update);
+-    return () => query.removeEventListener('change', update);
++    query.addEventListener("change", update);
++    return () => query.removeEventListener("change", update);
+   }, []);
+ 
+   // Source loading is independent from renderer construction. The same video
+@@ -344,7 +346,7 @@
+     }
+ 
+     video.pause();
+-    video.crossOrigin = isCrossOrigin(resolvedSrc) ? 'anonymous' : null;
++    video.crossOrigin = isCrossOrigin(resolvedSrc) ? "anonymous" : null;
+     video.src = resolvedSrc;
+     renderer.setVideo(video, true);
+     renderer.markVideoDirty();
+@@ -379,25 +381,25 @@
+ 
+     const onError = () => {
+       if (disposed) return;
+-      const message = 'This video could not be decoded.';
++      const message = "This video could not be decoded.";
+       setMediaReady(false);
+       setMediaError(message);
+       reportError(new Error(message));
+     };
+ 
+-    video.addEventListener('loadedmetadata', onLoadedMetadata);
+-    video.addEventListener('canplay', onCanPlay);
+-    video.addEventListener('error', onError);
++    video.addEventListener("loadedmetadata", onLoadedMetadata);
++    video.addEventListener("canplay", onCanPlay);
++    video.addEventListener("error", onError);
+     if (video.readyState >= 1) onLoadedMetadata();
+     if (video.readyState >= 3) onCanPlay();
+ 
+     return () => {
+       disposed = true;
+-      video.removeEventListener('loadedmetadata', onLoadedMetadata);
+-      video.removeEventListener('canplay', onCanPlay);
+-      video.removeEventListener('error', onError);
++      video.removeEventListener("loadedmetadata", onLoadedMetadata);
++      video.removeEventListener("canplay", onCanPlay);
++      video.removeEventListener("error", onError);
+       video.pause();
+-      video.removeAttribute('src');
++      video.removeAttribute("src");
+       video.load();
+       renderer.setVideo(null, false);
+     };
+@@ -468,7 +470,7 @@
+     };
+     const onDown = (event: PointerEvent) => {
+       update(event);
+-      if (event.pointerType !== 'mouse') {
++      if (event.pointerType !== "mouse") {
+         activePointer = event.pointerId;
+         if (root.setPointerCapture) {
+           try {
+@@ -481,14 +483,14 @@
+     };
+     const onEnd = (event: PointerEvent) => {
+       if (event.pointerId === activePointer) activePointer = null;
+-      if (event.pointerType !== 'mouse') {
++      if (event.pointerType !== "mouse") {
+         rendererRef.current?.setPointerActive(false);
+       }
+     };
+     const onLeave = (event: PointerEvent) => {
+       // Touch pointers receive a leave when capture retargets the stream to
+       // this element. Only a mouse leaving the box should settle the eddy.
+-      if (event.pointerType !== 'mouse' || activePointer !== null) return;
++      if (event.pointerType !== "mouse" || activePointer !== null) return;
+       rendererRef.current?.setPointerActive(false);
+     };
+     const onBlur = () => {
+@@ -497,19 +499,19 @@
+     };
+     const onMove = (event: PointerEvent) => update(event);
+ 
+-    root.addEventListener('pointermove', onMove, { passive: true });
+-    root.addEventListener('pointerdown', onDown, { passive: true });
+-    root.addEventListener('pointerup', onEnd, { passive: true });
+-    root.addEventListener('pointercancel', onEnd, { passive: true });
+-    root.addEventListener('pointerleave', onLeave, { passive: true });
+-    window.addEventListener('blur', onBlur);
++    root.addEventListener("pointermove", onMove, { passive: true });
++    root.addEventListener("pointerdown", onDown, { passive: true });
++    root.addEventListener("pointerup", onEnd, { passive: true });
++    root.addEventListener("pointercancel", onEnd, { passive: true });
++    root.addEventListener("pointerleave", onLeave, { passive: true });
++    window.addEventListener("blur", onBlur);
+     return () => {
+-      root.removeEventListener('pointermove', onMove);
+-      root.removeEventListener('pointerdown', onDown);
+-      root.removeEventListener('pointerup', onEnd);
+-      root.removeEventListener('pointercancel', onEnd);
+-      root.removeEventListener('pointerleave', onLeave);
+-      window.removeEventListener('blur', onBlur);
++      root.removeEventListener("pointermove", onMove);
++      root.removeEventListener("pointerdown", onDown);
++      root.removeEventListener("pointerup", onEnd);
++      root.removeEventListener("pointercancel", onEnd);
++      root.removeEventListener("pointerleave", onLeave);
++      window.removeEventListener("blur", onBlur);
+       if (activePointer !== null) rendererRef.current?.setPointerActive(false);
+     };
+   }, [rendererEpoch]);
+@@ -542,11 +544,11 @@
+       }
+       const target = clamp(seconds, 0, Math.max(0, video.duration - 0.04));
+       const complete = () => {
+-        video.removeEventListener('seeked', complete);
++        video.removeEventListener("seeked", complete);
+         rendererRef.current?.markVideoDirty();
+         resolve(video.currentTime);
+       };
+-      video.addEventListener('seeked', complete);
++      video.addEventListener("seeked", complete);
+       video.currentTime = target;
+     }),
+     setFrozenTime: (seconds: number | null) => rendererRef.current?.setFrozenTime(seconds),
+@@ -558,22 +560,22 @@
+   const fallback = Boolean(rendererFailure || contextLost || mediaError);
+   const showFallbackImage = fallback && Boolean(fallbackSrc);
+   const fallbackLabel = rendererFailure
+-    ? 'ASCII Waves could not start WebGL 2.'
++    ? "ASCII Waves could not start WebGL 2."
+     : contextLost
+-      ? 'The WebGL context was lost.'
+-      : mediaError ?? 'The source video could not be decoded.';
++      ? "The WebGL context was lost."
++      : mediaError ?? "The source video could not be decoded.";
+ 
+   return (
+     <div
+       ref={rootRef}
+-      className={[styles.root, className].filter(Boolean).join(' ')}
++      className={`${styles.root} ${className ?? ""}`.trim()}
+       style={style}
+       data-ascii-waves=""
+       data-preset={selectedPreset.id}
+-      data-ready={mediaReady ? 'true' : 'false'}
+-      data-fallback={fallback ? 'true' : 'false'}
+-      data-reduced-motion={reduced ? 'true' : 'false'}
+-      data-renderer={rendererFailure || contextLost ? 'unavailable' : 'webgl2'}
++      data-ready={mediaReady ? "true" : "false"}
++      data-fallback={fallback ? "true" : "false"}
++      data-reduced-motion={reduced ? "true" : "false"}
++      data-renderer={rendererFailure || contextLost ? "unavailable" : "webgl2"}
+       aria-busy={!mediaReady && !fallback}
+     >
+       <canvas
+@@ -595,6 +597,7 @@
+         tabIndex={-1}
+       />
+       {showFallbackImage && (
++        // eslint-disable-next-line @next/next/no-img-element -- fallback URL is consumer-supplied
+         <img
+           className={styles.fallbackImage}
+           src={fallbackSrc}
+@@ -612,7 +615,7 @@
+   );
+ });
+ 
+-AsciiWaves.displayName = 'AsciiWaves';
++AsciiWaves.displayName = "AsciiWaves";
+ 
+ export { ASCII_WAVES_PRESETS, DEFAULT_ASCII_WAVES_PRESET };
+-export type { AsciiWavesPreset, AsciiWavesPresetId } from './presets';
++export type { AsciiWavesPreset, AsciiWavesPresetId } from "./presets";

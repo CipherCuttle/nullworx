@@ -1,0 +1,113 @@
+{
+  "capturedAt": "2026-10-30T16:26:53.392582+00:00",
+  "method": "All regular files except generated/cache directories and this new audit directory; same-pass preservation baseline, not independent historical evidence.",
+  "trees": {
+    "proof03": {
+      "root": "/home/swirky/DevHub/experiments/ascii-waves-proof03",
+      "files": 90,
+      "changed": [],
+      "missing": [],
+      "added": [],
+      "head": null,
+      "gitStatusUnchanged": true,
+      "pass": true
+    },
+    "react01": {
+      "root": "/home/swirky/DevHub/experiments/ascii-waves-react-01",
+      "files": 115,
+      "changed": [],
+      "missing": [],
+      "added": [],
+      "head": null,
+      "gitStatusUnchanged": true,
+      "pass": true
+    },
+    "ui-forge": {
+      "root": "/home/swirky/DevHub/experiments/ui-forge-flower-integration-01",
+      "files": 158,
+      "changed": [],
+      "missing": [],
+      "added": [],
+      "head": "906f859db0125965cba71c51da1707c0a4c6d045\n",
+      "gitStatusUnchanged": true,
+      "pass": true
+    },
+    "branded": {
+      "root": "/home/swirky/DevHub/nullworx",
+      "files": 186,
+      "changed": [],
+      "missing": [],
+      "added": [],
+      "head": "4884b2bda77ead07f038c1a6ee2e85783936ba15\n",
+      "gitStatusUnchanged": true,
+      "pass": true
+    },
+    "branded-preview": {
+      "root": "/home/swirky/DevHub/experiments/nullworx-site-preview",
+      "files": 176,
+      "changed": [],
+      "missing": [],
+      "added": [],
+      "head": "4884b2bda77ead07f038c1a6ee2e85783936ba15\n",
+      "gitStatusUnchanged": true,
+      "pass": true
+    }
+  },
+  "historical": {
+    "source": "/home/swirky/DevHub/experiments/ascii-waves-react-01/evidence/preservation/baseline.json",
+    "capturedAt": "2026-10-24T00:59:26.774604+00:00",
+    "proof03FileHashesMatching": 90,
+    "mismatches": [],
+    "checkpoint": {
+      "path": "/home/swirky/DevHub/experiments/ascii-waves-proof03/checkpoints/ascii-waves-proof03-loved-flower-2026-10-24.tar.gz",
+      "exists": true,
+      "sha256": "422482e98569aeda9e4254a9ef98b4cd42ca5b9f9ede75e7d17fca6d61114012",
+      "expectedSha256": "422482e98569aeda9e4254a9ef98b4cd42ca5b9f9ede75e7d17fca6d61114012",
+      "matches": true
+    }
+  },
+  "preservedComponent": [
+    {
+      "file": "ascii-waves.tsx",
+      "sha256": "b679afe2693c3bdc207a41bd0f28907ffaa4da5ef2b257bfce36b7ff0c4d2d03",
+      "matchesUiForge": true
+    },
+    {
+      "file": "ascii-waves.module.css",
+      "sha256": "4784f3b073a15bb84bff14e18d5ca5bd1448f4d5cd94e4097ec209789733475b",
+      "matchesUiForge": true
+    },
+    {
+      "file": "renderer.ts",
+      "sha256": "edd2ab3a049ed2c2a70b8cd62043134163463246516ba06cdf7d6fe9e12aafd7",
+      "matchesUiForge": true
+    },
+    {
+      "file": "glyphAtlas.ts",
+      "sha256": "eb002aa7ce2875db3afeafebb596d0e32633acd4a4fdeb10ab95886c5be950f2",
+      "matchesUiForge": true
+    },
+    {
+      "file": "presets.ts",
+      "sha256": "f4418e448209e0176c019f95dde35e42f1a9ae6d0381bb1540d91918ed666de3",
+      "matchesUiForge": true
+    }
+  ],
+  "preExistingUntouchedFiles": [
+    {
+      "file": "components/effects/home-field.tsx",
+      "sha256": "b416f8bf6febce139850abb7d9000f05bb57b253ae3894ab5738eeb789598824",
+      "matchesPreAudit": true
+    },
+    {
+      "file": "lib/effects/manifest.ts",
+      "sha256": "2a7111205fe4ac82f8d60ec6eea0ea3d1ca64c63f7a21569fac3c3e161f1d910",
+      "matchesPreAudit": true
+    }
+  ],
+  "highLabDefaultRetained": true,
+  "consolidatedHeadUnchanged": true,
+  "consolidatedStatus": "## feat/consolidation-01\n M components/effects/ascii-waves-canvas.tsx\n M components/effects/effect-lab-preview.tsx\n M components/effects/home-field.tsx\n M lib/effects/manifest.ts\n?? ASCII_GOLDEN_MASTER_AUDIT.md\n?? evidence/ascii-golden-master-2026-10-30/\n?? scripts/ascii-golden-master/\n",
+  "allOriginalsUnchanged": true,
+  "allPreservedComponentFilesMatch": true
+}

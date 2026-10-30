@@ -1,0 +1,196 @@
+--- react01/renderer.ts
++++ ui-forge/renderer.ts
+@@ -1,4 +1,4 @@
+-import { createGlyphAtlas, type GlyphAtlas } from './glyphAtlas';
++import { createGlyphAtlas, type GlyphAtlas } from "./glyphAtlas";
+ 
+ export interface WavesSettings {
+   characters: string;
+@@ -51,8 +51,8 @@
+ }
+ 
+ export const DEFAULT_SETTINGS: WavesSettings = {
+-  characters: ' .:-+*=%@#',
+-  color: '#ffffff',
++  characters: ` .:-+*=%@#`,
++  color: "#ffffff",
+   invert: false,
+   cellSize: 16,
+   noiseScale: 2,
+@@ -256,11 +256,11 @@
+ 
+ function compileShader(gl: WebGL2RenderingContext, type: number, source: string): WebGLShader {
+   const shader = gl.createShader(type);
+-  if (!shader) throw new Error('Could not allocate a WebGL shader.');
++  if (!shader) throw new Error("Could not allocate a WebGL shader.");
+   gl.shaderSource(shader, source);
+   gl.compileShader(shader);
+   if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+-    const log = gl.getShaderInfoLog(shader) ?? 'Unknown shader error';
++    const log = gl.getShaderInfoLog(shader) ?? "Unknown shader error";
+     gl.deleteShader(shader);
+     throw new Error(log);
+   }
+@@ -271,14 +271,14 @@
+   const vert = compileShader(gl, gl.VERTEX_SHADER, VERT);
+   const frag = compileShader(gl, gl.FRAGMENT_SHADER, FRAG);
+   const program = gl.createProgram();
+-  if (!program) throw new Error('Could not allocate a WebGL program.');
++  if (!program) throw new Error("Could not allocate a WebGL program.");
+   gl.attachShader(program, vert);
+   gl.attachShader(program, frag);
+   gl.linkProgram(program);
+   gl.deleteShader(vert);
+   gl.deleteShader(frag);
+   if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+-    const log = gl.getProgramInfoLog(program) ?? 'Unknown link error';
++    const log = gl.getProgramInfoLog(program) ?? "Unknown link error";
+     gl.deleteProgram(program);
+     throw new Error(log);
+   }
+@@ -286,10 +286,10 @@
+ }
+ 
+ function parseColor(hex: string): [number, number, number] {
+-  const value = hex.trim().replace(/^#/, '');
++  const value = hex.trim().replace(/^#/, "");
+   const normalized = value.length === 3
+-    ? value.split('').map((ch) => ch + ch).join('')
+-    : value.padEnd(6, '0').slice(0, 6);
++    ? value.split("").map((ch) => ch + ch).join("")
++    : value.padEnd(6, "0").slice(0, 6);
+   const n = Number.parseInt(normalized, 16);
+   if (!Number.isFinite(n)) return [1, 1, 1];
+   return [((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255];
+@@ -314,7 +314,7 @@
+   private readonly videoUniform: WebGLUniformLocation | null;
+   private glyphAtlas: GlyphAtlas;
+   private videoTexture: WebGLTexture;
+-  private atlasCharacters = '';
++  private atlasCharacters = "";
+   private video: HTMLVideoElement | null = null;
+   private settings: WavesSettings = { ...DEFAULT_SETTINGS };
+   private width = 1;
+@@ -328,7 +328,7 @@
+   private frameCount = 0;
+   private videoUploads = 0;
+   private uploadedVideoTime = Number.NaN;
+-  private uploadedVideoSource = '';
++  private uploadedVideoSource = "";
+   private videoFrameDirty = true;
+   private videoFrameHandle: number | null = null;
+   private pointerTarget = { x: 0.5, y: 0.5 };
+@@ -343,33 +343,33 @@
+ 
+   constructor(canvas: HTMLCanvasElement, options: RendererOptions = {}) {
+     this.canvas = canvas;
+-    const gl = canvas.getContext('webgl2', {
++    const gl = canvas.getContext("webgl2", {
+       alpha: false,
+       antialias: false,
+       depth: false,
+       stencil: false,
+       preserveDrawingBuffer: false,
+-      powerPreference: 'high-performance',
++      powerPreference: "high-performance",
+       premultipliedAlpha: false,
+     });
+-    if (!gl) throw new Error('WebGL 2 is unavailable in this browser.');
++    if (!gl) throw new Error("WebGL 2 is unavailable in this browser.");
+     this.gl = gl;
+     this.maxDpr = Math.min(2, Math.max(1, options.maxDpr ?? 2));
+     this.dpr = deviceDpr(this.maxDpr);
+     this.program = buildProgram(gl);
+     const vao = gl.createVertexArray();
+-    if (!vao) throw new Error('Could not allocate a WebGL vertex array.');
++    if (!vao) throw new Error("Could not allocate a WebGL vertex array.");
+     this.vao = vao;
+ 
+     const names = [
+-      'uResolution', 'uCellPx', 'uTime', 'uVideoEnabled', 'uAtlasCols', 'uAtlasInner',
+-      'uAtlasPad', 'uCharCount', 'uInk', 'uInvert', 'uNoiseScale', 'uWaveTension',
+-      'uWaveTwist', 'uIntensity', 'uPointer', 'uPointerStrength', 'uInteractionIntensity',
+-      'uVideoAspect', 'uVideoScale',
++      "uResolution", "uCellPx", "uTime", "uVideoEnabled", "uAtlasCols", "uAtlasInner",
++      "uAtlasPad", "uCharCount", "uInk", "uInvert", "uNoiseScale", "uWaveTension",
++      "uWaveTwist", "uIntensity", "uPointer", "uPointerStrength", "uInteractionIntensity",
++      "uVideoAspect", "uVideoScale",
+     ];
+     this.uniforms = Object.fromEntries(names.map((name) => [name, gl.getUniformLocation(this.program, name)]));
+-    this.atlasUniform = gl.getUniformLocation(this.program, 'uAtlas');
+-    this.videoUniform = gl.getUniformLocation(this.program, 'uVideo');
++    this.atlasUniform = gl.getUniformLocation(this.program, "uAtlas");
++    this.videoUniform = gl.getUniformLocation(this.program, "uVideo");
+     this.glyphAtlas = createGlyphAtlas(gl, DEFAULT_SETTINGS.characters, DEFAULT_SETTINGS.cellSize, this.dpr);
+     this.atlasCharacters = DEFAULT_SETTINGS.characters;
+     this.videoTexture = this.createVideoTexture();
+@@ -381,7 +381,7 @@
+   private createVideoTexture(): WebGLTexture {
+     const gl = this.gl;
+     const texture = gl.createTexture();
+-    if (!texture) throw new Error('Could not allocate the video texture.');
++    if (!texture) throw new Error("Could not allocate the video texture.");
+     gl.bindTexture(gl.TEXTURE_2D, texture);
+     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 0, 255]));
+     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+@@ -424,13 +424,13 @@
+     }
+     this.videoFrameDirty = true;
+     this.uploadedVideoTime = Number.NaN;
+-    this.uploadedVideoSource = '';
++    this.uploadedVideoSource = "";
+     this.resize();
+   }
+ 
+   private cancelVideoFrameCallback() {
+     const video = this.video as VideoWithFrameCallback | null;
+-    if (video && this.videoFrameHandle !== null && typeof video.cancelVideoFrameCallback === 'function') {
++    if (video && this.videoFrameHandle !== null && typeof video.cancelVideoFrameCallback === "function") {
+       video.cancelVideoFrameCallback(this.videoFrameHandle);
+     }
+     this.videoFrameHandle = null;
+@@ -438,7 +438,7 @@
+ 
+   private queueVideoFrameCallback() {
+     const video = this.video as VideoWithFrameCallback | null;
+-    if (!video || typeof video.requestVideoFrameCallback !== 'function') return;
++    if (!video || typeof video.requestVideoFrameCallback !== "function") return;
+     this.videoFrameHandle = video.requestVideoFrameCallback(() => {
+       this.videoFrameDirty = true;
+       this.videoFrameHandle = null;
+@@ -449,7 +449,7 @@
+   markVideoDirty() {
+     this.videoFrameDirty = true;
+     this.uploadedVideoTime = Number.NaN;
+-    this.uploadedVideoSource = '';
++    this.uploadedVideoSource = "";
+   }
+ 
+   setPointer(x: number, y: number, active = true) {
+@@ -501,7 +501,7 @@
+   private uploadVideo() {
+     const video = this.video;
+     if (!video || video.readyState < 2) return;
+-    const supportsFrameCallback = typeof (video as VideoWithFrameCallback).requestVideoFrameCallback === 'function';
++    const supportsFrameCallback = typeof (video as VideoWithFrameCallback).requestVideoFrameCallback === "function";
+     if (supportsFrameCallback) {
+       if (!this.videoFrameDirty) return;
+     } else if (video.currentTime === this.uploadedVideoTime && video.currentSrc === this.uploadedVideoSource) {
+@@ -599,7 +599,7 @@
+       ? this.frameDurations.reduce((sum, value) => sum + value, 0) / this.frameDurations.length
+       : 0;
+     const gl = this.gl;
+-    const debug = gl.getExtension('WEBGL_debug_renderer_info');
++    const debug = gl.getExtension("WEBGL_debug_renderer_info");
+     return {
+       fps: Number(fps.toFixed(1)),
+       frameMs: Number(frameMs.toFixed(2)),
+@@ -654,7 +654,7 @@
+     gl.deleteTexture(this.videoTexture);
+     gl.deleteVertexArray(this.vao);
+     gl.deleteProgram(this.program);
+-    gl.getExtension('WEBGL_lose_context')?.loseContext();
++    gl.getExtension("WEBGL_lose_context")?.loseContext();
+   }
+ 
+   get canvasElement() {

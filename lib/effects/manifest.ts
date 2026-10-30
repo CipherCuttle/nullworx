@@ -111,7 +111,7 @@ export function Field() {
         preset="flower"
         cellSize="auto"
         speed={1}
-        quality="balanced"
+        quality="high"
         muted
         loop
         reducedMotion="system"
@@ -155,8 +155,8 @@ export function Field() {
         type: "select",
         key: "quality",
         label: "Quality",
-        description: "Caps render resolution against the browser's device-pixel ratio.",
-        default: "balanced",
+        description: "Caps render resolution against the browser's device-pixel ratio. High matches the reviewed Proof 03 default (device DPR, capped at 2).",
+        default: "high",
         options: [
           { label: "High · DPR 2", value: "high" },
           { label: "Balanced · DPR 1.5", value: "balanced" },

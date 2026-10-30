@@ -1,0 +1,289 @@
+--- proof03-shelf/renderer.ts
++++ react01/renderer.ts
+@@ -21,6 +21,7 @@
+   width: number;
+   height: number;
+   dpr: number;
++  maxDpr: number;
+   columns: number;
+   rows: number;
+   cellPx: number;
+@@ -29,17 +30,24 @@
+   videoPaused: boolean;
+   videoUploads: number;
+   webglRenderer: string;
++  running: boolean;
+ }
+ 
+ export interface RendererSnapshot {
+   width: number;
+   height: number;
+   dpr: number;
++  maxDpr: number;
+   cellSize: number;
+   waveClock: number;
+   frameCount: number;
+   pointer: { x: number; y: number; strength: number };
+   settings: WavesSettings;
++}
++
++export interface RendererOptions {
++  /** 2 = high, 1.5 = balanced, 1 = efficient. Clamped to the browser DPR. */
++  maxDpr?: number;
+ }
+ 
+ export const DEFAULT_SETTINGS: WavesSettings = {
+@@ -62,6 +70,11 @@
+   gl_Position = vec4(p * 2.0 - 1.0, 0.0, 1.0);
+ }`;
+ 
++/**
++ * The fragment shader is copied from the owner-approved Proof 03 build. Do not
++ * change this program to make the React extraction easier to demonstrate:
++ * Flower fidelity depends on the same UV warp, luma mapping and atlas sampling.
++ */
+ const FRAG = `#version 300 es
+ precision highp float;
+ precision highp int;
+@@ -273,7 +286,7 @@
+ }
+ 
+ function parseColor(hex: string): [number, number, number] {
+-  const value = hex.replace('#', '');
++  const value = hex.trim().replace(/^#/, '');
+   const normalized = value.length === 3
+     ? value.split('').map((ch) => ch + ch).join('')
+     : value.padEnd(6, '0').slice(0, 6);
+@@ -282,14 +295,14 @@
+   return [((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255];
+ }
+ 
+-function effectiveDpr(): number {
+-  const params = new URLSearchParams(window.location.search);
+-  const requested = Number(params.get('dpr'));
+-  if (params.has('dpr') && Number.isFinite(requested) && requested > 0) {
+-    return Math.min(2, Math.max(0.5, requested));
+-  }
+-  return Math.min(2, Math.max(1, window.devicePixelRatio || 1));
+-}
++function deviceDpr(maxDpr: number): number {
++  return Math.min(maxDpr, Math.max(1, window.devicePixelRatio || 1));
++}
++
++type VideoWithFrameCallback = HTMLVideoElement & {
++  requestVideoFrameCallback?: (callback: () => void) => number;
++  cancelVideoFrameCallback?: (handle: number) => void;
++};
+ 
+ export class AsciiWavesRenderer {
+   private readonly canvas: HTMLCanvasElement;
+@@ -307,8 +320,9 @@
+   private width = 1;
+   private height = 1;
+   private dpr = 1;
+-  private maxDpr = 2;
++  private maxDpr: number;
+   private raf = 0;
++  private running = false;
+   private lastFrame = 0;
+   private waveClock = 0;
+   private frameCount = 0;
+@@ -325,12 +339,9 @@
+   private lastTimestamps: number[] = [];
+   private frameDurations: number[] = [];
+   private disposed = false;
+-  private readonly handleResize = () => this.resize();
+-  private readonly handleVisibility = () => {
+-    if (!document.hidden) this.lastFrame = performance.now();
+-  };
+-
+-  constructor(canvas: HTMLCanvasElement) {
++  private readonly handleRender = (now: number) => this.render(now);
++
++  constructor(canvas: HTMLCanvasElement, options: RendererOptions = {}) {
+     this.canvas = canvas;
+     const gl = canvas.getContext('webgl2', {
+       alpha: false,
+@@ -343,9 +354,8 @@
+     });
+     if (!gl) throw new Error('WebGL 2 is unavailable in this browser.');
+     this.gl = gl;
+-    const params = new URLSearchParams(window.location.search);
+-    this.maxDpr = params.has('dpr') ? Math.min(2, effectiveDpr()) : 2;
+-    this.dpr = Math.min(2, effectiveDpr());
++    this.maxDpr = Math.min(2, Math.max(1, options.maxDpr ?? 2));
++    this.dpr = deviceDpr(this.maxDpr);
+     this.program = buildProgram(gl);
+     const vao = gl.createVertexArray();
+     if (!vao) throw new Error('Could not allocate a WebGL vertex array.');
+@@ -364,12 +374,8 @@
+     this.atlasCharacters = DEFAULT_SETTINGS.characters;
+     this.videoTexture = this.createVideoTexture();
+     this.resize();
+-    window.addEventListener('resize', this.handleResize, { passive: true });
+-    window.addEventListener('orientationchange', this.handleResize, { passive: true });
+-    document.addEventListener('visibilitychange', this.handleVisibility);
+     this.lastFrame = performance.now();
+-    this.render = this.render.bind(this);
+-    this.raf = requestAnimationFrame(this.render);
++    this.setRunning(true);
+   }
+ 
+   private createVideoTexture(): WebGLTexture {
+@@ -398,9 +404,15 @@
+ 
+   setSettings(settings: WavesSettings) {
+     this.settings = { ...settings };
+-    const dpr = Math.min(2, effectiveDpr());
+-    if (dpr > this.maxDpr) this.maxDpr = dpr;
++    const dpr = deviceDpr(this.maxDpr);
+     if (dpr !== this.dpr) this.resize();
++  }
++
++  setMaxDpr(maxDpr: number) {
++    const next = Math.min(2, Math.max(1, maxDpr));
++    if (next === this.maxDpr) return;
++    this.maxDpr = next;
++    this.resize();
+   }
+ 
+   setVideo(video: HTMLVideoElement | null, enabled: boolean) {
+@@ -417,9 +429,7 @@
+   }
+ 
+   private cancelVideoFrameCallback() {
+-    const video = this.video as (HTMLVideoElement & {
+-      cancelVideoFrameCallback?: (handle: number) => void;
+-    }) | null;
++    const video = this.video as VideoWithFrameCallback | null;
+     if (video && this.videoFrameHandle !== null && typeof video.cancelVideoFrameCallback === 'function') {
+       video.cancelVideoFrameCallback(this.videoFrameHandle);
+     }
+@@ -427,9 +437,7 @@
+   }
+ 
+   private queueVideoFrameCallback() {
+-    const video = this.video as (HTMLVideoElement & {
+-      requestVideoFrameCallback?: (callback: () => void) => number;
+-    }) | null;
++    const video = this.video as VideoWithFrameCallback | null;
+     if (!video || typeof video.requestVideoFrameCallback !== 'function') return;
+     this.videoFrameHandle = video.requestVideoFrameCallback(() => {
+       this.videoFrameDirty = true;
+@@ -456,9 +464,9 @@
+ 
+   resize() {
+     const rect = this.canvas.getBoundingClientRect();
+-    const cssWidth = Math.max(1, rect.width || window.innerWidth);
+-    const cssHeight = Math.max(1, rect.height || window.innerHeight);
+-    this.dpr = Math.min(this.maxDpr, effectiveDpr());
++    const cssWidth = Math.max(1, rect.width);
++    const cssHeight = Math.max(1, rect.height);
++    this.dpr = deviceDpr(this.maxDpr);
+     const width = Math.max(1, Math.round(cssWidth * this.dpr));
+     const height = Math.max(1, Math.round(cssHeight * this.dpr));
+     if (this.canvas.width !== width || this.canvas.height !== height) {
+@@ -467,6 +475,18 @@
+     }
+     this.width = width;
+     this.height = height;
++  }
++
++  setRunning(running: boolean) {
++    if (this.disposed || this.running === running) return;
++    this.running = running;
++    if (running) {
++      this.lastFrame = performance.now();
++      this.raf = requestAnimationFrame(this.handleRender);
++    } else {
++      cancelAnimationFrame(this.raf);
++      this.raf = 0;
++    }
+   }
+ 
+   private updatePointer(dt: number) {
+@@ -481,9 +501,7 @@
+   private uploadVideo() {
+     const video = this.video;
+     if (!video || video.readyState < 2) return;
+-    const supportsFrameCallback = typeof (video as HTMLVideoElement & {
+-      requestVideoFrameCallback?: unknown;
+-    }).requestVideoFrameCallback === 'function';
++    const supportsFrameCallback = typeof (video as VideoWithFrameCallback).requestVideoFrameCallback === 'function';
+     if (supportsFrameCallback) {
+       if (!this.videoFrameDirty) return;
+     } else if (video.currentTime === this.uploadedVideoTime && video.currentSrc === this.uploadedVideoSource) {
+@@ -507,8 +525,8 @@
+   }
+ 
+   private render(now: number) {
+-    if (this.disposed) return;
+-    this.raf = requestAnimationFrame(this.render);
++    if (this.disposed || !this.running) return;
++    this.raf = requestAnimationFrame(this.handleRender);
+     const rawDt = (now - this.lastFrame) / 1000;
+     const dt = Math.min(0.08, Math.max(0, rawDt));
+     this.lastFrame = now;
+@@ -518,7 +536,6 @@
+       this.waveClock += dt * this.settings.speed;
+     }
+     this.updatePointer(dt);
+-    this.resize();
+     this.ensureAtlas();
+     this.uploadVideo();
+ 
+@@ -576,7 +593,7 @@
+   getMetrics(): RendererMetrics {
+     const timestamps = this.lastTimestamps;
+     const fps = timestamps.length > 2
+-      ? (timestamps.length - 1) * 1000 / Math.max(1, timestamps[timestamps.length - 1] - timestamps[0])
++      ? (timestamps.length - 1) * 1000 / Math.max(1, timestamps[timestamps.length - 1]! - timestamps[0]!)
+       : 0;
+     const frameMs = this.frameDurations.length
+       ? this.frameDurations.reduce((sum, value) => sum + value, 0) / this.frameDurations.length
+@@ -590,6 +607,7 @@
+       width: this.width,
+       height: this.height,
+       dpr: this.dpr,
++      maxDpr: this.maxDpr,
+       columns: Math.ceil(this.width / Math.max(2, this.settings.cellSize * this.dpr)),
+       rows: Math.ceil(this.height / Math.max(2, this.settings.cellSize * this.dpr)),
+       cellPx: this.settings.cellSize,
+@@ -598,6 +616,7 @@
+       videoPaused: this.video?.paused ?? true,
+       videoUploads: this.videoUploads,
+       webglRenderer: debug ? String(gl.getParameter(debug.UNMASKED_RENDERER_WEBGL)) : String(gl.getParameter(gl.RENDERER)),
++      running: this.running,
+     };
+   }
+ 
+@@ -606,6 +625,7 @@
+       width: this.width,
+       height: this.height,
+       dpr: this.dpr,
++      maxDpr: this.maxDpr,
+       cellSize: this.settings.cellSize,
+       waveClock: this.waveClock,
+       frameCount: this.frameCount,
+@@ -623,17 +643,18 @@
+   }
+ 
+   dispose() {
++    if (this.disposed) return;
+     this.disposed = true;
+     cancelAnimationFrame(this.raf);
+-    window.removeEventListener('resize', this.handleResize);
+-    window.removeEventListener('orientationchange', this.handleResize);
+-    document.removeEventListener('visibilitychange', this.handleVisibility);
++    this.raf = 0;
++    this.running = false;
+     this.cancelVideoFrameCallback();
+     const gl = this.gl;
+     gl.deleteTexture(this.glyphAtlas.texture);
+     gl.deleteTexture(this.videoTexture);
+     gl.deleteVertexArray(this.vao);
+     gl.deleteProgram(this.program);
++    gl.getExtension('WEBGL_lose_context')?.loseContext();
+   }
+ 
+   get canvasElement() {

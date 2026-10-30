@@ -1,0 +1,14 @@
+{
+  "variants": 7,
+  "hashRows": 161,
+  "mediaFiles": 31,
+  "shaderHashes": {
+    "VERT": [
+      "5e5cb7d301ae948a9e99926a0e5e040c73c9bb146c8875e1e91c6e34d71f50af"
+    ],
+    "FRAG": [
+      "69681757a77f3099a9dd533f90d1e54e4d410398a32a03c90000aefec7faad08"
+    ]
+  },
+  "output": "/home/swirky/Documents/deepseek-harness/default-workspace/nullworx-consolidation-01/evidence/ascii-golden-master-2026-10-30/source"
+}

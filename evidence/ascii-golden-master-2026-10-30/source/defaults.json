@@ -1,0 +1,9 @@
+{
+  "golden-checkpoint": "{\n  characters: ' .:-+*=%@#',\n  color: '#ffffff',\n  invert: false,\n  cellSize: 16,\n  noiseScale: 2,\n  speed: 1,\n  waveTension: 0.5,\n  waveTwist: 0.1,\n  intensity: 1,\n  cursorInteraction: true,\n  interactionIntensity: 1,\n}",
+  "proof03-shelf": "{\n  characters: ' .:-+*=%@#',\n  color: '#ffffff',\n  invert: false,\n  cellSize: 16,\n  noiseScale: 2,\n  speed: 1,\n  waveTension: 0.5,\n  waveTwist: 0.1,\n  intensity: 1,\n  cursorInteraction: true,\n  interactionIntensity: 1,\n}",
+  "react01": "{\n  characters: ' .:-+*=%@#',\n  color: '#ffffff',\n  invert: false,\n  cellSize: 16,\n  noiseScale: 2,\n  speed: 1,\n  waveTension: 0.5,\n  waveTwist: 0.1,\n  intensity: 1,\n  cursorInteraction: true,\n  interactionIntensity: 1,\n}",
+  "ui-forge": "{\n  characters: ` .:-+*=%@#`,\n  color: \"#ffffff\",\n  invert: false,\n  cellSize: 16,\n  noiseScale: 2,\n  speed: 1,\n  waveTension: 0.5,\n  waveTwist: 0.1,\n  intensity: 1,\n  cursorInteraction: true,\n  interactionIntensity: 1,\n}",
+  "branded": "{\n  characters: ` .:-+*=%@#`,\n  color: \"#ffffff\",\n  invert: false,\n  cellSize: 16,\n  noiseScale: 2,\n  speed: 1,\n  waveTension: 0.5,\n  waveTwist: 0.1,\n  intensity: 1,\n  cursorInteraction: true,\n  interactionIntensity: 1,\n}",
+  "consolidated-HEAD": "{\n  characters: ` .:-+*=%@#`,\n  color: \"#ffffff\",\n  invert: false,\n  cellSize: 16,\n  noiseScale: 2,\n  speed: 1,\n  waveTension: 0.5,\n  waveTwist: 0.1,\n  intensity: 1,\n  cursorInteraction: true,\n  interactionIntensity: 1,\n}",
+  "consolidated-working": "{\n  characters: ` .:-+*=%@#`,\n  color: \"#ffffff\",\n  invert: false,\n  cellSize: 16,\n  noiseScale: 2,\n  speed: 1,\n  waveTension: 0.5,\n  waveTwist: 0.1,\n  intensity: 1,\n  cursorInteraction: true,\n  interactionIntensity: 1,\n}"
+}

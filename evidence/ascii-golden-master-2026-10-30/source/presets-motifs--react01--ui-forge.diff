@@ -1,0 +1,118 @@
+--- react01/presets/motifs
++++ ui-forge/presets/motifs
+@@ -1,4 +1,4 @@
+-export type AsciiWavesPresetId = 'flower' | 'jellyfish' | 'koi' | 'smoke' | 'orion';
++export type AsciiWavesPresetId = "flower";
+ 
+ export interface AsciiWavesPreset {
+   id: AsciiWavesPresetId;
+@@ -12,93 +12,36 @@
+   sourceUrl: string;
+   /** Flower is the owner-approved default and the fidelity baseline. */
+   loved: boolean;
+-  /** The four reels the owner marked experimental. */
+   experimental: boolean;
+ }
+ 
+ /**
+- * The motion shelf from Proof 03, carried over byte-for-byte. The presets use
+- * the same public `/media` layout as the approved app so the component can be
+- * consumed by Next, Vite or any static host. Copy `public/media` with the
+- * component, or pass a custom `src`/`fallbackImage`.
++ * Flower is the only distributable preset. The experimental reels from the
++ * local React 01 review are intentionally excluded from the UI Forge package
++ * because their Pexels provenance was not independently verified.
++ *
++ * Copy public/media/flower.mp4 and public/media/motifs/flower-poster.jpg with
++ * this component, or pass custom src/fallbackImage URLs.
+  */
+ export const ASCII_WAVES_PRESETS: Record<AsciiWavesPresetId, AsciiWavesPreset> = {
+   flower: {
+-    id: 'flower',
+-    title: 'Flower',
+-    subtitle: 'Parrot bloom',
+-    src: '/media/flower.mp4',
+-    poster: '/media/motifs/flower-poster.jpg',
++    id: "flower",
++    title: "Flower",
++    subtitle: "Parrot bloom",
++    src: "/media/flower.mp4",
++    poster: "/media/motifs/flower-poster.jpg",
+     startTime: 2.2,
+-    credit: 'MDN contributors',
+-    license: 'CC0 1.0',
+-    sourceUrl: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',
++    credit: "MDN contributors",
++    license: "CC0 1.0",
++    sourceUrl: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+     loved: true,
+     experimental: false,
+   },
+-  jellyfish: {
+-    id: 'jellyfish',
+-    title: 'Jellyfish',
+-    subtitle: 'Blue drift',
+-    src: '/media/motifs/jellyfish.mp4',
+-    poster: '/media/motifs/jellyfish-poster.jpg',
+-    startTime: 0.4,
+-    credit: 'Soly Moses / Pexels',
+-    license: 'Pexels License',
+-    sourceUrl: 'https://www.pexels.com/video/jellyfish-tank-28156785/',
+-    loved: false,
+-    experimental: true,
+-  },
+-  koi: {
+-    id: 'koi',
+-    title: 'Koi',
+-    subtitle: 'Pond',
+-    src: '/media/motifs/koi.mp4',
+-    poster: '/media/motifs/koi-poster.jpg',
+-    startTime: 0.4,
+-    credit: 'Pexels contributor',
+-    license: 'Pexels License',
+-    sourceUrl: 'https://www.pexels.com/video/6392574/',
+-    loved: false,
+-    experimental: true,
+-  },
+-  smoke: {
+-    id: 'smoke',
+-    title: 'Smoke',
+-    subtitle: 'Colour plumes',
+-    src: '/media/motifs/smoke.mp4',
+-    poster: '/media/motifs/smoke-poster.jpg',
+-    startTime: 0.4,
+-    credit: 'Pexels contributor',
+-    license: 'Pexels License',
+-    sourceUrl: 'https://www.pexels.com/video/2328902/',
+-    loved: false,
+-    experimental: true,
+-  },
+-  orion: {
+-    id: 'orion',
+-    title: 'Orion',
+-    subtitle: 'Nebula flight',
+-    src: '/media/motifs/nebula.mp4',
+-    poster: '/media/motifs/nebula-poster.jpg',
+-    startTime: 0.2,
+-    credit: "NASA's Scientific Visualization Studio / Paul Morris",
+-    license: 'Public domain',
+-    sourceUrl: 'https://commons.wikimedia.org/wiki/File:Flight_Through_the_Orion_Nebula_in_Visible_Light_(Dome_Version)_(SVS14658).webm',
+-    loved: false,
+-    experimental: true,
+-  },
+ };
+ 
+-export const ASCII_WAVES_PRESET_ORDER: AsciiWavesPresetId[] = [
+-  'flower',
+-  'jellyfish',
+-  'koi',
+-  'smoke',
+-  'orion',
+-];
++export const ASCII_WAVES_PRESET_ORDER: AsciiWavesPresetId[] = ["flower"];
+ 
+-export const DEFAULT_ASCII_WAVES_PRESET: AsciiWavesPresetId = 'flower';
++export const DEFAULT_ASCII_WAVES_PRESET: AsciiWavesPresetId = "flower";
+ 
+ export function resolvePreset(id: AsciiWavesPresetId | undefined): AsciiWavesPreset {
+   return ASCII_WAVES_PRESETS[id ?? DEFAULT_ASCII_WAVES_PRESET]

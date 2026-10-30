@@ -1,0 +1,83 @@
+--- branded/controls
++++ consolidated-HEAD/controls
+@@ -2,7 +2,7 @@
+ 
+ import { useId, useRef, useState } from "react";
+ import { trackClientEvent } from "@/lib/analytics/client";
+-import { AsciiWavesCanvas } from "./ascii-waves-canvas";
++import { AsciiWavesCanvas, type FieldPlaybackState } from "./ascii-waves-canvas";
+ import { CopyButton } from "./copy-button";
+ import styles from "./effect-lab-preview.module.css";
+ 
+@@ -38,7 +38,8 @@
+   const stageRef = useRef<HTMLDivElement>(null);
+   const interacted = useRef(false);
+   const [settings, setSettings] = useState<Settings>(defaults);
+-  const [ready, setReady] = useState(false);
++  const [fieldState, setFieldState] = useState<FieldPlaybackState | null>(null);
++  const phase = fieldState?.phase ?? "loading";
+ 
+   const config = `const config = {
+   cellSize: "${settings.cellSize}",
+@@ -64,9 +65,36 @@
+     <div className={styles.wrapper}>
+       <div className={styles.toolbar}>
+         <span>
+-          <span className={styles.liveDot} /> Live material
++          <span className={styles.liveDot} data-phase={phase} />{" "}
++          {phase === "live"
++            ? "Live material"
++            : phase === "reduced"
++              ? "Reduced motion / still"
++              : phase === "paused"
++                ? "Field paused"
++                : phase === "blocked"
++                  ? "Autoplay blocked"
++                  : phase === "error"
++                    ? "Fallback / poster"
++                    : phase === "offscreen"
++                      ? "Field offscreen"
++                      : "Loading field"}
+         </span>
+-        <span className={styles.renderState}>{ready ? "WEBGL2 / ACTIVE" : "LOADING FIELD"}</span>
++        <span className={styles.renderState}>
++          {phase === "live"
++            ? "WEBGL2 / ACTIVE"
++            : phase === "offscreen"
++              ? "WEBGL2 / PAUSED OFFSCREEN"
++              : phase === "blocked"
++                ? "START REQUIRED"
++                : phase === "reduced"
++                  ? "REDUCED / STILL"
++                  : phase === "paused"
++                    ? "PAUSED / HELD"
++                    : phase === "error"
++                      ? "FALLBACK"
++                      : "LOADING FIELD"}
++        </span>
+         <button
+           className={styles.reset}
+           type="button"
+@@ -95,10 +123,20 @@
+           pointerInteraction={settings.pointerInteraction}
+           reducedMotion="system"
+           ariaLabel="ASCII Waves field made from a flowering plant, rendered as moving characters."
+-          onReady={() => setReady(true)}
++          onStateChange={setFieldState}
+         />
+         <span className={styles.cornerLabel}>NWX / FIELD 001</span>
+-        <span className={styles.cornerState}>{settings.playing ? "MOTION / ON" : "MOTION / HELD"}</span>
++        <span className={styles.cornerState}>
++          {phase === "live"
++            ? "MOTION / ON"
++            : phase === "reduced"
++              ? "REDUCED / STILL"
++              : phase === "paused"
++                ? "MOTION / HELD"
++                : phase === "blocked"
++                  ? "AUTOPLAY / BLOCKED"
++                  : "MOTION / WAITING"}
++        </span>
+         <span className={styles.reducedNote}>Reduced motion freezes the field automatically.</span>
+       </div>
+ 

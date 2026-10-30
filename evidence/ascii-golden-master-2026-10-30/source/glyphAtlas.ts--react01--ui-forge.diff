@@ -1,0 +1,45 @@
+--- react01/glyphAtlas.ts
++++ ui-forge/glyphAtlas.ts
+@@ -1,4 +1,4 @@
+-const FONT_STACK = '"DejaVu Sans Mono", "Liberation Mono", "Nimbus Mono PS", monospace';
++const FONT_STACK = `"DejaVu Sans Mono", "Liberation Mono", "Nimbus Mono PS", monospace`;
+ const PAD = 2;
+ 
+ export interface GlyphAtlas {
+@@ -33,28 +33,28 @@
+   const cellPx = Math.max(6, Math.round(cellCssPx * dpr));
+   const slotPx = cellPx + PAD * 2;
+   const fontPx = Math.max(9, cellPx * 0.94);
+-  const canvas = document.createElement('canvas');
++  const canvas = document.createElement("canvas");
+   canvas.width = columns * slotPx;
+   canvas.height = slotPx;
+-  const ctx = canvas.getContext('2d', { alpha: true });
+-  if (!ctx) throw new Error('2D canvas is unavailable for the glyph atlas.');
++  const ctx = canvas.getContext("2d", { alpha: true });
++  if (!ctx) throw new Error("2D canvas is unavailable for the glyph atlas.");
+ 
+   ctx.clearRect(0, 0, canvas.width, canvas.height);
+-  ctx.fillStyle = '#ffffff';
+-  ctx.textAlign = 'center';
+-  ctx.textBaseline = 'middle';
++  ctx.fillStyle = "#ffffff";
++  ctx.textAlign = "center";
++  ctx.textBaseline = "middle";
+   ctx.font = `700 ${fontPx}px ${FONT_STACK}`;
+   ctx.imageSmoothingEnabled = true;
+ 
+   glyphs.forEach((char, index) => {
+-    if (char === ' ' || char === '\u00a0') return;
++    if (char === ` ` || char === String.fromCharCode(0xa0)) return;
+     const centerX = index * slotPx + PAD + cellPx / 2;
+     const centerY = PAD + cellPx / 2;
+     ctx.fillText(char, centerX, centerY + fontPx * 0.015);
+   });
+ 
+   const texture = gl.createTexture();
+-  if (!texture) throw new Error('Could not allocate the glyph atlas texture.');
++  if (!texture) throw new Error("Could not allocate the glyph atlas texture.");
+   gl.bindTexture(gl.TEXTURE_2D, texture);
+   gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
+   gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);

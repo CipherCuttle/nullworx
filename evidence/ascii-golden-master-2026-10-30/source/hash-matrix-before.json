@@ -1,0 +1,1163 @@
+{
+  "generatedAt": "2026-10-30T15:57:37.842401+00:00",
+  "algorithm": "SHA-256 of complete raw file or named exact extracted block; no whitespace normalization",
+  "variants": {
+    "golden-checkpoint": {
+      "root": "/tmp/nullworx-ascii-golden-20261030-a83xij4m/golden",
+      "component": "src"
+    },
+    "proof03-shelf": {
+      "root": "/home/swirky/DevHub/experiments/ascii-waves-proof03",
+      "component": "src"
+    },
+    "react01": {
+      "root": "/home/swirky/DevHub/experiments/ascii-waves-react-01",
+      "component": "src/components/ascii-waves"
+    },
+    "ui-forge": {
+      "root": "/home/swirky/DevHub/experiments/ui-forge-flower-integration-01",
+      "component": "registry/new-york/ascii-waves"
+    },
+    "branded": {
+      "root": "/home/swirky/DevHub/nullworx",
+      "component": "components/effects/ascii-waves"
+    },
+    "consolidated-HEAD": {
+      "root": "/home/swirky/Documents/deepseek-harness/default-workspace/nullworx-consolidation-01",
+      "component": "components/effects/ascii-waves"
+    },
+    "consolidated-working": {
+      "root": "/home/swirky/Documents/deepseek-harness/default-workspace/nullworx-consolidation-01",
+      "component": "components/effects/ascii-waves"
+    }
+  },
+  "rows": [
+    {
+      "variant": "golden-checkpoint",
+      "item": "renderer.ts",
+      "path": "src/renderer.ts",
+      "bytes": 22563,
+      "sha256": "1d02a7a1c0608ec717863c45eaa76d840df7cb5ad6dd335ff30172fc82ea7088"
+    },
+    {
+      "variant": "golden-checkpoint",
+      "item": "glyphAtlas.ts",
+      "path": "src/glyphAtlas.ts",
+      "bytes": 2671,
+      "sha256": "6f8b4baea7da950add0733ea18d70dad764624110dd48ed148e99d2ccd46a321"
+    },
+    {
+      "variant": "golden-checkpoint",
+      "item": "component/App",
+      "path": "src/App.tsx",
+      "bytes": 24319,
+      "sha256": "a0043f459afb769649c0c9ba927408eac47ab3ee97bbc2ec791e02635eebbd70"
+    },
+    {
+      "variant": "golden-checkpoint",
+      "item": "component CSS",
+      "path": "src/styles.css",
+      "bytes": 25375,
+      "sha256": "78d833dcdbdce2c64a9fa59b44c2a57711c39199907b684f6efd3578e01049ab"
+    },
+    {
+      "variant": "golden-checkpoint",
+      "item": "presets/motifs",
+      "path": "src/motifs.ts",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "variant": "golden-checkpoint",
+      "item": "controls",
+      "path": "src/components/ControlPanel.tsx",
+      "bytes": 10122,
+      "sha256": "880155612460c693247a4ea60db531591badce682485c5d861f2e87f011ca969"
+    },
+    {
+      "variant": "golden-checkpoint",
+      "item": "homepage wrapper",
+      "path": "components/effects/home-field.tsx",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "variant": "golden-checkpoint",
+      "item": "site canvas wrapper",
+      "path": "components/effects/ascii-waves-canvas.tsx",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "variant": "golden-checkpoint",
+      "item": "site wrapper CSS",
+      "path": "components/effects/ascii-waves-canvas.module.css",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "variant": "golden-checkpoint",
+      "item": "runtime seam",
+      "path": "components/effects/ascii-waves-runtime.tsx",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "variant": "golden-checkpoint",
+      "item": "home CSS",
+      "path": "components/effects/home-field.module.css",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "variant": "golden-checkpoint",
+      "item": "lab CSS",
+      "path": "components/effects/effect-lab-preview.module.css",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "variant": "golden-checkpoint",
+      "item": "global CSS",
+      "path": "src/styles.css",
+      "bytes": 25375,
+      "sha256": "78d833dcdbdce2c64a9fa59b44c2a57711c39199907b684f6efd3578e01049ab"
+    },
+    {
+      "variant": "golden-checkpoint",
+      "item": "manifest",
+      "path": "lib/effects/manifest.ts",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "variant": "golden-checkpoint",
+      "item": "package.json",
+      "path": "package.json",
+      "bytes": 692,
+      "sha256": "14ce466397672435681c77a1d02462ea4a1340ca63ad9629cfda517f5ce92ba8"
+    },
+    {
+      "variant": "golden-checkpoint",
+      "item": "lockfile",
+      "path": "package-lock.json",
+      "bytes": 29109,
+      "sha256": "826a654cfcc20cdea615ccc34ec4f21ca83155218c6f6a38d68669491f533385"
+    },
+    {
+      "variant": "golden-checkpoint",
+      "item": "framework config",
+      "path": "tsconfig.json",
+      "bytes": 321,
+      "sha256": "4c91797b9c901b4c40e4f7afd0b4f3f58276cd94d666662b43f2a417a9312202"
+    },
+    {
+      "variant": "golden-checkpoint",
+      "item": "Flower MP4",
+      "path": "public/media/flower.mp4",
+      "bytes": 1128375,
+      "sha256": "0cd83d944a6ca7822b4a8306cecc60a36e859b041f6702c6a1ad9ead78924451"
+    },
+    {
+      "variant": "golden-checkpoint",
+      "item": "Flower poster",
+      "path": "public/media/motifs/flower-poster.jpg",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "variant": "golden-checkpoint",
+      "item": "VP9 derivative",
+      "path": "public/media/flower.webm",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "variant": "golden-checkpoint",
+      "item": "VERT exact extracted bytes",
+      "path": "src/renderer.ts::VERT",
+      "bytes": 150,
+      "sha256": "5e5cb7d301ae948a9e99926a0e5e040c73c9bb146c8875e1e91c6e34d71f50af"
+    },
+    {
+      "variant": "golden-checkpoint",
+      "item": "FRAG exact extracted bytes",
+      "path": "src/renderer.ts::FRAG",
+      "bytes": 5803,
+      "sha256": "69681757a77f3099a9dd533f90d1e54e4d410398a32a03c90000aefec7faad08"
+    },
+    {
+      "variant": "golden-checkpoint",
+      "item": "DEFAULT_SETTINGS exact extracted bytes",
+      "path": "src/renderer.ts::DEFAULT_SETTINGS",
+      "bytes": 221,
+      "sha256": "f0fffaa43377a2435c854ed34b5e13ce4ba79e6545e01bd6fbf506a57ecf01fa"
+    },
+    {
+      "variant": "proof03-shelf",
+      "item": "renderer.ts",
+      "path": "src/renderer.ts",
+      "bytes": 22563,
+      "sha256": "1d02a7a1c0608ec717863c45eaa76d840df7cb5ad6dd335ff30172fc82ea7088"
+    },
+    {
+      "variant": "proof03-shelf",
+      "item": "glyphAtlas.ts",
+      "path": "src/glyphAtlas.ts",
+      "bytes": 2671,
+      "sha256": "6f8b4baea7da950add0733ea18d70dad764624110dd48ed148e99d2ccd46a321"
+    },
+    {
+      "variant": "proof03-shelf",
+      "item": "component/App",
+      "path": "src/App.tsx",
+      "bytes": 25406,
+      "sha256": "529dc244684aea3e7b2ebeebaa978837f2663b6af34b032106346eaf2a007da8"
+    },
+    {
+      "variant": "proof03-shelf",
+      "item": "component CSS",
+      "path": "src/styles.css",
+      "bytes": 28520,
+      "sha256": "e2a68d8dab3fd145e513a6a50769fb08a3e84b8ad1c71614c9d4668344e61ba2"
+    },
+    {
+      "variant": "proof03-shelf",
+      "item": "presets/motifs",
+      "path": "src/motifs.ts",
+      "bytes": 2240,
+      "sha256": "78091262af0606b7eac57a83b699875680b3cae1e47392e917c5c69ae661f36e"
+    },
+    {
+      "variant": "proof03-shelf",
+      "item": "controls",
+      "path": "src/components/ControlPanel.tsx",
+      "bytes": 12284,
+      "sha256": "14b6a6531a5809458783be6cea95af7eb97ae7723833994f0442f66f4a1f4142"
+    },
+    {
+      "variant": "proof03-shelf",
+      "item": "homepage wrapper",
+      "path": "components/effects/home-field.tsx",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "variant": "proof03-shelf",
+      "item": "site canvas wrapper",
+      "path": "components/effects/ascii-waves-canvas.tsx",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "variant": "proof03-shelf",
+      "item": "site wrapper CSS",
+      "path": "components/effects/ascii-waves-canvas.module.css",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "variant": "proof03-shelf",
+      "item": "runtime seam",
+      "path": "components/effects/ascii-waves-runtime.tsx",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "variant": "proof03-shelf",
+      "item": "home CSS",
+      "path": "components/effects/home-field.module.css",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "variant": "proof03-shelf",
+      "item": "lab CSS",
+      "path": "components/effects/effect-lab-preview.module.css",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "variant": "proof03-shelf",
+      "item": "global CSS",
+      "path": "src/styles.css",
+      "bytes": 28520,
+      "sha256": "e2a68d8dab3fd145e513a6a50769fb08a3e84b8ad1c71614c9d4668344e61ba2"
+    },
+    {
+      "variant": "proof03-shelf",
+      "item": "manifest",
+      "path": "lib/effects/manifest.ts",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "variant": "proof03-shelf",
+      "item": "package.json",
+      "path": "package.json",
+      "bytes": 692,
+      "sha256": "14ce466397672435681c77a1d02462ea4a1340ca63ad9629cfda517f5ce92ba8"
+    },
+    {
+      "variant": "proof03-shelf",
+      "item": "lockfile",
+      "path": "package-lock.json",
+      "bytes": 29109,
+      "sha256": "826a654cfcc20cdea615ccc34ec4f21ca83155218c6f6a38d68669491f533385"
+    },
+    {
+      "variant": "proof03-shelf",
+      "item": "framework config",
+      "path": "tsconfig.json",
+      "bytes": 321,
+      "sha256": "4c91797b9c901b4c40e4f7afd0b4f3f58276cd94d666662b43f2a417a9312202"
+    },
+    {
+      "variant": "proof03-shelf",
+      "item": "Flower MP4",
+      "path": "public/media/flower.mp4",
+      "bytes": 1128375,
+      "sha256": "0cd83d944a6ca7822b4a8306cecc60a36e859b041f6702c6a1ad9ead78924451"
+    },
+    {
+      "variant": "proof03-shelf",
+      "item": "Flower poster",
+      "path": "public/media/motifs/flower-poster.jpg",
+      "bytes": 16272,
+      "sha256": "fb34be9b63ad42c7b13dae6c507e683c09f623cc7380ca6717959d54554e919a"
+    },
+    {
+      "variant": "proof03-shelf",
+      "item": "VP9 derivative",
+      "path": "public/media/flower.webm",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "variant": "proof03-shelf",
+      "item": "VERT exact extracted bytes",
+      "path": "src/renderer.ts::VERT",
+      "bytes": 150,
+      "sha256": "5e5cb7d301ae948a9e99926a0e5e040c73c9bb146c8875e1e91c6e34d71f50af"
+    },
+    {
+      "variant": "proof03-shelf",
+      "item": "FRAG exact extracted bytes",
+      "path": "src/renderer.ts::FRAG",
+      "bytes": 5803,
+      "sha256": "69681757a77f3099a9dd533f90d1e54e4d410398a32a03c90000aefec7faad08"
+    },
+    {
+      "variant": "proof03-shelf",
+      "item": "DEFAULT_SETTINGS exact extracted bytes",
+      "path": "src/renderer.ts::DEFAULT_SETTINGS",
+      "bytes": 221,
+      "sha256": "f0fffaa43377a2435c854ed34b5e13ce4ba79e6545e01bd6fbf506a57ecf01fa"
+    },
+    {
+      "variant": "react01",
+      "item": "renderer.ts",
+      "path": "src/components/ascii-waves/renderer.ts",
+      "bytes": 22748,
+      "sha256": "2bf9b073b0d8b1c11a6bfdf7e57fdf5443692c69d34f4fb1fbeafbd4b7c97568"
+    },
+    {
+      "variant": "react01",
+      "item": "glyphAtlas.ts",
+      "path": "src/components/ascii-waves/glyphAtlas.ts",
+      "bytes": 2671,
+      "sha256": "6f8b4baea7da950add0733ea18d70dad764624110dd48ed148e99d2ccd46a321"
+    },
+    {
+      "variant": "react01",
+      "item": "component/App",
+      "path": "src/components/ascii-waves/AsciiWaves.tsx",
+      "bytes": 21666,
+      "sha256": "f1814de0000c509549b9ca0807345d88669d1d0298a3819c95fa3ed045e39bc2"
+    },
+    {
+      "variant": "react01",
+      "item": "component CSS",
+      "path": "src/components/ascii-waves/AsciiWaves.module.css",
+      "bytes": 1169,
+      "sha256": "4784f3b073a15bb84bff14e18d5ca5bd1448f4d5cd94e4097ec209789733475b"
+    },
+    {
+      "variant": "react01",
+      "item": "presets/motifs",
+      "path": "src/components/ascii-waves/presets.ts",
+      "bytes": 3159,
+      "sha256": "88e6b92e8f1621324f902e99d58d903573e86f368a630bbc72f5d63e8bfb493a"
+    },
+    {
+      "variant": "react01",
+      "item": "controls",
+      "path": "src/demo/App.tsx",
+      "bytes": 17833,
+      "sha256": "34c49833de20a27d2251dd101c232ff2d16e077c3703ec1caf2d5da11ef148c9"
+    },
+    {
+      "variant": "react01",
+      "item": "homepage wrapper",
+      "path": "components/effects/home-field.tsx",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "variant": "react01",
+      "item": "site canvas wrapper",
+      "path": "components/effects/ascii-waves-canvas.tsx",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "variant": "react01",
+      "item": "site wrapper CSS",
+      "path": "components/effects/ascii-waves-canvas.module.css",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "variant": "react01",
+      "item": "runtime seam",
+      "path": "components/effects/ascii-waves-runtime.tsx",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "variant": "react01",
+      "item": "home CSS",
+      "path": "components/effects/home-field.module.css",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "variant": "react01",
+      "item": "lab CSS",
+      "path": "components/effects/effect-lab-preview.module.css",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "variant": "react01",
+      "item": "global CSS",
+      "path": "src/demo/demo.module.css",
+      "bytes": 14895,
+      "sha256": "49845040977b5e1c1321aa1c1387bb5488f116c78495e88de7b1eea45e56843e"
+    },
+    {
+      "variant": "react01",
+      "item": "manifest",
+      "path": "lib/effects/manifest.ts",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "variant": "react01",
+      "item": "package.json",
+      "path": "package.json",
+      "bytes": 1085,
+      "sha256": "c768da360bc1b9c819392b5feeb00255c1551fe537bfe68401bcbcf0389578ec"
+    },
+    {
+      "variant": "react01",
+      "item": "lockfile",
+      "path": "package-lock.json",
+      "bytes": 29111,
+      "sha256": "7a531beafbca49250f45d05fbb2ab1b16d2ff5f4bb1a975eade9c789cf6107c2"
+    },
+    {
+      "variant": "react01",
+      "item": "framework config",
+      "path": "vite.config.mjs",
+      "bytes": 238,
+      "sha256": "6b68a34521367b441b75c17dbe93f9250bf609062105d680cb0f6ceba504983f"
+    },
+    {
+      "variant": "react01",
+      "item": "Flower MP4",
+      "path": "public/media/flower.mp4",
+      "bytes": 1128375,
+      "sha256": "0cd83d944a6ca7822b4a8306cecc60a36e859b041f6702c6a1ad9ead78924451"
+    },
+    {
+      "variant": "react01",
+      "item": "Flower poster",
+      "path": "public/media/motifs/flower-poster.jpg",
+      "bytes": 16272,
+      "sha256": "fb34be9b63ad42c7b13dae6c507e683c09f623cc7380ca6717959d54554e919a"
+    },
+    {
+      "variant": "react01",
+      "item": "VP9 derivative",
+      "path": "public/media/flower.webm",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "variant": "react01",
+      "item": "VERT exact extracted bytes",
+      "path": "src/components/ascii-waves/renderer.ts::VERT",
+      "bytes": 150,
+      "sha256": "5e5cb7d301ae948a9e99926a0e5e040c73c9bb146c8875e1e91c6e34d71f50af"
+    },
+    {
+      "variant": "react01",
+      "item": "FRAG exact extracted bytes",
+      "path": "src/components/ascii-waves/renderer.ts::FRAG",
+      "bytes": 5803,
+      "sha256": "69681757a77f3099a9dd533f90d1e54e4d410398a32a03c90000aefec7faad08"
+    },
+    {
+      "variant": "react01",
+      "item": "DEFAULT_SETTINGS exact extracted bytes",
+      "path": "src/components/ascii-waves/renderer.ts::DEFAULT_SETTINGS",
+      "bytes": 221,
+      "sha256": "f0fffaa43377a2435c854ed34b5e13ce4ba79e6545e01bd6fbf506a57ecf01fa"
+    },
+    {
+      "variant": "ui-forge",
+      "item": "renderer.ts",
+      "path": "registry/new-york/ascii-waves/renderer.ts",
+      "bytes": 22748,
+      "sha256": "edd2ab3a049ed2c2a70b8cd62043134163463246516ba06cdf7d6fe9e12aafd7"
+    },
+    {
+      "variant": "ui-forge",
+      "item": "glyphAtlas.ts",
+      "path": "registry/new-york/ascii-waves/glyphAtlas.ts",
+      "bytes": 2688,
+      "sha256": "eb002aa7ce2875db3afeafebb596d0e32633acd4a4fdeb10ab95886c5be950f2"
+    },
+    {
+      "variant": "ui-forge",
+      "item": "component/App",
+      "path": "registry/new-york/ascii-waves/ascii-waves.tsx",
+      "bytes": 21773,
+      "sha256": "b679afe2693c3bdc207a41bd0f28907ffaa4da5ef2b257bfce36b7ff0c4d2d03"
+    },
+    {
+      "variant": "ui-forge",
+      "item": "component CSS",
+      "path": "registry/new-york/ascii-waves/ascii-waves.module.css",
+      "bytes": 1169,
+      "sha256": "4784f3b073a15bb84bff14e18d5ca5bd1448f4d5cd94e4097ec209789733475b"
+    },
+    {
+      "variant": "ui-forge",
+      "item": "presets/motifs",
+      "path": "registry/new-york/ascii-waves/presets.ts",
+      "bytes": 1557,
+      "sha256": "f4418e448209e0176c019f95dde35e42f1a9ae6d0381bb1540d91918ed666de3"
+    },
+    {
+      "variant": "ui-forge",
+      "item": "controls",
+      "path": "components/forge-gallery.tsx",
+      "bytes": 26854,
+      "sha256": "6992c04a7deff8520bb8a12b3b10c2c5ddcd2b580cab5ff87b9c46ca65775550"
+    },
+    {
+      "variant": "ui-forge",
+      "item": "homepage wrapper",
+      "path": "components/effects/home-field.tsx",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "variant": "ui-forge",
+      "item": "site canvas wrapper",
+      "path": "components/effects/ascii-waves-canvas.tsx",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "variant": "ui-forge",
+      "item": "site wrapper CSS",
+      "path": "components/effects/ascii-waves-canvas.module.css",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "variant": "ui-forge",
+      "item": "runtime seam",
+      "path": "components/effects/ascii-waves-runtime.tsx",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "variant": "ui-forge",
+      "item": "home CSS",
+      "path": "components/effects/home-field.module.css",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "variant": "ui-forge",
+      "item": "lab CSS",
+      "path": "components/effects/effect-lab-preview.module.css",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "variant": "ui-forge",
+      "item": "global CSS",
+      "path": "app/globals.css",
+      "bytes": 4168,
+      "sha256": "42fd06cb5ccf12227e18c48913da993317f8548aed1bbc8305a273c26dfba422"
+    },
+    {
+      "variant": "ui-forge",
+      "item": "manifest",
+      "path": "lib/effects/manifest.ts",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "variant": "ui-forge",
+      "item": "package.json",
+      "path": "package.json",
+      "bytes": 1162,
+      "sha256": "4105499b8bf34c0ad604d4abc4c9c89a0e16e96f099c9f5c741bb1db0f5d992b"
+    },
+    {
+      "variant": "ui-forge",
+      "item": "lockfile",
+      "path": "pnpm-lock.yaml",
+      "bytes": 197933,
+      "sha256": "7eb6ab7e6aa74d5445e1e7c7f57f78c19a307f8e64e625e414f4f79c7d25fcf5"
+    },
+    {
+      "variant": "ui-forge",
+      "item": "framework config",
+      "path": "next.config.ts",
+      "bytes": 133,
+      "sha256": "614bce25b089c3f19b1e17a6346c74b858034040154c6621e7d35303004767cc"
+    },
+    {
+      "variant": "ui-forge",
+      "item": "Flower MP4",
+      "path": "public/media/flower.mp4",
+      "bytes": 1128375,
+      "sha256": "0cd83d944a6ca7822b4a8306cecc60a36e859b041f6702c6a1ad9ead78924451"
+    },
+    {
+      "variant": "ui-forge",
+      "item": "Flower poster",
+      "path": "public/media/motifs/flower-poster.jpg",
+      "bytes": 16272,
+      "sha256": "fb34be9b63ad42c7b13dae6c507e683c09f623cc7380ca6717959d54554e919a"
+    },
+    {
+      "variant": "ui-forge",
+      "item": "VP9 derivative",
+      "path": "public/media/flower.webm",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "variant": "ui-forge",
+      "item": "VERT exact extracted bytes",
+      "path": "registry/new-york/ascii-waves/renderer.ts::VERT",
+      "bytes": 150,
+      "sha256": "5e5cb7d301ae948a9e99926a0e5e040c73c9bb146c8875e1e91c6e34d71f50af"
+    },
+    {
+      "variant": "ui-forge",
+      "item": "FRAG exact extracted bytes",
+      "path": "registry/new-york/ascii-waves/renderer.ts::FRAG",
+      "bytes": 5803,
+      "sha256": "69681757a77f3099a9dd533f90d1e54e4d410398a32a03c90000aefec7faad08"
+    },
+    {
+      "variant": "ui-forge",
+      "item": "DEFAULT_SETTINGS exact extracted bytes",
+      "path": "registry/new-york/ascii-waves/renderer.ts::DEFAULT_SETTINGS",
+      "bytes": 221,
+      "sha256": "732039e39fdd5c680b2012c3c01bcf9e690e73d2606b0906bd0bda1310730214"
+    },
+    {
+      "variant": "branded",
+      "item": "renderer.ts",
+      "path": "components/effects/ascii-waves/renderer.ts",
+      "bytes": 22748,
+      "sha256": "edd2ab3a049ed2c2a70b8cd62043134163463246516ba06cdf7d6fe9e12aafd7"
+    },
+    {
+      "variant": "branded",
+      "item": "glyphAtlas.ts",
+      "path": "components/effects/ascii-waves/glyphAtlas.ts",
+      "bytes": 2688,
+      "sha256": "eb002aa7ce2875db3afeafebb596d0e32633acd4a4fdeb10ab95886c5be950f2"
+    },
+    {
+      "variant": "branded",
+      "item": "component/App",
+      "path": "components/effects/ascii-waves/ascii-waves.tsx",
+      "bytes": 21773,
+      "sha256": "b679afe2693c3bdc207a41bd0f28907ffaa4da5ef2b257bfce36b7ff0c4d2d03"
+    },
+    {
+      "variant": "branded",
+      "item": "component CSS",
+      "path": "components/effects/ascii-waves/ascii-waves.module.css",
+      "bytes": 1169,
+      "sha256": "4784f3b073a15bb84bff14e18d5ca5bd1448f4d5cd94e4097ec209789733475b"
+    },
+    {
+      "variant": "branded",
+      "item": "presets/motifs",
+      "path": "components/effects/ascii-waves/presets.ts",
+      "bytes": 1557,
+      "sha256": "f4418e448209e0176c019f95dde35e42f1a9ae6d0381bb1540d91918ed666de3"
+    },
+    {
+      "variant": "branded",
+      "item": "controls",
+      "path": "components/effects/effect-lab-preview.tsx",
+      "bytes": 6160,
+      "sha256": "95ec6c1c2ade640e8b1f1a6b25afe3386478c3f9809f4b06a79aa64e33a1d661"
+    },
+    {
+      "variant": "branded",
+      "item": "homepage wrapper",
+      "path": "components/effects/home-field.tsx",
+      "bytes": 2349,
+      "sha256": "b4a9cab58ad1918181def6679fe91d9892cd122ae4943fa1dac5602d048a19ca"
+    },
+    {
+      "variant": "branded",
+      "item": "site canvas wrapper",
+      "path": "components/effects/ascii-waves-canvas.tsx",
+      "bytes": 2646,
+      "sha256": "203bd5c7312a58ac1593200c7c9ffb21886197362d96d5d696e9b8fb606d5575"
+    },
+    {
+      "variant": "branded",
+      "item": "site wrapper CSS",
+      "path": "components/effects/ascii-waves-canvas.module.css",
+      "bytes": 961,
+      "sha256": "91a9cfa4ed19ea4ff6d6879efc669ffa456f7484b9a1f536f62e2c5173ff3df5"
+    },
+    {
+      "variant": "branded",
+      "item": "runtime seam",
+      "path": "components/effects/ascii-waves-runtime.tsx",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "variant": "branded",
+      "item": "home CSS",
+      "path": "components/effects/home-field.module.css",
+      "bytes": 3612,
+      "sha256": "60d368791f4c12fef5e877d868bdd76c2905181c481d639617f6bc9ceadc33fe"
+    },
+    {
+      "variant": "branded",
+      "item": "lab CSS",
+      "path": "components/effects/effect-lab-preview.module.css",
+      "bytes": 4763,
+      "sha256": "685dccc341a4257800a1410a40403893933304e60e21a837e1534c44dae75659"
+    },
+    {
+      "variant": "branded",
+      "item": "global CSS",
+      "path": "app/globals.css",
+      "bytes": 8273,
+      "sha256": "83882bafe9bfa0b836e7af498f8281afb2ad5a34a0b0a7c1880e9c4b60dabf6d"
+    },
+    {
+      "variant": "branded",
+      "item": "manifest",
+      "path": "lib/effects/manifest.ts",
+      "bytes": 11321,
+      "sha256": "43649370ef14fbe90d724c8b32996bfc212667fb2070d62a5aad5d7f82fc970c"
+    },
+    {
+      "variant": "branded",
+      "item": "package.json",
+      "path": "package.json",
+      "bytes": 1635,
+      "sha256": "10a3b7d5f09e41ba21e45f5dd0ef76f4f8b92380356a515edf25cbda45870a3c"
+    },
+    {
+      "variant": "branded",
+      "item": "lockfile",
+      "path": "pnpm-lock.yaml",
+      "bytes": 165455,
+      "sha256": "d1ffad8f306159ef4ac002c17b0aee41b7fe8f732c4acd345d5d203f3d5cfaa8"
+    },
+    {
+      "variant": "branded",
+      "item": "framework config",
+      "path": "next.config.ts",
+      "bytes": 1178,
+      "sha256": "f6d9fe16c03a46a6202bdefa0b6078543e203d504cad84b44938b03cb4498b4c"
+    },
+    {
+      "variant": "branded",
+      "item": "Flower MP4",
+      "path": "public/media/flower.mp4",
+      "bytes": 1128375,
+      "sha256": "0cd83d944a6ca7822b4a8306cecc60a36e859b041f6702c6a1ad9ead78924451"
+    },
+    {
+      "variant": "branded",
+      "item": "Flower poster",
+      "path": "public/media/motifs/flower-poster.jpg",
+      "bytes": 16272,
+      "sha256": "fb34be9b63ad42c7b13dae6c507e683c09f623cc7380ca6717959d54554e919a"
+    },
+    {
+      "variant": "branded",
+      "item": "VP9 derivative",
+      "path": "public/media/flower.webm",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "variant": "branded",
+      "item": "VERT exact extracted bytes",
+      "path": "components/effects/ascii-waves/renderer.ts::VERT",
+      "bytes": 150,
+      "sha256": "5e5cb7d301ae948a9e99926a0e5e040c73c9bb146c8875e1e91c6e34d71f50af"
+    },
+    {
+      "variant": "branded",
+      "item": "FRAG exact extracted bytes",
+      "path": "components/effects/ascii-waves/renderer.ts::FRAG",
+      "bytes": 5803,
+      "sha256": "69681757a77f3099a9dd533f90d1e54e4d410398a32a03c90000aefec7faad08"
+    },
+    {
+      "variant": "branded",
+      "item": "DEFAULT_SETTINGS exact extracted bytes",
+      "path": "components/effects/ascii-waves/renderer.ts::DEFAULT_SETTINGS",
+      "bytes": 221,
+      "sha256": "732039e39fdd5c680b2012c3c01bcf9e690e73d2606b0906bd0bda1310730214"
+    },
+    {
+      "variant": "consolidated-HEAD",
+      "item": "renderer.ts",
+      "path": "components/effects/ascii-waves/renderer.ts",
+      "bytes": 22748,
+      "sha256": "edd2ab3a049ed2c2a70b8cd62043134163463246516ba06cdf7d6fe9e12aafd7"
+    },
+    {
+      "variant": "consolidated-HEAD",
+      "item": "glyphAtlas.ts",
+      "path": "components/effects/ascii-waves/glyphAtlas.ts",
+      "bytes": 2688,
+      "sha256": "eb002aa7ce2875db3afeafebb596d0e32633acd4a4fdeb10ab95886c5be950f2"
+    },
+    {
+      "variant": "consolidated-HEAD",
+      "item": "component/App",
+      "path": "components/effects/ascii-waves/ascii-waves.tsx",
+      "bytes": 21773,
+      "sha256": "b679afe2693c3bdc207a41bd0f28907ffaa4da5ef2b257bfce36b7ff0c4d2d03"
+    },
+    {
+      "variant": "consolidated-HEAD",
+      "item": "component CSS",
+      "path": "components/effects/ascii-waves/ascii-waves.module.css",
+      "bytes": 1169,
+      "sha256": "4784f3b073a15bb84bff14e18d5ca5bd1448f4d5cd94e4097ec209789733475b"
+    },
+    {
+      "variant": "consolidated-HEAD",
+      "item": "presets/motifs",
+      "path": "components/effects/ascii-waves/presets.ts",
+      "bytes": 1557,
+      "sha256": "f4418e448209e0176c019f95dde35e42f1a9ae6d0381bb1540d91918ed666de3"
+    },
+    {
+      "variant": "consolidated-HEAD",
+      "item": "controls",
+      "path": "components/effects/effect-lab-preview.tsx",
+      "bytes": 7476,
+      "sha256": "5a1ac2284a447d32ae4f9e59ce0fd98ecb60b080eb4044cfa079bd1e52512842"
+    },
+    {
+      "variant": "consolidated-HEAD",
+      "item": "homepage wrapper",
+      "path": "components/effects/home-field.tsx",
+      "bytes": 5977,
+      "sha256": "6e309b742f95040132ebce0793c429aeafb8a95811c72aee6b2c425f85826a58"
+    },
+    {
+      "variant": "consolidated-HEAD",
+      "item": "site canvas wrapper",
+      "path": "components/effects/ascii-waves-canvas.tsx",
+      "bytes": 14261,
+      "sha256": "e4c4b725671d6ad2ca2be269add87c8b8209dbaecde54146732de71aae66832e"
+    },
+    {
+      "variant": "consolidated-HEAD",
+      "item": "site wrapper CSS",
+      "path": "components/effects/ascii-waves-canvas.module.css",
+      "bytes": 1508,
+      "sha256": "eb3f0e4f5924d9ac3e5a57b757e0a612eb64bc216ed0f37f16a0ed084962696f"
+    },
+    {
+      "variant": "consolidated-HEAD",
+      "item": "runtime seam",
+      "path": "components/effects/ascii-waves-runtime.tsx",
+      "bytes": 574,
+      "sha256": "1c4ec57a4c6cb624d4a8e4314e6173d9c0bfd444b2963f6633a911ab33d11322"
+    },
+    {
+      "variant": "consolidated-HEAD",
+      "item": "home CSS",
+      "path": "components/effects/home-field.module.css",
+      "bytes": 6568,
+      "sha256": "f1a51fe74230c50fd6c0da4225873e0d2b58521fdb09e35aa975dbdcebdab2ef"
+    },
+    {
+      "variant": "consolidated-HEAD",
+      "item": "lab CSS",
+      "path": "components/effects/effect-lab-preview.module.css",
+      "bytes": 5117,
+      "sha256": "fc621a332b7d45c22566f09a27f06481d16cc47d2ea4ff1c88317a063c0d970b"
+    },
+    {
+      "variant": "consolidated-HEAD",
+      "item": "global CSS",
+      "path": "app/globals.css",
+      "bytes": 8273,
+      "sha256": "83882bafe9bfa0b836e7af498f8281afb2ad5a34a0b0a7c1880e9c4b60dabf6d"
+    },
+    {
+      "variant": "consolidated-HEAD",
+      "item": "manifest",
+      "path": "lib/effects/manifest.ts",
+      "bytes": 11321,
+      "sha256": "43649370ef14fbe90d724c8b32996bfc212667fb2070d62a5aad5d7f82fc970c"
+    },
+    {
+      "variant": "consolidated-HEAD",
+      "item": "package.json",
+      "path": "package.json",
+      "bytes": 2065,
+      "sha256": "73dcc0cda1d13edbfeb30089f9a7a30fc95f39293697e814601681cdefa9edc9"
+    },
+    {
+      "variant": "consolidated-HEAD",
+      "item": "lockfile",
+      "path": "pnpm-lock.yaml",
+      "bytes": 167978,
+      "sha256": "4737b01e72162ac2bae7d6d594763e016b0c61bec07f55993e0d457a2bfdd266"
+    },
+    {
+      "variant": "consolidated-HEAD",
+      "item": "framework config",
+      "path": "next.config.ts",
+      "bytes": 1178,
+      "sha256": "f6d9fe16c03a46a6202bdefa0b6078543e203d504cad84b44938b03cb4498b4c"
+    },
+    {
+      "variant": "consolidated-HEAD",
+      "item": "Flower MP4",
+      "path": "public/media/flower.mp4",
+      "bytes": 1128375,
+      "sha256": "0cd83d944a6ca7822b4a8306cecc60a36e859b041f6702c6a1ad9ead78924451"
+    },
+    {
+      "variant": "consolidated-HEAD",
+      "item": "Flower poster",
+      "path": "public/media/motifs/flower-poster.jpg",
+      "bytes": 16272,
+      "sha256": "fb34be9b63ad42c7b13dae6c507e683c09f623cc7380ca6717959d54554e919a"
+    },
+    {
+      "variant": "consolidated-HEAD",
+      "item": "VP9 derivative",
+      "path": "public/media/flower.webm",
+      "bytes": 506738,
+      "sha256": "11b671189edbc5d755e1874b656a73b4bcfa1b551cc5a3b987757152046935b1"
+    },
+    {
+      "variant": "consolidated-HEAD",
+      "item": "VERT exact extracted bytes",
+      "path": "components/effects/ascii-waves/renderer.ts::VERT",
+      "bytes": 150,
+      "sha256": "5e5cb7d301ae948a9e99926a0e5e040c73c9bb146c8875e1e91c6e34d71f50af"
+    },
+    {
+      "variant": "consolidated-HEAD",
+      "item": "FRAG exact extracted bytes",
+      "path": "components/effects/ascii-waves/renderer.ts::FRAG",
+      "bytes": 5803,
+      "sha256": "69681757a77f3099a9dd533f90d1e54e4d410398a32a03c90000aefec7faad08"
+    },
+    {
+      "variant": "consolidated-HEAD",
+      "item": "DEFAULT_SETTINGS exact extracted bytes",
+      "path": "components/effects/ascii-waves/renderer.ts::DEFAULT_SETTINGS",
+      "bytes": 221,
+      "sha256": "732039e39fdd5c680b2012c3c01bcf9e690e73d2606b0906bd0bda1310730214"
+    },
+    {
+      "variant": "consolidated-working",
+      "item": "renderer.ts",
+      "path": "components/effects/ascii-waves/renderer.ts",
+      "bytes": 22748,
+      "sha256": "edd2ab3a049ed2c2a70b8cd62043134163463246516ba06cdf7d6fe9e12aafd7"
+    },
+    {
+      "variant": "consolidated-working",
+      "item": "glyphAtlas.ts",
+      "path": "components/effects/ascii-waves/glyphAtlas.ts",
+      "bytes": 2688,
+      "sha256": "eb002aa7ce2875db3afeafebb596d0e32633acd4a4fdeb10ab95886c5be950f2"
+    },
+    {
+      "variant": "consolidated-working",
+      "item": "component/App",
+      "path": "components/effects/ascii-waves/ascii-waves.tsx",
+      "bytes": 21773,
+      "sha256": "b679afe2693c3bdc207a41bd0f28907ffaa4da5ef2b257bfce36b7ff0c4d2d03"
+    },
+    {
+      "variant": "consolidated-working",
+      "item": "component CSS",
+      "path": "components/effects/ascii-waves/ascii-waves.module.css",
+      "bytes": 1169,
+      "sha256": "4784f3b073a15bb84bff14e18d5ca5bd1448f4d5cd94e4097ec209789733475b"
+    },
+    {
+      "variant": "consolidated-working",
+      "item": "presets/motifs",
+      "path": "components/effects/ascii-waves/presets.ts",
+      "bytes": 1557,
+      "sha256": "f4418e448209e0176c019f95dde35e42f1a9ae6d0381bb1540d91918ed666de3"
+    },
+    {
+      "variant": "consolidated-working",
+      "item": "controls",
+      "path": "components/effects/effect-lab-preview.tsx",
+      "bytes": 7472,
+      "sha256": "52c713c9bf8441d0a78ca008ee6660572e930374c0e8629f57e493d2d15c9abf"
+    },
+    {
+      "variant": "consolidated-working",
+      "item": "homepage wrapper",
+      "path": "components/effects/home-field.tsx",
+      "bytes": 5972,
+      "sha256": "b416f8bf6febce139850abb7d9000f05bb57b253ae3894ab5738eeb789598824"
+    },
+    {
+      "variant": "consolidated-working",
+      "item": "site canvas wrapper",
+      "path": "components/effects/ascii-waves-canvas.tsx",
+      "bytes": 14261,
+      "sha256": "e4c4b725671d6ad2ca2be269add87c8b8209dbaecde54146732de71aae66832e"
+    },
+    {
+      "variant": "consolidated-working",
+      "item": "site wrapper CSS",
+      "path": "components/effects/ascii-waves-canvas.module.css",
+      "bytes": 1508,
+      "sha256": "eb3f0e4f5924d9ac3e5a57b757e0a612eb64bc216ed0f37f16a0ed084962696f"
+    },
+    {
+      "variant": "consolidated-working",
+      "item": "runtime seam",
+      "path": "components/effects/ascii-waves-runtime.tsx",
+      "bytes": 574,
+      "sha256": "1c4ec57a4c6cb624d4a8e4314e6173d9c0bfd444b2963f6633a911ab33d11322"
+    },
+    {
+      "variant": "consolidated-working",
+      "item": "home CSS",
+      "path": "components/effects/home-field.module.css",
+      "bytes": 6568,
+      "sha256": "f1a51fe74230c50fd6c0da4225873e0d2b58521fdb09e35aa975dbdcebdab2ef"
+    },
+    {
+      "variant": "consolidated-working",
+      "item": "lab CSS",
+      "path": "components/effects/effect-lab-preview.module.css",
+      "bytes": 5117,
+      "sha256": "fc621a332b7d45c22566f09a27f06481d16cc47d2ea4ff1c88317a063c0d970b"
+    },
+    {
+      "variant": "consolidated-working",
+      "item": "global CSS",
+      "path": "app/globals.css",
+      "bytes": 8273,
+      "sha256": "83882bafe9bfa0b836e7af498f8281afb2ad5a34a0b0a7c1880e9c4b60dabf6d"
+    },
+    {
+      "variant": "consolidated-working",
+      "item": "manifest",
+      "path": "lib/effects/manifest.ts",
+      "bytes": 11383,
+      "sha256": "2a7111205fe4ac82f8d60ec6eea0ea3d1ca64c63f7a21569fac3c3e161f1d910"
+    },
+    {
+      "variant": "consolidated-working",
+      "item": "package.json",
+      "path": "package.json",
+      "bytes": 2065,
+      "sha256": "73dcc0cda1d13edbfeb30089f9a7a30fc95f39293697e814601681cdefa9edc9"
+    },
+    {
+      "variant": "consolidated-working",
+      "item": "lockfile",
+      "path": "pnpm-lock.yaml",
+      "bytes": 167978,
+      "sha256": "4737b01e72162ac2bae7d6d594763e016b0c61bec07f55993e0d457a2bfdd266"
+    },
+    {
+      "variant": "consolidated-working",
+      "item": "framework config",
+      "path": "next.config.ts",
+      "bytes": 1178,
+      "sha256": "f6d9fe16c03a46a6202bdefa0b6078543e203d504cad84b44938b03cb4498b4c"
+    },
+    {
+      "variant": "consolidated-working",
+      "item": "Flower MP4",
+      "path": "public/media/flower.mp4",
+      "bytes": 1128375,
+      "sha256": "0cd83d944a6ca7822b4a8306cecc60a36e859b041f6702c6a1ad9ead78924451"
+    },
+    {
+      "variant": "consolidated-working",
+      "item": "Flower poster",
+      "path": "public/media/motifs/flower-poster.jpg",
+      "bytes": 16272,
+      "sha256": "fb34be9b63ad42c7b13dae6c507e683c09f623cc7380ca6717959d54554e919a"
+    },
+    {
+      "variant": "consolidated-working",
+      "item": "VP9 derivative",
+      "path": "public/media/flower.webm",
+      "bytes": 506738,
+      "sha256": "11b671189edbc5d755e1874b656a73b4bcfa1b551cc5a3b987757152046935b1"
+    },
+    {
+      "variant": "consolidated-working",
+      "item": "VERT exact extracted bytes",
+      "path": "components/effects/ascii-waves/renderer.ts::VERT",
+      "bytes": 150,
+      "sha256": "5e5cb7d301ae948a9e99926a0e5e040c73c9bb146c8875e1e91c6e34d71f50af"
+    },
+    {
+      "variant": "consolidated-working",
+      "item": "FRAG exact extracted bytes",
+      "path": "components/effects/ascii-waves/renderer.ts::FRAG",
+      "bytes": 5803,
+      "sha256": "69681757a77f3099a9dd533f90d1e54e4d410398a32a03c90000aefec7faad08"
+    },
+    {
+      "variant": "consolidated-working",
+      "item": "DEFAULT_SETTINGS exact extracted bytes",
+      "path": "components/effects/ascii-waves/renderer.ts::DEFAULT_SETTINGS",
+      "bytes": 221,
+      "sha256": "732039e39fdd5c680b2012c3c01bcf9e690e73d2606b0906bd0bda1310730214"
+    }
+  ]
+}

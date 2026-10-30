@@ -103,7 +103,7 @@ export function HomeField() {
             preset="flower"
             cellSize="auto"
             speed={1}
-            quality="efficient"
+            quality="high"
             pointerInteraction
             reducedMotion="system"
             playing={playing}

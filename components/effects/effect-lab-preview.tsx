@@ -20,7 +20,7 @@ interface Settings {
 const defaults: Settings = {
   cellSize: "auto",
   speed: 1,
-  quality: "balanced",
+  quality: "high",
   playing: true,
   pointerInteraction: true,
 };
@@ -78,7 +78,9 @@ export function EffectLabPreview({
                     ? "Fallback / poster"
                     : phase === "offscreen"
                       ? "Field offscreen"
-                      : "Loading field"}
+                      : phase === "hidden"
+                        ? "Page hidden / paused"
+                        : "Loading field"}
         </span>
         <span className={styles.renderState}>
           {phase === "live"
@@ -93,7 +95,9 @@ export function EffectLabPreview({
                     ? "PAUSED / HELD"
                     : phase === "error"
                       ? "FALLBACK"
-                      : "LOADING FIELD"}
+                      : phase === "hidden"
+                        ? "WEBGL2 / PAUSED HIDDEN"
+                        : "LOADING FIELD"}
         </span>
         <button
           className={styles.reset}
@@ -135,7 +139,13 @@ export function EffectLabPreview({
                 ? "MOTION / HELD"
                 : phase === "blocked"
                   ? "AUTOPLAY / BLOCKED"
-                  : "MOTION / WAITING"}
+                  : phase === "hidden"
+                    ? "MOTION / PAGE HIDDEN"
+                    : phase === "offscreen"
+                      ? "MOTION / OFFSCREEN"
+                      : phase === "error"
+                        ? "FALLBACK / POSTER"
+                        : "MOTION / WAITING"}
         </span>
         <span className={styles.reducedNote}>Reduced motion freezes the field automatically.</span>
       </div>
@@ -219,8 +229,8 @@ export function EffectLabPreview({
         </div>
 
         <p className={styles.consoleFoot}>
-          Changes are live. Motion off freezes the wave clock, video frame and pointer response
-          together.
+          Changes are live. Motion off holds the video and wave clock while the pointer eddy
+          settles.
         </p>
       </div>
     </div>
