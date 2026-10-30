@@ -1,0 +1,128 @@
+.stage {
+  position: relative;
+  min-height: clamp(480px, 53vw, 660px);
+  padding: clamp(48px, 6vw, 80px) clamp(14px, 3vw, 34px) 46px;
+  overflow: hidden;
+  background:
+    radial-gradient(70% 70% at 72% 20%, rgb(216 255 74 / 0.05), transparent 64%),
+    #080907;
+}
+
+.paper {
+  position: relative;
+  display: grid;
+  gap: clamp(20px, 3vw, 32px);
+  max-width: 980px;
+  margin-inline: auto;
+  padding: clamp(18px, 3vw, 34px);
+  border: 1px solid #d6d1c4;
+  color: #292924;
+  background:
+    linear-gradient(135deg, rgb(255 255 255 / 0.55), transparent 40%),
+    #f2eee4;
+  box-shadow: 0 30px 60px rgb(0 0 0 / 0.28);
+}
+
+.paperHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #d6d1c4;
+  color: #77766d;
+  font-family: var(--font-mono);
+  font-size: 7px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.headingRow {
+  display: grid;
+  gap: 14px;
+  align-items: end;
+}
+
+.heading {
+  max-width: 18ch;
+  color: #292924 !important;
+  font-size: clamp(2.1rem, 5.2vw, 4.6rem) !important;
+  line-height: 0.98 !important;
+  letter-spacing: -0.06em !important;
+}
+
+.replay {
+  justify-self: start;
+  padding: 3px 0;
+  border: 0;
+  border-bottom: 1px solid #b9b3a6;
+  color: #5d5b53;
+  background: transparent;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.replay:hover {
+  color: #b54d2f;
+  border-bottom-color: #b54d2f;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(240px, 0.85fr);
+  gap: clamp(18px, 3vw, 34px);
+  align-items: start;
+}
+
+.buttonColumn {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+}
+
+.label {
+  color: #77766d;
+  font-family: var(--font-mono);
+  font-size: 7px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.buttonRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.counter {
+  color: #5d5b53;
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.paper code {
+  font-family: var(--font-mono);
+  font-size: 9px;
+}
+
+@media (max-width: 760px) {
+  .stage {
+    padding: 58px 10px 46px;
+  }
+
+  .paper {
+    padding: 16px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .heading {
+    font-size: clamp(2rem, 9vw, 3.2rem) !important;
+  }
+}

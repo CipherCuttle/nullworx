@@ -1,0 +1,583 @@
+{
+  "capturedAt": "2026-10-30T16:25:36.618Z",
+  "viewport": [
+    390,
+    844
+  ],
+  "deviceDpr": 2,
+  "emulatedTouch": true,
+  "results": [
+    {
+      "name": "home",
+      "a": {
+        "snapshot": {
+          "width": 704,
+          "height": 670,
+          "dpr": 2,
+          "maxDpr": 2,
+          "cellSize": 12,
+          "waveClock": 0.6341820000000001,
+          "frameCount": 179,
+          "pointer": {
+            "x": 0.5,
+            "y": 0.5,
+            "strength": 0
+          },
+          "settings": {
+            "characters": " .:-+*=%@#",
+            "color": "#ffffff",
+            "invert": false,
+            "cellSize": 12,
+            "noiseScale": 2,
+            "speed": 1,
+            "waveTension": 0.5,
+            "waveTwist": 0.1,
+            "intensity": 1,
+            "cursorInteraction": false,
+            "interactionIntensity": 1
+          }
+        },
+        "metrics": {
+          "fps": 142.8,
+          "frameMs": 7,
+          "drawCalls": 1,
+          "width": 704,
+          "height": 670,
+          "dpr": 2,
+          "maxDpr": 2,
+          "columns": 30,
+          "rows": 28,
+          "cellPx": 12,
+          "videoEnabled": true,
+          "videoTime": 2.650026,
+          "videoPaused": true,
+          "videoUploads": 15,
+          "webglRenderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4060 Laptop GPU/PCIe/SSE2, OpenGL ES 3.2)",
+          "running": true
+        },
+        "video": {
+          "ready": true,
+          "playing": false,
+          "currentTime": 2.650026,
+          "duration": 5.055,
+          "readyState": 4,
+          "src": "http://127.0.0.1:3220/media/flower.mp4",
+          "muted": true,
+          "loop": true
+        },
+        "canvas": {
+          "x": 19,
+          "y": 508.765625,
+          "width": 352,
+          "height": 335.234375,
+          "backingWidth": 704,
+          "backingHeight": 670
+        },
+        "devicePixelRatio": 2,
+        "viewport": [
+          390,
+          844
+        ],
+        "fontSmoothing": "antialiased",
+        "stage": {
+          "testid": "home-field",
+          "asciiStage": "true",
+          "loaded": "true",
+          "ready": "true",
+          "live": "false",
+          "playback": "paused",
+          "videoTime": "2.65",
+          "frameCount": "163",
+          "waveClock": "0.634",
+          "pointerStrength": "0"
+        },
+        "poster": {
+          "complete": true,
+          "naturalWidth": 226,
+          "display": "block",
+          "opacity": "0.76",
+          "zIndex": "0"
+        },
+        "actualVideo": {
+          "time": 2.650026,
+          "paused": true,
+          "src": "http://127.0.0.1:3220/media/flower.mp4",
+          "readyState": 4,
+          "playbackRate": 1,
+          "muted": true,
+          "loop": true,
+          "frames": {}
+        },
+        "events": [
+          {
+            "event": "loadedmetadata",
+            "now": 659.5,
+            "time": 0,
+            "src": "http://127.0.0.1:3220/media/flower.mp4",
+            "paused": false
+          },
+          {
+            "event": "metadata-after-handler",
+            "now": 659.5999999996275,
+            "time": 0,
+            "src": "http://127.0.0.1:3220/media/flower.mp4"
+          },
+          {
+            "event": "seeked",
+            "now": 777.3999999994412,
+            "time": 2.2,
+            "src": "http://127.0.0.1:3220/media/flower.mp4",
+            "paused": false
+          },
+          {
+            "event": "playing",
+            "now": 777.8999999994412,
+            "time": 2.2,
+            "src": "http://127.0.0.1:3220/media/flower.mp4",
+            "paused": false
+          },
+          {
+            "event": "pause",
+            "now": 1271.5999999996275,
+            "time": 2.650026,
+            "src": "http://127.0.0.1:3220/media/flower.mp4",
+            "paused": true
+          }
+        ],
+        "overflow": 0
+      },
+      "b": {
+        "snapshot": {
+          "width": 704,
+          "height": 670,
+          "dpr": 2,
+          "maxDpr": 2,
+          "cellSize": 12,
+          "waveClock": 0.6341820000000001,
+          "frameCount": 251,
+          "pointer": {
+            "x": 0.5,
+            "y": 0.5,
+            "strength": 0
+          },
+          "settings": {
+            "characters": " .:-+*=%@#",
+            "color": "#ffffff",
+            "invert": false,
+            "cellSize": 12,
+            "noiseScale": 2,
+            "speed": 1,
+            "waveTension": 0.5,
+            "waveTwist": 0.1,
+            "intensity": 1,
+            "cursorInteraction": false,
+            "interactionIntensity": 1
+          }
+        },
+        "metrics": {
+          "fps": 143.6,
+          "frameMs": 6.96,
+          "drawCalls": 1,
+          "width": 704,
+          "height": 670,
+          "dpr": 2,
+          "maxDpr": 2,
+          "columns": 30,
+          "rows": 28,
+          "cellPx": 12,
+          "videoEnabled": true,
+          "videoTime": 2.650026,
+          "videoPaused": true,
+          "videoUploads": 15,
+          "webglRenderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4060 Laptop GPU/PCIe/SSE2, OpenGL ES 3.2)",
+          "running": true
+        },
+        "video": {
+          "ready": true,
+          "playing": false,
+          "currentTime": 2.650026,
+          "duration": 5.055,
+          "readyState": 4,
+          "src": "http://127.0.0.1:3220/media/flower.mp4",
+          "muted": true,
+          "loop": true
+        },
+        "canvas": {
+          "x": 19,
+          "y": 508.765625,
+          "width": 352,
+          "height": 335.234375,
+          "backingWidth": 704,
+          "backingHeight": 670
+        },
+        "devicePixelRatio": 2,
+        "viewport": [
+          390,
+          844
+        ],
+        "fontSmoothing": "antialiased",
+        "stage": {
+          "testid": "home-field",
+          "asciiStage": "true",
+          "loaded": "true",
+          "ready": "true",
+          "live": "false",
+          "playback": "paused",
+          "videoTime": "2.65",
+          "frameCount": "235",
+          "waveClock": "0.634",
+          "pointerStrength": "0"
+        },
+        "poster": {
+          "complete": true,
+          "naturalWidth": 226,
+          "display": "block",
+          "opacity": "0.76",
+          "zIndex": "0"
+        },
+        "actualVideo": {
+          "time": 2.650026,
+          "paused": true,
+          "src": "http://127.0.0.1:3220/media/flower.mp4",
+          "readyState": 4,
+          "playbackRate": 1,
+          "muted": true,
+          "loop": true,
+          "frames": {}
+        },
+        "events": [
+          {
+            "event": "loadedmetadata",
+            "now": 659.5,
+            "time": 0,
+            "src": "http://127.0.0.1:3220/media/flower.mp4",
+            "paused": false
+          },
+          {
+            "event": "metadata-after-handler",
+            "now": 659.5999999996275,
+            "time": 0,
+            "src": "http://127.0.0.1:3220/media/flower.mp4"
+          },
+          {
+            "event": "seeked",
+            "now": 777.3999999994412,
+            "time": 2.2,
+            "src": "http://127.0.0.1:3220/media/flower.mp4",
+            "paused": false
+          },
+          {
+            "event": "playing",
+            "now": 777.8999999994412,
+            "time": 2.2,
+            "src": "http://127.0.0.1:3220/media/flower.mp4",
+            "paused": false
+          },
+          {
+            "event": "pause",
+            "now": 1271.5999999996275,
+            "time": 2.650026,
+            "src": "http://127.0.0.1:3220/media/flower.mp4",
+            "paused": true
+          }
+        ],
+        "overflow": 0
+      },
+      "pass": true,
+      "image": "/home/swirky/Documents/deepseek-harness/default-workspace/nullworx-consolidation-01/evidence/ascii-golden-master-2026-10-30/screenshots/final-home-mobile-full.png",
+      "errors": []
+    },
+    {
+      "name": "lab",
+      "a": {
+        "snapshot": {
+          "width": 352,
+          "height": 352,
+          "dpr": 1,
+          "maxDpr": 1,
+          "cellSize": 20,
+          "waveClock": 0.32991399999944127,
+          "frameCount": 136,
+          "pointer": {
+            "x": 0.5,
+            "y": 0.5,
+            "strength": 0
+          },
+          "settings": {
+            "characters": " .:-+*=%@#",
+            "color": "#ffffff",
+            "invert": false,
+            "cellSize": 20,
+            "noiseScale": 2,
+            "speed": 1,
+            "waveTension": 0.5,
+            "waveTwist": 0.1,
+            "intensity": 1,
+            "cursorInteraction": false,
+            "interactionIntensity": 1
+          }
+        },
+        "metrics": {
+          "fps": 87.9,
+          "frameMs": 7.03,
+          "drawCalls": 1,
+          "width": 352,
+          "height": 352,
+          "dpr": 1,
+          "maxDpr": 1,
+          "columns": 18,
+          "rows": 18,
+          "cellPx": 20,
+          "videoEnabled": true,
+          "videoTime": 2.477988,
+          "videoPaused": true,
+          "videoUploads": 10,
+          "webglRenderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4060 Laptop GPU/PCIe/SSE2, OpenGL ES 3.2)",
+          "running": true
+        },
+        "video": {
+          "ready": true,
+          "playing": false,
+          "currentTime": 2.477988,
+          "duration": 5.055,
+          "readyState": 4,
+          "src": "http://127.0.0.1:3220/media/flower.mp4",
+          "muted": true,
+          "loop": true
+        },
+        "canvas": {
+          "x": 19,
+          "y": 246.03125,
+          "width": 352,
+          "height": 352,
+          "backingWidth": 352,
+          "backingHeight": 352
+        },
+        "devicePixelRatio": 2,
+        "viewport": [
+          390,
+          844
+        ],
+        "fontSmoothing": "antialiased",
+        "stage": {
+          "asciiStage": "true",
+          "loaded": "true",
+          "ready": "true",
+          "live": "false",
+          "playback": "paused",
+          "videoTime": "2.478",
+          "frameCount": "120",
+          "waveClock": "0.33",
+          "pointerStrength": "0"
+        },
+        "poster": {
+          "complete": true,
+          "naturalWidth": 226,
+          "display": "block",
+          "opacity": "0.76",
+          "zIndex": "0"
+        },
+        "actualVideo": {
+          "time": 2.477988,
+          "paused": true,
+          "src": "http://127.0.0.1:3220/media/flower.mp4",
+          "readyState": 4,
+          "playbackRate": 1,
+          "muted": true,
+          "loop": true,
+          "frames": {}
+        },
+        "events": [
+          {
+            "event": "pause",
+            "now": 552.8000000007451,
+            "time": 0,
+            "src": "http://127.0.0.1:3220/media/flower.mp4",
+            "paused": true
+          },
+          {
+            "event": "loadedmetadata",
+            "now": 564.2000000001863,
+            "time": 0,
+            "src": "http://127.0.0.1:3220/media/flower.mp4",
+            "paused": true
+          },
+          {
+            "event": "metadata-after-handler",
+            "now": 564.3000000007451,
+            "time": 0,
+            "src": "http://127.0.0.1:3220/media/flower.mp4"
+          },
+          {
+            "event": "seeked",
+            "now": 655.1000000005588,
+            "time": 2.2,
+            "src": "http://127.0.0.1:3220/media/flower.mp4",
+            "paused": true
+          },
+          {
+            "event": "playing",
+            "now": 1133.2000000001863,
+            "time": 2.2,
+            "src": "http://127.0.0.1:3220/media/flower.mp4",
+            "paused": false
+          },
+          {
+            "event": "pause",
+            "now": 1455.7000000001863,
+            "time": 2.477988,
+            "src": "http://127.0.0.1:3220/media/flower.mp4",
+            "paused": true
+          }
+        ],
+        "overflow": 0
+      },
+      "b": {
+        "snapshot": {
+          "width": 352,
+          "height": 352,
+          "dpr": 1,
+          "maxDpr": 1,
+          "cellSize": 20,
+          "waveClock": 0.32991399999944127,
+          "frameCount": 209,
+          "pointer": {
+            "x": 0.5,
+            "y": 0.5,
+            "strength": 0
+          },
+          "settings": {
+            "characters": " .:-+*=%@#",
+            "color": "#ffffff",
+            "invert": false,
+            "cellSize": 20,
+            "noiseScale": 2,
+            "speed": 1,
+            "waveTension": 0.5,
+            "waveTwist": 0.1,
+            "intensity": 1,
+            "cursorInteraction": false,
+            "interactionIntensity": 1
+          }
+        },
+        "metrics": {
+          "fps": 143.6,
+          "frameMs": 6.96,
+          "drawCalls": 1,
+          "width": 352,
+          "height": 352,
+          "dpr": 1,
+          "maxDpr": 1,
+          "columns": 18,
+          "rows": 18,
+          "cellPx": 20,
+          "videoEnabled": true,
+          "videoTime": 2.477988,
+          "videoPaused": true,
+          "videoUploads": 10,
+          "webglRenderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4060 Laptop GPU/PCIe/SSE2, OpenGL ES 3.2)",
+          "running": true
+        },
+        "video": {
+          "ready": true,
+          "playing": false,
+          "currentTime": 2.477988,
+          "duration": 5.055,
+          "readyState": 4,
+          "src": "http://127.0.0.1:3220/media/flower.mp4",
+          "muted": true,
+          "loop": true
+        },
+        "canvas": {
+          "x": 19,
+          "y": 246.03125,
+          "width": 352,
+          "height": 352,
+          "backingWidth": 352,
+          "backingHeight": 352
+        },
+        "devicePixelRatio": 2,
+        "viewport": [
+          390,
+          844
+        ],
+        "fontSmoothing": "antialiased",
+        "stage": {
+          "asciiStage": "true",
+          "loaded": "true",
+          "ready": "true",
+          "live": "false",
+          "playback": "paused",
+          "videoTime": "2.478",
+          "frameCount": "192",
+          "waveClock": "0.33",
+          "pointerStrength": "0"
+        },
+        "poster": {
+          "complete": true,
+          "naturalWidth": 226,
+          "display": "block",
+          "opacity": "0.76",
+          "zIndex": "0"
+        },
+        "actualVideo": {
+          "time": 2.477988,
+          "paused": true,
+          "src": "http://127.0.0.1:3220/media/flower.mp4",
+          "readyState": 4,
+          "playbackRate": 1,
+          "muted": true,
+          "loop": true,
+          "frames": {}
+        },
+        "events": [
+          {
+            "event": "pause",
+            "now": 552.8000000007451,
+            "time": 0,
+            "src": "http://127.0.0.1:3220/media/flower.mp4",
+            "paused": true
+          },
+          {
+            "event": "loadedmetadata",
+            "now": 564.2000000001863,
+            "time": 0,
+            "src": "http://127.0.0.1:3220/media/flower.mp4",
+            "paused": true
+          },
+          {
+            "event": "metadata-after-handler",
+            "now": 564.3000000007451,
+            "time": 0,
+            "src": "http://127.0.0.1:3220/media/flower.mp4"
+          },
+          {
+            "event": "seeked",
+            "now": 655.1000000005588,
+            "time": 2.2,
+            "src": "http://127.0.0.1:3220/media/flower.mp4",
+            "paused": true
+          },
+          {
+            "event": "playing",
+            "now": 1133.2000000001863,
+            "time": 2.2,
+            "src": "http://127.0.0.1:3220/media/flower.mp4",
+            "paused": false
+          },
+          {
+            "event": "pause",
+            "now": 1455.7000000001863,
+            "time": 2.477988,
+            "src": "http://127.0.0.1:3220/media/flower.mp4",
+            "paused": true
+          }
+        ],
+        "overflow": 0
+      },
+      "pass": true,
+      "image": "/home/swirky/Documents/deepseek-harness/default-workspace/nullworx-consolidation-01/evidence/ascii-golden-master-2026-10-30/screenshots/final-lab-mobile-full.png",
+      "errors": []
+    }
+  ]
+}

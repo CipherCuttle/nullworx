@@ -1,0 +1,347 @@
+{
+  "generatedAt": "2026-10-30T16:28:38.439858+00:00",
+  "localLinks": [
+    {
+      "source": "ASCII_GOLDEN_MASTER_AUDIT.md",
+      "target": "evidence/ascii-golden-master-2026-10-30/REVIEW.html",
+      "exists": true
+    },
+    {
+      "source": "ASCII_GOLDEN_MASTER_AUDIT.md",
+      "target": "evidence/ascii-golden-master-2026-10-30/screenshots/golden-versus-current-screenshot-sheet.png",
+      "exists": true
+    },
+    {
+      "source": "ASCII_GOLDEN_MASTER_AUDIT.md",
+      "target": "evidence/ascii-golden-master-2026-10-30/screenshots/native-presentation-sheet.png",
+      "exists": true
+    },
+    {
+      "source": "ASCII_GOLDEN_MASTER_AUDIT.md",
+      "target": "evidence/ascii-golden-master-2026-10-30/motion/golden-versus-current-motion.mp4",
+      "exists": true
+    },
+    {
+      "source": "ASCII_GOLDEN_MASTER_AUDIT.md",
+      "target": "evidence/ascii-golden-master-2026-10-30/motion/home-presentation-native-6s.mp4",
+      "exists": true
+    },
+    {
+      "source": "ASCII_GOLDEN_MASTER_AUDIT.md",
+      "target": "evidence/ascii-golden-master-2026-10-30/motion/lab-presentation-native-6s.mp4",
+      "exists": true
+    },
+    {
+      "source": "ASCII_GOLDEN_MASTER_AUDIT.md",
+      "target": "evidence/ascii-golden-master-2026-10-30/source/HASH_MATRIX.md",
+      "exists": true
+    },
+    {
+      "source": "ASCII_GOLDEN_MASTER_AUDIT.md",
+      "target": "evidence/ascii-golden-master-2026-10-30/source/hash-matrix.tsv",
+      "exists": true
+    },
+    {
+      "source": "ASCII_GOLDEN_MASTER_AUDIT.md",
+      "target": "evidence/ascii-golden-master-2026-10-30/source/hash-matrix.json",
+      "exists": true
+    },
+    {
+      "source": "ASCII_GOLDEN_MASTER_AUDIT.md",
+      "target": "evidence/ascii-golden-master-2026-10-30/source",
+      "exists": true
+    },
+    {
+      "source": "ASCII_GOLDEN_MASTER_AUDIT.md",
+      "target": "evidence/ascii-golden-master-2026-10-30/receipts/performance-rtx4060.json",
+      "exists": true
+    },
+    {
+      "source": "ASCII_GOLDEN_MASTER_AUDIT.md",
+      "target": "evidence/ascii-golden-master-2026-10-30/receipts/motion.json",
+      "exists": true
+    },
+    {
+      "source": "ASCII_GOLDEN_MASTER_AUDIT.md",
+      "target": "evidence/ascii-golden-master-2026-10-30/receipts/flow-verification.json",
+      "exists": true
+    },
+    {
+      "source": "ASCII_GOLDEN_MASTER_AUDIT.md",
+      "target": "evidence/ascii-golden-master-2026-10-30/receipts/visibility-after.json",
+      "exists": true
+    },
+    {
+      "source": "ASCII_GOLDEN_MASTER_AUDIT.md",
+      "target": "evidence/ascii-golden-master-2026-10-30/preservation/final.json",
+      "exists": true
+    },
+    {
+      "source": "ASCII_GOLDEN_MASTER_AUDIT.md",
+      "target": "evidence/ascii-golden-master-2026-10-30/preservation/audit-only.patch",
+      "exists": true
+    },
+    {
+      "source": "ASCII_GOLDEN_MASTER_AUDIT.md",
+      "target": "evidence/ascii-golden-master-2026-10-30/SHA256SUMS.txt",
+      "exists": true
+    },
+    {
+      "source": "ASCII_GOLDEN_MASTER_AUDIT.md",
+      "target": "evidence/ascii-golden-master-2026-10-30/screenshots/golden-controls-desktop.png",
+      "exists": true
+    },
+    {
+      "source": "ASCII_GOLDEN_MASTER_AUDIT.md",
+      "target": "evidence/ascii-golden-master-2026-10-30/screenshots/golden-controls-mobile.png",
+      "exists": true
+    },
+    {
+      "source": "ASCII_GOLDEN_MASTER_AUDIT.md",
+      "target": "evidence/ascii-golden-master-2026-10-30/receipts/golden-controls.json",
+      "exists": true
+    },
+    {
+      "source": "ASCII_GOLDEN_MASTER_AUDIT.md",
+      "target": "evidence/ascii-golden-master-2026-10-30/source/HASH_MATRIX.md",
+      "exists": true
+    },
+    {
+      "source": "ASCII_GOLDEN_MASTER_AUDIT.md",
+      "target": "evidence/ascii-golden-master-2026-10-30/source/media-inventory.json",
+      "exists": true
+    },
+    {
+      "source": "ASCII_GOLDEN_MASTER_AUDIT.md",
+      "target": "evidence/ascii-golden-master-2026-10-30/receipts/display.txt",
+      "exists": true
+    },
+    {
+      "source": "ASCII_GOLDEN_MASTER_AUDIT.md",
+      "target": "evidence/ascii-golden-master-2026-10-30/logs/build-reviewed.log",
+      "exists": true
+    },
+    {
+      "source": "ASCII_GOLDEN_MASTER_AUDIT.md",
+      "target": "evidence/ascii-golden-master-2026-10-30/logs/lint-reviewed.log",
+      "exists": true
+    },
+    {
+      "source": "ASCII_GOLDEN_MASTER_AUDIT.md",
+      "target": "evidence/ascii-golden-master-2026-10-30/logs/typecheck-final.log",
+      "exists": true
+    },
+    {
+      "source": "ASCII_GOLDEN_MASTER_AUDIT.md",
+      "target": "evidence/ascii-golden-master-2026-10-30/logs/unit.log",
+      "exists": true
+    },
+    {
+      "source": "ASCII_GOLDEN_MASTER_AUDIT.md",
+      "target": "evidence/ascii-golden-master-2026-10-30/preservation/baseline.json",
+      "exists": true
+    },
+    {
+      "source": "ASCII_GOLDEN_MASTER_AUDIT.md",
+      "target": "evidence/ascii-golden-master-2026-10-30/preservation/final.json",
+      "exists": true
+    },
+    {
+      "source": "REVIEW.html",
+      "target": "../../ASCII_GOLDEN_MASTER_AUDIT.md",
+      "exists": true
+    },
+    {
+      "source": "REVIEW.html",
+      "target": "source/HASH_MATRIX.md",
+      "exists": true
+    },
+    {
+      "source": "REVIEW.html",
+      "target": "receipts/performance-rtx4060.json",
+      "exists": true
+    },
+    {
+      "source": "REVIEW.html",
+      "target": "preservation/final.json",
+      "exists": true
+    },
+    {
+      "source": "REVIEW.html",
+      "target": "motion/golden-versus-current-motion.mp4",
+      "exists": true
+    },
+    {
+      "source": "REVIEW.html",
+      "target": "motion/home-presentation-native-6s.mp4",
+      "exists": true
+    },
+    {
+      "source": "REVIEW.html",
+      "target": "motion/lab-presentation-native-6s.mp4",
+      "exists": true
+    },
+    {
+      "source": "REVIEW.html",
+      "target": "screenshots/native-presentation-sheet.png",
+      "exists": true
+    },
+    {
+      "source": "REVIEW.html",
+      "target": "screenshots/native-presentation-sheet.png",
+      "exists": true
+    },
+    {
+      "source": "REVIEW.html",
+      "target": "screenshots/golden-versus-current-screenshot-sheet.png",
+      "exists": true
+    },
+    {
+      "source": "REVIEW.html",
+      "target": "screenshots/golden-versus-current-screenshot-sheet.png",
+      "exists": true
+    },
+    {
+      "source": "REVIEW.html",
+      "target": "receipts/pixel-comparisons.json",
+      "exists": true
+    },
+    {
+      "source": "REVIEW.html",
+      "target": "screenshots/final-device2-golden.png",
+      "exists": true
+    },
+    {
+      "source": "REVIEW.html",
+      "target": "screenshots/final-device2-consolidated.png",
+      "exists": true
+    },
+    {
+      "source": "REVIEW.html",
+      "target": "screenshots/golden-controls-desktop.png",
+      "exists": true
+    },
+    {
+      "source": "REVIEW.html",
+      "target": "screenshots/golden-controls-desktop.png",
+      "exists": true
+    },
+    {
+      "source": "REVIEW.html",
+      "target": "screenshots/golden-controls-mobile.png",
+      "exists": true
+    },
+    {
+      "source": "REVIEW.html",
+      "target": "screenshots/golden-controls-mobile.png",
+      "exists": true
+    },
+    {
+      "source": "REVIEW.html",
+      "target": "screenshots/final-home-mobile-full.png",
+      "exists": true
+    },
+    {
+      "source": "REVIEW.html",
+      "target": "screenshots/final-lab-mobile-full.png",
+      "exists": true
+    },
+    {
+      "source": "REVIEW.html",
+      "target": "screenshots/home-webgl.png",
+      "exists": true
+    },
+    {
+      "source": "REVIEW.html",
+      "target": "screenshots/lab-webgl.png",
+      "exists": true
+    }
+  ],
+  "videoFiles": [
+    {
+      "file": "consolidated-native-6s.mp4",
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 1440,
+          "height": 900,
+          "r_frame_rate": "30/1"
+        }
+      ],
+      "format": {
+        "duration": "6.000000"
+      }
+    },
+    {
+      "file": "golden-native-6s.mp4",
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 1440,
+          "height": 900,
+          "r_frame_rate": "30/1"
+        }
+      ],
+      "format": {
+        "duration": "6.000000"
+      }
+    },
+    {
+      "file": "golden-versus-current-motion.mp4",
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 2880,
+          "height": 944,
+          "r_frame_rate": "30/1"
+        }
+      ],
+      "format": {
+        "duration": "6.000000"
+      }
+    },
+    {
+      "file": "home-presentation-native-6s.mp4",
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 1440,
+          "height": 900,
+          "r_frame_rate": "30/1"
+        }
+      ],
+      "format": {
+        "duration": "6.000000"
+      }
+    },
+    {
+      "file": "lab-presentation-native-6s.mp4",
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 1440,
+          "height": 900,
+          "r_frame_rate": "30/1"
+        }
+      ],
+      "format": {
+        "duration": "6.000000"
+      }
+    }
+  ],
+  "exactPixelPairs": 9,
+  "auditOnlyRollbackCheck": "PASS; patch not applied",
+  "artifactFiles": 169,
+  "unresolved": "Native tab visibility transition and owner visual approval remain unverified; feature parity incomplete.",
+  "serverLogNote": "Archived server log is a frozen copy. The active local review process continues logging in the temporary scratch directory."
+}

@@ -1,0 +1,8 @@
+{
+  "checks": 48,
+  "passed": 46,
+  "failed": [
+    "home: background tab reports hidden truthfully",
+    "lab: background tab reports hidden truthfully"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "generatedAt": "2026-10-30T16:30:02.203581+00:00",
+  "verdict": "FEATURE_PARITY_INCOMPLETE",
+  "ownerVisualApproval": "PENDING",
+  "consolidatedHead": "9926dbcb52f60348ddb5878eefe204451babd9d7",
+  "exactCapturePairs": 9,
+  "allMatchedCapturePixelsExact": true,
+  "nativeFlowChecks": 46,
+  "nativeFlowPassed": 46,
+  "nativeVisibilityInconclusive": 2,
+  "visibilityEventSimulationsPassed": true,
+  "codecFallbackChecksPassed": true,
+  "finalRouteSmokePassed": true,
+  "mobileControlCasesPassed": true,
+  "allOriginalsUnchanged": true,
+  "preservedComponentIdenticalToUiForge": true,
+  "auditOnlyRollbackPatchReverseCheckPassed": true,
+  "localLinksChecked": 51,
+  "missingLinks": []
+}

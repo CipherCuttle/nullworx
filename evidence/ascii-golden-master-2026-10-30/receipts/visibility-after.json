@@ -1,0 +1,596 @@
+[
+  {
+    "name": "home",
+    "method": "Explicit test-only document visibility override + visibilitychange event; not a native OS/tab transition. Independent headful windows stayed visible in the native attempt.",
+    "hidden": {
+      "snapshot": {
+        "width": 971,
+        "height": 867,
+        "dpr": 2,
+        "maxDpr": 2,
+        "cellSize": 12,
+        "waveClock": 0.5737720000000004,
+        "frameCount": 84,
+        "pointer": {
+          "x": 0.5,
+          "y": 0.5,
+          "strength": 0
+        },
+        "settings": {
+          "characters": " .:-+*=%@#",
+          "color": "#ffffff",
+          "invert": false,
+          "cellSize": 12,
+          "noiseScale": 2,
+          "speed": 1,
+          "waveTension": 0.5,
+          "waveTwist": 0.1,
+          "intensity": 1,
+          "cursorInteraction": true,
+          "interactionIntensity": 1
+        }
+      },
+      "metrics": {
+        "fps": 144.7,
+        "frameMs": 6.91,
+        "drawCalls": 1,
+        "width": 971,
+        "height": 867,
+        "dpr": 2,
+        "maxDpr": 2,
+        "columns": 41,
+        "rows": 37,
+        "cellPx": 12,
+        "videoEnabled": true,
+        "videoTime": 2.617886,
+        "videoPaused": true,
+        "videoUploads": 14,
+        "webglRenderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4060 Laptop GPU/PCIe/SSE2, OpenGL ES 3.2)",
+        "running": false
+      },
+      "video": {
+        "ready": true,
+        "playing": false,
+        "currentTime": 2.617886,
+        "duration": 5.055,
+        "readyState": 4,
+        "src": "http://127.0.0.1:3220/media/flower.mp4",
+        "muted": true,
+        "loop": true
+      },
+      "canvas": {
+        "x": 877.796875,
+        "y": 312,
+        "width": 485.734375,
+        "height": 433.6875,
+        "backingWidth": 971,
+        "backingHeight": 867
+      },
+      "devicePixelRatio": 2,
+      "viewport": [
+        1440,
+        900
+      ],
+      "fontSmoothing": "antialiased",
+      "stage": {
+        "testid": "home-field",
+        "asciiStage": "true",
+        "loaded": "true",
+        "ready": "true",
+        "live": "false",
+        "playback": "hidden",
+        "videoTime": "2.618",
+        "frameCount": "84",
+        "waveClock": "0.574",
+        "pointerStrength": "0"
+      },
+      "poster": {
+        "complete": true,
+        "naturalWidth": 180,
+        "display": "block",
+        "opacity": "0.248158",
+        "zIndex": "0"
+      },
+      "actualVideo": {
+        "time": 2.617886,
+        "paused": true,
+        "src": "http://127.0.0.1:3220/media/flower.mp4",
+        "readyState": 4,
+        "playbackRate": 1,
+        "muted": true,
+        "loop": true,
+        "frames": {}
+      },
+      "events": [
+        {
+          "event": "loadedmetadata",
+          "now": 684.7999999998137,
+          "time": 0,
+          "src": "http://127.0.0.1:3220/media/flower.mp4",
+          "paused": false
+        },
+        {
+          "event": "metadata-after-handler",
+          "now": 684.7999999998137,
+          "time": 0,
+          "src": "http://127.0.0.1:3220/media/flower.mp4"
+        },
+        {
+          "event": "seeked",
+          "now": 794,
+          "time": 2.2,
+          "src": "http://127.0.0.1:3220/media/flower.mp4",
+          "paused": false
+        },
+        {
+          "event": "playing",
+          "now": 794.1999999997206,
+          "time": 2.200258,
+          "src": "http://127.0.0.1:3220/media/flower.mp4",
+          "paused": false
+        },
+        {
+          "event": "pause",
+          "now": 1252.5,
+          "time": 2.617886,
+          "src": "http://127.0.0.1:3220/media/flower.mp4",
+          "paused": true
+        }
+      ],
+      "overflow": 0
+    },
+    "labels": {
+      "home": "PAUSED / PAGE HIDDEN"
+    },
+    "resumed": {
+      "snapshot": {
+        "width": 971,
+        "height": 867,
+        "dpr": 2,
+        "maxDpr": 2,
+        "cellSize": 12,
+        "waveClock": 0.5749720000002799,
+        "frameCount": 85,
+        "pointer": {
+          "x": 0.5,
+          "y": 0.5,
+          "strength": 0
+        },
+        "settings": {
+          "characters": " .:-+*=%@#",
+          "color": "#ffffff",
+          "invert": false,
+          "cellSize": 12,
+          "noiseScale": 2,
+          "speed": 1,
+          "waveTension": 0.5,
+          "waveTwist": 0.1,
+          "intensity": 1,
+          "cursorInteraction": true,
+          "interactionIntensity": 1
+        }
+      },
+      "metrics": {
+        "fps": 142.9,
+        "frameMs": 6.84,
+        "drawCalls": 1,
+        "width": 971,
+        "height": 867,
+        "dpr": 2,
+        "maxDpr": 2,
+        "columns": 41,
+        "rows": 37,
+        "cellPx": 12,
+        "videoEnabled": true,
+        "videoTime": 2.625722,
+        "videoPaused": false,
+        "videoUploads": 15,
+        "webglRenderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4060 Laptop GPU/PCIe/SSE2, OpenGL ES 3.2)",
+        "running": true
+      },
+      "video": {
+        "ready": true,
+        "playing": true,
+        "currentTime": 2.625722,
+        "duration": 5.055,
+        "readyState": 4,
+        "src": "http://127.0.0.1:3220/media/flower.mp4",
+        "muted": true,
+        "loop": true
+      },
+      "canvas": {
+        "x": 877.796875,
+        "y": 312,
+        "width": 485.734375,
+        "height": 433.6875,
+        "backingWidth": 971,
+        "backingHeight": 867
+      },
+      "devicePixelRatio": 2,
+      "viewport": [
+        1440,
+        900
+      ],
+      "fontSmoothing": "antialiased",
+      "stage": {
+        "testid": "home-field",
+        "asciiStage": "true",
+        "loaded": "true",
+        "ready": "true",
+        "live": "true",
+        "playback": "live",
+        "videoTime": "2.618",
+        "frameCount": "84",
+        "waveClock": "0.574",
+        "pointerStrength": "0"
+      },
+      "poster": {
+        "complete": true,
+        "naturalWidth": 180,
+        "display": "block",
+        "opacity": "0.218627",
+        "zIndex": "0"
+      },
+      "actualVideo": {
+        "time": 2.625722,
+        "paused": false,
+        "src": "http://127.0.0.1:3220/media/flower.mp4",
+        "readyState": 4,
+        "playbackRate": 1,
+        "muted": true,
+        "loop": true,
+        "frames": {}
+      },
+      "events": [
+        {
+          "event": "loadedmetadata",
+          "now": 684.7999999998137,
+          "time": 0,
+          "src": "http://127.0.0.1:3220/media/flower.mp4",
+          "paused": false
+        },
+        {
+          "event": "metadata-after-handler",
+          "now": 684.7999999998137,
+          "time": 0,
+          "src": "http://127.0.0.1:3220/media/flower.mp4"
+        },
+        {
+          "event": "seeked",
+          "now": 794,
+          "time": 2.2,
+          "src": "http://127.0.0.1:3220/media/flower.mp4",
+          "paused": false
+        },
+        {
+          "event": "playing",
+          "now": 794.1999999997206,
+          "time": 2.200258,
+          "src": "http://127.0.0.1:3220/media/flower.mp4",
+          "paused": false
+        },
+        {
+          "event": "pause",
+          "now": 1252.5,
+          "time": 2.617886,
+          "src": "http://127.0.0.1:3220/media/flower.mp4",
+          "paused": true
+        },
+        {
+          "event": "playing",
+          "now": 1260.0999999996275,
+          "time": 2.625722,
+          "src": "http://127.0.0.1:3220/media/flower.mp4",
+          "paused": false
+        }
+      ],
+      "overflow": 0
+    },
+    "pausedPass": true,
+    "labelPass": true,
+    "errors": []
+  },
+  {
+    "name": "lab",
+    "method": "Explicit test-only document visibility override + visibilitychange event; not a native OS/tab transition. Independent headful windows stayed visible in the native attempt.",
+    "hidden": {
+      "snapshot": {
+        "width": 1873,
+        "height": 1170,
+        "dpr": 2,
+        "maxDpr": 2,
+        "cellSize": 16,
+        "waveClock": 0.26560000000000006,
+        "frameCount": 40,
+        "pointer": {
+          "x": 0.5,
+          "y": 0.5,
+          "strength": 0
+        },
+        "settings": {
+          "characters": " .:-+*=%@#",
+          "color": "#ffffff",
+          "invert": false,
+          "cellSize": 16,
+          "noiseScale": 2,
+          "speed": 1,
+          "waveTension": 0.5,
+          "waveTwist": 0.1,
+          "intensity": 1,
+          "cursorInteraction": true,
+          "interactionIntensity": 1
+        }
+      },
+      "metrics": {
+        "fps": 47.8,
+        "frameMs": 6.64,
+        "drawCalls": 1,
+        "width": 1873,
+        "height": 1170,
+        "dpr": 2,
+        "maxDpr": 2,
+        "columns": 59,
+        "rows": 37,
+        "cellPx": 16,
+        "videoEnabled": true,
+        "videoTime": 2.417211,
+        "videoPaused": true,
+        "videoUploads": 8,
+        "webglRenderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4060 Laptop GPU/PCIe/SSE2, OpenGL ES 3.2)",
+        "running": false
+      },
+      "video": {
+        "ready": true,
+        "playing": false,
+        "currentTime": 2.417211,
+        "duration": 5.055,
+        "readyState": 4,
+        "src": "http://127.0.0.1:3220/media/flower.mp4",
+        "muted": true,
+        "loop": true
+      },
+      "canvas": {
+        "x": 61.46875,
+        "y": 157.6875,
+        "width": 936.265625,
+        "height": 585.15625,
+        "backingWidth": 1873,
+        "backingHeight": 1170
+      },
+      "devicePixelRatio": 2,
+      "viewport": [
+        1440,
+        900
+      ],
+      "fontSmoothing": "antialiased",
+      "stage": {
+        "asciiStage": "true",
+        "loaded": "true",
+        "ready": "true",
+        "live": "false",
+        "playback": "hidden",
+        "videoTime": "2.417",
+        "frameCount": "40",
+        "waveClock": "0.266",
+        "pointerStrength": "0"
+      },
+      "poster": {
+        "complete": true,
+        "naturalWidth": 180,
+        "display": "block",
+        "opacity": "0.76",
+        "zIndex": "0"
+      },
+      "actualVideo": {
+        "time": 2.417211,
+        "paused": true,
+        "src": "http://127.0.0.1:3220/media/flower.mp4",
+        "readyState": 4,
+        "playbackRate": 1,
+        "muted": true,
+        "loop": true,
+        "frames": {}
+      },
+      "events": [
+        {
+          "event": "pause",
+          "now": 718.1999999997206,
+          "time": 0,
+          "src": "http://127.0.0.1:3220/media/flower.mp4",
+          "paused": true
+        },
+        {
+          "event": "loadedmetadata",
+          "now": 721.0999999996275,
+          "time": 0,
+          "src": "http://127.0.0.1:3220/media/flower.mp4",
+          "paused": true
+        },
+        {
+          "event": "metadata-after-handler",
+          "now": 721.0999999996275,
+          "time": 0,
+          "src": "http://127.0.0.1:3220/media/flower.mp4"
+        },
+        {
+          "event": "seeked",
+          "now": 819.6999999997206,
+          "time": 2.2,
+          "src": "http://127.0.0.1:3220/media/flower.mp4",
+          "paused": true
+        },
+        {
+          "event": "playing",
+          "now": 1268.3999999999069,
+          "time": 2.200242,
+          "src": "http://127.0.0.1:3220/media/flower.mp4",
+          "paused": false
+        },
+        {
+          "event": "pause",
+          "now": 1525.5999999996275,
+          "time": 2.417211,
+          "src": "http://127.0.0.1:3220/media/flower.mp4",
+          "paused": true
+        }
+      ],
+      "overflow": 0
+    },
+    "labels": {
+      "lab": " Page hidden / pausedWEBGL2 / PAUSED HIDDENReset"
+    },
+    "resumed": {
+      "snapshot": {
+        "width": 1873,
+        "height": 1170,
+        "dpr": 2,
+        "maxDpr": 2,
+        "cellSize": 16,
+        "waveClock": 0.26560000000000006,
+        "frameCount": 40,
+        "pointer": {
+          "x": 0.5,
+          "y": 0.5,
+          "strength": 0
+        },
+        "settings": {
+          "characters": " .:-+*=%@#",
+          "color": "#ffffff",
+          "invert": false,
+          "cellSize": 16,
+          "noiseScale": 2,
+          "speed": 1,
+          "waveTension": 0.5,
+          "waveTwist": 0.1,
+          "intensity": 1,
+          "cursorInteraction": true,
+          "interactionIntensity": 1
+        }
+      },
+      "metrics": {
+        "fps": 47.8,
+        "frameMs": 6.64,
+        "drawCalls": 1,
+        "width": 1873,
+        "height": 1170,
+        "dpr": 2,
+        "maxDpr": 2,
+        "columns": 59,
+        "rows": 37,
+        "cellPx": 16,
+        "videoEnabled": true,
+        "videoTime": 2.422348,
+        "videoPaused": false,
+        "videoUploads": 8,
+        "webglRenderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4060 Laptop GPU/PCIe/SSE2, OpenGL ES 3.2)",
+        "running": true
+      },
+      "video": {
+        "ready": true,
+        "playing": true,
+        "currentTime": 2.422348,
+        "duration": 5.055,
+        "readyState": 4,
+        "src": "http://127.0.0.1:3220/media/flower.mp4",
+        "muted": true,
+        "loop": true
+      },
+      "canvas": {
+        "x": 61.46875,
+        "y": 157.6875,
+        "width": 936.265625,
+        "height": 585.15625,
+        "backingWidth": 1873,
+        "backingHeight": 1170
+      },
+      "devicePixelRatio": 2,
+      "viewport": [
+        1440,
+        900
+      ],
+      "fontSmoothing": "antialiased",
+      "stage": {
+        "asciiStage": "true",
+        "loaded": "true",
+        "ready": "true",
+        "live": "true",
+        "playback": "live",
+        "videoTime": "2.417",
+        "frameCount": "40",
+        "waveClock": "0.266",
+        "pointerStrength": "0"
+      },
+      "poster": {
+        "complete": true,
+        "naturalWidth": 180,
+        "display": "block",
+        "opacity": "0.76",
+        "zIndex": "0"
+      },
+      "actualVideo": {
+        "time": 2.422348,
+        "paused": false,
+        "src": "http://127.0.0.1:3220/media/flower.mp4",
+        "readyState": 4,
+        "playbackRate": 1,
+        "muted": true,
+        "loop": true,
+        "frames": {}
+      },
+      "events": [
+        {
+          "event": "pause",
+          "now": 718.1999999997206,
+          "time": 0,
+          "src": "http://127.0.0.1:3220/media/flower.mp4",
+          "paused": true
+        },
+        {
+          "event": "loadedmetadata",
+          "now": 721.0999999996275,
+          "time": 0,
+          "src": "http://127.0.0.1:3220/media/flower.mp4",
+          "paused": true
+        },
+        {
+          "event": "metadata-after-handler",
+          "now": 721.0999999996275,
+          "time": 0,
+          "src": "http://127.0.0.1:3220/media/flower.mp4"
+        },
+        {
+          "event": "seeked",
+          "now": 819.6999999997206,
+          "time": 2.2,
+          "src": "http://127.0.0.1:3220/media/flower.mp4",
+          "paused": true
+        },
+        {
+          "event": "playing",
+          "now": 1268.3999999999069,
+          "time": 2.200242,
+          "src": "http://127.0.0.1:3220/media/flower.mp4",
+          "paused": false
+        },
+        {
+          "event": "pause",
+          "now": 1525.5999999996275,
+          "time": 2.417211,
+          "src": "http://127.0.0.1:3220/media/flower.mp4",
+          "paused": true
+        },
+        {
+          "event": "playing",
+          "now": 1533.2999999998137,
+          "time": 2.420209,
+          "src": "http://127.0.0.1:3220/media/flower.mp4",
+          "paused": false
+        }
+      ],
+      "overflow": 0
+    },
+    "pausedPass": true,
+    "labelPass": true,
+    "errors": []
+  }
+]

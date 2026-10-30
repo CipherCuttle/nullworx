@@ -1,0 +1,10 @@
+$ vitest run
+
+ RUN  v4.1.12 /home/swirky/Documents/deepseek-harness/default-workspace/nullworx-consolidation-01
+
+
+ Test Files  7 passed (7)
+      Tests  51 passed (51)
+   Start at  17:02:24
+   Duration  343ms (transform 393ms, setup 0ms, import 925ms, tests 115ms, environment 0ms)
+

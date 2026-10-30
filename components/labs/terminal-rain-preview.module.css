@@ -1,0 +1,72 @@
+.stage {
+  position: relative;
+  min-height: clamp(440px, 50vw, 620px);
+  overflow: hidden;
+  background: #050806;
+}
+
+.stage > div:first-child {
+  position: absolute !important;
+  inset: 0;
+}
+
+.stage::after {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  content: "";
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgb(5 8 6 / 0.24), transparent 26%, transparent 58%, rgb(5 8 6 / 0.86)),
+    radial-gradient(120% 80% at 50% 44%, transparent 44%, rgb(5 8 6 / 0.52) 100%);
+}
+
+.stageCopy {
+  position: absolute;
+  z-index: 4;
+  left: clamp(18px, 3vw, 32px);
+  bottom: 42px;
+  max-width: min(420px, calc(100% - 36px));
+  pointer-events: none;
+}
+
+.stageCopy strong {
+  display: block;
+  color: var(--paper);
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.6vw, 4.2rem);
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+}
+
+.stageCopy p {
+  margin-top: 7px;
+  color: rgb(241 237 223 / 0.62);
+  font-size: 9px;
+  line-height: 1.7;
+}
+
+.failure {
+  position: absolute;
+  z-index: 6;
+  left: 50%;
+  top: 50%;
+  display: grid;
+  gap: 4px;
+  width: min(340px, calc(100% - 40px));
+  padding: 12px;
+  border: 1px solid rgb(255 94 56 / 0.42);
+  color: var(--paper);
+  background: rgb(9 10 8 / 0.9);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  transform: translate(-50%, -50%);
+}
+
+.failure strong {
+  color: var(--ember);
+  font-size: 8px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}

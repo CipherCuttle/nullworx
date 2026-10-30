@@ -1,0 +1,125 @@
+.stage {
+  position: relative;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  min-height: clamp(430px, 48vw, 620px);
+  padding: 64px clamp(20px, 4vw, 46px) 44px;
+  overflow: hidden;
+  background:
+    radial-gradient(80% 90% at 76% 14%, rgb(216 255 74 / 0.045), transparent 58%),
+    radial-gradient(60% 70% at 18% 88%, rgb(255 94 56 / 0.03), transparent 65%),
+    #070806;
+}
+
+.hero {
+  display: grid;
+  align-content: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.eyebrow {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 7px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.word {
+  display: block;
+  width: 100%;
+  font-size: clamp(2.5rem, 12.4vw, 10rem) !important;
+  line-height: 0.9 !important;
+  letter-spacing: -0.06em !important;
+}
+
+.heroNote {
+  max-width: 46ch;
+  color: var(--paper-dim);
+  font-size: 10px;
+  line-height: 1.7;
+}
+
+.glyphRow {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 3vw, 32px);
+  margin-top: clamp(24px, 5vw, 58px);
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.glyphBox {
+  width: clamp(78px, 11vw, 132px);
+  flex: 0 0 auto;
+}
+
+.glyphCopy {
+  display: grid;
+  gap: 5px;
+  max-width: 46ch;
+}
+
+.glyphCopy strong {
+  color: var(--paper-soft);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.glyphCopy p {
+  color: var(--paper-dim);
+  font-size: 10px;
+  line-height: 1.65;
+}
+
+.glyphCopy span {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 7px;
+  line-height: 1.5;
+  letter-spacing: 0.03em;
+}
+
+.stage[data-tone="light"] {
+  background:
+    radial-gradient(80% 90% at 76% 14%, rgb(140 120 40 / 0.06), transparent 58%),
+    #e9e4d8;
+}
+
+.stage[data-tone="light"] .eyebrow,
+.stage[data-tone="light"] .heroNote,
+.stage[data-tone="light"] .glyphCopy p,
+.stage[data-tone="light"] .glyphCopy span {
+  color: #5c5a51;
+}
+
+.stage[data-tone="light"] .glyphCopy strong {
+  color: #292924;
+}
+
+.stage[data-tone="light"] .glyphRow {
+  border-top-color: rgb(41 41 36 / 0.18);
+}
+
+@media (max-width: 640px) {
+  .stage {
+    min-height: 400px;
+    padding: 56px 16px 42px;
+  }
+
+  .word {
+    font-size: clamp(2.4rem, 15vw, 5rem) !important;
+  }
+
+  .glyphRow {
+    gap: 14px;
+  }
+
+  .glyphBox {
+    width: 66px;
+  }
+}

@@ -1,0 +1,242 @@
+.presets {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  border: 1px solid var(--line-strong);
+  background: var(--line);
+}
+
+.preset {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 8px;
+  align-items: center;
+  min-height: 58px;
+  padding: 9px 10px;
+  border: 0;
+  color: var(--paper-dim);
+  background: #0b0c09;
+  text-align: left;
+}
+
+.preset:hover {
+  color: var(--paper);
+  background: #10120d;
+}
+
+.preset[data-active="true"] {
+  color: var(--ink);
+  background: var(--acid);
+}
+
+.presetLetter {
+  display: grid;
+  width: 24px;
+  height: 24px;
+  place-items: center;
+  border: 1px solid currentColor;
+  font-family: var(--font-mono);
+  font-size: 9px;
+}
+
+.presetBody {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.presetBody strong {
+  overflow: hidden;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.presetBody small {
+  overflow: hidden;
+  font-family: var(--font-mono);
+  font-size: 7px;
+  opacity: 0.66;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.stageFrame {
+  padding: 10px;
+  border: 1px solid var(--line-strong);
+  border-top: 0;
+  background: var(--ink-panel);
+}
+
+.stageInner {
+  position: relative;
+  width: min(100%, 840px);
+  max-height: 620px;
+  margin-inline: auto;
+  overflow: hidden;
+  container-type: inline-size;
+  background: var(--stage-bg, #0a0c09);
+}
+
+.surfaceError {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 22px;
+  color: var(--ember);
+  background: #1a0d0a;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.stageMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  padding: 10px 4px 0;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 7px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.stageMeta > span:first-child {
+  color: var(--acid);
+}
+
+.controlFoot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 0 14px 14px;
+}
+
+.reset {
+  min-height: 30px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  color: var(--paper-soft);
+  background: transparent;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.reset:hover {
+  color: var(--acid);
+  border-color: var(--acid);
+}
+
+.effectiveState {
+  padding: 4px 7px;
+  border: 1px solid var(--line);
+  color: var(--paper-dim);
+  font-family: var(--font-mono);
+  font-size: 7px;
+  letter-spacing: 0.08em;
+}
+
+.capabilities {
+  padding: 18px 14px;
+  border-top: 1px solid var(--line);
+}
+
+.capabilityHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+  color: var(--paper-dim);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.spec {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px 18px;
+  margin: 14px 0 0;
+}
+
+.spec > div {
+  display: grid;
+  gap: 3px;
+}
+
+.spec dt {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 7px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.spec dd {
+  margin: 0;
+  color: var(--paper-soft);
+  font-size: 10px;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+.spec code {
+  color: var(--acid-deep);
+  font-family: var(--font-mono);
+  font-size: 8px;
+}
+
+.capabilityNote,
+.gapList {
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.65;
+}
+
+.gapList {
+  display: grid;
+  gap: 5px;
+  padding-left: 15px;
+  list-style: square;
+}
+
+.maskReference {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  pointer-events: none;
+}
+
+@media (max-width: 760px) {
+  .presets {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .stageFrame {
+    padding: 6px;
+  }
+
+  .stageInner {
+    max-height: none;
+  }
+
+  .spec {
+    grid-template-columns: 1fr;
+  }
+}

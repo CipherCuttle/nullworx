@@ -1,0 +1,316 @@
+.wrapper {
+  border: 1px solid var(--line-strong);
+  background: var(--ink-panel);
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-height: 42px;
+  padding: 0 14px;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 7px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.toolbar > span:first-child {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--paper-dim);
+}
+
+.liveDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--acid);
+  box-shadow: 0 0 0 4px rgb(216 255 74 / 0.08);
+}
+
+.renderState {
+  margin-left: auto;
+  color: var(--muted);
+}
+
+.reset {
+  padding: 4px 0 4px 12px;
+  border: 0;
+  border-left: 1px solid var(--line);
+  color: var(--paper-dim);
+  background: transparent;
+  font-family: var(--font-mono);
+  font-size: 7px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.reset:hover {
+  color: var(--acid);
+}
+
+.stage {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #070806;
+  touch-action: pan-y;
+}
+
+.cornerLabel,
+.cornerState,
+.reducedNote {
+  position: absolute;
+  z-index: 5;
+  color: rgb(241 237 223 / 0.58);
+  font-family: var(--font-mono);
+  font-size: 7px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.cornerLabel {
+  left: 17px;
+  top: 15px;
+}
+
+.cornerState {
+  right: 17px;
+  top: 15px;
+}
+
+.reducedNote {
+  right: 17px;
+  bottom: 14px;
+  color: rgb(241 237 223 / 0.38);
+}
+
+.console {
+  border-top: 1px solid var(--line);
+}
+
+.consoleHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  min-height: 44px;
+  padding: 5px 13px 5px 16px;
+  border-bottom: 1px solid var(--line);
+  color: var(--paper-soft);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.copyConfig {
+  border-color: transparent;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: minmax(110px, 0.8fr) minmax(130px, 1fr) minmax(160px, 1.3fr) auto;
+  gap: 19px;
+  align-items: end;
+  padding: 17px 16px;
+}
+
+.field {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field label {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 7px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.field output {
+  color: var(--acid);
+}
+
+.selectWrap {
+  position: relative;
+  display: block;
+}
+
+.selectWrap select {
+  width: 100%;
+  height: 34px;
+  padding: 0 25px 0 9px;
+  appearance: none;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  outline: 0;
+  color: var(--paper-soft);
+  background: #0d0e0b;
+  font-family: var(--font-mono);
+  font-size: 8px;
+}
+
+.selectWrap > span {
+  position: absolute;
+  right: 9px;
+  top: 7px;
+  pointer-events: none;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+.selectWrap select:focus-visible {
+  border-color: var(--acid);
+  outline: 1px solid var(--acid);
+  outline-offset: 1px;
+}
+
+.rangeField input {
+  width: 100%;
+  height: 34px;
+  margin: 0;
+  accent-color: var(--acid);
+}
+
+.toggles {
+  display: flex;
+  min-height: 34px;
+  align-items: stretch;
+  gap: 1px;
+  border: 1px solid var(--line);
+}
+
+.toggles button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 9px;
+  border: 0;
+  color: var(--muted);
+  background: #0d0e0b;
+  font-family: var(--font-mono);
+  font-size: 7px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.toggles button + button {
+  border-left: 1px solid var(--line);
+}
+
+.toggles button[aria-pressed="true"] {
+  color: var(--acid);
+  background: rgb(216 255 74 / 0.07);
+}
+
+.toggleDot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.consoleFoot {
+  padding: 0 16px 14px;
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.6;
+}
+
+@media (max-width: 1050px) {
+  .controls {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .toggles {
+    min-height: 37px;
+  }
+}
+
+@media (max-width: 620px) {
+  .toolbar {
+    gap: 10px;
+    min-height: 38px;
+    padding-inline: 11px;
+  }
+
+  .renderState {
+    display: none;
+  }
+
+  .stage {
+    aspect-ratio: 1 / 1;
+  }
+
+  .cornerLabel,
+  .cornerState {
+    top: 11px;
+  }
+
+  .cornerLabel {
+    left: 11px;
+  }
+
+  .cornerState {
+    right: 11px;
+  }
+
+  .reducedNote {
+    display: none;
+  }
+
+  .controls {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 15px 13px;
+  }
+
+  .rangeField {
+    order: 4;
+  }
+
+  .toggles {
+    min-height: 39px;
+    order: 3;
+  }
+
+  .consoleFoot {
+    padding-inline: 13px;
+  }
+
+  .consoleHead {
+    padding-inline: 13px;
+  }
+
+  .copyConfig span:last-child {
+    max-width: 140px;
+  }
+}
+
+.liveDot[data-phase="paused"],
+.liveDot[data-phase="reduced"],
+.liveDot[data-phase="offscreen"],
+.liveDot[data-phase="loading"] {
+  background: var(--paper-dim);
+  box-shadow: 0 0 0 4px rgb(241 237 223 / 0.07);
+}
+
+.liveDot[data-phase="blocked"],
+.liveDot[data-phase="error"] {
+  background: var(--ember);
+  box-shadow: 0 0 0 4px rgb(255 94 56 / 0.1);
+}

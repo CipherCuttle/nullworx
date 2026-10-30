@@ -1,0 +1,20 @@
+[
+  {
+    "mobile": false,
+    "pauseBehavior": {
+      "videoHeld": true,
+      "wavesContinue": true
+    },
+    "overflow": 0,
+    "errors": []
+  },
+  {
+    "mobile": true,
+    "pauseBehavior": {
+      "videoHeld": true,
+      "wavesContinue": true
+    },
+    "overflow": 0,
+    "errors": []
+  }
+]

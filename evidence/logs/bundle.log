@@ -1,0 +1,4 @@
+$ tsx scripts/build-effect-bundles.ts
+ascii-waves: public/downloads/ascii-waves-0.1.0.zip
+  bytes: 1002146
+  sha256: 0e59f06f719e3ed624f8a3a902509473371798f260ebc8379509bdef02de7e5a

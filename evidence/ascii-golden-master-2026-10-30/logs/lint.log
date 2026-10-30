@@ -1,0 +1,7 @@
+$ eslint .
+
+/home/swirky/Documents/deepseek-harness/default-workspace/nullworx-consolidation-01/scripts/ascii-golden-master/motion.mjs
+  86:125  warning  'path' is defined but never used  @typescript-eslint/no-unused-vars
+
+✖ 1 problem (0 errors, 1 warning)
+

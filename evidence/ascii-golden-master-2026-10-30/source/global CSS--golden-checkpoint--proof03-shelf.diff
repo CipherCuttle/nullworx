@@ -1,0 +1,180 @@
+--- golden-checkpoint/global CSS
++++ proof03-shelf/global CSS
+@@ -625,9 +625,167 @@
+ 
+ .source-actions {
+   display: grid;
+-  grid-template-columns: 1fr auto auto;
++  grid-template-columns: 1fr 1fr;
+   gap: 6px;
+   margin-top: 8px;
++}
++
++.motion-shelf {
++  margin-top: 18px;
++  padding-top: 14px;
++  border-top: 1px solid var(--line-faint);
++}
++
++.motion-shelf__head {
++  display: flex;
++  align-items: center;
++  justify-content: space-between;
++  gap: 10px;
++  margin-bottom: 9px;
++  color: var(--muted-dark);
++  font-size: 7px;
++  letter-spacing: 0.1em;
++  line-height: 1;
++  text-transform: uppercase;
++}
++
++.motion-shelf__head > span:first-child {
++  color: var(--muted);
++  font-size: 8px;
++  letter-spacing: 0.16em;
++}
++
++.motion-grid {
++  display: grid;
++  grid-template-columns: repeat(3, minmax(0, 1fr));
++  gap: 8px 6px;
++}
++
++.motion-card {
++  display: flex;
++  min-width: 0;
++  flex-direction: column;
++  gap: 5px;
++  padding: 0;
++  border: 0;
++  border-radius: 7px;
++  background: transparent;
++  color: inherit;
++  text-align: left;
++}
++
++.motion-card__art {
++  position: relative;
++  display: block;
++  overflow: hidden;
++  aspect-ratio: 16 / 9;
++  border: 1px solid var(--line-faint);
++  border-radius: 7px;
++  background: #050505;
++  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
++}
++
++.motion-card__art img {
++  display: block;
++  width: 100%;
++  height: 100%;
++  object-fit: cover;
++  filter: saturate(0.72) brightness(0.7);
++  opacity: 0.76;
++  transform: scale(1.001);
++  transition: filter 220ms ease, opacity 220ms ease, transform 320ms var(--ease);
++}
++
++.motion-card:hover .motion-card__art {
++  border-color: rgba(244, 241, 234, 0.28);
++  transform: translateY(-1px);
++}
++
++.motion-card:hover .motion-card__art img {
++  filter: saturate(0.95) brightness(0.88);
++  opacity: 0.96;
++  transform: scale(1.035);
++}
++
++.motion-card.is-selected .motion-card__art {
++  border-color: rgba(244, 241, 234, 0.82);
++  box-shadow: 0 0 0 1px rgba(244, 241, 234, 0.14);
++}
++
++.motion-card.is-selected .motion-card__art img {
++  filter: saturate(1) brightness(0.95);
++  opacity: 1;
++}
++
++.motion-card__badge {
++  position: absolute;
++  bottom: 5px;
++  left: 5px;
++  padding: 2px 3px;
++  border-radius: 2px;
++  background: rgba(0, 0, 0, 0.7);
++  color: rgba(244, 241, 234, 0.74);
++  font-size: 6px;
++  letter-spacing: 0.1em;
++  line-height: 1;
++}
++
++.motion-card__heart {
++  position: absolute;
++  top: 5px;
++  right: 5px;
++  display: grid;
++  place-items: center;
++  width: 16px;
++  height: 16px;
++  border-radius: 50%;
++  background: #e6cfae;
++  color: #090909;
++  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
++}
++
++.motion-card__title {
++  overflow: hidden;
++  padding-left: 1px;
++  color: var(--muted-dark);
++  font-size: 8px;
++  letter-spacing: 0.05em;
++  line-height: 1.1;
++  text-overflow: ellipsis;
++  text-transform: uppercase;
++  white-space: nowrap;
++  transition: color 160ms ease;
++}
++
++.motion-card:hover .motion-card__title,
++.motion-card.is-selected .motion-card__title {
++  color: var(--ink);
++}
++
++.motion-credit {
++  display: flex;
++  align-items: center;
++  justify-content: space-between;
++  gap: 10px;
++  margin-top: 10px;
++  color: #5b5a54;
++  font-size: 7.5px;
++  letter-spacing: 0.035em;
++  line-height: 1.4;
++}
++
++.motion-credit a {
++  flex: 0 0 auto;
++  border-bottom: 1px solid var(--line);
++  color: var(--muted-dark);
++  font-size: 6.5px;
++  letter-spacing: 0.1em;
++  text-decoration: none;
++}
++
++.motion-credit a:hover {
++  border-color: var(--ink);
++  color: var(--ink);
+ }
+ 
+ .button {
+@@ -1346,7 +1504,7 @@
+   }
+ 
+   .source-actions {
+-    grid-template-columns: 1fr 1fr 1fr;
++    grid-template-columns: 1fr 1fr;
+   }
+ 
+   .button {

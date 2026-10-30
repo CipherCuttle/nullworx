@@ -1,0 +1,87 @@
+--- a/components/effects/ascii-waves-canvas.tsx
++++ b/components/effects/ascii-waves-canvas.tsx
+@@ -15,6 +15,7 @@
+   AsciiWavesProps,
+   AsciiWavesVideoState,
+ } from "./ascii-waves/ascii-waves";
++import { resolvePreset } from "./ascii-waves/presets";
+ import styles from "./ascii-waves-canvas.module.css";
+ 
+ const AsciiWavesRuntime = dynamic(
+@@ -26,6 +27,7 @@
+   AsciiWavesProps,
+   | "preset"
+   | "src"
++  | "startTime"
+   | "cellSize"
+   | "characters"
+   | "color"
+@@ -153,6 +155,10 @@
+     const presetId = props.preset ?? "flower";
+     const needsSourceProbe = props.src === undefined && presetId === "flower";
+     const effectiveSrc = props.src ?? (needsSourceProbe ? selectedSrc ?? undefined : undefined);
++    // Probing chooses a codec for the bundled preset. Passing that URL as src
++    // otherwise makes the preserved component treat it as a custom clip and
++    // start at zero, losing Flower's reviewed opening frame.
++    const effectiveStartTime = props.startTime ?? (needsSourceProbe ? resolvePreset(presetId).startTime : undefined);
+     const sourceSelected = !needsSourceProbe || selectedSrc !== null;
+ 
+     // The CDN-free site serves H.264 first because it is the reviewed source.
+@@ -399,6 +405,7 @@
+           <AsciiWavesRuntime
+             {...props}
+             src={effectiveSrc}
++            startTime={effectiveStartTime}
+             ref={runtimeRef}
+             playing={playing && !blockedHold}
+             reducedMotion={reducedMotion}
+--- a/components/effects/effect-lab-preview.tsx
++++ b/components/effects/effect-lab-preview.tsx
+@@ -78,7 +78,9 @@
+                     ? "Fallback / poster"
+                     : phase === "offscreen"
+                       ? "Field offscreen"
+-                      : "Loading field"}
++                      : phase === "hidden"
++                        ? "Page hidden / paused"
++                        : "Loading field"}
+         </span>
+         <span className={styles.renderState}>
+           {phase === "live"
+@@ -93,7 +95,9 @@
+                     ? "PAUSED / HELD"
+                     : phase === "error"
+                       ? "FALLBACK"
+-                      : "LOADING FIELD"}
++                      : phase === "hidden"
++                        ? "WEBGL2 / PAUSED HIDDEN"
++                        : "LOADING FIELD"}
+         </span>
+         <button
+           className={styles.reset}
+@@ -135,7 +139,13 @@
+                 ? "MOTION / HELD"
+                 : phase === "blocked"
+                   ? "AUTOPLAY / BLOCKED"
+-                  : "MOTION / WAITING"}
++                  : phase === "hidden"
++                    ? "MOTION / PAGE HIDDEN"
++                    : phase === "offscreen"
++                      ? "MOTION / OFFSCREEN"
++                      : phase === "error"
++                        ? "FALLBACK / POSTER"
++                        : "MOTION / WAITING"}
+         </span>
+         <span className={styles.reducedNote}>Reduced motion freezes the field automatically.</span>
+       </div>
+@@ -219,8 +229,8 @@
+         </div>
+ 
+         <p className={styles.consoleFoot}>
+-          Changes are live. Motion off freezes the wave clock, video frame and pointer response
+-          together.
++          Changes are live. Motion off holds the video and wave clock while the pointer eddy
++          settles.
+         </p>
+       </div>
+     </div>

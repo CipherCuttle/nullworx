@@ -1,0 +1,440 @@
+{
+  "generatedAt": "2026-10-29T22:48:29.788Z",
+  "baseUrl": "http://127.0.0.1:3200",
+  "renderer": {
+    "tag": "CANVAS",
+    "className": "qrF3rG_canvas"
+  },
+  "checks": [
+    {
+      "name": "home/live: playback reaches live",
+      "pass": true,
+      "detail": "live"
+    },
+    {
+      "name": "home/live: video timeline advances",
+      "pass": true,
+      "detail": {
+        "from": 0.211,
+        "to": 1.461
+      }
+    },
+    {
+      "name": "home/live: renderer frame count advances",
+      "pass": true,
+      "detail": {
+        "from": 19,
+        "to": 90
+      }
+    },
+    {
+      "name": "home/live: wave clock advances",
+      "pass": true,
+      "detail": {
+        "from": 0.3,
+        "to": 1.546
+      }
+    },
+    {
+      "name": "home/live: canvas paints above poster",
+      "pass": true,
+      "detail": {
+        "tag": "CANVAS",
+        "className": "qrF3rG_canvas"
+      }
+    },
+    {
+      "name": "home/live: canvas is visible and opaque",
+      "pass": true,
+      "detail": {
+        "width": 492,
+        "height": 439,
+        "hidden": false,
+        "z": "0",
+        "display": "block"
+      }
+    },
+    {
+      "name": "home/live: live readout is truthful",
+      "pass": true,
+      "detail": "LIVE MATERIAL / WEBGL 2"
+    },
+    {
+      "name": "home/live: source video is playing",
+      "pass": true,
+      "detail": {
+        "src": "http://127.0.0.1:3200/media/flower.mp4",
+        "paused": false,
+        "time": 1.705169,
+        "readyState": 4,
+        "error": null,
+        "muted": true
+      }
+    },
+    {
+      "name": "home/live: rendered pixels move over time",
+      "pass": true,
+      "detail": {
+        "width": 493,
+        "height": 440,
+        "meanAbs": 5.3363,
+        "channelMean": [
+          6.0744,
+          5.2266,
+          3.9653
+        ],
+        "diffPixels": 27276,
+        "diffPercent": 12.5742,
+        "bbox": [
+          2,
+          1,
+          490,
+          439
+        ]
+      }
+    },
+    {
+      "name": "home/live: no horizontal overflow",
+      "pass": true,
+      "detail": {
+        "scrollWidth": 1440,
+        "clientWidth": 1440
+      }
+    },
+    {
+      "name": "home/pointer: pointer increases eddy strength",
+      "pass": true,
+      "detail": 0.985
+    },
+    {
+      "name": "home/pointer: pointer settles after leave",
+      "pass": true,
+      "detail": 0.012
+    },
+    {
+      "name": "home/pause: readout is not LIVE",
+      "pass": true,
+      "detail": "PAUSED / FRAME HELD"
+    },
+    {
+      "name": "home/pause: video timeline stops",
+      "pass": true,
+      "detail": {
+        "a": 3.739,
+        "b": 3.739
+      }
+    },
+    {
+      "name": "home/pause: wave clock freezes",
+      "pass": true,
+      "detail": {
+        "a": 3.776,
+        "b": 3.776
+      }
+    },
+    {
+      "name": "home/pause: rendered pixels remain stable",
+      "pass": true,
+      "detail": {
+        "width": 493,
+        "height": 440,
+        "meanAbs": 0.0051,
+        "channelMean": [
+          0.0121,
+          0.0022,
+          0.0016
+        ],
+        "diffPixels": 22,
+        "diffPercent": 0.0101,
+        "bbox": [
+          183,
+          52,
+          488,
+          417
+        ]
+      }
+    },
+    {
+      "name": "home/resume: playback returns live",
+      "pass": true,
+      "detail": "live"
+    },
+    {
+      "name": "home/resume: timeline advances after resume",
+      "pass": true,
+      "detail": {
+        "paused": 3.739,
+        "resumed": 4.509
+      }
+    },
+    {
+      "name": "home/live: no application console errors",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "home/reduced: phase is reduced",
+      "pass": true,
+      "detail": "reduced"
+    },
+    {
+      "name": "home/reduced: readout names reduced motion",
+      "pass": true,
+      "detail": "REDUCED MOTION / STILL"
+    },
+    {
+      "name": "home/reduced: readout never claims LIVE",
+      "pass": true,
+      "detail": "REDUCED MOTION / STILL"
+    },
+    {
+      "name": "home/reduced: video is paused",
+      "pass": true,
+      "detail": {
+        "src": "http://127.0.0.1:3200/media/flower.mp4",
+        "paused": true,
+        "time": 0.000584,
+        "readyState": 4,
+        "error": null,
+        "muted": true
+      }
+    },
+    {
+      "name": "home/reduced: video timeline does not advance",
+      "pass": true,
+      "detail": {
+        "a": 0.001,
+        "b": 0.001
+      }
+    },
+    {
+      "name": "home/reduced: wave clock is frozen",
+      "pass": true,
+      "detail": {
+        "a": 0,
+        "b": 0
+      }
+    },
+    {
+      "name": "home/reduced: rendered pixels remain stable",
+      "pass": true,
+      "detail": {
+        "width": 493,
+        "height": 440,
+        "meanAbs": 0,
+        "channelMean": [
+          0,
+          0,
+          0
+        ],
+        "diffPixels": 0,
+        "diffPercent": 0,
+        "bbox": null
+      }
+    },
+    {
+      "name": "home/reduced: note is visible",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "home/reduced: no application console errors",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "home/blocked: phase is blocked, not live",
+      "pass": true,
+      "detail": {
+        "playback": "blocked",
+        "live": "false"
+      }
+    },
+    {
+      "name": "home/blocked: readout never claims LIVE",
+      "pass": true,
+      "detail": "AUTOPLAY BLOCKED / START"
+    },
+    {
+      "name": "home/blocked: start control is present",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "home/blocked: video is paused",
+      "pass": true,
+      "detail": {
+        "src": "http://127.0.0.1:3200/media/flower.mp4",
+        "paused": true,
+        "time": 0,
+        "readyState": 4,
+        "error": null,
+        "muted": true
+      }
+    },
+    {
+      "name": "home/blocked: poster/video still frame remains stable",
+      "pass": true,
+      "detail": {
+        "width": 493,
+        "height": 440,
+        "meanAbs": 0,
+        "channelMean": [
+          0,
+          0,
+          0
+        ],
+        "diffPixels": 0,
+        "diffPercent": 0,
+        "bbox": null
+      }
+    },
+    {
+      "name": "home/blocked: start control recovers live playback",
+      "pass": true,
+      "detail": "live"
+    },
+    {
+      "name": "home/blocked: recovered readout is LIVE",
+      "pass": true,
+      "detail": "LIVE MATERIAL / WEBGL 2"
+    },
+    {
+      "name": "home/blocked: recovered video advances",
+      "pass": true,
+      "detail": 1.14
+    },
+    {
+      "name": "home/blocked: no application console errors",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "home/context-loss: loss extension was invoked",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "home/context-loss: phase is error",
+      "pass": true,
+      "detail": "error"
+    },
+    {
+      "name": "home/context-loss: readout is fallback, not LIVE",
+      "pass": true,
+      "detail": "FALLBACK / POSTER"
+    },
+    {
+      "name": "home/context-loss: live claim is false",
+      "pass": true,
+      "detail": "false"
+    },
+    {
+      "name": "home/context-loss: fallback message is visible",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "home/context-loss: poster remains present",
+      "pass": true,
+      "detail": {
+        "src": "/_next/image?url=%2Fmedia%2Fmotifs%2Fflower-poster.jpg&w=3840&q=75",
+        "z": "0",
+        "opacity": "0.18"
+      }
+    },
+    {
+      "name": "home/visibility: hidden page pauses the field",
+      "pass": true,
+      "detail": {
+        "playback": "hidden",
+        "ready": "true",
+        "live": "false",
+        "videoTime": 0.459,
+        "frameCount": 33,
+        "waveClock": 0.533,
+        "pointerStrength": 0,
+        "video": {
+          "src": "http://127.0.0.1:3200/media/flower.mp4",
+          "paused": true,
+          "time": 0.458526,
+          "readyState": 4,
+          "error": null,
+          "muted": true
+        },
+        "canvas": {
+          "width": 492,
+          "height": 439,
+          "hidden": false,
+          "z": "0",
+          "display": "block"
+        },
+        "poster": {
+          "src": "/_next/image?url=%2Fmedia%2Fmotifs%2Fflower-poster.jpg&w=3840&q=75",
+          "z": "0",
+          "opacity": "0.18"
+        },
+        "center": {
+          "tag": "CANVAS",
+          "className": "qrF3rG_canvas"
+        },
+        "readout": "PAUSED / PAGE HIDDEN",
+        "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4060 Laptop GPU/PCIe/SSE2, OpenGL ES 3.2)",
+        "scrollWidth": 1440,
+        "clientWidth": 1440
+      }
+    },
+    {
+      "name": "home/visibility: visible page resumes the field",
+      "pass": true,
+      "detail": "live"
+    },
+    {
+      "name": "home/mobile: live field animates",
+      "pass": true,
+      "detail": {
+        "width": 704,
+        "height": 672,
+        "meanAbs": 5.1866,
+        "channelMean": [
+          5.9327,
+          5.0684,
+          3.8486
+        ],
+        "diffPixels": 72992,
+        "diffPercent": 15.4288,
+        "bbox": [
+          3,
+          2,
+          704,
+          669
+        ]
+      }
+    },
+    {
+      "name": "home/mobile: video timeline advances",
+      "pass": true,
+      "detail": {
+        "a": 0.212,
+        "b": 1.462
+      }
+    },
+    {
+      "name": "home/mobile: no horizontal overflow",
+      "pass": true,
+      "detail": {
+        "scrollWidth": 390,
+        "clientWidth": 390
+      }
+    },
+    {
+      "name": "home/mobile: no application console errors",
+      "pass": true,
+      "detail": []
+    }
+  ],
+  "total": 49,
+  "passed": 49,
+  "failed": 0,
+  "errors": []
+}

@@ -1,0 +1,1214 @@
+{
+  "config": {
+    "argv": [
+      "/home/swirky/.nvm/versions/node/v24.20.0/bin/node",
+      "/home/swirky/Documents/deepseek-harness/default-workspace/nullworx-consolidation-01/node_modules/.pnpm/@playwright+test@1.64.1/node_modules/@playwright/test/cli.js",
+      "test"
+    ],
+    "configFile": "/home/swirky/Documents/deepseek-harness/default-workspace/nullworx-consolidation-01/playwright.config.ts",
+    "rootDir": "/home/swirky/Documents/deepseek-harness/default-workspace/nullworx-consolidation-01/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/swirky/Documents/deepseek-harness/default-workspace/nullworx-consolidation-01/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/home/swirky/Documents/deepseek-harness/default-workspace/nullworx-consolidation-01/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/home/swirky/Documents/deepseek-harness/default-workspace/nullworx-consolidation-01/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "/home/swirky/Documents/deepseek-harness/default-workspace/nullworx-consolidation-01/tests/e2e",
+        "snapshotDir": "/home/swirky/Documents/deepseek-harness/default-workspace/nullworx-consolidation-01/tests/e2e",
+        "testIgnore": [],
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 60000,
+        "use": {
+          "baseURL": "http://127.0.0.1:3310",
+          "channel": "chrome",
+          "headless": true,
+          "viewport": {
+            "width": 1440,
+            "height": 900
+          },
+          "deviceScaleFactor": 1,
+          "trace": "retain-on-failure",
+          "screenshot": "only-on-failure",
+          "video": "off",
+          "launchOptions": {
+            "args": [
+              "--enable-unsafe-swiftshader",
+              "--use-gl=angle",
+              "--use-angle=swiftshader",
+              "--disable-dev-shm-usage"
+            ]
+          }
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "evidence/tests/playwright-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": {
+      "command": "pnpm start --port 3310",
+      "url": "http://127.0.0.1:3310",
+      "reuseExistingServer": false,
+      "timeout": 120000,
+      "env": {
+        "KDE_FULL_SESSION": "true",
+        "PROFILEHOME": "",
+        "DATABASE_URL": "postgres://rektrace:rektrace_dev_password_2024@postgres:5432/rektrace",
+        "LANGUAGE": "",
+        "LC_TIME": "sv_SE.UTF-8",
+        "PAM_KWALLET5_LOGIN": "/run/user/1000/kwallet5.socket",
+        "USER": "swirky",
+        "npm_config_user_agent": "pnpm/12.15.0 npm/? node/? linux x64",
+        "XDG_SEAT": "seat0",
+        "BUN_INSTALL": "/home/swirky/.bun",
+        "XDG_SESSION_TYPE": "wayland",
+        "npm_node_execpath": "/home/swirky/.nvm/versions/node/v24.20.0/bin/node",
+        "KONSOLE_VERSION": "251203",
+        "QT_WAYLAND_RECONNECT": "1",
+        "SHLVL": "2",
+        "npm_config_noproxy": "",
+        "DSH_SESSION_ID": "session-a57aae4e-6192-43ac-9928-4a1bfce6cd9a",
+        "HOME": "/home/swirky",
+        "KDE_APPLICATIONS_AS_SCOPE": "1",
+        "LESS": "-R",
+        "OLDPWD": "/home/swirky/Documents/deepseek-harness/default-workspace",
+        "VIPSHOME": "/target",
+        "DESKTOP_SESSION": "plasma",
+        "NVM_BIN": "/home/swirky/.nvm/versions/node/v24.20.0/bin",
+        "npm_package_json": "/home/swirky/Documents/deepseek-harness/default-workspace/nullworx-consolidation-01/package.json",
+        "COREPACK_ROOT": "/home/swirky/.nvm/versions/node/v24.20.0/lib/node_modules/corepack",
+        "LSCOLORS": "Gxfxcxdxbxegedabagacad",
+        "NVM_INC": "/home/swirky/.nvm/versions/node/v24.20.0/include/node",
+        "ZSH": "/home/swirky/.oh-my-zsh",
+        "npm_package_engines_node": ">=22.12.0",
+        "GTK_RC_FILES": "/etc/gtk/gtkrc:/home/swirky/.gtkrc:/home/swirky/.config/gtkrc",
+        "KDE_SESSION_VERSION": "6",
+        "PAGER": "cat",
+        "SHELL_SESSION_ID": "3382b7e90b454e83be5ced97c0ad62a6",
+        "XDG_SEAT_PATH": "/org/freedesktop/DisplayManager/Seat0",
+        "KONSOLE_DBUS_SESSION": "/Sessions/1",
+        "LC_MONETARY": "sv_SE.UTF-8",
+        "MANAGERPID": "1967",
+        "npm_config_local_prefix": "/home/swirky",
+        "npm_config_userconfig": "/home/swirky/.npmrc",
+        "DBUS_SESSION_BUS_ADDRESS": "unix:path=/run/user/1000/bus",
+        "NO_COLOR": "1",
+        "SSH_ASKPASS": "/usr/bin/ksshaskpass",
+        "SYSTEMD_EXEC_PID": "3293",
+        "COLOR": "1",
+        "COLORTERM": "truecolor",
+        "KONSOLE_DBUS_ACTIVATION_COOKIE": "anS1M3LShoMvh41k9SZuhvEBm3XGA2lS5QLDGg0PHdE=",
+        "KONSOLE_DBUS_WINDOW": "/Windows/1",
+        "NVM_DIR": "/home/swirky/.nvm",
+        "COREPACK_ENABLE_DOWNLOAD_PROMPT": "1",
+        "WAYLAND_DISPLAY": "wayland-0",
+        "XKB_DEFAULT_LAYOUT": "se",
+        "LOGNAME": "swirky",
+        "pnpm_config_verify_deps_before_run": "false",
+        "DSH_WEB_URL": "http://127.0.0.1:3080",
+        "JOURNAL_STREAM": "10:44042",
+        "MANAGERPIDFDID": "57432",
+        "WINDOWID": "102061420232608",
+        "_": "/home/swirky/.nvm/versions/node/v24.20.0/bin/pnpm",
+        "npm_config_npm_version": "11.19.0",
+        "npm_config_prefix": "/home/swirky/.nvm/versions/node/v24.20.0",
+        "COLORFGBG": "15;0",
+        "MEMORY_PRESSURE_WATCH": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/session.slice/plasma-plasmashell.service/memory.pressure",
+        "QNTYSPOT_QUALIFICATION_TAKER": "0x1324d87e24E1657F6fe6805dE814Bb6873052106",
+        "XDG_SESSION_CLASS": "user",
+        "TERM": "dumb",
+        "XDG_SESSION_ID": "4",
+        "npm_config_cache": "/home/swirky/.npm",
+        "E2E_BASE_URL": "http://127.0.0.1:3310",
+        "GTK2_RC_FILES": "/etc/gtk-2.0/gtkrc:/home/swirky/.gtkrc-2.0:/home/swirky/.config/gtkrc-2.0",
+        "npm_config_node_gyp": "/home/swirky/.nvm/versions/node/v24.20.0/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js",
+        "PATH": "/home/swirky/Documents/deepseek-harness/default-workspace/nullworx-consolidation-01/node_modules/.bin:/home/swirky/.cache/node/corepack/v1/pnpm/12.15.0/dist/node-gyp-bin:/home/swirky/Documents/deepseek-harness/default-workspace/nullworx-consolidation-01/node_modules/.bin:/home/swirky/.npm/_npx/1e7f6d9597241db0/node_modules/.bin:/home/swirky/node_modules/.bin:/home/node_modules/.bin:/node_modules/.bin:/home/swirky/.nvm/versions/node/v24.20.0/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/node-gyp-bin:/home/swirky/.local/bin:/home/swirky/.bun/bin:/home/swirky/.local/bin:/home/swirky/.local/bin:/home/swirky/.local/share/pnpm:/snap/bin:/home/swirky/bin:/home/swirky/.local/bin:/home/swirky/.nvm/versions/node/v24.20.0/bin:/snap/bin:/home/swirky/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/swirky/.foundry/bin:/home/swirky/.foundry/bin:/home/swirky/.maestro/bin:/home/swirky/.maestro/bin",
+        "INVOCATION_ID": "4a1cf9fc318c436da0a68c70f4fa1ea6",
+        "NODE": "/home/swirky/.nvm/versions/node/v24.20.0/bin/node",
+        "SESSION_MANAGER": "local/viktor-asustufgamingf15fx507vvfx507vv:@/tmp/.ICE-unix/3275,unix/viktor-asustufgamingf15fx507vvfx507vv:/tmp/.ICE-unix/3275",
+        "npm_package_name": "nullworx",
+        "LC_ADDRESS": "sv_SE.UTF-8",
+        "XDG_MENU_PREFIX": "plasma-",
+        "XDG_RUNTIME_DIR": "/run/user/1000",
+        "XDG_SESSION_PATH": "/org/freedesktop/DisplayManager/Session1",
+        "XKB_DEFAULT_MODEL": "pc105",
+        "DISPLAY": ":0",
+        "EMBEDDING_MODEL": "text-embedding-3-small",
+        "ICEAUTHORITY": "/run/user/1000/iceauth_CecMNE",
+        "QDRANT_COLLECTION": "rektrace_docs",
+        "SSH_ASKPASS_REQUIRE": "prefer",
+        "DSH_PROFILE": "web",
+        "LANG": "en_US.UTF-8",
+        "LC_TELEPHONE": "sv_SE.UTF-8",
+        "XDG_CURRENT_DESKTOP": "KDE",
+        "LS_COLORS": "rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.swp=00;90:*.tmp=00;90:*.dpkg-dist=00;90:*.dpkg-old=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:",
+        "QDRANT_URL": "http://qdrant:6333",
+        "XAUTHORITY": "/run/user/1000/xauth_XOyuwY",
+        "XDG_SESSION_DESKTOP": "KDE",
+        "npm_lifecycle_script": "playwright test",
+        "DSH_HOME": "/home/swirky/.dsh",
+        "SSH_AUTH_SOCK": "/run/user/1000/gcr/ssh",
+        "DSH_SHELL": "1",
+        "LC_NAME": "sv_SE.UTF-8",
+        "SHELL": "/usr/bin/zsh",
+        "npm_lifecycle_event": "test:e2e",
+        "npm_package_version": "0.1.0",
+        "NODE_PATH": "/home/swirky/Documents/deepseek-harness/default-workspace/nullworx-consolidation-01/node_modules/.bin/../.pnpm/@playwright+test@1.64.1/node_modules/@playwright/test/node_modules:/home/swirky/Documents/deepseek-harness/default-workspace/nullworx-consolidation-01/node_modules/.bin/../.pnpm/@playwright+test@1.64.1/node_modules:/home/swirky/Documents/deepseek-harness/default-workspace/nullworx-consolidation-01/node_modules/.bin/../.pnpm/node_modules",
+        "QT_ACCESSIBILITY": "1",
+        "_JAVA_AWT_WM_NONREPARENTING": "1",
+        "DSH_PROFILE_DIR": "/home/swirky/.dsh/profiles/web",
+        "KONSOLE_DBUS_SERVICE": ":1.113",
+        "LC_MEASUREMENT": "sv_SE.UTF-8",
+        "GPG_AGENT_INFO": "/run/user/1000/gnupg/S.gpg-agent:0:1",
+        "LC_IDENTIFICATION": "sv_SE.UTF-8",
+        "GIT_PAGER": "cat",
+        "XDG_VTNR": "2",
+        "npm_config_globalconfig": "/home/swirky/.nvm/versions/node/v24.20.0/etc/npmrc",
+        "npm_config_init_module": "/home/swirky/.npm-init.js",
+        "PWD": "/home/swirky/Documents/deepseek-harness/default-workspace/nullworx-consolidation-01",
+        "npm_execpath": "/home/swirky/.cache/node/corepack/v1/pnpm/12.15.0/pnpm-native",
+        "NVM_CD_FLAGS": "-q",
+        "XDG_CONFIG_DIRS": "/home/swirky/.config/kdedefaults:/etc/xdg:/usr/share/kubuntu-default-settings/kf5-settings",
+        "XDG_DATA_DIRS": "/home/swirky/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop",
+        "npm_config_global_prefix": "/home/swirky/.nvm/versions/node/v24.20.0",
+        "E2E_PORT": "3310",
+        "LC_NUMERIC": "sv_SE.UTF-8",
+        "PNPM_SCRIPT_SRC_DIR": "/home/swirky/Documents/deepseek-harness/default-workspace/nullworx-consolidation-01",
+        "npm_command": "run-script",
+        "npm_config_allow_scripts": "",
+        "KDE_SESSION_UID": "1000",
+        "LC_PAPER": "sv_SE.UTF-8",
+        "REDIS_URL": "redis://dragonfly:6379",
+        "MEMORY_PRESSURE_WRITE": "c29tZSAyMDAwMDAgMjAwMDAwMAA=",
+        "PNPM_HOME": "/home/swirky/.local/share/pnpm",
+        "EDITOR": "vi",
+        "INIT_CWD": "/home/swirky/Documents/deepseek-harness/default-workspace/nullworx-consolidation-01",
+        "NODE_ENV": "production",
+        "NEWSLETTER_PROVIDER": "mock",
+        "NEWSLETTER_ALLOW_MOCK": "1",
+        "NEWSLETTER_MOCK_SECRET": "local-e2e-only-mock-secret-not-a-real-credential"
+      }
+    }
+  },
+  "suites": [
+    {
+      "title": "experience.spec.ts",
+      "file": "experience.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "core experience",
+          "file": "experience.spec.ts",
+          "line": 16,
+          "column": 6,
+          "specs": [
+            {
+              "title": "homepage renders its copy in HTML and a real WebGL field in the browser",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2534,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-29T22:44:51.584Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "116f6b4a9defd92cdbb9-2df68bba08d967dc03e6",
+              "file": "experience.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "lab preview exposes live controls, copies reviewed config and uses reduced motion",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1949,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-29T22:44:54.238Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "116f6b4a9defd92cdbb9-163afd26fdd17ec2a1b3",
+              "file": "experience.spec.ts",
+              "line": 33,
+              "column": 7
+            },
+            {
+              "title": "reduced motion freezes the field and still exposes the accessible label",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1151,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-29T22:44:56.198Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "116f6b4a9defd92cdbb9-c1593808e187d848c42d",
+              "file": "experience.spec.ts",
+              "line": 64,
+              "column": 7
+            },
+            {
+              "title": "desktop and mobile layouts do not overflow and the mobile menu navigates",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 768,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-29T22:44:57.356Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "116f6b4a9defd92cdbb9-1e1664b5ce6e80f9cbc7",
+              "file": "experience.spec.ts",
+              "line": 78,
+              "column": 7
+            },
+            {
+              "title": "page-level structure and landmarks are accessible",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2865,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-29T22:44:58.131Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "116f6b4a9defd92cdbb9-6d939980a83fd192455a",
+              "file": "experience.spec.ts",
+              "line": 104,
+              "column": 7
+            },
+            {
+              "title": "no third-party cookies are set and the footer does not invent a support URL",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1376,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-29T22:45:01.004Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "116f6b4a9defd92cdbb9-a5574a5b9ee9b0d01993",
+              "file": "experience.spec.ts",
+              "line": 114,
+              "column": 7
+            },
+            {
+              "title": "serious accessibility violations are absent on core routes",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5447,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-29T22:45:02.394Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "116f6b4a9defd92cdbb9-40ea97c40995e99b9b92",
+              "file": "experience.spec.ts",
+              "line": 126,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "newsletter.spec.ts",
+      "file": "newsletter.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Nullworx Drops mock flow",
+          "file": "newsletter.spec.ts",
+          "line": 25,
+          "column": 6,
+          "specs": [
+            {
+              "title": "form ships with two unchecked, separate consent choices",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 907,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-29T22:45:07.856Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "bf56ae4106871f847130-17f187223f3d36254f26",
+              "file": "newsletter.spec.ts",
+              "line": 26,
+              "column": 7
+            },
+            {
+              "title": "effect detail page carries the same independent Drops signup",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1609,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-29T22:45:08.771Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "bf56ae4106871f847130-9a5e22c177474851ac4f",
+              "file": "newsletter.spec.ts",
+              "line": 32,
+              "column": 7
+            },
+            {
+              "title": "form submits free consent only, shows the local mock confirmation, and confirms",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2061,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-29T22:45:10.386Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "bf56ae4106871f847130-a0b60eac0d3ba998d0db",
+              "file": "newsletter.spec.ts",
+              "line": 48,
+              "column": 7
+            },
+            {
+              "title": "premium marketing is a separate opt-in and does not get implied by Drops",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 23,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-29T22:45:12.453Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "bf56ae4106871f847130-88c3a653120996abbd91",
+              "file": "newsletter.spec.ts",
+              "line": 77,
+              "column": 7
+            },
+            {
+              "title": "server rejects missing free consent, malformed email, unknown fields and cross-origin requests",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 16,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-29T22:45:12.482Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "bf56ae4106871f847130-2bbb30554fca065d10b2",
+              "file": "newsletter.spec.ts",
+              "line": 92,
+              "column": 7
+            },
+            {
+              "title": "duplicate signup and idempotency stay generic and do not expose subscriber state",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 12,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-29T22:45:12.503Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "bf56ae4106871f847130-a0b1d3a6033b93191656",
+              "file": "newsletter.spec.ts",
+              "line": 120,
+              "column": 7
+            },
+            {
+              "title": "honeypot submissions receive a generic acceptance and never a confirmation link",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-29T22:45:12.521Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "bf56ae4106871f847130-5916980ff4c5d0e8a343",
+              "file": "newsletter.spec.ts",
+              "line": 138,
+              "column": 7
+            },
+            {
+              "title": "analytics endpoint only accepts allowlisted, identity-free events",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 16,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-29T22:45:12.533Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "bf56ae4106871f847130-b22878e504d51e339f67",
+              "file": "newsletter.spec.ts",
+              "line": 150,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "seo.spec.ts",
+      "file": "seo.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "technical SEO and crawlability",
+          "file": "seo.spec.ts",
+          "line": 40,
+          "column": 6,
+          "specs": [
+            {
+              "title": "indexable routes have unique titles, descriptions, canonicals, social cards and server-rendered content",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 51,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-29T22:45:12.564Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "265a6ee67c94b2ef6801-4fab351c5b3f70fa0a70",
+              "file": "seo.spec.ts",
+              "line": 41,
+              "column": 7
+            },
+            {
+              "title": "unreleased review and status pages are noindex and excluded from the sitemap",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 47,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-29T22:45:12.622Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "265a6ee67c94b2ef6801-57928d01013321581650",
+              "file": "seo.spec.ts",
+              "line": 82,
+              "column": 7
+            },
+            {
+              "title": "robots policy separates retrieval from training and points to the sitemap",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 8,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-29T22:45:12.674Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "265a6ee67c94b2ef6801-9f269c697eeb58dca2f2",
+              "file": "seo.spec.ts",
+              "line": 105,
+              "column": 7
+            },
+            {
+              "title": "llms.txt is a plain navigation aid and does not expose the review preview",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 8,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-29T22:45:12.689Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "265a6ee67c94b2ef6801-de83082b77b67012934b",
+              "file": "seo.spec.ts",
+              "line": 116,
+              "column": 7
+            },
+            {
+              "title": "social card is a real 1200x630 PNG",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 16,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-29T22:45:12.703Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "265a6ee67c94b2ef6801-f81cb68194bd8c0e8415",
+              "file": "seo.spec.ts",
+              "line": 127,
+              "column": 7
+            },
+            {
+              "title": "structured data parses and contains no invented ratings or offers",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 25,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-29T22:45:12.725Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "265a6ee67c94b2ef6801-e3f2c4ed10636b042d75",
+              "file": "seo.spec.ts",
+              "line": 141,
+              "column": 7
+            },
+            {
+              "title": "404 renders the designed page with a 404 status",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 6,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-29T22:45:12.756Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "265a6ee67c94b2ef6801-3f563a651e8760277973",
+              "file": "seo.spec.ts",
+              "line": 156,
+              "column": 7
+            },
+            {
+              "title": "all internal links on public pages resolve",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 86,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-29T22:45:12.767Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "265a6ee67c94b2ef6801-e8576154d4f73e90f50f",
+              "file": "seo.spec.ts",
+              "line": 164,
+              "column": 7
+            },
+            {
+              "title": "download and media assets are served with real bytes",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 18,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-29T22:45:12.859Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "265a6ee67c94b2ef6801-935150648ee1c4d6a2fb",
+              "file": "seo.spec.ts",
+              "line": 182,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "visual.spec.ts",
+      "file": "visual.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "evidence screenshots",
+          "file": "visual.spec.ts",
+          "line": 30,
+          "column": 6,
+          "specs": [
+            {
+              "title": "capture requested desktop and mobile layouts",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 23368,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-29T22:45:12.885Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8324bb52c49185e48ff4-264b9851274ea19af58c",
+              "file": "visual.spec.ts",
+              "line": 31,
+              "column": 7
+            },
+            {
+              "title": "capture reduced-motion still and mobile gallery",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3633,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-29T22:45:36.269Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8324bb52c49185e48ff4-73c6b68b27757578fcd9",
+              "file": "visual.spec.ts",
+              "line": 80,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-29T22:44:50.774Z",
+    "duration": 49245.047999999995,
+    "expected": 26,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

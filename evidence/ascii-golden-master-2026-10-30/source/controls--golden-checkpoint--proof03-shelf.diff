@@ -1,0 +1,140 @@
+--- golden-checkpoint/controls
++++ proof03-shelf/controls
+@@ -1,5 +1,6 @@
+ import type { ChangeEvent, ReactNode } from 'react';
+ import type { WavesSettings } from '../renderer';
++import type { Motif } from '../motifs';
+ import { Icon } from './Icon';
+ 
+ export type SourceMode = 'demo' | 'file' | 'none';
+@@ -82,8 +83,10 @@
+   onClose: () => void;
+   source: SourceMode;
+   fileName: string;
++  activeMotif: Motif | null;
++  motifs: Motif[];
++  onMotif: (motif: Motif) => void;
+   onUpload: () => void;
+-  onDemo: () => void;
+   onClear: () => void;
+   videoReady: boolean;
+   videoTimeLabel: string;
+@@ -104,8 +107,10 @@
+   onClose,
+   source,
+   fileName,
++  activeMotif,
++  motifs,
++  onMotif,
+   onUpload,
+-  onDemo,
+   onClear,
+   videoReady,
+   videoTimeLabel,
+@@ -120,11 +125,19 @@
+   const sourceLabel = source === 'none'
+     ? 'Procedural field'
+     : source === 'demo'
+-      ? 'flower.mp4'
++      ? (activeMotif?.title ?? 'Saved motion')
+       : fileName || 'Local video';
+   const sourceSub = source === 'none'
+     ? 'No video · generated waves'
+     : `${videoTimeLabel}${videoReady ? '' : ' · loading source'}`;
++  const sourceBadge = source === 'none'
++    ? 'GEN'
++    : source === 'file'
++      ? 'LOCAL'
++      : activeMotif?.loved
++        ? 'LOVED'
++        : (activeMotif?.badge ?? 'DEMO');
++  const credit = source === 'demo' ? activeMotif : null;
+ 
+   return (
+     <aside
+@@ -155,20 +168,12 @@
+               <strong>{sourceLabel}</strong>
+               <span>{sourceSub}</span>
+             </div>
+-            <span className="source-badge">{source === 'none' ? 'GEN' : source === 'demo' ? 'CC0' : 'LOCAL'}</span>
+-          </div>
+-          <div className="source-actions">
++            <span className="source-badge">{sourceBadge}</span>
++          </div>
++          <div className="source-actions source-actions--two">
+             <button type="button" className="button button--solid" onClick={onUpload}>
+               <Icon name="upload" size={14} />
+               Choose video
+-            </button>
+-            <button
+-              type="button"
+-              className={`button button--ghost ${source === 'demo' ? 'is-selected' : ''}`}
+-              onClick={onDemo}
+-              aria-pressed={source === 'demo'}
+-            >
+-              Demo
+             </button>
+             <button
+               type="button"
+@@ -179,7 +184,6 @@
+               No video
+             </button>
+           </div>
+-          <p className="field-note">MP4 or WebM. Files stay in this browser; nothing is uploaded.</p>
+           <div className="sheet-transport" aria-label="Video playback">
+             <button
+               type="button"
+@@ -212,6 +216,53 @@
+               <Icon name="loop" size={16} />
+             </button>
+           </div>
++
++          <div className="motion-shelf">
++            <div className="motion-shelf__head">
++              <span>Motion shelf</span>
++              <span>{String(motifs.length).padStart(2, '0')} LOCAL REELS</span>
++            </div>
++            <div className="motion-grid">
++              {motifs.map((motif) => {
++                const selected = source === 'demo' && activeMotif?.id === motif.id;
++                return (
++                  <button
++                    key={motif.id}
++                    type="button"
++                    className={`motion-card ${selected ? 'is-selected' : ''} ${motif.loved ? 'is-loved' : ''}`}
++                    onClick={() => onMotif(motif)}
++                    aria-pressed={selected}
++                    aria-label={`Play ${motif.title}${motif.loved ? ', saved favourite' : ''}`}
++                    title={`${motif.title} · ${motif.subtitle} · ${motif.credit}`}
++                  >
++                    <span className="motion-card__art">
++                      <img src={motif.poster} alt="" loading="lazy" decoding="async" />
++                      <span className="motion-card__badge">{motif.badge}</span>
++                      {motif.loved && (
++                        <span className="motion-card__heart" aria-hidden="true">
++                          <Icon name="heart" size={11} />
++                        </span>
++                      )}
++                    </span>
++                    <span className="motion-card__title">{motif.title}</span>
++                  </button>
++                );
++              })}
++            </div>
++            <div className="motion-credit">
++              {credit ? (
++                <>
++                  <span>{credit.credit} · {credit.license}</span>
++                  <a href={credit.sourceUrl} target="_blank" rel="noreferrer">SOURCE</a>
++                </>
++              ) : source === 'file' ? (
++                <span>Local file · stays on this device</span>
++              ) : (
++                <span>Generated entirely in the shader</span>
++              )}
++            </div>
++          </div>
++          <p className="field-note">MP4 or WebM. Files stay in this browser; nothing is uploaded.</p>
+         </Section>
+ 
+         <Section index="02" title="Glyphs">

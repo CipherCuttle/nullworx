@@ -1,0 +1,23 @@
+node_modules/
+.next/
+out/
+coverage/
+test-results/
+playwright-report/
+blob-report/
+*.tsbuildinfo
+next-env.d.ts
+.env
+.env.*
+!.env.example
+.DS_Store
+/drafts/
+evidence/screenshots/raw/
+
+# Consolidation verification media is kept locally for handoff; small receipts
+# and selected screenshots under evidence/g5 are committed.
+evidence/g4/
+evidence/g5/recordings/
+evidence/g5/frames/
+evidence/g5/comparisons/
+evidence/diagnostics/

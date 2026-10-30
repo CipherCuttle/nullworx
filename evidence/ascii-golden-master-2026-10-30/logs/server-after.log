@@ -1,0 +1,19 @@
+$ next start --hostname 127.0.0.1 --port 3220
+▲ Next.js 16.4.3
+- Local:         http://127.0.0.1:3220
+- Network:       http://127.0.0.1:3220
+✓ Ready in 89ms
+✓ Running next.config.ts took 23ms
+[nullworx:event] {"event":"effect_page_viewed","path":"/lab/ascii-waves","effectSlug":"ascii-waves","location":"effect-preview","at":"2026-10-30T16:03:57.640Z"}
+[nullworx:event] {"event":"preview_interacted","path":"/lab/ascii-waves","effectSlug":"ascii-waves","location":"effect-preview","at":"2026-10-30T16:04:00.973Z"}
+[nullworx:event] {"event":"code_copied","path":"/lab/ascii-waves","effectSlug":"ascii-waves","location":"effect-preview","at":"2026-10-30T16:04:03.460Z"}
+[nullworx:event] {"event":"effect_page_viewed","path":"/lab/ascii-waves","effectSlug":"ascii-waves","location":"effect-preview","at":"2026-10-30T16:04:08.976Z"}
+[nullworx:event] {"event":"preview_interacted","path":"/lab/ascii-waves","effectSlug":"ascii-waves","location":"effect-preview","at":"2026-10-30T16:04:10.168Z"}
+[nullworx:event] {"event":"effect_page_viewed","path":"/lab/ascii-waves","effectSlug":"ascii-waves","location":"effect-preview","at":"2026-10-30T16:04:14.413Z"}
+[nullworx:event] {"event":"effect_page_viewed","path":"/lab/ascii-waves","effectSlug":"ascii-waves","location":"effect-preview","at":"2026-10-30T16:04:18.422Z"}
+[nullworx:event] {"event":"effect_page_viewed","path":"/lab/ascii-waves","effectSlug":"ascii-waves","location":"effect-preview","at":"2026-10-30T16:04:21.260Z"}
+[nullworx:event] {"event":"effect_page_viewed","path":"/lab/ascii-waves","effectSlug":"ascii-waves","location":"effect-preview","at":"2026-10-30T16:04:25.874Z"}
+[nullworx:event] {"event":"preview_interacted","path":"/lab/ascii-waves","effectSlug":"ascii-waves","location":"effect-preview","at":"2026-10-30T16:04:28.728Z"}
+[nullworx:event] {"event":"effect_page_viewed","path":"/lab/ascii-waves","effectSlug":"ascii-waves","location":"effect-preview","at":"2026-10-30T16:04:48.179Z"}
+[nullworx:event] {"event":"effect_page_viewed","path":"/lab/ascii-waves","effectSlug":"ascii-waves","location":"effect-preview","at":"2026-10-30T16:04:50.517Z"}
+[nullworx:event] {"event":"effect_page_viewed","path":"/lab/ascii-waves","effectSlug":"ascii-waves","location":"effect-preview","at":"2026-10-30T16:06:39.388Z"}

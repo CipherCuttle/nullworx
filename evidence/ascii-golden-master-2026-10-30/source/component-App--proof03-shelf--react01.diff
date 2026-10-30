@@ -1,0 +1,1210 @@
+--- proof03-shelf/component/App
++++ react01/component/App
+@@ -1,657 +1,618 @@
+-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+-import { ControlPanel, type SourceMode } from './components/ControlPanel';
+-import { Icon } from './components/Icon';
+-import { DEFAULT_MOTIF, MOTIFS, type Motif } from './motifs';
++import {
++  forwardRef,
++  useCallback,
++  useEffect,
++  useImperativeHandle,
++  useMemo,
++  useRef,
++  useState,
++  type CSSProperties,
++} from 'react';
+ import {
+   AsciiWavesRenderer,
+   DEFAULT_SETTINGS,
++  type RendererMetrics,
++  type RendererSnapshot,
+   type WavesSettings,
+ } from './renderer';
+-
+-const params = new URLSearchParams(window.location.search);
+-const initialMotif = MOTIFS.find((motif) => motif.id === params.get('motif')) ?? DEFAULT_MOTIF;
+-const initialSource: SourceMode = params.get('source') === 'none' ? 'none' : 'demo';
+-const initialPaused = params.get('paused') === '1' || params.has('freeze');
+-function viewportDefaultCell(): number {
+-  if (window.matchMedia('(max-width: 520px)').matches) return 12;
+-  if (window.matchMedia('(max-width: 820px)').matches) return 14;
+-  return DEFAULT_SETTINGS.cellSize;
++import {
++  ASCII_WAVES_PRESETS,
++  DEFAULT_ASCII_WAVES_PRESET,
++  resolvePreset,
++  type AsciiWavesPresetId,
++} from './presets';
++import styles from './AsciiWaves.module.css';
++
++export type AsciiWavesQuality = 'high' | 'balanced' | 'efficient';
++export type AsciiWavesReducedMotion = 'system' | 'play';
++
++export interface AsciiWavesProps {
++  /** Named, bundled reel. Flower is the default. */
++  preset?: AsciiWavesPresetId;
++  /** Optional custom video URL. Overrides the preset's video, but not its poster. */
++  src?: string;
++  /** Glyph cell pitch in CSS pixels, or a responsive 12/14/16 default. */
++  cellSize?: number | 'auto';
++  /** Ordered characters from darkest to brightest. 48 characters max. */
++  characters?: string;
++  /** Ink tint as a three- or six-digit hex colour. */
++  color?: string;
++  /** Flip the luma-to-character mapping. */
++  invert?: boolean;
++  /** Wave-clock multiplier. 1 is the approved Flower speed. */
++  speed?: number;
++  /** Pointer eddy strength. 0 disables the response. */
++  interactionIntensity?: number;
++  /** Set false to remove the pointer listener's effect entirely. */
++  pointerInteraction?: boolean;
++  /** 2x, 1.5x or 1x render-pixel cap. The browser DPR is always the ceiling. */
++  quality?: AsciiWavesQuality;
++  /** Playback intent. Pausing also freezes the wave clock. */
++  playing?: boolean;
++  muted?: boolean;
++  loop?: boolean;
++  /** Seconds at which a newly loaded source starts. Defaults to the preset offset. */
++  startTime?: number;
++  /** `system` freezes the field when prefers-reduced-motion is reduce. */
++  reducedMotion?: AsciiWavesReducedMotion;
++  /** Image shown if WebGL or the video cannot render. Defaults to the preset poster. */
++  fallbackImage?: string;
++  className?: string;
++  style?: CSSProperties;
++  ariaLabel?: string;
++  onReady?: () => void;
++  onError?: (error: Error) => void;
+ }
+-const initialCell = (() => {
+-  if (params.has('cell')) {
+-    const value = Number(params.get('cell'));
+-    if (Number.isFinite(value)) return Math.min(32, Math.max(8, value));
++
++export interface AsciiWavesVideoState {
++  ready: boolean;
++  playing: boolean;
++  currentTime: number;
++  duration: number;
++  readyState: number;
++  src: string;
++  muted: boolean;
++  loop: boolean;
++}
++
++export interface AsciiWavesHandle {
++  getMetrics: () => RendererMetrics | null;
++  getSnapshot: () => RendererSnapshot | null;
++  getVideoState: () => AsciiWavesVideoState | null;
++  getWaveClock: () => number;
++  play: () => Promise<void>;
++  pause: () => void;
++  seek: (seconds: number) => Promise<number>;
++  setFrozenTime: (seconds: number | null) => void;
++  setPointer: (x: number, y: number, active?: boolean) => void;
++  setPointerActive: (active: boolean) => void;
++  markVideoDirty: () => void;
++}
++
++const QUALITY_DPR: Record<AsciiWavesQuality, number> = {
++  high: 2,
++  balanced: 1.5,
++  efficient: 1,
++};
++
++function clamp(value: number, min: number, max: number): number {
++  return Math.min(max, Math.max(min, value));
++}
++
++function cleanCharacters(value: string | undefined): string {
++  const characters = Array.from(value ?? DEFAULT_SETTINGS.characters).slice(0, 48).join('');
++  return characters.length > 0 ? characters : DEFAULT_SETTINGS.characters;
++}
++
++function responsiveCell(width: number): number {
++  if (width <= 520) return 12;
++  if (width <= 820) return 14;
++  return 16;
++}
++
++function isCrossOrigin(src: string): boolean {
++  if (src.startsWith('data:') || src.startsWith('blob:')) return false;
++  try {
++    return new URL(src, window.location.href).origin !== window.location.origin;
++  } catch {
++    return false;
+   }
+-  return viewportDefaultCell();
+-})();
+-const initialTime = (() => {
+-  if (!params.has('time')) return null;
+-  const value = Number(params.get('time'));
+-  return Number.isFinite(value) && value >= 0 ? value : null;
+-})();
+-const initialStart = initialTime ?? initialMotif.startTime;
+-const initialFreeze = (() => {
+-  if (!params.has('freeze')) return null;
+-  const value = Number(params.get('freeze'));
+-  return Number.isFinite(value) ? value : 0;
+-})();
+-const chromeVisible = params.get('chrome') !== '0';
+-const initialControlsOpen = params.get('controls') === '1';
+-
+-interface SourceState {
+-  mode: SourceMode;
+-  url: string | null;
+-  name: string;
+ }
+ 
+-const demoSettings: WavesSettings = {
+-  ...DEFAULT_SETTINGS,
+-  cellSize: initialCell,
+-};
+-
+-function formatTime(seconds: number): string {
+-  const safe = Number.isFinite(seconds) ? Math.max(0, seconds) : 0;
+-  const minutes = Math.floor(safe / 60);
+-  const rest = safe - minutes * 60;
+-  return `${minutes}:${rest.toFixed(1).padStart(4, '0')}`;
+-}
+-
+-function isVideoFile(file: File): boolean {
+-  if (file.type.startsWith('video/')) return true;
+-  return /\.(mp4|webm|mov|m4v|ogv|ogg)$/i.test(file.name);
+-}
+-
+-export default function App() {
++export const AsciiWaves = forwardRef<AsciiWavesHandle, AsciiWavesProps>(function AsciiWaves(
++  {
++    preset = DEFAULT_ASCII_WAVES_PRESET,
++    src,
++    cellSize = 'auto',
++    characters = DEFAULT_SETTINGS.characters,
++    color = DEFAULT_SETTINGS.color,
++    invert = false,
++    speed = DEFAULT_SETTINGS.speed,
++    interactionIntensity = DEFAULT_SETTINGS.interactionIntensity,
++    pointerInteraction = true,
++    quality = 'high',
++    playing = true,
++    muted = true,
++    loop = true,
++    startTime,
++    reducedMotion = 'system',
++    fallbackImage,
++    className,
++    style,
++    ariaLabel = 'ASCII wave field',
++    onReady,
++    onError,
++  },
++  ref,
++) {
++  const rootRef = useRef<HTMLDivElement>(null);
+   const canvasRef = useRef<HTMLCanvasElement>(null);
+   const videoRef = useRef<HTMLVideoElement>(null);
+-  const fileInputRef = useRef<HTMLInputElement>(null);
+   const rendererRef = useRef<AsciiWavesRenderer | null>(null);
+-  const objectUrlRef = useRef<string | null>(null);
+-  const autoPlayRef = useRef(initialSource !== 'none' && !initialPaused);
+-  const pendingSeekRef = useRef<number | null>(initialSource === 'demo' ? initialStart : null);
+-  const noticeTimer = useRef<number | null>(null);
+-  const dragDepth = useRef(0);
+-  const settingsRef = useRef(demoSettings);
+-  const [settings, setSettings] = useState<WavesSettings>(demoSettings);
+-  const [activeMotifId, setActiveMotifId] = useState(initialMotif.id);
+-  const activeMotif = MOTIFS.find((motif) => motif.id === activeMotifId) ?? DEFAULT_MOTIF;
+-  const [source, setSource] = useState<SourceState>(() => initialSource === 'none'
+-    ? { mode: 'none', url: null, name: '' }
+-    : { mode: 'demo', url: initialMotif.file, name: initialMotif.title });
+-  const [fileName, setFileName] = useState('');
+-  const [videoReady, setVideoReady] = useState(false);
+-  const [videoError, setVideoError] = useState('');
+-  const [renderError, setRenderError] = useState('');
+-  const [playing, setPlaying] = useState(false);
+-  const [muted, setMuted] = useState(true);
+-  const [loop, setLoop] = useState(true);
+-  const [currentTime, setCurrentTime] = useState(0);
+-  const [duration, setDuration] = useState(0);
+-  const [controlsOpen, setControlsOpen] = useState(initialControlsOpen);
+-  const [notice, setNotice] = useState('');
+-  const [dragging, setDragging] = useState(false);
+-  const [viewport, setViewport] = useState({
+-    width: window.innerWidth,
+-    height: window.innerHeight,
+-  });
+-
++  const onReadyRef = useRef(onReady);
++  const onErrorRef = useRef(onError);
++  const contextEventsSuppressed = useRef(false);
++  onReadyRef.current = onReady;
++  onErrorRef.current = onError;
++
++  const [rendererEpoch, setRendererEpoch] = useState(0);
++  const [canvasVersion, setCanvasVersion] = useState(0);
++  const [rendererFailure, setRendererFailure] = useState<string | null>(null);
++  const [contextLost, setContextLost] = useState(false);
++  const [mediaError, setMediaError] = useState<string | null>(null);
++  const [mediaReady, setMediaReady] = useState(false);
++  const [autoCell, setAutoCell] = useState(16);
++  const [inView, setInView] = useState(true);
++  const [pageHidden, setPageHidden] = useState(() => typeof document !== 'undefined' && document.hidden);
++  const [systemReduced, setSystemReduced] = useState(false);
++
++  const selectedPreset = resolvePreset(preset);
++  const resolvedSrc = src !== undefined ? src : selectedPreset.src;
++  const resolvedStartTime = startTime ?? (src !== undefined ? 0 : selectedPreset.startTime);
++  const fallbackSrc = fallbackImage !== undefined ? fallbackImage : selectedPreset.poster;
++  const reduced = reducedMotion === 'system' && systemReduced;
++  const effectiveCell = typeof cellSize === 'number' && Number.isFinite(cellSize)
++    ? clamp(cellSize, 8, 32)
++    : autoCell;
++  const qualityDpr = QUALITY_DPR[quality] ?? 2;
++  const shouldPlay = playing && !reduced && inView && !pageHidden && !rendererFailure && !contextLost && !mediaError;
++  const shouldRender = inView
++    && !pageHidden
++    && !rendererFailure
++    && !contextLost
++    && !(mediaError && Boolean(fallbackSrc));
++
++  const settings = useMemo<WavesSettings>(() => ({
++    ...DEFAULT_SETTINGS,
++    characters: cleanCharacters(characters),
++    color,
++    invert,
++    cellSize: effectiveCell,
++    speed: Number.isFinite(speed) ? clamp(speed, 0, 4) : DEFAULT_SETTINGS.speed,
++    cursorInteraction: pointerInteraction && !reduced && playing,
++    interactionIntensity: Number.isFinite(interactionIntensity)
++      ? clamp(interactionIntensity, 0, 2)
++      : DEFAULT_SETTINGS.interactionIntensity,
++  }), [characters, color, effectiveCell, interactionIntensity, invert, playing, pointerInteraction, reduced, speed]);
++
++  const settingsRef = useRef(settings);
+   settingsRef.current = settings;
+-
+-  const showNotice = useCallback((message: string) => {
+-    setNotice(message);
+-    if (noticeTimer.current !== null) window.clearTimeout(noticeTimer.current);
+-    noticeTimer.current = window.setTimeout(() => setNotice(''), 3600);
++  const shouldPlayRef = useRef(shouldPlay);
++  shouldPlayRef.current = shouldPlay;
++  const shouldRenderRef = useRef(shouldRender);
++  shouldRenderRef.current = shouldRender;
++  const reducedRef = useRef(reduced);
++  reducedRef.current = reduced;
++  const stateRef = useRef({ mediaReady, rendererFailure, mediaError, reduced });
++  stateRef.current = { mediaReady, rendererFailure, mediaError, reduced };
++
++  const reportError = useCallback((error: Error) => {
++    onErrorRef.current?.(error);
+   }, []);
+ 
+-  useEffect(() => () => {
+-    if (noticeTimer.current !== null) window.clearTimeout(noticeTimer.current);
+-  }, []);
+-
++  // A lost context is a renderer failure even though the constructor succeeded.
++  // preventDefault() opts into the browser's restore event. The restored path
++  // mounts a fresh canvas so the old context/resources can never be reused.
+   useEffect(() => {
+     const canvas = canvasRef.current;
+-    if (!canvas) return;
++    if (!canvas) return undefined;
++    let unmounting = false;
++    const onContextLost = (event: Event) => {
++      event.preventDefault();
++      if (unmounting || contextEventsSuppressed.current) return;
++      rendererRef.current?.setRunning(false);
++      videoRef.current?.pause();
++      setContextLost(true);
++      reportError(new Error('The WebGL context was lost.'));
++    };
++    const onContextRestored = () => {
++      if (unmounting || contextEventsSuppressed.current) return;
++      setContextLost(false);
++      setCanvasVersion((value) => value + 1);
++    };
++    canvas.addEventListener('webglcontextlost', onContextLost);
++    canvas.addEventListener('webglcontextrestored', onContextRestored);
++    return () => {
++      unmounting = true;
++      canvas.removeEventListener('webglcontextlost', onContextLost);
++      canvas.removeEventListener('webglcontextrestored', onContextRestored);
++    };
++  }, [canvasVersion, reportError]);
++
++  // One renderer per mounted canvas. A preset or prop change never rebuilds the
++  // program. canvasVersion only changes after a real context-loss restore.
++  useEffect(() => {
++    const canvas = canvasRef.current;
++    if (!canvas) return undefined;
+     let renderer: AsciiWavesRenderer | null = null;
+     try {
+-      renderer = new AsciiWavesRenderer(canvas);
++      renderer = new AsciiWavesRenderer(canvas, { maxDpr: QUALITY_DPR[quality] ?? 2 });
++      renderer.setSettings(settingsRef.current);
++      renderer.setRunning(shouldRenderRef.current);
+       rendererRef.current = renderer;
+-      renderer.setSettings(settingsRef.current);
+-      if (initialFreeze !== null) renderer.setFrozenTime(initialFreeze);
+-      setRenderError('');
++      contextEventsSuppressed.current = false;
++      setRendererFailure(null);
++      setRendererEpoch((value) => value + 1);
+     } catch (error) {
+-      setRenderError(error instanceof Error ? error.message : 'The WebGL renderer could not start.');
++      const failure = error instanceof Error ? error : new Error('The WebGL renderer could not start.');
++      setRendererFailure(failure.message);
++      reportError(failure);
+     }
+     return () => {
++      contextEventsSuppressed.current = true;
+       renderer?.dispose();
+       if (rendererRef.current === renderer) rendererRef.current = null;
+     };
+-  }, []);
++  // A renderer is intentionally created once per canvas/mount.
++  // eslint-disable-next-line react-hooks/exhaustive-deps
++  }, [canvasVersion]);
+ 
+   useEffect(() => {
+     rendererRef.current?.setSettings(settings);
+   }, [settings]);
+ 
+   useEffect(() => {
+-    const onResize = () => setViewport({ width: window.innerWidth, height: window.innerHeight });
+-    window.addEventListener('resize', onResize, { passive: true });
+-    return () => window.removeEventListener('resize', onResize);
++    rendererRef.current?.setMaxDpr(qualityDpr);
++  }, [qualityDpr]);
++
++  useEffect(() => {
++    const root = rootRef.current;
++    if (!root) return undefined;
++    const measure = () => {
++      if (typeof cellSize !== 'number') {
++        const next = responsiveCell(root.clientWidth || window.innerWidth);
++        setAutoCell((value) => (value === next ? value : next));
++      }
++      rendererRef.current?.resize();
++    };
++    const observer = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(measure) : null;
++    observer?.observe(root);
++    window.addEventListener('resize', measure, { passive: true });
++    window.addEventListener('orientationchange', measure, { passive: true });
++    measure();
++    return () => {
++      observer?.disconnect();
++      window.removeEventListener('resize', measure);
++      window.removeEventListener('orientationchange', measure);
++    };
++  }, [cellSize, rendererEpoch]);
++
++  useEffect(() => {
++    const root = rootRef.current;
++    if (!root) return undefined;
++    if (typeof IntersectionObserver === 'undefined') return undefined;
++    const observer = new IntersectionObserver((entries) => {
++      const entry = entries[0];
++      if (entry) setInView(entry.isIntersecting);
++    }, { threshold: 0.01 });
++    observer.observe(root);
++    return () => observer.disconnect();
+   }, []);
+ 
++  useEffect(() => {
++    const onVisibility = () => setPageHidden(document.hidden);
++    document.addEventListener('visibilitychange', onVisibility);
++    return () => document.removeEventListener('visibilitychange', onVisibility);
++  }, []);
++
++  useEffect(() => {
++    const query = window.matchMedia('(prefers-reduced-motion: reduce)');
++    const update = () => setSystemReduced(query.matches);
++    update();
++    query.addEventListener('change', update);
++    return () => query.removeEventListener('change', update);
++  }, []);
++
++  // Source loading is independent from renderer construction. The same video
++  // element and texture are reused when a preset changes.
+   useEffect(() => {
+     const video = videoRef.current;
+     const renderer = rendererRef.current;
+-    if (!video || !renderer) return;
+-    const enabled = source.mode !== 'none' && Boolean(source.url);
+-    renderer.setVideo(enabled ? video : null, enabled);
++    if (!video || !renderer) return undefined;
++
++    let disposed = false;
++    let notified = false;
++    setMediaReady(false);
++    setMediaError(null);
++
++    if (!resolvedSrc) {
++      renderer.setVideo(null, false);
++      video.pause();
++      setMediaReady(true);
++      onReadyRef.current?.();
++      return undefined;
++    }
++
++    video.pause();
++    video.crossOrigin = isCrossOrigin(resolvedSrc) ? 'anonymous' : null;
++    video.src = resolvedSrc;
++    renderer.setVideo(video, true);
+     renderer.markVideoDirty();
+-    setVideoReady(false);
+-    setVideoError('');
+-    setCurrentTime(0);
+-    setDuration(0);
+-    if (!enabled) {
++
++    const markReady = () => {
++      if (disposed || notified) return;
++      notified = true;
++      setMediaReady(true);
++      renderer.markVideoDirty();
++      onReadyRef.current?.();
++    };
++
++    const onLoadedMetadata = () => {
++      if (disposed) return;
++      const duration = Number.isFinite(video.duration) ? video.duration : 0;
++      const target = clamp(resolvedStartTime, 0, Math.max(0, duration - 0.04));
++      if (target > 0 && Math.abs(video.currentTime - target) > 0.01) {
++        video.currentTime = target;
++      }
++      renderer.markVideoDirty();
++    };
++
++    const onCanPlay = () => {
++      if (disposed) return;
++      markReady();
++      if (shouldPlayRef.current) {
++        void video.play().catch(() => {
++          // Autoplay can be blocked. The explicit play controls remain usable.
++        });
++      }
++    };
++
++    const onError = () => {
++      if (disposed) return;
++      const message = 'This video could not be decoded.';
++      setMediaReady(false);
++      setMediaError(message);
++      reportError(new Error(message));
++    };
++
++    video.addEventListener('loadedmetadata', onLoadedMetadata);
++    video.addEventListener('canplay', onCanPlay);
++    video.addEventListener('error', onError);
++    if (video.readyState >= 1) onLoadedMetadata();
++    if (video.readyState >= 3) onCanPlay();
++
++    return () => {
++      disposed = true;
++      video.removeEventListener('loadedmetadata', onLoadedMetadata);
++      video.removeEventListener('canplay', onCanPlay);
++      video.removeEventListener('error', onError);
+       video.pause();
+-      setPlaying(false);
+-      return;
+-    }
+-    if (autoPlayRef.current) {
+-      video.play().catch(() => {
+-        setPlaying(false);
+-      });
+-    }
+-  }, [source.mode, source.url]);
++      video.removeAttribute('src');
++      video.load();
++      renderer.setVideo(null, false);
++    };
++  }, [resolvedSrc, resolvedStartTime, canvasVersion, reportError]);
+ 
+   useEffect(() => {
+     const video = videoRef.current;
+     if (!video) return;
+     video.muted = muted;
+     video.loop = loop;
+-  }, [muted, loop, source.url]);
++  }, [muted, loop, resolvedSrc]);
++
++  useEffect(() => {
++    rendererRef.current?.setRunning(shouldRender);
++  }, [shouldRender, rendererEpoch]);
++
++  // Playback intent, reduced motion and visibility all settle here. A paused
++  // component freezes the wave clock instead of only pausing the decoder.
++  useEffect(() => {
++    const renderer = rendererRef.current;
++    if (!renderer) return;
++    renderer.setFrozenTime(shouldPlay ? null : renderer.getWaveClock());
++  }, [shouldPlay, rendererEpoch]);
+ 
+   useEffect(() => {
+     const video = videoRef.current;
+-    if (!video || !videoReady) return;
+-    const sync = () => setCurrentTime(video.currentTime);
+-    const timer = window.setInterval(sync, 220);
+-    return () => window.clearInterval(timer);
+-  }, [videoReady, playing]);
+-
+-  useEffect(() => {
+-    const onPointerMove = (event: PointerEvent) => {
++    if (!video || !mediaReady) return;
++    if (shouldPlay) {
++      void video.play().catch(() => {
++        // Keep the decoded frame and the last wave clock if the browser blocks play.
++      });
++    } else {
++      video.pause();
++    }
++  }, [shouldPlay, mediaReady, rendererEpoch]);
++
++  useEffect(() => {
++    const renderer = rendererRef.current;
++    const video = videoRef.current;
++    if (!renderer || !video) return undefined;
++    if (!shouldRender) {
++      video.pause();
++      return undefined;
++    }
++    if (shouldPlayRef.current) {
++      void video.play().catch(() => {});
++    }
++    return undefined;
++  }, [shouldRender, rendererEpoch]);
++
++  // Pointer input is bound to the component's own box, not the window, so two
++  // placements cannot fight over one global pointer.
++  useEffect(() => {
++    const root = rootRef.current;
++    if (!root) return undefined;
++    let activePointer: number | null = null;
++
++    const update = (event: PointerEvent) => {
+       const renderer = rendererRef.current;
+       if (!renderer) return;
+-      const x = event.clientX / Math.max(1, window.innerWidth);
+-      const y = event.clientY / Math.max(1, window.innerHeight);
+-      renderer.setPointer(x, y, true);
+-    };
+-    const onPointerEnd = (event: PointerEvent) => {
+-      // A mouse keeps its eddy while it stays in the window. Touch and pen
+-      // release should let the field settle.
+-      if (event.pointerType !== 'mouse') rendererRef.current?.setPointerActive(false);
+-    };
+-    const onWindowLeave = () => rendererRef.current?.setPointerActive(false);
+-    window.addEventListener('pointermove', onPointerMove, { passive: true });
+-    window.addEventListener('pointerdown', onPointerMove, { passive: true });
+-    window.addEventListener('pointerup', onPointerEnd, { passive: true });
+-    window.addEventListener('pointercancel', onPointerEnd, { passive: true });
+-    window.addEventListener('blur', onWindowLeave);
+-    document.addEventListener('mouseleave', onWindowLeave);
++      const rect = root.getBoundingClientRect();
++      if (rect.width <= 0 || rect.height <= 0) return;
++      renderer.setPointer(
++        (event.clientX - rect.left) / rect.width,
++        (event.clientY - rect.top) / rect.height,
++        true,
++      );
++    };
++    const onDown = (event: PointerEvent) => {
++      update(event);
++      if (event.pointerType !== 'mouse') {
++        activePointer = event.pointerId;
++        if (root.setPointerCapture) {
++          try {
++            root.setPointerCapture(event.pointerId);
++          } catch {
++            // Pointer capture is an optimisation; the field still receives moves.
++          }
++        }
++      }
++    };
++    const onEnd = (event: PointerEvent) => {
++      if (event.pointerId === activePointer) activePointer = null;
++      if (event.pointerType !== 'mouse') {
++        rendererRef.current?.setPointerActive(false);
++      }
++    };
++    const onLeave = (event: PointerEvent) => {
++      // Touch pointers receive a leave when capture retargets the stream to
++      // this element. Only a mouse leaving the box should settle the eddy.
++      if (event.pointerType !== 'mouse' || activePointer !== null) return;
++      rendererRef.current?.setPointerActive(false);
++    };
++    const onBlur = () => {
++      activePointer = null;
++      rendererRef.current?.setPointerActive(false);
++    };
++    const onMove = (event: PointerEvent) => update(event);
++
++    root.addEventListener('pointermove', onMove, { passive: true });
++    root.addEventListener('pointerdown', onDown, { passive: true });
++    root.addEventListener('pointerup', onEnd, { passive: true });
++    root.addEventListener('pointercancel', onEnd, { passive: true });
++    root.addEventListener('pointerleave', onLeave, { passive: true });
++    window.addEventListener('blur', onBlur);
+     return () => {
+-      window.removeEventListener('pointermove', onPointerMove);
+-      window.removeEventListener('pointerdown', onPointerMove);
+-      window.removeEventListener('pointerup', onPointerEnd);
+-      window.removeEventListener('pointercancel', onPointerEnd);
+-      window.removeEventListener('blur', onWindowLeave);
+-      document.removeEventListener('mouseleave', onWindowLeave);
+-    };
+-  }, []);
+-
+-  const openUpload = useCallback(() => fileInputRef.current?.click(), []);
+-
+-  const acceptFile = useCallback((file: File) => {
+-    if (!isVideoFile(file)) {
+-      showNotice('Choose an MP4, WebM, or MOV video.');
+-      return;
+-    }
+-    if (objectUrlRef.current) URL.revokeObjectURL(objectUrlRef.current);
+-    const url = URL.createObjectURL(file);
+-    objectUrlRef.current = url;
+-    autoPlayRef.current = true;
+-    pendingSeekRef.current = 0;
+-    setFileName(file.name);
+-    setSource({ mode: 'file', url, name: file.name });
+-    setControlsOpen(false);
+-    showNotice(`Loaded ${file.name}`);
+-  }, [showNotice]);
+-
+-  useEffect(() => () => {
+-    if (objectUrlRef.current) URL.revokeObjectURL(objectUrlRef.current);
+-  }, []);
+-
+-  const playMotif = useCallback((motif: Motif) => {
+-    const video = videoRef.current;
+-    if (source.mode === 'demo' && activeMotif.id === motif.id && video) {
+-      // Re-selecting the playing reel restarts it from its chosen offset.
+-      video.currentTime = motif.startTime;
+-      video.play().catch(() => setPlaying(false));
+-    } else {
+-      autoPlayRef.current = true;
+-      pendingSeekRef.current = motif.startTime;
+-      setActiveMotifId(motif.id);
+-      setSource({ mode: 'demo', url: motif.file, name: motif.title });
+-      setFileName('');
+-    }
+-    // The shelf is a quick-look control on phones; close the sheet so the
+-    // field fills the screen. Desktop keeps the panel open for the next reel.
+-    if (window.matchMedia('(max-width: 820px)').matches) setControlsOpen(false);
+-  }, [activeMotif.id, source.mode]);
+-
+-  const clearSource = useCallback(() => {
+-    const video = videoRef.current;
+-    if (video) video.pause();
+-    rendererRef.current?.setVideo(null, false);
+-    autoPlayRef.current = false;
+-    setSource({ mode: 'none', url: null, name: '' });
+-    setFileName('');
+-    setVideoReady(false);
+-    setPlaying(false);
+-    setControlsOpen(false);
+-  }, []);
+-
+-  const togglePlayback = useCallback(() => {
+-    const video = videoRef.current;
+-    if (!video || source.mode === 'none') return;
+-    if (video.paused) {
+-      video.play().catch(() => showNotice('Playback was blocked. Press play again.'));
+-    } else {
+-      autoPlayRef.current = false;
+-      video.pause();
+-    }
+-  }, [showNotice, source.mode]);
+-
+-  const handleFileInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+-    const file = event.target.files?.[0];
+-    if (file) acceptFile(file);
+-    event.target.value = '';
+-  };
+-
+-  const onLoadedMetadata = () => {
+-    const video = videoRef.current;
+-    if (!video) return;
+-    setDuration(video.duration);
+-    if (pendingSeekRef.current !== null) {
+-      video.currentTime = Math.min(Math.max(0, pendingSeekRef.current), Math.max(0, video.duration - 0.04));
+-      pendingSeekRef.current = null;
+-    }
+-    // A paused source only uploads on demand. Without this mark, an initial
+-    // deep-link seek can report the new time while the texture keeps the old
+-    // frame until playback resumes.
+-    rendererRef.current?.markVideoDirty();
+-  };
+-
+-  const onCanPlay = () => {
+-    const video = videoRef.current;
+-    if (!video) return;
+-    setVideoReady(true);
+-    rendererRef.current?.markVideoDirty();
+-    // Autoplay is a one-shot intent for a freshly selected source. Without
+-    // clearing it, a paused seek that fires canplay would silently resume.
+-    if (autoPlayRef.current && video.paused) {
+-      autoPlayRef.current = false;
+-      video.play().catch(() => setPlaying(false));
+-    }
+-  };
+-
+-  const onVideoError = () => {
+-    setVideoReady(false);
+-    setVideoError('This video could not be decoded. Try an MP4 or WebM file.');
+-    showNotice('The video could not be played.');
+-  };
+-
+-  const onPlay = () => {
+-    autoPlayRef.current = false;
+-    setPlaying(true);
+-    rendererRef.current?.markVideoDirty();
+-  };
+-  const onPause = () => setPlaying(false);
+-  const onTimeUpdate = () => {
+-    const video = videoRef.current;
+-    if (video) setCurrentTime(video.currentTime);
+-  };
+-
+-  const resetSettings = () => {
+-    setSettings({ ...DEFAULT_SETTINGS, cellSize: viewportDefaultCell() });
+-    showNotice('Field defaults restored.');
+-  };
+-
+-  useEffect(() => {
+-    const onKeyDown = (event: KeyboardEvent) => {
+-      const target = event.target as HTMLElement | null;
+-      if (target && (target.closest('input, textarea, select, button, [contenteditable="true"]'))) return;
+-      if (event.metaKey || event.ctrlKey || event.altKey) return;
+-      if (event.code === 'Space') {
+-        event.preventDefault();
+-        togglePlayback();
+-      } else if (event.key.toLowerCase() === 'm') {
+-        setMuted((value) => !value);
+-      } else if (event.key.toLowerCase() === 'l') {
+-        setLoop((value) => !value);
+-      } else if (event.key.toLowerCase() === 'u') {
+-        openUpload();
+-      } else if (event.key.toLowerCase() === 'c') {
+-        setControlsOpen((value) => !value);
+-      } else if (event.key === 'Escape') {
+-        setControlsOpen(false);
++      root.removeEventListener('pointermove', onMove);
++      root.removeEventListener('pointerdown', onDown);
++      root.removeEventListener('pointerup', onEnd);
++      root.removeEventListener('pointercancel', onEnd);
++      root.removeEventListener('pointerleave', onLeave);
++      window.removeEventListener('blur', onBlur);
++      if (activePointer !== null) rendererRef.current?.setPointerActive(false);
++    };
++  }, [rendererEpoch]);
++
++  useImperativeHandle(ref, () => ({
++    getMetrics: () => rendererRef.current?.getMetrics() ?? null,
++    getSnapshot: () => rendererRef.current?.snapshot() ?? null,
++    getVideoState: () => {
++      const video = videoRef.current;
++      if (!video) return null;
++      return {
++        ready: stateRef.current.mediaReady,
++        playing: Boolean(video.currentSrc) && !video.paused,
++        currentTime: Number.isFinite(video.currentTime) ? video.currentTime : 0,
++        duration: Number.isFinite(video.duration) ? video.duration : 0,
++        readyState: video.readyState,
++        src: video.currentSrc,
++        muted: video.muted,
++        loop: video.loop,
++      };
++    },
++    getWaveClock: () => rendererRef.current?.getWaveClock() ?? 0,
++    play: () => videoRef.current?.play() ?? Promise.resolve(),
++    pause: () => videoRef.current?.pause(),
++    seek: (seconds: number) => new Promise<number>((resolve) => {
++      const video = videoRef.current;
++      if (!video) {
++        resolve(0);
++        return;
+       }
+-    };
+-    window.addEventListener('keydown', onKeyDown);
+-    return () => window.removeEventListener('keydown', onKeyDown);
+-  }, [openUpload, togglePlayback]);
+-
+-  const columns = Math.max(1, Math.ceil(viewport.width / settings.cellSize));
+-  const rows = Math.max(1, Math.ceil(viewport.height / settings.cellSize));
+-  const secondsLabel = useMemo(
+-    () => `${formatTime(currentTime)} / ${duration ? formatTime(duration) : '0:05.0'}`,
+-    [currentTime, duration],
+-  );
+-  const sourceLabel = source.mode === 'none'
+-    ? 'PROCEDURAL FIELD'
+-    : source.mode === 'demo'
+-      ? activeMotif.title.toUpperCase()
+-      : (fileName || 'LOCAL VIDEO').toUpperCase();
+-  const panelOpen = chromeVisible && controlsOpen;
+-
+-  useEffect(() => {
+-    const api = {
+-      getMetrics: () => rendererRef.current?.getMetrics() ?? null,
+-      getSnapshot: () => rendererRef.current?.snapshot() ?? null,
+-      getVideo: () => {
+-        const video = videoRef.current;
+-        if (!video) return null;
+-        return {
+-          readyState: video.readyState,
+-          currentTime: video.currentTime,
+-          duration: video.duration,
+-          paused: video.paused,
+-          muted: video.muted,
+-          loop: video.loop,
+-          src: video.currentSrc,
+-        };
+-      },
+-      pause: () => videoRef.current?.pause(),
+-      play: () => videoRef.current?.play(),
+-      seek: (time: number) => new Promise<number>((resolve) => {
+-        const video = videoRef.current;
+-        if (!video) { resolve(0); return; }
+-        const target = Math.min(Math.max(0, time), Math.max(0, video.duration - 0.04));
+-        const complete = () => {
+-          video.removeEventListener('seeked', complete);
+-          setCurrentTime(video.currentTime);
+-          setVideoReady(video.readyState >= 2);
+-          rendererRef.current?.markVideoDirty();
+-          resolve(video.currentTime);
+-        };
+-        video.addEventListener('seeked', complete);
+-        video.currentTime = target;
+-      }),
+-      setFrozenTime: (value: number | null) => rendererRef.current?.setFrozenTime(value),
+-      setPointer: (x: number, y: number, active = true) => rendererRef.current?.setPointer(x, y, active),
+-      setPointerActive: (active: boolean) => rendererRef.current?.setPointerActive(active),
+-      setSettings: (patch: Partial<WavesSettings>) => setSettings((current) => ({ ...current, ...patch })),
+-      setControlsOpen: (value: boolean) => setControlsOpen(value),
+-      sourceMode: source.mode,
+-      motifId: activeMotif.id,
+-    };
+-    window.__asciiWaves = api;
+-    return () => {
+-      if (window.__asciiWaves === api) delete window.__asciiWaves;
+-    };
+-  }, [source.mode, activeMotif.id]);
++      const target = clamp(seconds, 0, Math.max(0, video.duration - 0.04));
++      const complete = () => {
++        video.removeEventListener('seeked', complete);
++        rendererRef.current?.markVideoDirty();
++        resolve(video.currentTime);
++      };
++      video.addEventListener('seeked', complete);
++      video.currentTime = target;
++    }),
++    setFrozenTime: (seconds: number | null) => rendererRef.current?.setFrozenTime(seconds),
++    setPointer: (x: number, y: number, active = true) => rendererRef.current?.setPointer(x, y, active),
++    setPointerActive: (active: boolean) => rendererRef.current?.setPointerActive(active),
++    markVideoDirty: () => rendererRef.current?.markVideoDirty(),
++  }), []);
++
++  const fallback = Boolean(rendererFailure || contextLost || mediaError);
++  const showFallbackImage = fallback && Boolean(fallbackSrc);
++  const fallbackLabel = rendererFailure
++    ? 'ASCII Waves could not start WebGL 2.'
++    : contextLost
++      ? 'The WebGL context was lost.'
++      : mediaError ?? 'The source video could not be decoded.';
+ 
+   return (
+     <div
+-      className={`shell ${panelOpen ? 'panel-open' : ''} ${chromeVisible ? '' : 'is-bare'}`}
+-      onDragEnter={(event) => {
+-        event.preventDefault();
+-        dragDepth.current += 1;
+-        if (event.dataTransfer.types.includes('Files')) setDragging(true);
+-      }}
+-      onDragOver={(event) => event.preventDefault()}
+-      onDragLeave={(event) => {
+-        event.preventDefault();
+-        dragDepth.current = Math.max(0, dragDepth.current - 1);
+-        if (dragDepth.current === 0) setDragging(false);
+-      }}
+-      onDrop={(event) => {
+-        event.preventDefault();
+-        dragDepth.current = 0;
+-        setDragging(false);
+-        const file = event.dataTransfer.files?.[0];
+-        if (file) acceptFile(file);
+-      }}
++      ref={rootRef}
++      className={[styles.root, className].filter(Boolean).join(' ')}
++      style={style}
++      data-ascii-waves=""
++      data-preset={selectedPreset.id}
++      data-ready={mediaReady ? 'true' : 'false'}
++      data-fallback={fallback ? 'true' : 'false'}
++      data-reduced-motion={reduced ? 'true' : 'false'}
++      data-renderer={rendererFailure || contextLost ? 'unavailable' : 'webgl2'}
++      aria-busy={!mediaReady && !fallback}
+     >
+-      <canvas ref={canvasRef} className="waves-canvas" aria-label="Full-screen ASCII wave field driven by video" />
+-      <div className="field-scrim field-scrim--top" aria-hidden="true" />
+-      <div className="field-scrim field-scrim--bottom" aria-hidden="true" />
+-
++      <canvas
++        key={canvasVersion}
++        ref={canvasRef}
++        className={styles.canvas}
++        role="img"
++        aria-label={ariaLabel}
++        hidden={showFallbackImage}
++      />
+       <video
+         ref={videoRef}
+-        className="source-video"
+-        src={source.url ?? undefined}
++        className={styles.video}
+         muted={muted}
+         loop={loop}
+         playsInline
+         preload="auto"
+-        onLoadedMetadata={onLoadedMetadata}
+-        onCanPlay={onCanPlay}
+-        onPlaying={onPlay}
+-        onPause={onPause}
+-        onPlay={onPlay}
+-        onEnded={() => setPlaying(false)}
+-        onTimeUpdate={onTimeUpdate}
+-        onError={onVideoError}
+         aria-hidden="true"
+         tabIndex={-1}
+       />
+-
+-      {chromeVisible && (
+-        <>
+-          <header className="topbar" data-ui>
+-            <div className="brand-block">
+-              <span className="brand-mark" aria-hidden="true"><span>+</span><span>#</span><span>=</span><span>@</span></span>
+-              <div className="brand-copy">
+-                <span className="brand-name">ASCII WAVES</span>
+-                <span className="brand-sub">PROOF 03&nbsp;&nbsp;/&nbsp;&nbsp;LOCAL</span>
+-              </div>
+-            </div>
+-
+-            <div className="topbar-clock" aria-hidden="true">
+-              <span className={`status-pulse ${playing ? 'is-on' : ''}`} />
+-              <span>{source.mode === 'none' ? 'GENERATED' : playing ? 'PLAYING' : 'PAUSED'}</span>
+-              <span className="clock-divider" />
+-              <span>{secondsLabel}</span>
+-            </div>
+-
+-            <div className="topbar-actions" data-ui>
+-              <div className="transport" aria-label="Video playback">
+-                <button
+-                  type="button"
+-                  className={`icon-button transport-play ${playing ? 'is-active' : ''}`}
+-                  onClick={togglePlayback}
+-                  disabled={source.mode === 'none'}
+-                  aria-label={playing ? 'Pause video' : 'Play video'}
+-                  title={playing ? 'Pause (Space)' : 'Play (Space)'}
+-                >
+-                  <Icon name={playing ? 'pause' : 'play'} size={16} />
+-                </button>
+-                <button
+-                  type="button"
+-                  className={`icon-button ${muted ? '' : 'is-active'}`}
+-                  onClick={() => setMuted((value) => !value)}
+-                  disabled={source.mode === 'none'}
+-                  aria-label={muted ? 'Unmute video' : 'Mute video'}
+-                  aria-pressed={!muted}
+-                  title={muted ? 'Unmute (M)' : 'Mute (M)'}
+-                >
+-                  <Icon name={muted ? 'muted' : 'volume'} size={17} />
+-                </button>
+-                <button
+-                  type="button"
+-                  className={`icon-button ${loop ? 'is-active' : ''}`}
+-                  onClick={() => setLoop((value) => !value)}
+-                  disabled={source.mode === 'none'}
+-                  aria-label={loop ? 'Disable loop' : 'Enable loop'}
+-                  aria-pressed={loop}
+-                  title={loop ? 'Loop on (L)' : 'Loop off (L)'}
+-                >
+-                  <Icon name="loop" size={17} />
+-                </button>
+-              </div>
+-              <span className="topbar-rule" aria-hidden="true" />
+-              <button type="button" className="topbar-text-button" onClick={openUpload}>
+-                <Icon name="upload" size={16} />
+-                <span>Add video</span>
+-              </button>
+-              <button
+-                type="button"
+-                className={`controls-button ${panelOpen ? 'is-open' : ''}`}
+-                onClick={() => setControlsOpen((value) => !value)}
+-                aria-expanded={panelOpen}
+-                aria-controls="ascii-waves-controls"
+-              >
+-                <Icon name="sliders" size={17} />
+-                <span>{panelOpen ? 'Close' : 'Controls'}</span>
+-              </button>
+-            </div>
+-          </header>
+-
+-          <div className="meta-line" data-ui>
+-            <span className={`meta-source ${videoError ? 'has-error' : ''}`}>
+-              <span className={`source-pip ${source.mode !== 'none' && videoReady ? 'is-live' : ''}`} />
+-              {sourceLabel}
+-            </span>
+-            <span className="meta-separator">/</span>
+-            <span>{columns} × {rows} CELLS</span>
+-            <span className="meta-separator">/</span>
+-            <span>{settings.cellSize} PX</span>
+-            {source.mode !== 'none' && !videoReady && <span className="meta-loading">SOURCE LOADING</span>}
+-          </div>
+-
+-          <div className="corner-hint" data-ui>
+-            <span className="hint-cross" aria-hidden="true">+</span>
+-            MOVE POINTER TO DISTURB FIELD
+-          </div>
+-
+-          <div className="mobile-dock" data-ui>
+-            <button
+-              className="dock-play"
+-              type="button"
+-              onClick={togglePlayback}
+-              disabled={source.mode === 'none'}
+-              aria-label={playing ? 'Pause video' : 'Play video'}
+-            >
+-              <Icon name={playing ? 'pause' : 'play'} size={18} />
+-            </button>
+-            <div className="dock-meta">
+-              <span>{sourceLabel}</span>
+-              <span>{secondsLabel}</span>
+-            </div>
+-            <div className="dock-actions">
+-              <button
+-                type="button"
+-                className="dock-icon"
+-                onClick={() => setMuted((value) => !value)}
+-                disabled={source.mode === 'none'}
+-                aria-label={muted ? 'Unmute video' : 'Mute video'}
+-                aria-pressed={!muted}
+-              >
+-                <Icon name={muted ? 'muted' : 'volume'} size={17} />
+-              </button>
+-              <button
+-                type="button"
+-                className={`dock-icon ${loop ? 'is-active' : ''}`}
+-                onClick={() => setLoop((value) => !value)}
+-                disabled={source.mode === 'none'}
+-                aria-label={loop ? 'Disable loop' : 'Enable loop'}
+-                aria-pressed={loop}
+-              >
+-                <Icon name="loop" size={17} />
+-              </button>
+-              <button type="button" className="dock-icon" onClick={openUpload} aria-label="Add video">
+-                <Icon name="upload" size={17} />
+-              </button>
+-              <button
+-                type="button"
+-                className="dock-controls"
+-                onClick={() => setControlsOpen(true)}
+-                aria-expanded={panelOpen}
+-                aria-controls="ascii-waves-controls"
+-                aria-label="Adjust controls"
+-              >
+-                <Icon name="sliders" size={16} />
+-                <span>Adjust</span>
+-              </button>
+-            </div>
+-          </div>
+-
+-          {panelOpen && <button type="button" className="sheet-scrim" onClick={() => setControlsOpen(false)} aria-label="Close controls overlay" />}
+-
+-          <ControlPanel
+-            open={panelOpen}
+-            settings={settings}
+-            onSettings={(next) => setSettings((current) => ({ ...current, ...next }))}
+-            onReset={resetSettings}
+-            onClose={() => setControlsOpen(false)}
+-            source={source.mode}
+-            fileName={fileName}
+-            activeMotif={source.mode === 'demo' ? activeMotif : null}
+-            motifs={MOTIFS}
+-            onMotif={playMotif}
+-            onUpload={openUpload}
+-            onClear={clearSource}
+-            videoReady={videoReady}
+-            videoTimeLabel={source.mode === 'none' ? 'Generated in the shader' : secondsLabel}
+-            playing={playing}
+-            muted={muted}
+-            loop={loop}
+-            transportDisabled={source.mode === 'none'}
+-            onTogglePlay={togglePlayback}
+-            onToggleMute={() => setMuted((value) => !value)}
+-            onToggleLoop={() => setLoop((value) => !value)}
+-          />
+-
+-          {renderError && (
+-            <div className="error-plate" role="alert">
+-              <span className="error-kicker">RENDERER OFFLINE</span>
+-              <h2>WebGL 2 is required for this field.</h2>
+-              <p>{renderError}</p>
+-              <p>Open this page in a current Chrome, Edge, Firefox, or Safari build with hardware acceleration enabled.</p>
+-            </div>
+-          )}
+-
+-          {dragging && (
+-            <div className="drop-screen" data-ui>
+-              <div className="drop-card">
+-                <Icon name="video" size={24} />
+-                <span>DROP VIDEO</span>
+-                <small>Local file · stays on this device</small>
+-              </div>
+-            </div>
+-          )}
+-
+-          <div className={`notice ${notice ? 'is-visible' : ''}`} role="status" aria-live="polite">
+-            {notice || videoError}
+-          </div>
+-        </>
++      {showFallbackImage && (
++        <img
++          className={styles.fallbackImage}
++          src={fallbackSrc}
++          alt={`Fallback still for ${selectedPreset.title}`}
++          draggable={false}
++        />
+       )}
+-
+-      <input
+-        ref={fileInputRef}
+-        type="file"
+-        accept="video/mp4,video/webm,video/quicktime,video/ogg,video/*"
+-        onChange={handleFileInput}
+-        className="file-input"
+-        tabIndex={-1}
+-        aria-hidden="true"
+-      />
++      {fallback && (
++        <div className={styles.fallbackNote} role="status">
++          <span>{fallbackLabel}</span>
++          {!showFallbackImage && <small>WebGL 2 and a decodable source are required.</small>}
++        </div>
++      )}
+     </div>
+   );
+-}
++});
++
++AsciiWaves.displayName = 'AsciiWaves';
++
++export { ASCII_WAVES_PRESETS, DEFAULT_ASCII_WAVES_PRESET };
++export type { AsciiWavesPreset, AsciiWavesPresetId } from './presets';

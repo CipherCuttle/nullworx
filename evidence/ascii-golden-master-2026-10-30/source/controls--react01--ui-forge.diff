@@ -1,0 +1,708 @@
+--- react01/controls
++++ ui-forge/controls
+@@ -1,457 +1,262 @@
+-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
++"use client";
++
++import { useId, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
+ import {
+-  AsciiWaves,
+-  ASCII_WAVES_PRESETS,
+-  ASCII_WAVES_PRESET_ORDER,
+-  type AsciiWavesHandle,
+-  type AsciiWavesPresetId,
+-  type AsciiWavesQuality,
+-  type AsciiWavesVideoState,
+-} from '../components/ascii-waves';
+-import type { RendererMetrics } from '../components/ascii-waves';
+-import styles from './demo.module.css';
+-
+-type Placement = 'hero' | 'card' | 'fullscreen';
+-type MotionMode = 'system' | 'play';
+-
+-const PLACEMENTS: Placement[] = ['hero', 'card', 'fullscreen'];
+-const PLACEMENT_LABELS: Record<Placement, string> = {
+-  hero: 'Hero',
+-  card: 'Card',
+-  fullscreen: 'Fullscreen',
+-};
+-const QUALITIES: AsciiWavesQuality[] = ['high', 'balanced', 'efficient'];
+-const params = new URLSearchParams(window.location.search);
+-
+-function numberParam(name: string): number | null {
+-  if (!params.has(name)) return null;
+-  const value = Number(params.get(name));
+-  return Number.isFinite(value) ? value : null;
++  ArrowDown, ArrowRight, ArrowUpRight, Braces, Check, ChevronDown,
++  CircleHelp, Code2, Copy, Grid2X2, Layers2, MousePointer2,
++  Play, RotateCcw, SlidersHorizontal, Sparkles, Terminal, Type, Waves, X,
++} from "lucide-react";
++import { CommandButton } from "@/registry/new-york/command-button/command-button";
++import { SignalCard } from "@/registry/new-york/signal-card/signal-card";
++import { RevealHeading } from "@/registry/new-york/reveal-heading/reveal-heading";
++import { AsciiWaves } from "@/registry/new-york/ascii-waves/ascii-waves";
++import { componentInfo, type ComponentName, type GalleryItem } from "@/lib/forge";
++import { defaultSettings, getUsage, type PreviewSettings } from "@/lib/usage";
++import styles from "./forge-gallery.module.css";
++
++const icons = { "command-button": MousePointer2, "signal-card": Layers2, "reveal-heading": Type, "ascii-waves": Waves };
++const tabs = ["preview", "code", "usage"] as const;
++type Tab = typeof tabs[number];
++
++function Field({ label, children }: { label: string; children: (id: string) => ReactNode }) {
++  const id = useId();
++  return <div className={styles.field}><label htmlFor={id}>{label}</label>{children(id)}</div>;
+ }
+ 
+-function placementParam(): Placement {
+-  const value = params.get('placement');
+-  return PLACEMENTS.includes(value as Placement) ? value as Placement : 'hero';
++function Toggle({ label, checked, onChange }: { label: string; checked: boolean; onChange: (checked: boolean) => void }) {
++  return (
++    <label className={styles.toggleRow}>
++      <span>{label}</span>
++      <input type="checkbox" checked={checked} onChange={(event) => onChange(event.target.checked)} />
++      <span className={styles.toggleTrack} aria-hidden="true" />
++    </label>
++  );
+ }
+ 
+-function presetParam(): AsciiWavesPresetId {
+-  const value = params.get('preset');
+-  return ASCII_WAVES_PRESET_ORDER.includes(value as AsciiWavesPresetId)
+-    ? value as AsciiWavesPresetId
+-    : 'flower';
+-}
+-
+-function qualityParam(): AsciiWavesQuality {
+-  const value = params.get('quality');
+-  return QUALITIES.includes(value as AsciiWavesQuality) ? value as AsciiWavesQuality : 'high';
+-}
+-
+-const CHROME_VISIBLE = params.get('chrome') !== '0';
+-const INITIAL_PAUSED = params.get('paused') === '1';
+-const INITIAL_TIME = numberParam('time');
+-const INITIAL_FREEZE = numberParam('freeze');
+-const INITIAL_SRC = params.has('src') ? params.get('src') ?? '' : undefined;
+-const TEST_MODE = params.get('test');
+-
+-interface Stats {
+-  fps: number;
+-  columns: number;
+-  rows: number;
+-  cellPx: number;
+-  dpr: number;
+-  maxDpr: number;
+-}
+-
+-interface DemoApi {
+-  getMetrics: () => RendererMetrics | null;
+-  getSnapshot: () => ReturnType<AsciiWavesHandle['getSnapshot']>;
+-  getVideoState: () => AsciiWavesVideoState | null;
+-  getWaveClock: () => number;
+-  getState: () => {
+-    placement: Placement;
+-    preset: AsciiWavesPresetId;
+-    playing: boolean;
+-    motionMode: MotionMode;
+-    quality: AsciiWavesQuality;
+-    chrome: boolean;
+-    ready: boolean;
+-  };
+-  play: () => Promise<void>;
+-  pause: () => void;
+-  seek: (seconds: number) => Promise<number>;
+-  setFrozenTime: (seconds: number | null) => void;
+-  setPointer: (x: number, y: number, active?: boolean) => void;
+-  setPointerActive: (active: boolean) => void;
+-  setPlacement: (value: Placement) => void;
+-  setPreset: (value: AsciiWavesPresetId) => void;
+-  setPlaying: (value: boolean) => void;
+-}
+-
+-declare global {
+-  interface Window {
+-    __asciiWavesReact?: DemoApi;
+-  }
+-}
+-
+-export default function App() {
+-  return TEST_MODE === 'multi' ? <MultiInstanceTest /> : <ReviewApp />;
+-}
+-
+-function ReviewApp() {
+-  const [placement, setPlacementState] = useState<Placement>(placementParam);
+-  const [preset, setPresetState] = useState<AsciiWavesPresetId>(presetParam);
+-  const [quality, setQuality] = useState<AsciiWavesQuality>(qualityParam);
+-  const [playing, setPlaying] = useState(!INITIAL_PAUSED);
+-  const [motionMode, setMotionMode] = useState<MotionMode>(params.get('motion') === 'play' ? 'play' : 'system');
+-  const [ready, setReady] = useState(false);
+-  const [stats, setStats] = useState<Stats | null>(null);
+-  const [videoState, setVideoState] = useState<AsciiWavesVideoState | null>(null);
+-  const [notice, setNotice] = useState('');
+-  const wavesRef = useRef<AsciiWavesHandle>(null);
+-  const initialApplied = useRef(false);
+-
+-  const presetInfo = ASCII_WAVES_PRESETS[preset];
+-
+-  const setPlacement = useCallback((next: Placement) => {
+-    setPlacementState(next);
+-    setReady(false);
+-    setNotice('');
+-  }, []);
+-
+-  const choosePreset = useCallback((next: AsciiWavesPresetId) => {
+-    setPresetState(next);
+-    setReady(false);
+-    setNotice(`${ASCII_WAVES_PRESETS[next].title} selected.`);
+-  }, []);
+-
+-  const onWavesReady = useCallback(() => {
+-    setReady(true);
+-    if (initialApplied.current) return;
+-    initialApplied.current = true;
+-    if (INITIAL_TIME === null && INITIAL_FREEZE === null && !INITIAL_PAUSED) return;
+-    // Let the media-ready pause effect settle before applying a deterministic
+-    // review frame (used by the fidelity and motion evidence scripts).
+-    window.setTimeout(() => {
+-      const handle = wavesRef.current;
+-      if (!handle) return;
+-      if (INITIAL_TIME !== null) void handle.seek(INITIAL_TIME);
+-      if (INITIAL_PAUSED) handle.pause();
+-      if (INITIAL_FREEZE !== null) handle.setFrozenTime(INITIAL_FREEZE);
+-    }, 120);
+-  }, []);
+-
+-  useEffect(() => {
+-    if (!CHROME_VISIBLE) return undefined;
+-    const timer = window.setInterval(() => {
+-      const metrics = wavesRef.current?.getMetrics();
+-      if (metrics) {
+-        setStats({
+-          fps: metrics.fps,
+-          columns: metrics.columns,
+-          rows: metrics.rows,
+-          cellPx: metrics.cellPx,
+-          dpr: metrics.dpr,
+-          maxDpr: metrics.maxDpr,
+-        });
+-      }
+-      setVideoState(wavesRef.current?.getVideoState() ?? null);
+-    }, 600);
+-    return () => window.clearInterval(timer);
+-  }, [placement]);
+-
+-  useEffect(() => {
+-    const api: DemoApi = {
+-      getMetrics: () => wavesRef.current?.getMetrics() ?? null,
+-      getSnapshot: () => wavesRef.current?.getSnapshot() ?? null,
+-      getVideoState: () => wavesRef.current?.getVideoState() ?? null,
+-      getWaveClock: () => wavesRef.current?.getWaveClock() ?? 0,
+-      getState: () => ({ placement, preset, playing, motionMode, quality, chrome: CHROME_VISIBLE, ready }),
+-      play: () => wavesRef.current?.play() ?? Promise.resolve(),
+-      pause: () => wavesRef.current?.pause(),
+-      seek: (seconds: number) => wavesRef.current?.seek(seconds) ?? Promise.resolve(0),
+-      setFrozenTime: (seconds: number | null) => wavesRef.current?.setFrozenTime(seconds),
+-      setPointer: (x: number, y: number, active = true) => wavesRef.current?.setPointer(x, y, active),
+-      setPointerActive: (active: boolean) => wavesRef.current?.setPointerActive(active),
+-      setPlacement,
+-      setPreset: choosePreset,
+-      setPlaying: (value: boolean) => setPlaying(value),
+-    };
+-    window.__asciiWavesReact = api;
+-    return () => {
+-      if (window.__asciiWavesReact === api) delete window.__asciiWavesReact;
+-    };
+-  }, [choosePreset, motionMode, placement, playing, preset, quality, ready, setPlacement]);
+-
+-  useEffect(() => {
+-    const onKeyDown = (event: KeyboardEvent) => {
+-      const target = event.target as HTMLElement | null;
+-      if (target?.closest('input, select, textarea, button, [contenteditable="true"]')) return;
+-      if (event.metaKey || event.ctrlKey || event.altKey) return;
+-      if (event.code === 'Space') {
+-        event.preventDefault();
+-        setPlaying((value) => !value);
+-      }
+-    };
+-    window.addEventListener('keydown', onKeyDown);
+-    return () => window.removeEventListener('keydown', onKeyDown);
+-  }, []);
+-
+-  const sharedProps = useMemo(() => ({
+-    preset,
+-    src: INITIAL_SRC,
+-    cellSize: 'auto' as const,
+-    reducedMotion: motionMode,
+-    quality,
+-    playing,
+-    muted: true,
+-    loop: true,
+-    onReady: onWavesReady,
+-  }), [motionMode, onWavesReady, playing, preset, quality]);
+-
+-  const statsLabel = stats
+-    ? `${stats.columns} × ${stats.rows} cells · ${stats.cellPx} px · ${stats.fps.toFixed(0)} fps · DPR ${stats.dpr.toFixed(1)}`
+-    : 'FIELD LOADING';
+-
+-  const sourceLabel = INITIAL_SRC !== undefined ? 'CUSTOM SOURCE' : presetInfo.title.toUpperCase();
++export function ForgeGallery({ items }: { items: GalleryItem[] }) {
++  const [selected, setSelected] = useState<ComponentName>("command-button");
++  const [tab, setTab] = useState<Tab>("preview");
++  const [sourceIndex, setSourceIndex] = useState(0);
++  const [settings, setSettings] = useState<PreviewSettings>(defaultSettings);
++  const [replay, setReplay] = useState(0);
++  const [message, setMessage] = useState("");
++  const [copied, setCopied] = useState("");
++  const [help, setHelp] = useState(false);
++  const [showcaseMessage, setShowcaseMessage] = useState("");
++  const copyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
++  const item = items.find((entry) => entry.name === selected)!;
++  const info = componentInfo[selected];
++  const usage = getUsage(selected, settings);
++  const button = settings.button;
++  const card = settings.card;
++  const heading = settings.heading;
++  const waves = settings.waves;
++
++  function choose(name: ComponentName) {
++    setSelected(name);
++    setTab("preview");
++    setSourceIndex(0);
++    setMessage("");
++    setCopied("");
++  }
++
++  function update<K extends keyof PreviewSettings>(group: K, value: Partial<PreviewSettings[K]>) {
++    setSettings((current) => ({ ...current, [group]: { ...current[group], ...value } }));
++    setCopied("");
++    setMessage("");
++  }
++
++  async function copy(value: string, key: string) {
++    try {
++      await navigator.clipboard.writeText(value);
++      setCopied(key);
++      setMessage("Copied to clipboard.");
++      if (copyTimer.current) clearTimeout(copyTimer.current);
++      copyTimer.current = setTimeout(() => setCopied(""), 2000);
++    } catch {
++      setMessage("Clipboard unavailable. Open Code or Usage and select the text to copy manually.");
++    }
++  }
++
++  function moveTab(event: KeyboardEvent<HTMLButtonElement>) {
++    const index = tabs.indexOf(tab);
++    const next = event.key === "ArrowRight" ? tabs[(index + 1) % tabs.length]
++      : event.key === "ArrowLeft" ? tabs[(index + tabs.length - 1) % tabs.length]
++      : event.key === "Home" ? tabs[0] : event.key === "End" ? tabs[2] : undefined;
++    if (next) {
++      event.preventDefault();
++      setTab(next);
++      document.getElementById(`tab-${next}`)?.focus();
++    }
++  }
+ 
+   return (
+-    <div className={styles.app} data-placement={placement} data-chrome={CHROME_VISIBLE ? 'on' : 'off'}>
+-      {CHROME_VISIBLE && (
+-        <header className={styles.chrome} data-testid="demo-chrome">
+-          <div className={styles.brandBlock}>
+-            <span className={styles.brandMark} aria-hidden="true"><span>+</span><span>#</span><span>@</span></span>
+-            <span className={styles.brandCopy}>
+-              <strong>ASCII WAVES</strong>
+-              <small>REACT 01 / FLOWER EXTRACTION</small>
+-            </span>
++    <div className={styles.forge}>
++      <a href="#playground" className={styles.skipLink}>Skip to playground</a>
++      <header className={styles.header}>
++        <a href="#" className={styles.brand} aria-label="UI Forge home">
++          <span className={styles.brandMark}><Layers2 size={19} strokeWidth={1.8} /></span>
++          <span>ui<span className={styles.brandLight}>forge</span><span className={styles.brandDot}>.</span></span>
++        </a>
++        <nav aria-label="Primary navigation" className={styles.topNav}>
++          <a href="#collection" aria-current="page">Components <span>{String(items.length).padStart(2, "0")}</span></a>
++          <a href="#showcase">Showcase <ArrowUpRight size={12} /></a>
++        </nav>
++        <div className={styles.headerRight}><span className={styles.version}>v0.1.0</span><span className={styles.headerDivider} /><span className={styles.openCode}><span /> Open code. Yours to shape.</span></div>
++      </header>
++
++      <div className={styles.shell}>
++        <aside className={styles.sidebar}>
++          <div className={styles.sidebarTop}><span className={styles.overline}>THE WORKBENCH</span><span className={styles.sidebarEdition}>001</span></div>
++          <a href="#collection" className={styles.overviewLink}><Grid2X2 size={15} /> Overview <ArrowUpRight size={13} /></a>
++          <div className={styles.sidebarLabel}>COMPONENTS <span>{items.length}</span></div>
++          <nav aria-label="Component library" className={styles.componentNav}>
++            {items.map((entry) => {
++              const Icon = icons[entry.name];
++              return <button key={entry.name} type="button" onClick={() => choose(entry.name)} aria-current={selected === entry.name ? "true" : undefined}><Icon size={16} /><span>{entry.title}</span>{selected === entry.name ? <span className={styles.activeDot} /> : null}</button>;
++            })}
++          </nav>
++          <div className={styles.sidebarLabel}>EXPLORE</div>
++          <a href="#showcase" className={styles.sidebarLink}><Sparkles size={15} /> In good company <ArrowUpRight size={12} /></a>
++          <a href="#foundations" className={styles.sidebarLink}><SlidersHorizontal size={15} /> Design foundations</a>
++          <div className={styles.sidebarNote}>
++            <span className={styles.noteIcon}><Braces size={19} /></span>
++            <strong>Take the good bits.</strong>
++            <p>Copy the source. Make it yours.<br />Build something with character.</p>
++            <a href="#installation">How to use <ArrowRight size={13} /></a>
+           </div>
+-
+-          <nav className={styles.placementNav} aria-label="Demo placement">
+-            {PLACEMENTS.map((value, index) => (
+-              <button
+-                key={value}
+-                type="button"
+-                className={styles.placementButton}
+-                aria-pressed={placement === value}
+-                onClick={() => setPlacement(value)}
+-                data-testid={`placement-${value}`}
+-              >
+-                <span aria-hidden="true">{String.fromCharCode(65 + index)}</span>
+-                {PLACEMENT_LABELS[value]}
+-              </button>
+-            ))}
++          <div className={styles.sidebarFooter}><span className={styles.smallDot} /> Independently crafted<br /><span>React + TypeScript</span></div>
++        </aside>
++
++        <main className={styles.main} id="collection">
++          <div className={styles.breadcrumb}><span>Library</span><span>/</span><strong>Components</strong><span className={styles.breadcrumbRight}><span className={styles.smallDot} /> FOUR SMALL THINGS, DONE WELL</span></div>
++          <section className={styles.hero} aria-labelledby="hero-title">
++            <div className={styles.heroCopy}>
++              <div className={styles.heroEyebrow}><span /> A SMALL LIBRARY FOR BIG IDEAS</div>
++              <h1 id="hero-title">Small components.<br /><span>Strong character.</span><span className={styles.heroAsterisk} aria-hidden="true">✳</span></h1>
++              <p>Thoughtful interactions. Quiet motion. Code you own.<br />A few good building blocks for your next great interface.</p>
++              <a href="#playground" className={styles.textLink}>Find your next detail <ArrowDown size={14} /></a>
++            </div>
++            <div className={styles.heroArtwork} aria-hidden="true">
++              <div className={styles.artOrbit} />
++              <div className={styles.artCard}><span>BUILT TO BE YOURS</span><div className={styles.artGlyph}>✳</div><div className={styles.artCardFoot}><span>FORM / FUNCTION</span><ArrowUpRight size={20} /></div></div>
++              <div className={styles.artStamp}><Code2 size={15} /><span>100%<br />OPEN SOURCE</span></div>
++              <div className={styles.artCoords}>59° 19′ N &nbsp; / &nbsp; EDITION 01</div>
++            </div>
++          </section>
++
++          <div className={styles.collectionBar}><div><span className={styles.overline}>THE COLLECTION</span><span className={styles.count}>{String(items.length).padStart(2, "0")} components</span></div><span className={styles.collectionHint}>Less setup. More making.</span></div>
++          <nav className={styles.collectionCards} aria-label="Choose a component">
++            {items.map((entry) => {
++              const Icon = icons[entry.name];
++              return <button type="button" key={entry.name} onClick={() => choose(entry.name)} aria-pressed={selected === entry.name} className={styles.collectionCard}><span className={styles.collectionIcon}><Icon size={18} /></span><span><strong>{entry.title}</strong><small>{componentInfo[entry.name].category}</small></span><span className={styles.collectionNumber}>{componentInfo[entry.name].number}</span></button>;
++            })}
+           </nav>
+ 
+-          <div className={styles.chromeControls}>
+-            <label className={styles.selectField}>
+-              <span>MOTION</span>
+-              <select
+-                value={preset}
+-                onChange={(event) => choosePreset(event.target.value as AsciiWavesPresetId)}
+-                aria-label="Motion preset"
+-                data-testid="preset-select"
+-              >
+-                {ASCII_WAVES_PRESET_ORDER.map((id) => (
+-                  <option key={id} value={id}>
+-                    {ASCII_WAVES_PRESETS[id].title}{ASCII_WAVES_PRESETS[id].loved ? ' — LOVED' : ' — experimental'}
+-                  </option>
+-                ))}
+-              </select>
+-            </label>
+-
+-            <label className={styles.selectField}>
+-              <span>QUALITY</span>
+-              <select
+-                value={quality}
+-                onChange={(event) => setQuality(event.target.value as AsciiWavesQuality)}
+-                aria-label="Render quality"
+-                data-testid="quality-select"
+-              >
+-                {QUALITIES.map((value) => (
+-                  <option key={value} value={value}>
+-                    {value === 'high' ? 'High · DPR 2' : value === 'balanced' ? 'Balanced · DPR 1.5' : 'Efficient · DPR 1'}
+-                  </option>
+-                ))}
+-              </select>
+-            </label>
+-
+-            <button
+-              type="button"
+-              className={styles.playButton}
+-              onClick={() => setPlaying((value) => !value)}
+-              aria-label={playing ? 'Pause animation' : 'Play animation'}
+-              data-testid="play-toggle"
+-            >
+-              <span className={styles.playGlyph} aria-hidden="true">{playing ? 'Ⅱ' : '▶'}</span>
+-              {playing ? 'PAUSE' : 'PLAY'}
+-            </button>
+-
+-            <button
+-              type="button"
+-              className={styles.motionButton}
+-              onClick={() => setMotionMode((value) => (value === 'system' ? 'play' : 'system'))}
+-              aria-pressed={motionMode === 'play'}
+-              title="Override the operating system's reduced-motion preference"
+-            >
+-              {motionMode === 'system' ? 'MOTION: SYSTEM' : 'MOTION: FORCED'}
+-            </button>
+-          </div>
+-
+-          <div className={styles.statusLine} data-testid="demo-status">
+-            <span className={`${styles.livePip} ${ready ? styles.livePipOn : ''}`} aria-hidden="true" />
+-            <span>{sourceLabel}</span>
+-            <span className={styles.statusDivider} aria-hidden="true" />
+-            <span>{statsLabel}</span>
+-            <span className={styles.statusDivider} aria-hidden="true" />
+-            <span>{videoState ? `${videoState.currentTime.toFixed(1)}s` : '0.0s'}</span>
+-            {presetInfo.experimental && <span className={styles.experimental}>EXPERIMENTAL</span>}
+-          </div>
+-        </header>
+-      )}
+-
+-      {placement === 'hero' && (
+-        <section className={styles.heroStage} data-testid="placement-hero">
+-          <div className={styles.fieldLayer}>
+-            <AsciiWaves
+-              ref={wavesRef}
+-              {...sharedProps}
+-              ariaLabel="ASCII Waves Flower field behind the hero headline"
+-            />
+-          </div>
+-          <div className={styles.heroScrim} aria-hidden="true" />
+-          <div className={styles.heroContent}>
+-            <p className={styles.eyebrow}><span aria-hidden="true" /> THE FLOWER, PRESERVED</p>
+-            <h1>Characters<br />in motion.</h1>
+-            <p className={styles.heroCopy}>
+-              The owner-approved ASCII Waves field, now one reusable React component.
+-              Same source. Same glyphs. Same Flower. One API for hero, card and fullscreen.
+-            </p>
+-            <div className={styles.heroActions}>
+-              <button
+-                type="button"
+-                className={styles.primaryAction}
+-                onClick={() => {
+-                  setNotice('Fullscreen Flower opened.');
+-                  setPlacement('fullscreen');
+-                }}
+-                data-testid="hero-cta"
+-              >
+-                Enter fullscreen <span aria-hidden="true">↗</span>
+-              </button>
+-              <button
+-                type="button"
+-                className={styles.secondaryAction}
+-                onClick={() => setPlacement('card')}
+-              >
+-                See it in a card
+-              </button>
+-            </div>
+-            <p className={styles.lovedLine}><span aria-hidden="true">♥</span> FLOWER IS THE SAVED DEFAULT · CC0</p>
+-          </div>
+-          <div className={styles.heroFooter} aria-hidden="true">
+-            <span>MOVE POINTER TO DISTURB FIELD</span>
+-            <span>ASCII WAVES / REACT 01</span>
+-          </div>
+-        </section>
+-      )}
+-
+-      {placement === 'card' && (
+-        <section className={styles.cardStage} data-testid="placement-card">
+-          <article className={styles.contentCard}>
+-            <div className={styles.cardCopy}>
+-              <p className={styles.cardEyebrow}>THE COMPONENT / IN CONTENT</p>
+-              <h2>A field that belongs<br />to the layout.</h2>
+-              <p>
+-                A responsive card, a fixed aspect ratio, and the same Flower renderer.
+-                No global styles, no page-level canvas, no competing animation loop.
+-              </p>
+-              <dl className={styles.cardFacts}>
+-                <div><dt>Preset</dt><dd>{presetInfo.title}</dd></div>
+-                <div><dt>Licence</dt><dd>{presetInfo.license}</dd></div>
+-                <div><dt>Source</dt><dd>{presetInfo.credit}</dd></div>
+-              </dl>
+-              <div className={styles.cardActions}>
+-                <button type="button" className={styles.primaryActionDark} onClick={() => setPlacement('fullscreen')}>
+-                  Open fullscreen <span aria-hidden="true">↗</span>
+-                </button>
+-                <button type="button" className={styles.textAction} onClick={() => setPlacement('hero')}>
+-                  Back to hero
+-                </button>
++          <section className={styles.playground} id="playground" aria-labelledby="component-title">
++            <div className={styles.componentHeading}>
++              <div><div className={styles.componentTitleRow}><h2 id="component-title">{item.title}</h2><span className={styles.categoryBadge}>{info.category}</span></div><p>{info.description}</p></div>
++              <button type="button" className={styles.iconButton} aria-label="About this component" onClick={() => setHelp((value) => !value)} aria-expanded={help}><CircleHelp size={17} /></button>
++            </div>
++            {help ? <div className={styles.help}>{item.description} Native semantics, visible keyboard focus, and reduced-motion support are included where applicable. <button type="button" aria-label="Close component information" onClick={() => setHelp(false)}><X size={14} /></button></div> : null}
++            <div className={styles.playgroundBody}>
++              <div className={styles.canvasColumn}>
++                <div className={styles.canvasToolbar}>
++                  <div role="tablist" aria-label="Component documentation" className={styles.tabs}>
++                    {tabs.map((value) => <button type="button" key={value} role="tab" id={`tab-${value}`} aria-controls={`panel-${value}`} aria-selected={tab === value} tabIndex={tab === value ? 0 : -1} onClick={() => setTab(value)} onKeyDown={moveTab}>{value === "preview" ? <Play size={12} /> : value === "code" ? <Code2 size={14} /> : <Terminal size={13} />}{value[0].toUpperCase() + value.slice(1)}</button>)}
++                  </div>
++                  <button type="button" className={styles.copyButton} onClick={() => copy(tab === "code" ? item.files[sourceIndex].content : usage, tab === "code" ? "source" : "usage")}>{copied === (tab === "code" ? "source" : "usage") ? <Check size={13} /> : <Copy size={13} />}<span>{copied === (tab === "code" ? "source" : "usage") ? "Copied" : tab === "code" ? "Copy source" : "Copy usage"}</span></button>
++                </div>
++                <div id="panel-preview" role="tabpanel" aria-labelledby="tab-preview" hidden={tab !== "preview"} tabIndex={0}>
++                  <div className={`${styles.canvas} ${selected === "reveal-heading" ? styles.headingCanvas : ""} ${selected === "ascii-waves" ? styles.wavesCanvas : ""}`} data-testid="live-preview">
++                    <span className={styles.canvasLabel}><span /> LIVE PREVIEW</span>
++                    <div className={styles.canvasCross} aria-hidden="true">+</div>
++                    {selected === "command-button" ? <div className={styles.buttonStage}><div className={styles.stageHalo} aria-hidden="true" /><CommandButton variant={button.variant} accent={button.accent} size={button.size} loading={button.loading} disabled={button.disabled} showArrow={button.showArrow} onClick={() => setMessage("Command received. Your next good idea starts here.")}>{button.label || "Make something good"}</CommandButton><span className={styles.stageHint}>A SMALL NUDGE FORWARD.</span></div>
++                      : selected === "signal-card" ? <div className={styles.cardStage}><SignalCard heading={card.heading} metric={card.metric} description={card.description} status={card.status === "none" ? undefined : card.status} actions={card.actions ? <button type="button" className={styles.cardAction} onClick={() => setMessage("Report opened. Revenue is up 12.8% this month.")}>View report <ArrowUpRight size={14} /></button> : undefined} /></div>
++                        : selected === "reveal-heading" ? <div className={styles.headingStage}><span className={styles.headingEyebrow}>MAKE EVERY WORD COUNT.</span><RevealHeading key={`${replay}-${heading.text}-${heading.duration}-${heading.delay}-${heading.as}`} {...heading} /><button className={styles.replayButton} type="button" onClick={() => setReplay((value) => value + 1)}><RotateCcw size={12} /> Replay animation</button></div>
++                          : <div className={styles.wavesStage}>
++                              <span className={styles.wavesBadge}>FLOWER / LOVED</span>
++                              <AsciiWaves
++                                preset="flower"
++                                cellSize={waves.cellSize}
++                                characters={waves.characters}
++                                color={waves.color}
++                                invert={waves.invert}
++                                speed={waves.speed}
++                                interactionIntensity={waves.interactionIntensity}
++                                quality={waves.quality}
++                                playing={waves.playing}
++                                muted
++                                loop
++                                reducedMotion="system"
++                                ariaLabel="ASCII Waves Flower gallery preview"
++                              />
++                            </div>}
++                    <span className={styles.canvasBottomLeft}>FIG. {info.number} <span>—</span> {info.category.toUpperCase()}</span><span className={styles.canvasBottomRight}>100% ↗</span>
++                  </div>
++                </div>
++                <div id="panel-code" role="tabpanel" aria-labelledby="tab-code" hidden={tab !== "code"} tabIndex={0}>
++                  <div className={styles.fileTabs} aria-label="Source files">{item.files.map((file, index) => <button type="button" key={file.name} aria-pressed={sourceIndex === index} onClick={() => { setSourceIndex(index); setCopied(""); }}>{file.name}</button>)}</div>
++                  <pre className={styles.codeBlock} data-testid="source-code"><code>{item.files[sourceIndex].content}</code></pre>
++                  {selected === "ascii-waves" ? <p className={styles.codeNote}>Copy the five listed files into one folder. The CSS Module is required. Copy <code>public/media/flower.mp4</code> and <code>public/media/motifs/flower-poster.jpg</code> (CC0 1.0) for the Flower preset; no global stylesheet changes.</p> : <p className={styles.codeNote}>Copy both files into the same folder. The CSS Module is required; no global stylesheet changes.</p>}
++                </div>
++                <div id="panel-usage" role="tabpanel" aria-labelledby="tab-usage" hidden={tab !== "usage"} tabIndex={0}>
++                  <div className={styles.usageLabel}><span>demo.tsx</span><span>FOLLOWS YOUR PROPS</span></div>
++                  <pre className={styles.codeBlock} data-testid="usage-code"><code>{usage}</code></pre>
++                  <p className={styles.codeNote}>Install the component first. This example uses the default <code>@/components/ui</code> alias; adjust it to your project.{selected === "ascii-waves" ? " Copy the Flower media into public/media for the named preset." : ""}</p>
++                </div>
++                <div className={styles.canvasFooter}><span><span className={styles.smallDot} /> React + CSS Modules</span><span>No extra dependencies <Check size={12} /></span></div>
+               </div>
+-            </div>
+-            <figure className={styles.cardMedia} data-testid="card-field-frame">
+-              <div className={styles.cardField}>
+-                <AsciiWaves
+-                  ref={wavesRef}
+-                  {...sharedProps}
+-                  ariaLabel="ASCII Waves Flower field inside a responsive content card"
+-                />
+-              </div>
+-              <figcaption>
+-                <span><span aria-hidden="true" /> {presetInfo.title.toUpperCase()} / LIVE FIELD</span>
+-                <span>{statsLabel.split(' · ')[0]}</span>
+-              </figcaption>
+-            </figure>
+-          </article>
+-          <p className={styles.cardFootnote}>ASCII WAVES / REACT 01 · COMPONENT IN A RESPONSIVE CONTENT CARD</p>
+-        </section>
+-      )}
+-
+-      {placement === 'fullscreen' && (
+-        <section className={styles.fullscreenStage} data-testid="placement-fullscreen">
+-          <div className={styles.fullscreenField}>
+-            <AsciiWaves
+-              ref={wavesRef}
+-              {...sharedProps}
+-              ariaLabel="Fullscreen ASCII Waves Flower field"
+-            />
+-          </div>
+-          {CHROME_VISIBLE && (
+-            <>
+-              <div className={styles.fullscreenScrimTop} aria-hidden="true" />
+-              <div className={styles.fullscreenScrimBottom} aria-hidden="true" />
+-            </>
+-          )}
+-          {CHROME_VISIBLE && (
+-            <div className={styles.fullscreenMeta} aria-hidden="true">
+-              <div className={styles.fullscreenTitle}>
+-                <span className={styles.fullscreenKicker}>SAVED DEFAULT / LOVED</span>
+-                <strong>FLOWER</strong>
+-                <span>{presetInfo.subtitle} · {presetInfo.license}</span>
+-              </div>
+-              <div className={styles.fullscreenHint}>MOVE POINTER TO DISTURB FIELD</div>
+-              <div className={styles.fullscreenFoot}>ASCII WAVES / REACT 01</div>
+-            </div>
+-          )}
+-        </section>
+-      )}
+-
+-      <p className={styles.notice} role="status" aria-live="polite">{notice}</p>
++
++              <aside className={styles.controls} aria-label={`${item.title} prop controls`}>
++                <div className={styles.controlsHeading}><span><SlidersHorizontal size={14} /> Make it yours</span><button type="button" aria-label="Reset component props" title="Reset component props" onClick={() => { setSettings(defaultSettings); setReplay((value) => value + 1); setMessage("Props reset to defaults."); }}><RotateCcw size={13} /></button></div>
++                <div className={styles.controlsFields}>
++                  {selected === "command-button" ? <>
++                    <Field label="Label">{(id) => <input id={id} value={button.label} onChange={(event) => update("button", { label: event.target.value })} />}</Field>
++                    <Field label="Variant">{(id) => <span className={styles.selectWrap}><select id={id} aria-label="Variant" value={button.variant} onChange={(event) => update("button", { variant: event.target.value as typeof button.variant })}><option value="solid">Solid</option><option value="outline">Outline</option><option value="ghost">Ghost</option></select><ChevronDown size={13} /></span>}</Field>
++                    <fieldset className={styles.accentField}><legend>Accent</legend><div>{(["copper", "teal", "violet"] as const).map((accent) => <label key={accent} title={accent}><input type="radio" name="accent" value={accent} checked={button.accent === accent} onChange={() => update("button", { accent })} /><span className={styles.swatch} data-accent={accent}>{button.accent === accent ? <Check size={12} /> : null}</span><span>{accent[0].toUpperCase() + accent.slice(1)}</span></label>)}</div></fieldset>
++                    <Field label="Size">{(id) => <span className={styles.selectWrap}><select id={id} aria-label="Size" value={button.size} onChange={(event) => update("button", { size: event.target.value as typeof button.size })}><option value="sm">Small</option><option value="md">Medium</option><option value="lg">Large</option></select><ChevronDown size={13} /></span>}</Field>
++                    <div className={styles.toggleGroup}><Toggle label="Loading" checked={button.loading} onChange={(loading) => update("button", { loading })} /><Toggle label="Disabled" checked={button.disabled} onChange={(disabled) => update("button", { disabled })} /><Toggle label="Show arrow" checked={button.showArrow} onChange={(showArrow) => update("button", { showArrow })} /></div>
++                  </> : selected === "signal-card" ? <>
++                    <Field label="Heading">{(id) => <input id={id} value={card.heading} onChange={(event) => update("card", { heading: event.target.value })} />}</Field>
++                    <Field label="Metric">{(id) => <input id={id} value={card.metric} onChange={(event) => update("card", { metric: event.target.value })} />}</Field>
++                    <Field label="Description">{(id) => <input id={id} value={card.description} onChange={(event) => update("card", { description: event.target.value })} />}</Field>
++                    <Field label="Status">{(id) => <span className={styles.selectWrap}><select id={id} aria-label="Status" value={card.status} onChange={(event) => update("card", { status: event.target.value as typeof card.status })}><option value="positive">Positive · On track</option><option value="neutral">Neutral · Steady</option><option value="warning">Warning · Needs attention</option><option value="none">No status</option></select><ChevronDown size={13} /></span>}</Field>
++                    <Toggle label="Show actions" checked={card.actions} onChange={(actions) => update("card", { actions })} />
++                  </> : selected === "ascii-waves" ? <>
++                    <Field label="Cell size">{(id) => <span className={styles.selectWrap}><select id={id} aria-label="Cell size" value={String(waves.cellSize)} onChange={(event) => update("waves", { cellSize: event.target.value === "auto" ? "auto" : Number(event.target.value) as 12 | 16 | 20 })}><option value="auto">Auto · 12 / 14 / 16</option><option value="12">12 px</option><option value="16">16 px</option><option value="20">20 px</option></select><ChevronDown size={13} /></span>}</Field>
++                    <Field label="Characters">{(id) => <input id={id} maxLength={48} value={waves.characters} onChange={(event) => update("waves", { characters: event.target.value })} />}</Field>
++                    <Field label="Colour">{(id) => <input id={id} type="color" aria-label="Colour" value={waves.color} onChange={(event) => update("waves", { color: event.target.value })} />}</Field>
++                    <Field label={`Speed · ${waves.speed.toFixed(1)}`}>{(id) => <input id={id} aria-label="Speed" type="range" min={0} max={2} step={0.1} value={waves.speed} onChange={(event) => update("waves", { speed: Number(event.target.value) })} />}</Field>
++                    <Field label={`Interaction · ${waves.interactionIntensity.toFixed(1)}`}>{(id) => <input id={id} aria-label="Interaction intensity" type="range" min={0} max={2} step={0.1} value={waves.interactionIntensity} onChange={(event) => update("waves", { interactionIntensity: Number(event.target.value) })} />}</Field>
++                    <Field label="Quality">{(id) => <span className={styles.selectWrap}><select id={id} aria-label="Quality" value={waves.quality} onChange={(event) => update("waves", { quality: event.target.value as typeof waves.quality })}><option value="high">High · DPR 2</option><option value="balanced">Balanced · DPR 1.5</option><option value="efficient">Efficient · DPR 1</option></select><ChevronDown size={13} /></span>}</Field>
++                    <div className={styles.toggleGroup}><Toggle label="Playing" checked={waves.playing} onChange={(playing) => update("waves", { playing })} /><Toggle label="Invert" checked={waves.invert} onChange={(invert) => update("waves", { invert })} /></div>
++                    <div className={styles.wavesNote}><span>FLOWER / CC0 1.0</span><span>Renderer carried over unchanged.</span></div>
++                  </> : <>
++                    <Field label="Text">{(id) => <textarea id={id} rows={3} value={heading.text} onChange={(event) => update("heading", { text: event.target.value })} />}</Field>
++                    <Field label="Heading level">{(id) => <span className={styles.selectWrap}><select id={id} aria-label="Heading level" value={heading.as} onChange={(event) => update("heading", { as: event.target.value as typeof heading.as })}><option value="h1">H1</option><option value="h2">H2</option><option value="h3">H3</option></select><ChevronDown size={13} /></span>}</Field>
++                    <Field label={`Duration · ${heading.duration}ms`}>{(id) => <input id={id} aria-label="Duration" type="range" min={0} max={2000} step={50} value={heading.duration} onChange={(event) => update("heading", { duration: Number(event.target.value) })} />}</Field>
++                    <Field label={`Delay · ${heading.delay}ms`}>{(id) => <input id={id} aria-label="Delay" type="range" min={0} max={1500} step={50} value={heading.delay} onChange={(event) => update("heading", { delay: Number(event.target.value) })} />}</Field>
++                    <div className={styles.motionNote}><Sparkles size={14} /><p>Motion is optional.<br /><span>Automatically respects prefers-reduced-motion.</span></p></div>
++                  </>}
++                </div>
++                <div className={styles.controlsFoot}><span /> Changes happen live.</div>
++              </aside>
++            </div>
++            <p className={styles.feedback} role="status" aria-live="polite">{message}</p>
++          </section>
++
++          <section className={styles.installation} id="installation" aria-labelledby="install-title"><div><Terminal size={17} /><div><h2 id="install-title">A good start is one command away.</h2><p>Run in a shadcn-configured project. React 18+ and CSS Modules. No Tailwind required by these components. ASCII Waves needs WebGL2; its Flower media is a separate CC0 copy.</p></div></div><button className={styles.installCommand} type="button" aria-label="Copy install command" onClick={() => copy(`npx shadcn@3.0.0 add ${window.location.origin}/r/${selected}.json`, "install")}><code>npx shadcn add …/{selected}.json</code>{copied === "install" ? <Check size={14} /> : <Copy size={14} />}</button></section>
++
++          <section className={styles.showcaseSection} id="showcase" aria-labelledby="showcase-title">
++            <div className={styles.sectionHeading}><div><span className={styles.overline}>BETTER TOGETHER</span><h2 id="showcase-title">A few parts. A whole possibility.</h2></div><span className={styles.composedLabel}><Layers2 size={13} /> All three, in good company</span></div>
++            <div className={styles.showcase}><div className={styles.showcaseCopy}><span className={styles.showcaseEyebrow}>YOUR NEXT CHAPTER</span><RevealHeading text="Good things are taking shape." duration={900} /><p>A little momentum goes a long way. Here’s a clear view of where you are, and a good place to go next.</p><CommandButton onClick={() => setShowcaseMessage("Workspace opened. You’re ready to make your next good thing.")}>Open your workspace</CommandButton><p className={styles.showcaseFeedback} role="status">{showcaseMessage}</p></div><div className={styles.showcaseCard}><SignalCard heading="Ideas brought to life" metric="128" description="One small component. A little more possibility." status="positive" statusLabel="Making progress" actions={<CommandButton variant="ghost" size="sm" onClick={() => setShowcaseMessage("Activity opened. 128 ideas brought to life.")}>View activity</CommandButton>} /><span className={styles.showcaseCardCaption}>SMALL DETAILS. COMPOUNDING RETURNS.</span></div><div className={styles.showcaseAsterisk} aria-hidden="true">✳</div></div>
++          </section>
++
++          <section className={styles.foundations} id="foundations" aria-labelledby="foundations-title"><div><span className={styles.overline}>THE COMMON THREAD</span><h2 id="foundations-title">Built from the same good foundations.</h2><p>Warm neutrals, useful contrast, and room to breathe.</p></div><div className={styles.foundationTokens}><div><span className={styles.tokenColors}><i /><i /><i /><i /></span><strong>Earth & ink</strong><small>A considered palette</small></div><div><span className={styles.tokenType}>Aa<span>↗</span></span><strong>Clear by nature</strong><small>System-ready typography</small></div><div><span className={styles.tokenShape}><i /><i /><i /></span><strong>Quiet precision</strong><small>4px rhythm · 8–14px radii</small></div></div></section>
++          <footer className={styles.footer}><span><span className={styles.footerMark}>✳</span> Made with care. Ready for whatever’s next.</span><span>UI FORGE <span>©</span> 2026 <a href="#">Back to top ↑</a></span></footer>
++        </main>
++      </div>
+     </div>
+   );
+ }
+-
+-function MultiInstanceTest() {
+-  const ids: AsciiWavesPresetId[] = ['flower', 'jellyfish', 'koi', 'orion'];
+-  return (
+-    <div className={styles.multiStage} data-testid="multi-instance-stage">
+-      {ids.map((id, index) => (
+-        <section key={id} className={styles.multiCell} data-testid={`instance-${index}`}>
+-          <div className={styles.multiLabel}>
+-            {String(index + 1).padStart(2, '0')} / {ASCII_WAVES_PRESETS[id].title.toUpperCase()}
+-          </div>
+-          <div className={styles.multiField}>
+-            <AsciiWaves
+-              preset={id}
+-              cellSize={12}
+-              playing
+-              muted
+-              loop
+-              ariaLabel={`Independent ASCII Waves field for ${ASCII_WAVES_PRESETS[id].title}`}
+-            />
+-          </div>
+-        </section>
+-      ))}
+-    </div>
+-  );
+-}

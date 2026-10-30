@@ -1,0 +1,37 @@
+--- consolidated-HEAD/site canvas wrapper
++++ consolidated-working/site canvas wrapper
+@@ -15,6 +15,7 @@
+   AsciiWavesProps,
+   AsciiWavesVideoState,
+ } from "./ascii-waves/ascii-waves";
++import { resolvePreset } from "./ascii-waves/presets";
+ import styles from "./ascii-waves-canvas.module.css";
+ 
+ const AsciiWavesRuntime = dynamic(
+@@ -26,6 +27,7 @@
+   AsciiWavesProps,
+   | "preset"
+   | "src"
++  | "startTime"
+   | "cellSize"
+   | "characters"
+   | "color"
+@@ -153,6 +155,10 @@
+     const presetId = props.preset ?? "flower";
+     const needsSourceProbe = props.src === undefined && presetId === "flower";
+     const effectiveSrc = props.src ?? (needsSourceProbe ? selectedSrc ?? undefined : undefined);
++    // Probing chooses a codec for the bundled preset. Passing that URL as src
++    // otherwise makes the preserved component treat it as a custom clip and
++    // start at zero, losing Flower's reviewed opening frame.
++    const effectiveStartTime = props.startTime ?? (needsSourceProbe ? resolvePreset(presetId).startTime : undefined);
+     const sourceSelected = !needsSourceProbe || selectedSrc !== null;
+ 
+     // The CDN-free site serves H.264 first because it is the reviewed source.
+@@ -399,6 +405,7 @@
+           <AsciiWavesRuntime
+             {...props}
+             src={effectiveSrc}
++            startTime={effectiveStartTime}
+             ref={runtimeRef}
+             playing={playing && !blockedHold}
+             reducedMotion={reducedMotion}

@@ -1,0 +1,72 @@
+.field {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+  overflow: hidden;
+  background: #070806;
+  isolation: isolate;
+}
+
+.poster {
+  /* The poster is the fallback under the canvas, never a cover above it. */
+  z-index: 0;
+  object-fit: cover;
+  opacity: 0.76;
+  filter: saturate(0.65) contrast(1.08) brightness(0.7);
+  transform: scale(1.015);
+  pointer-events: none;
+  transition: opacity 480ms var(--ease);
+}
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgb(9 10 8 / 0.36), transparent 28%, transparent 70%, rgb(9 10 8 / 0.6)),
+    radial-gradient(120% 80% at 50% 50%, transparent 50%, rgb(9 10 8 / 0.52) 100%);
+  mix-blend-mode: multiply;
+}
+
+.scan {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0.1;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 2px,
+    rgb(9 10 8 / 0.75) 3px,
+    transparent 4px
+  );
+}
+
+.liveCanvas {
+  position: absolute !important;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+
+/* The live renderer is opaque; dim the fallback further once it is proven
+   to be advancing. On pause/reduced/fallback the poster stays fully present. */
+.field[data-live="true"] .poster {
+  opacity: 0.18;
+}
+
+.observation {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}

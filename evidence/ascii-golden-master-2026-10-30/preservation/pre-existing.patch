@@ -1,0 +1,50 @@
+diff --git a/components/effects/effect-lab-preview.tsx b/components/effects/effect-lab-preview.tsx
+index 59266bc..47eb411 100644
+--- a/components/effects/effect-lab-preview.tsx
++++ b/components/effects/effect-lab-preview.tsx
+@@ -20,7 +20,7 @@ interface Settings {
+ const defaults: Settings = {
+   cellSize: "auto",
+   speed: 1,
+-  quality: "balanced",
++  quality: "high",
+   playing: true,
+   pointerInteraction: true,
+ };
+diff --git a/components/effects/home-field.tsx b/components/effects/home-field.tsx
+index f133f63..ba396ab 100644
+--- a/components/effects/home-field.tsx
++++ b/components/effects/home-field.tsx
+@@ -103,7 +103,7 @@ export function HomeField() {
+             preset="flower"
+             cellSize="auto"
+             speed={1}
+-            quality="efficient"
++            quality="high"
+             pointerInteraction
+             reducedMotion="system"
+             playing={playing}
+diff --git a/lib/effects/manifest.ts b/lib/effects/manifest.ts
+index b984452..7515b7d 100644
+--- a/lib/effects/manifest.ts
++++ b/lib/effects/manifest.ts
+@@ -111,7 +111,7 @@ export function Field() {
+         preset="flower"
+         cellSize="auto"
+         speed={1}
+-        quality="balanced"
++        quality="high"
+         muted
+         loop
+         reducedMotion="system"
+@@ -155,8 +155,8 @@ export function Field() {
+         type: "select",
+         key: "quality",
+         label: "Quality",
+-        description: "Caps render resolution against the browser's device-pixel ratio.",
+-        default: "balanced",
++        description: "Caps render resolution against the browser's device-pixel ratio. High matches the reviewed Proof 03 default (device DPR, capped at 2).",
++        default: "high",
+         options: [
+           { label: "High · DPR 2", value: "high" },
+           { label: "Balanced · DPR 1.5", value: "balanced" },

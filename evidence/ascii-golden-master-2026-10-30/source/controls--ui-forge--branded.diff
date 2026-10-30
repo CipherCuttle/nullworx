@@ -1,0 +1,430 @@
+--- ui-forge/controls
++++ branded/controls
+@@ -1,261 +1,189 @@
+ "use client";
+ 
+-import { useId, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
+-import {
+-  ArrowDown, ArrowRight, ArrowUpRight, Braces, Check, ChevronDown,
+-  CircleHelp, Code2, Copy, Grid2X2, Layers2, MousePointer2,
+-  Play, RotateCcw, SlidersHorizontal, Sparkles, Terminal, Type, Waves, X,
+-} from "lucide-react";
+-import { CommandButton } from "@/registry/new-york/command-button/command-button";
+-import { SignalCard } from "@/registry/new-york/signal-card/signal-card";
+-import { RevealHeading } from "@/registry/new-york/reveal-heading/reveal-heading";
+-import { AsciiWaves } from "@/registry/new-york/ascii-waves/ascii-waves";
+-import { componentInfo, type ComponentName, type GalleryItem } from "@/lib/forge";
+-import { defaultSettings, getUsage, type PreviewSettings } from "@/lib/usage";
+-import styles from "./forge-gallery.module.css";
++import { useId, useRef, useState } from "react";
++import { trackClientEvent } from "@/lib/analytics/client";
++import { AsciiWavesCanvas } from "./ascii-waves-canvas";
++import { CopyButton } from "./copy-button";
++import styles from "./effect-lab-preview.module.css";
+ 
+-const icons = { "command-button": MousePointer2, "signal-card": Layers2, "reveal-heading": Type, "ascii-waves": Waves };
+-const tabs = ["preview", "code", "usage"] as const;
+-type Tab = typeof tabs[number];
++type CellPitch = "auto" | "12" | "16" | "20";
++type Quality = "high" | "balanced" | "efficient";
+ 
+-function Field({ label, children }: { label: string; children: (id: string) => ReactNode }) {
+-  const id = useId();
+-  return <div className={styles.field}><label htmlFor={id}>{label}</label>{children(id)}</div>;
++interface Settings {
++  cellSize: CellPitch;
++  speed: number;
++  quality: Quality;
++  playing: boolean;
++  pointerInteraction: boolean;
+ }
+ 
+-function Toggle({ label, checked, onChange }: { label: string; checked: boolean; onChange: (checked: boolean) => void }) {
+-  return (
+-    <label className={styles.toggleRow}>
+-      <span>{label}</span>
+-      <input type="checkbox" checked={checked} onChange={(event) => onChange(event.target.checked)} />
+-      <span className={styles.toggleTrack} aria-hidden="true" />
+-    </label>
+-  );
+-}
++const defaults: Settings = {
++  cellSize: "auto",
++  speed: 1,
++  quality: "balanced",
++  playing: true,
++  pointerInteraction: true,
++};
+ 
+-export function ForgeGallery({ items }: { items: GalleryItem[] }) {
+-  const [selected, setSelected] = useState<ComponentName>("command-button");
+-  const [tab, setTab] = useState<Tab>("preview");
+-  const [sourceIndex, setSourceIndex] = useState(0);
+-  const [settings, setSettings] = useState<PreviewSettings>(defaultSettings);
+-  const [replay, setReplay] = useState(0);
+-  const [message, setMessage] = useState("");
+-  const [copied, setCopied] = useState("");
+-  const [help, setHelp] = useState(false);
+-  const [showcaseMessage, setShowcaseMessage] = useState("");
+-  const copyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+-  const item = items.find((entry) => entry.name === selected)!;
+-  const info = componentInfo[selected];
+-  const usage = getUsage(selected, settings);
+-  const button = settings.button;
+-  const card = settings.card;
+-  const heading = settings.heading;
+-  const waves = settings.waves;
++export function EffectLabPreview({
++  effectSlug,
++  poster,
++}: {
++  effectSlug: string;
++  poster: { src: string; alt: string };
++}) {
++  const cellId = useId();
++  const qualityId = useId();
++  const speedId = useId();
++  const stageRef = useRef<HTMLDivElement>(null);
++  const interacted = useRef(false);
++  const [settings, setSettings] = useState<Settings>(defaults);
++  const [ready, setReady] = useState(false);
+ 
+-  function choose(name: ComponentName) {
+-    setSelected(name);
+-    setTab("preview");
+-    setSourceIndex(0);
+-    setMessage("");
+-    setCopied("");
++  const config = `const config = {
++  cellSize: "${settings.cellSize}",
++  speed: ${settings.speed},
++  quality: "${settings.quality}",
++  playing: ${settings.playing},
++  pointerInteraction: ${settings.pointerInteraction},
++  reducedMotion: "system",
++} as const;`;
++
++  function noteInteraction() {
++    if (interacted.current) return;
++    interacted.current = true;
++    trackClientEvent("preview_interacted", { effectSlug, location: "effect-preview" });
+   }
+ 
+-  function update<K extends keyof PreviewSettings>(group: K, value: Partial<PreviewSettings[K]>) {
+-    setSettings((current) => ({ ...current, [group]: { ...current[group], ...value } }));
+-    setCopied("");
+-    setMessage("");
+-  }
+-
+-  async function copy(value: string, key: string) {
+-    try {
+-      await navigator.clipboard.writeText(value);
+-      setCopied(key);
+-      setMessage("Copied to clipboard.");
+-      if (copyTimer.current) clearTimeout(copyTimer.current);
+-      copyTimer.current = setTimeout(() => setCopied(""), 2000);
+-    } catch {
+-      setMessage("Clipboard unavailable. Open Code or Usage and select the text to copy manually.");
+-    }
+-  }
+-
+-  function moveTab(event: KeyboardEvent<HTMLButtonElement>) {
+-    const index = tabs.indexOf(tab);
+-    const next = event.key === "ArrowRight" ? tabs[(index + 1) % tabs.length]
+-      : event.key === "ArrowLeft" ? tabs[(index + tabs.length - 1) % tabs.length]
+-      : event.key === "Home" ? tabs[0] : event.key === "End" ? tabs[2] : undefined;
+-    if (next) {
+-      event.preventDefault();
+-      setTab(next);
+-      document.getElementById(`tab-${next}`)?.focus();
+-    }
++  function update<K extends keyof Settings>(key: K, value: Settings[K]) {
++    noteInteraction();
++    setSettings((current) => ({ ...current, [key]: value }));
+   }
+ 
+   return (
+-    <div className={styles.forge}>
+-      <a href="#playground" className={styles.skipLink}>Skip to playground</a>
+-      <header className={styles.header}>
+-        <a href="#" className={styles.brand} aria-label="UI Forge home">
+-          <span className={styles.brandMark}><Layers2 size={19} strokeWidth={1.8} /></span>
+-          <span>ui<span className={styles.brandLight}>forge</span><span className={styles.brandDot}>.</span></span>
+-        </a>
+-        <nav aria-label="Primary navigation" className={styles.topNav}>
+-          <a href="#collection" aria-current="page">Components <span>{String(items.length).padStart(2, "0")}</span></a>
+-          <a href="#showcase">Showcase <ArrowUpRight size={12} /></a>
+-        </nav>
+-        <div className={styles.headerRight}><span className={styles.version}>v0.1.0</span><span className={styles.headerDivider} /><span className={styles.openCode}><span /> Open code. Yours to shape.</span></div>
+-      </header>
++    <div className={styles.wrapper}>
++      <div className={styles.toolbar}>
++        <span>
++          <span className={styles.liveDot} /> Live material
++        </span>
++        <span className={styles.renderState}>{ready ? "WEBGL2 / ACTIVE" : "LOADING FIELD"}</span>
++        <button
++          className={styles.reset}
++          type="button"
++          onClick={() => {
++            setSettings(defaults);
++            noteInteraction();
++          }}
++        >
++          Reset
++        </button>
++      </div>
+ 
+-      <div className={styles.shell}>
+-        <aside className={styles.sidebar}>
+-          <div className={styles.sidebarTop}><span className={styles.overline}>THE WORKBENCH</span><span className={styles.sidebarEdition}>001</span></div>
+-          <a href="#collection" className={styles.overviewLink}><Grid2X2 size={15} /> Overview <ArrowUpRight size={13} /></a>
+-          <div className={styles.sidebarLabel}>COMPONENTS <span>{items.length}</span></div>
+-          <nav aria-label="Component library" className={styles.componentNav}>
+-            {items.map((entry) => {
+-              const Icon = icons[entry.name];
+-              return <button key={entry.name} type="button" onClick={() => choose(entry.name)} aria-current={selected === entry.name ? "true" : undefined}><Icon size={16} /><span>{entry.title}</span>{selected === entry.name ? <span className={styles.activeDot} /> : null}</button>;
+-            })}
+-          </nav>
+-          <div className={styles.sidebarLabel}>EXPLORE</div>
+-          <a href="#showcase" className={styles.sidebarLink}><Sparkles size={15} /> In good company <ArrowUpRight size={12} /></a>
+-          <a href="#foundations" className={styles.sidebarLink}><SlidersHorizontal size={15} /> Design foundations</a>
+-          <div className={styles.sidebarNote}>
+-            <span className={styles.noteIcon}><Braces size={19} /></span>
+-            <strong>Take the good bits.</strong>
+-            <p>Copy the source. Make it yours.<br />Build something with character.</p>
+-            <a href="#installation">How to use <ArrowRight size={13} /></a>
++      <div
++        className={styles.stage}
++        ref={stageRef}
++        onPointerDown={noteInteraction}
++        data-testid="effect-preview"
++      >
++        <AsciiWavesCanvas
++          poster={poster}
++          preset="flower"
++          cellSize={settings.cellSize === "auto" ? "auto" : (Number(settings.cellSize) as 12 | 16 | 20)}
++          speed={settings.speed}
++          quality={settings.quality}
++          playing={settings.playing}
++          pointerInteraction={settings.pointerInteraction}
++          reducedMotion="system"
++          ariaLabel="ASCII Waves field made from a flowering plant, rendered as moving characters."
++          onReady={() => setReady(true)}
++        />
++        <span className={styles.cornerLabel}>NWX / FIELD 001</span>
++        <span className={styles.cornerState}>{settings.playing ? "MOTION / ON" : "MOTION / HELD"}</span>
++        <span className={styles.reducedNote}>Reduced motion freezes the field automatically.</span>
++      </div>
++
++      <div className={styles.console}>
++        <div className={styles.consoleHead}>
++          <span>Material controls</span>
++          <CopyButton
++            value={config}
++            label="Copy config"
++            effectSlug={effectSlug}
++            className={styles.copyConfig}
++          />
++        </div>
++
++        <div className={styles.controls}>
++          <div className={styles.field}>
++            <label htmlFor={cellId}>Cell pitch</label>
++            <div className={styles.selectWrap}>
++              <select
++                id={cellId}
++                value={settings.cellSize}
++                onChange={(event) => update("cellSize", event.target.value as CellPitch)}
++              >
++                <option value="auto">Auto / 12–16</option>
++                <option value="12">12 px</option>
++                <option value="16">16 px</option>
++                <option value="20">20 px</option>
++              </select>
++              <span aria-hidden="true">⌄</span>
++            </div>
+           </div>
+-          <div className={styles.sidebarFooter}><span className={styles.smallDot} /> Independently crafted<br /><span>React + TypeScript</span></div>
+-        </aside>
+ 
+-        <main className={styles.main} id="collection">
+-          <div className={styles.breadcrumb}><span>Library</span><span>/</span><strong>Components</strong><span className={styles.breadcrumbRight}><span className={styles.smallDot} /> FOUR SMALL THINGS, DONE WELL</span></div>
+-          <section className={styles.hero} aria-labelledby="hero-title">
+-            <div className={styles.heroCopy}>
+-              <div className={styles.heroEyebrow}><span /> A SMALL LIBRARY FOR BIG IDEAS</div>
+-              <h1 id="hero-title">Small components.<br /><span>Strong character.</span><span className={styles.heroAsterisk} aria-hidden="true">✳</span></h1>
+-              <p>Thoughtful interactions. Quiet motion. Code you own.<br />A few good building blocks for your next great interface.</p>
+-              <a href="#playground" className={styles.textLink}>Find your next detail <ArrowDown size={14} /></a>
++          <div className={styles.field}>
++            <label htmlFor={qualityId}>Quality</label>
++            <div className={styles.selectWrap}>
++              <select
++                id={qualityId}
++                value={settings.quality}
++                onChange={(event) => update("quality", event.target.value as Quality)}
++              >
++                <option value="high">High / DPR 2</option>
++                <option value="balanced">Balanced / DPR 1.5</option>
++                <option value="efficient">Efficient / DPR 1</option>
++              </select>
++              <span aria-hidden="true">⌄</span>
+             </div>
+-            <div className={styles.heroArtwork} aria-hidden="true">
+-              <div className={styles.artOrbit} />
+-              <div className={styles.artCard}><span>BUILT TO BE YOURS</span><div className={styles.artGlyph}>✳</div><div className={styles.artCardFoot}><span>FORM / FUNCTION</span><ArrowUpRight size={20} /></div></div>
+-              <div className={styles.artStamp}><Code2 size={15} /><span>100%<br />OPEN SOURCE</span></div>
+-              <div className={styles.artCoords}>59° 19′ N &nbsp; / &nbsp; EDITION 01</div>
+-            </div>
+-          </section>
++          </div>
+ 
+-          <div className={styles.collectionBar}><div><span className={styles.overline}>THE COLLECTION</span><span className={styles.count}>{String(items.length).padStart(2, "0")} components</span></div><span className={styles.collectionHint}>Less setup. More making.</span></div>
+-          <nav className={styles.collectionCards} aria-label="Choose a component">
+-            {items.map((entry) => {
+-              const Icon = icons[entry.name];
+-              return <button type="button" key={entry.name} onClick={() => choose(entry.name)} aria-pressed={selected === entry.name} className={styles.collectionCard}><span className={styles.collectionIcon}><Icon size={18} /></span><span><strong>{entry.title}</strong><small>{componentInfo[entry.name].category}</small></span><span className={styles.collectionNumber}>{componentInfo[entry.name].number}</span></button>;
+-            })}
+-          </nav>
++          <div className={`${styles.field} ${styles.rangeField}`}>
++            <label htmlFor={speedId}>
++              Wave speed <output htmlFor={speedId}>{settings.speed.toFixed(1)}</output>
++            </label>
++            <input
++              id={speedId}
++              type="range"
++              min={0}
++              max={2}
++              step={0.1}
++              value={settings.speed}
++              onChange={(event) => update("speed", Number(event.target.value))}
++            />
++          </div>
+ 
+-          <section className={styles.playground} id="playground" aria-labelledby="component-title">
+-            <div className={styles.componentHeading}>
+-              <div><div className={styles.componentTitleRow}><h2 id="component-title">{item.title}</h2><span className={styles.categoryBadge}>{info.category}</span></div><p>{info.description}</p></div>
+-              <button type="button" className={styles.iconButton} aria-label="About this component" onClick={() => setHelp((value) => !value)} aria-expanded={help}><CircleHelp size={17} /></button>
+-            </div>
+-            {help ? <div className={styles.help}>{item.description} Native semantics, visible keyboard focus, and reduced-motion support are included where applicable. <button type="button" aria-label="Close component information" onClick={() => setHelp(false)}><X size={14} /></button></div> : null}
+-            <div className={styles.playgroundBody}>
+-              <div className={styles.canvasColumn}>
+-                <div className={styles.canvasToolbar}>
+-                  <div role="tablist" aria-label="Component documentation" className={styles.tabs}>
+-                    {tabs.map((value) => <button type="button" key={value} role="tab" id={`tab-${value}`} aria-controls={`panel-${value}`} aria-selected={tab === value} tabIndex={tab === value ? 0 : -1} onClick={() => setTab(value)} onKeyDown={moveTab}>{value === "preview" ? <Play size={12} /> : value === "code" ? <Code2 size={14} /> : <Terminal size={13} />}{value[0].toUpperCase() + value.slice(1)}</button>)}
+-                  </div>
+-                  <button type="button" className={styles.copyButton} onClick={() => copy(tab === "code" ? item.files[sourceIndex].content : usage, tab === "code" ? "source" : "usage")}>{copied === (tab === "code" ? "source" : "usage") ? <Check size={13} /> : <Copy size={13} />}<span>{copied === (tab === "code" ? "source" : "usage") ? "Copied" : tab === "code" ? "Copy source" : "Copy usage"}</span></button>
+-                </div>
+-                <div id="panel-preview" role="tabpanel" aria-labelledby="tab-preview" hidden={tab !== "preview"} tabIndex={0}>
+-                  <div className={`${styles.canvas} ${selected === "reveal-heading" ? styles.headingCanvas : ""} ${selected === "ascii-waves" ? styles.wavesCanvas : ""}`} data-testid="live-preview">
+-                    <span className={styles.canvasLabel}><span /> LIVE PREVIEW</span>
+-                    <div className={styles.canvasCross} aria-hidden="true">+</div>
+-                    {selected === "command-button" ? <div className={styles.buttonStage}><div className={styles.stageHalo} aria-hidden="true" /><CommandButton variant={button.variant} accent={button.accent} size={button.size} loading={button.loading} disabled={button.disabled} showArrow={button.showArrow} onClick={() => setMessage("Command received. Your next good idea starts here.")}>{button.label || "Make something good"}</CommandButton><span className={styles.stageHint}>A SMALL NUDGE FORWARD.</span></div>
+-                      : selected === "signal-card" ? <div className={styles.cardStage}><SignalCard heading={card.heading} metric={card.metric} description={card.description} status={card.status === "none" ? undefined : card.status} actions={card.actions ? <button type="button" className={styles.cardAction} onClick={() => setMessage("Report opened. Revenue is up 12.8% this month.")}>View report <ArrowUpRight size={14} /></button> : undefined} /></div>
+-                        : selected === "reveal-heading" ? <div className={styles.headingStage}><span className={styles.headingEyebrow}>MAKE EVERY WORD COUNT.</span><RevealHeading key={`${replay}-${heading.text}-${heading.duration}-${heading.delay}-${heading.as}`} {...heading} /><button className={styles.replayButton} type="button" onClick={() => setReplay((value) => value + 1)}><RotateCcw size={12} /> Replay animation</button></div>
+-                          : <div className={styles.wavesStage}>
+-                              <span className={styles.wavesBadge}>FLOWER / LOVED</span>
+-                              <AsciiWaves
+-                                preset="flower"
+-                                cellSize={waves.cellSize}
+-                                characters={waves.characters}
+-                                color={waves.color}
+-                                invert={waves.invert}
+-                                speed={waves.speed}
+-                                interactionIntensity={waves.interactionIntensity}
+-                                quality={waves.quality}
+-                                playing={waves.playing}
+-                                muted
+-                                loop
+-                                reducedMotion="system"
+-                                ariaLabel="ASCII Waves Flower gallery preview"
+-                              />
+-                            </div>}
+-                    <span className={styles.canvasBottomLeft}>FIG. {info.number} <span>—</span> {info.category.toUpperCase()}</span><span className={styles.canvasBottomRight}>100% ↗</span>
+-                  </div>
+-                </div>
+-                <div id="panel-code" role="tabpanel" aria-labelledby="tab-code" hidden={tab !== "code"} tabIndex={0}>
+-                  <div className={styles.fileTabs} aria-label="Source files">{item.files.map((file, index) => <button type="button" key={file.name} aria-pressed={sourceIndex === index} onClick={() => { setSourceIndex(index); setCopied(""); }}>{file.name}</button>)}</div>
+-                  <pre className={styles.codeBlock} data-testid="source-code"><code>{item.files[sourceIndex].content}</code></pre>
+-                  {selected === "ascii-waves" ? <p className={styles.codeNote}>Copy the five listed files into one folder. The CSS Module is required. Copy <code>public/media/flower.mp4</code> and <code>public/media/motifs/flower-poster.jpg</code> (CC0 1.0) for the Flower preset; no global stylesheet changes.</p> : <p className={styles.codeNote}>Copy both files into the same folder. The CSS Module is required; no global stylesheet changes.</p>}
+-                </div>
+-                <div id="panel-usage" role="tabpanel" aria-labelledby="tab-usage" hidden={tab !== "usage"} tabIndex={0}>
+-                  <div className={styles.usageLabel}><span>demo.tsx</span><span>FOLLOWS YOUR PROPS</span></div>
+-                  <pre className={styles.codeBlock} data-testid="usage-code"><code>{usage}</code></pre>
+-                  <p className={styles.codeNote}>Install the component first. This example uses the default <code>@/components/ui</code> alias; adjust it to your project.{selected === "ascii-waves" ? " Copy the Flower media into public/media for the named preset." : ""}</p>
+-                </div>
+-                <div className={styles.canvasFooter}><span><span className={styles.smallDot} /> React + CSS Modules</span><span>No extra dependencies <Check size={12} /></span></div>
+-              </div>
++          <div className={styles.toggles}>
++            <button
++              type="button"
++              aria-pressed={settings.playing}
++              onClick={() => update("playing", !settings.playing)}
++            >
++              <span className={styles.toggleDot} /> Motion
++            </button>
++            <button
++              type="button"
++              aria-pressed={settings.pointerInteraction}
++              onClick={() => update("pointerInteraction", !settings.pointerInteraction)}
++            >
++              <span className={styles.toggleDot} /> Pointer eddy
++            </button>
++          </div>
++        </div>
+ 
+-              <aside className={styles.controls} aria-label={`${item.title} prop controls`}>
+-                <div className={styles.controlsHeading}><span><SlidersHorizontal size={14} /> Make it yours</span><button type="button" aria-label="Reset component props" title="Reset component props" onClick={() => { setSettings(defaultSettings); setReplay((value) => value + 1); setMessage("Props reset to defaults."); }}><RotateCcw size={13} /></button></div>
+-                <div className={styles.controlsFields}>
+-                  {selected === "command-button" ? <>
+-                    <Field label="Label">{(id) => <input id={id} value={button.label} onChange={(event) => update("button", { label: event.target.value })} />}</Field>
+-                    <Field label="Variant">{(id) => <span className={styles.selectWrap}><select id={id} aria-label="Variant" value={button.variant} onChange={(event) => update("button", { variant: event.target.value as typeof button.variant })}><option value="solid">Solid</option><option value="outline">Outline</option><option value="ghost">Ghost</option></select><ChevronDown size={13} /></span>}</Field>
+-                    <fieldset className={styles.accentField}><legend>Accent</legend><div>{(["copper", "teal", "violet"] as const).map((accent) => <label key={accent} title={accent}><input type="radio" name="accent" value={accent} checked={button.accent === accent} onChange={() => update("button", { accent })} /><span className={styles.swatch} data-accent={accent}>{button.accent === accent ? <Check size={12} /> : null}</span><span>{accent[0].toUpperCase() + accent.slice(1)}</span></label>)}</div></fieldset>
+-                    <Field label="Size">{(id) => <span className={styles.selectWrap}><select id={id} aria-label="Size" value={button.size} onChange={(event) => update("button", { size: event.target.value as typeof button.size })}><option value="sm">Small</option><option value="md">Medium</option><option value="lg">Large</option></select><ChevronDown size={13} /></span>}</Field>
+-                    <div className={styles.toggleGroup}><Toggle label="Loading" checked={button.loading} onChange={(loading) => update("button", { loading })} /><Toggle label="Disabled" checked={button.disabled} onChange={(disabled) => update("button", { disabled })} /><Toggle label="Show arrow" checked={button.showArrow} onChange={(showArrow) => update("button", { showArrow })} /></div>
+-                  </> : selected === "signal-card" ? <>
+-                    <Field label="Heading">{(id) => <input id={id} value={card.heading} onChange={(event) => update("card", { heading: event.target.value })} />}</Field>
+-                    <Field label="Metric">{(id) => <input id={id} value={card.metric} onChange={(event) => update("card", { metric: event.target.value })} />}</Field>
+-                    <Field label="Description">{(id) => <input id={id} value={card.description} onChange={(event) => update("card", { description: event.target.value })} />}</Field>
+-                    <Field label="Status">{(id) => <span className={styles.selectWrap}><select id={id} aria-label="Status" value={card.status} onChange={(event) => update("card", { status: event.target.value as typeof card.status })}><option value="positive">Positive · On track</option><option value="neutral">Neutral · Steady</option><option value="warning">Warning · Needs attention</option><option value="none">No status</option></select><ChevronDown size={13} /></span>}</Field>
+-                    <Toggle label="Show actions" checked={card.actions} onChange={(actions) => update("card", { actions })} />
+-                  </> : selected === "ascii-waves" ? <>
+-                    <Field label="Cell size">{(id) => <span className={styles.selectWrap}><select id={id} aria-label="Cell size" value={String(waves.cellSize)} onChange={(event) => update("waves", { cellSize: event.target.value === "auto" ? "auto" : Number(event.target.value) as 12 | 16 | 20 })}><option value="auto">Auto · 12 / 14 / 16</option><option value="12">12 px</option><option value="16">16 px</option><option value="20">20 px</option></select><ChevronDown size={13} /></span>}</Field>
+-                    <Field label="Characters">{(id) => <input id={id} maxLength={48} value={waves.characters} onChange={(event) => update("waves", { characters: event.target.value })} />}</Field>
+-                    <Field label="Colour">{(id) => <input id={id} type="color" aria-label="Colour" value={waves.color} onChange={(event) => update("waves", { color: event.target.value })} />}</Field>
+-                    <Field label={`Speed · ${waves.speed.toFixed(1)}`}>{(id) => <input id={id} aria-label="Speed" type="range" min={0} max={2} step={0.1} value={waves.speed} onChange={(event) => update("waves", { speed: Number(event.target.value) })} />}</Field>
+-                    <Field label={`Interaction · ${waves.interactionIntensity.toFixed(1)}`}>{(id) => <input id={id} aria-label="Interaction intensity" type="range" min={0} max={2} step={0.1} value={waves.interactionIntensity} onChange={(event) => update("waves", { interactionIntensity: Number(event.target.value) })} />}</Field>
+-                    <Field label="Quality">{(id) => <span className={styles.selectWrap}><select id={id} aria-label="Quality" value={waves.quality} onChange={(event) => update("waves", { quality: event.target.value as typeof waves.quality })}><option value="high">High · DPR 2</option><option value="balanced">Balanced · DPR 1.5</option><option value="efficient">Efficient · DPR 1</option></select><ChevronDown size={13} /></span>}</Field>
+-                    <div className={styles.toggleGroup}><Toggle label="Playing" checked={waves.playing} onChange={(playing) => update("waves", { playing })} /><Toggle label="Invert" checked={waves.invert} onChange={(invert) => update("waves", { invert })} /></div>
+-                    <div className={styles.wavesNote}><span>FLOWER / CC0 1.0</span><span>Renderer carried over unchanged.</span></div>
+-                  </> : <>
+-                    <Field label="Text">{(id) => <textarea id={id} rows={3} value={heading.text} onChange={(event) => update("heading", { text: event.target.value })} />}</Field>
+-                    <Field label="Heading level">{(id) => <span className={styles.selectWrap}><select id={id} aria-label="Heading level" value={heading.as} onChange={(event) => update("heading", { as: event.target.value as typeof heading.as })}><option value="h1">H1</option><option value="h2">H2</option><option value="h3">H3</option></select><ChevronDown size={13} /></span>}</Field>
+-                    <Field label={`Duration · ${heading.duration}ms`}>{(id) => <input id={id} aria-label="Duration" type="range" min={0} max={2000} step={50} value={heading.duration} onChange={(event) => update("heading", { duration: Number(event.target.value) })} />}</Field>
+-                    <Field label={`Delay · ${heading.delay}ms`}>{(id) => <input id={id} aria-label="Delay" type="range" min={0} max={1500} step={50} value={heading.delay} onChange={(event) => update("heading", { delay: Number(event.target.value) })} />}</Field>
+-                    <div className={styles.motionNote}><Sparkles size={14} /><p>Motion is optional.<br /><span>Automatically respects prefers-reduced-motion.</span></p></div>
+-                  </>}
+-                </div>
+-                <div className={styles.controlsFoot}><span /> Changes happen live.</div>
+-              </aside>
+-            </div>
+-            <p className={styles.feedback} role="status" aria-live="polite">{message}</p>
+-          </section>
+-
+-          <section className={styles.installation} id="installation" aria-labelledby="install-title"><div><Terminal size={17} /><div><h2 id="install-title">A good start is one command away.</h2><p>Run in a shadcn-configured project. React 18+ and CSS Modules. No Tailwind required by these components. ASCII Waves needs WebGL2; its Flower media is a separate CC0 copy.</p></div></div><button className={styles.installCommand} type="button" aria-label="Copy install command" onClick={() => copy(`npx shadcn@3.0.0 add ${window.location.origin}/r/${selected}.json`, "install")}><code>npx shadcn add …/{selected}.json</code>{copied === "install" ? <Check size={14} /> : <Copy size={14} />}</button></section>
+-
+-          <section className={styles.showcaseSection} id="showcase" aria-labelledby="showcase-title">
+-            <div className={styles.sectionHeading}><div><span className={styles.overline}>BETTER TOGETHER</span><h2 id="showcase-title">A few parts. A whole possibility.</h2></div><span className={styles.composedLabel}><Layers2 size={13} /> All three, in good company</span></div>
+-            <div className={styles.showcase}><div className={styles.showcaseCopy}><span className={styles.showcaseEyebrow}>YOUR NEXT CHAPTER</span><RevealHeading text="Good things are taking shape." duration={900} /><p>A little momentum goes a long way. Here’s a clear view of where you are, and a good place to go next.</p><CommandButton onClick={() => setShowcaseMessage("Workspace opened. You’re ready to make your next good thing.")}>Open your workspace</CommandButton><p className={styles.showcaseFeedback} role="status">{showcaseMessage}</p></div><div className={styles.showcaseCard}><SignalCard heading="Ideas brought to life" metric="128" description="One small component. A little more possibility." status="positive" statusLabel="Making progress" actions={<CommandButton variant="ghost" size="sm" onClick={() => setShowcaseMessage("Activity opened. 128 ideas brought to life.")}>View activity</CommandButton>} /><span className={styles.showcaseCardCaption}>SMALL DETAILS. COMPOUNDING RETURNS.</span></div><div className={styles.showcaseAsterisk} aria-hidden="true">✳</div></div>
+-          </section>
+-
+-          <section className={styles.foundations} id="foundations" aria-labelledby="foundations-title"><div><span className={styles.overline}>THE COMMON THREAD</span><h2 id="foundations-title">Built from the same good foundations.</h2><p>Warm neutrals, useful contrast, and room to breathe.</p></div><div className={styles.foundationTokens}><div><span className={styles.tokenColors}><i /><i /><i /><i /></span><strong>Earth & ink</strong><small>A considered palette</small></div><div><span className={styles.tokenType}>Aa<span>↗</span></span><strong>Clear by nature</strong><small>System-ready typography</small></div><div><span className={styles.tokenShape}><i /><i /><i /></span><strong>Quiet precision</strong><small>4px rhythm · 8–14px radii</small></div></div></section>
+-          <footer className={styles.footer}><span><span className={styles.footerMark}>✳</span> Made with care. Ready for whatever’s next.</span><span>UI FORGE <span>©</span> 2026 <a href="#">Back to top ↑</a></span></footer>
+-        </main>
++        <p className={styles.consoleFoot}>
++          Changes are live. Motion off freezes the wave clock, video frame and pointer response
++          together.
++        </p>
+       </div>
+     </div>
+   );

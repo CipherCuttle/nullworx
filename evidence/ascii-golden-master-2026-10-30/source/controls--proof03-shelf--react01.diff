@@ -1,0 +1,821 @@
+--- proof03-shelf/controls
++++ react01/controls
+@@ -1,376 +1,457 @@
+-import type { ChangeEvent, ReactNode } from 'react';
+-import type { WavesSettings } from '../renderer';
+-import type { Motif } from '../motifs';
+-import { Icon } from './Icon';
+-
+-export type SourceMode = 'demo' | 'file' | 'none';
+-
+-interface SliderProps {
+-  label: string;
+-  value: number;
+-  min: number;
+-  max: number;
+-  step: number;
+-  format?: (value: number) => string;
+-  onChange: (value: number) => void;
+-}
+-
+-function Slider({ label, value, min, max, step, format, onChange }: SliderProps) {
+-  const progress = ((value - min) / (max - min)) * 100;
++import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
++import {
++  AsciiWaves,
++  ASCII_WAVES_PRESETS,
++  ASCII_WAVES_PRESET_ORDER,
++  type AsciiWavesHandle,
++  type AsciiWavesPresetId,
++  type AsciiWavesQuality,
++  type AsciiWavesVideoState,
++} from '../components/ascii-waves';
++import type { RendererMetrics } from '../components/ascii-waves';
++import styles from './demo.module.css';
++
++type Placement = 'hero' | 'card' | 'fullscreen';
++type MotionMode = 'system' | 'play';
++
++const PLACEMENTS: Placement[] = ['hero', 'card', 'fullscreen'];
++const PLACEMENT_LABELS: Record<Placement, string> = {
++  hero: 'Hero',
++  card: 'Card',
++  fullscreen: 'Fullscreen',
++};
++const QUALITIES: AsciiWavesQuality[] = ['high', 'balanced', 'efficient'];
++const params = new URLSearchParams(window.location.search);
++
++function numberParam(name: string): number | null {
++  if (!params.has(name)) return null;
++  const value = Number(params.get(name));
++  return Number.isFinite(value) ? value : null;
++}
++
++function placementParam(): Placement {
++  const value = params.get('placement');
++  return PLACEMENTS.includes(value as Placement) ? value as Placement : 'hero';
++}
++
++function presetParam(): AsciiWavesPresetId {
++  const value = params.get('preset');
++  return ASCII_WAVES_PRESET_ORDER.includes(value as AsciiWavesPresetId)
++    ? value as AsciiWavesPresetId
++    : 'flower';
++}
++
++function qualityParam(): AsciiWavesQuality {
++  const value = params.get('quality');
++  return QUALITIES.includes(value as AsciiWavesQuality) ? value as AsciiWavesQuality : 'high';
++}
++
++const CHROME_VISIBLE = params.get('chrome') !== '0';
++const INITIAL_PAUSED = params.get('paused') === '1';
++const INITIAL_TIME = numberParam('time');
++const INITIAL_FREEZE = numberParam('freeze');
++const INITIAL_SRC = params.has('src') ? params.get('src') ?? '' : undefined;
++const TEST_MODE = params.get('test');
++
++interface Stats {
++  fps: number;
++  columns: number;
++  rows: number;
++  cellPx: number;
++  dpr: number;
++  maxDpr: number;
++}
++
++interface DemoApi {
++  getMetrics: () => RendererMetrics | null;
++  getSnapshot: () => ReturnType<AsciiWavesHandle['getSnapshot']>;
++  getVideoState: () => AsciiWavesVideoState | null;
++  getWaveClock: () => number;
++  getState: () => {
++    placement: Placement;
++    preset: AsciiWavesPresetId;
++    playing: boolean;
++    motionMode: MotionMode;
++    quality: AsciiWavesQuality;
++    chrome: boolean;
++    ready: boolean;
++  };
++  play: () => Promise<void>;
++  pause: () => void;
++  seek: (seconds: number) => Promise<number>;
++  setFrozenTime: (seconds: number | null) => void;
++  setPointer: (x: number, y: number, active?: boolean) => void;
++  setPointerActive: (active: boolean) => void;
++  setPlacement: (value: Placement) => void;
++  setPreset: (value: AsciiWavesPresetId) => void;
++  setPlaying: (value: boolean) => void;
++}
++
++declare global {
++  interface Window {
++    __asciiWavesReact?: DemoApi;
++  }
++}
++
++export default function App() {
++  return TEST_MODE === 'multi' ? <MultiInstanceTest /> : <ReviewApp />;
++}
++
++function ReviewApp() {
++  const [placement, setPlacementState] = useState<Placement>(placementParam);
++  const [preset, setPresetState] = useState<AsciiWavesPresetId>(presetParam);
++  const [quality, setQuality] = useState<AsciiWavesQuality>(qualityParam);
++  const [playing, setPlaying] = useState(!INITIAL_PAUSED);
++  const [motionMode, setMotionMode] = useState<MotionMode>(params.get('motion') === 'play' ? 'play' : 'system');
++  const [ready, setReady] = useState(false);
++  const [stats, setStats] = useState<Stats | null>(null);
++  const [videoState, setVideoState] = useState<AsciiWavesVideoState | null>(null);
++  const [notice, setNotice] = useState('');
++  const wavesRef = useRef<AsciiWavesHandle>(null);
++  const initialApplied = useRef(false);
++
++  const presetInfo = ASCII_WAVES_PRESETS[preset];
++
++  const setPlacement = useCallback((next: Placement) => {
++    setPlacementState(next);
++    setReady(false);
++    setNotice('');
++  }, []);
++
++  const choosePreset = useCallback((next: AsciiWavesPresetId) => {
++    setPresetState(next);
++    setReady(false);
++    setNotice(`${ASCII_WAVES_PRESETS[next].title} selected.`);
++  }, []);
++
++  const onWavesReady = useCallback(() => {
++    setReady(true);
++    if (initialApplied.current) return;
++    initialApplied.current = true;
++    if (INITIAL_TIME === null && INITIAL_FREEZE === null && !INITIAL_PAUSED) return;
++    // Let the media-ready pause effect settle before applying a deterministic
++    // review frame (used by the fidelity and motion evidence scripts).
++    window.setTimeout(() => {
++      const handle = wavesRef.current;
++      if (!handle) return;
++      if (INITIAL_TIME !== null) void handle.seek(INITIAL_TIME);
++      if (INITIAL_PAUSED) handle.pause();
++      if (INITIAL_FREEZE !== null) handle.setFrozenTime(INITIAL_FREEZE);
++    }, 120);
++  }, []);
++
++  useEffect(() => {
++    if (!CHROME_VISIBLE) return undefined;
++    const timer = window.setInterval(() => {
++      const metrics = wavesRef.current?.getMetrics();
++      if (metrics) {
++        setStats({
++          fps: metrics.fps,
++          columns: metrics.columns,
++          rows: metrics.rows,
++          cellPx: metrics.cellPx,
++          dpr: metrics.dpr,
++          maxDpr: metrics.maxDpr,
++        });
++      }
++      setVideoState(wavesRef.current?.getVideoState() ?? null);
++    }, 600);
++    return () => window.clearInterval(timer);
++  }, [placement]);
++
++  useEffect(() => {
++    const api: DemoApi = {
++      getMetrics: () => wavesRef.current?.getMetrics() ?? null,
++      getSnapshot: () => wavesRef.current?.getSnapshot() ?? null,
++      getVideoState: () => wavesRef.current?.getVideoState() ?? null,
++      getWaveClock: () => wavesRef.current?.getWaveClock() ?? 0,
++      getState: () => ({ placement, preset, playing, motionMode, quality, chrome: CHROME_VISIBLE, ready }),
++      play: () => wavesRef.current?.play() ?? Promise.resolve(),
++      pause: () => wavesRef.current?.pause(),
++      seek: (seconds: number) => wavesRef.current?.seek(seconds) ?? Promise.resolve(0),
++      setFrozenTime: (seconds: number | null) => wavesRef.current?.setFrozenTime(seconds),
++      setPointer: (x: number, y: number, active = true) => wavesRef.current?.setPointer(x, y, active),
++      setPointerActive: (active: boolean) => wavesRef.current?.setPointerActive(active),
++      setPlacement,
++      setPreset: choosePreset,
++      setPlaying: (value: boolean) => setPlaying(value),
++    };
++    window.__asciiWavesReact = api;
++    return () => {
++      if (window.__asciiWavesReact === api) delete window.__asciiWavesReact;
++    };
++  }, [choosePreset, motionMode, placement, playing, preset, quality, ready, setPlacement]);
++
++  useEffect(() => {
++    const onKeyDown = (event: KeyboardEvent) => {
++      const target = event.target as HTMLElement | null;
++      if (target?.closest('input, select, textarea, button, [contenteditable="true"]')) return;
++      if (event.metaKey || event.ctrlKey || event.altKey) return;
++      if (event.code === 'Space') {
++        event.preventDefault();
++        setPlaying((value) => !value);
++      }
++    };
++    window.addEventListener('keydown', onKeyDown);
++    return () => window.removeEventListener('keydown', onKeyDown);
++  }, []);
++
++  const sharedProps = useMemo(() => ({
++    preset,
++    src: INITIAL_SRC,
++    cellSize: 'auto' as const,
++    reducedMotion: motionMode,
++    quality,
++    playing,
++    muted: true,
++    loop: true,
++    onReady: onWavesReady,
++  }), [motionMode, onWavesReady, playing, preset, quality]);
++
++  const statsLabel = stats
++    ? `${stats.columns} × ${stats.rows} cells · ${stats.cellPx} px · ${stats.fps.toFixed(0)} fps · DPR ${stats.dpr.toFixed(1)}`
++    : 'FIELD LOADING';
++
++  const sourceLabel = INITIAL_SRC !== undefined ? 'CUSTOM SOURCE' : presetInfo.title.toUpperCase();
++
+   return (
+-    <label className="field field--range">
+-      <span className="field__top">
+-        <span>{label}</span>
+-        <output>{format ? format(value) : value.toFixed(2)}</output>
+-      </span>
+-      <span className="range-shell">
+-        <span className="range-line" aria-hidden="true" />
+-        <span className="range-fill" style={{ width: `${progress}%` }} aria-hidden="true" />
+-        <input
+-          type="range"
+-          min={min}
+-          max={max}
+-          step={step}
+-          value={value}
+-          onChange={(event: ChangeEvent<HTMLInputElement>) => onChange(Number(event.target.value))}
+-        />
+-      </span>
+-    </label>
+-  );
+-}
+-
+-interface ToggleProps {
+-  label: string;
+-  checked: boolean;
+-  onChange: (value: boolean) => void;
+-}
+-
+-function Toggle({ label, checked, onChange }: ToggleProps) {
+-  return (
+-    <button
+-      type="button"
+-      role="switch"
+-      aria-checked={checked}
+-      className={`switch-row ${checked ? 'is-on' : ''}`}
+-      onClick={() => onChange(!checked)}
+-    >
+-      <span>{label}</span>
+-      <span className="switch" aria-hidden="true"><span /></span>
+-    </button>
+-  );
+-}
+-
+-interface SectionProps {
+-  index: string;
+-  title: string;
+-  children: ReactNode;
+-}
+-
+-function Section({ index, title, children }: SectionProps) {
+-  return (
+-    <section className="control-section">
+-      <div className="section-heading"><span>{index}</span><h2>{title}</h2></div>
+-      {children}
+-    </section>
+-  );
+-}
+-
+-interface ControlPanelProps {
+-  open: boolean;
+-  settings: WavesSettings;
+-  onSettings: (next: Partial<WavesSettings>) => void;
+-  onReset: () => void;
+-  onClose: () => void;
+-  source: SourceMode;
+-  fileName: string;
+-  activeMotif: Motif | null;
+-  motifs: Motif[];
+-  onMotif: (motif: Motif) => void;
+-  onUpload: () => void;
+-  onClear: () => void;
+-  videoReady: boolean;
+-  videoTimeLabel: string;
+-  playing: boolean;
+-  muted: boolean;
+-  loop: boolean;
+-  transportDisabled: boolean;
+-  onTogglePlay: () => void;
+-  onToggleMute: () => void;
+-  onToggleLoop: () => void;
+-}
+-
+-export function ControlPanel({
+-  open,
+-  settings,
+-  onSettings,
+-  onReset,
+-  onClose,
+-  source,
+-  fileName,
+-  activeMotif,
+-  motifs,
+-  onMotif,
+-  onUpload,
+-  onClear,
+-  videoReady,
+-  videoTimeLabel,
+-  playing,
+-  muted,
+-  loop,
+-  transportDisabled,
+-  onTogglePlay,
+-  onToggleMute,
+-  onToggleLoop,
+-}: ControlPanelProps) {
+-  const sourceLabel = source === 'none'
+-    ? 'Procedural field'
+-    : source === 'demo'
+-      ? (activeMotif?.title ?? 'Saved motion')
+-      : fileName || 'Local video';
+-  const sourceSub = source === 'none'
+-    ? 'No video · generated waves'
+-    : `${videoTimeLabel}${videoReady ? '' : ' · loading source'}`;
+-  const sourceBadge = source === 'none'
+-    ? 'GEN'
+-    : source === 'file'
+-      ? 'LOCAL'
+-      : activeMotif?.loved
+-        ? 'LOVED'
+-        : (activeMotif?.badge ?? 'DEMO');
+-  const credit = source === 'demo' ? activeMotif : null;
+-
+-  return (
+-    <aside
+-      className={`control-panel ${open ? 'is-open' : ''}`}
+-      id="ascii-waves-controls"
+-      aria-label="ASCII Waves controls"
+-      aria-hidden={!open}
+-      inert={!open}
+-    >
+-      <button className="tray-handle" type="button" onClick={onClose} aria-label="Close controls">
+-        <span />
+-      </button>
+-      <div className="panel-top">
+-        <div>
+-          <p className="panel-eyebrow">Waves / 03</p>
+-          <h1>Controls</h1>
+-        </div>
+-        <button className="icon-button panel-close" type="button" onClick={onClose} aria-label="Close controls">
+-          <Icon name="close" size={18} />
+-        </button>
+-      </div>
+-
+-      <div className="panel-scroll">
+-        <Section index="01" title="Source">
+-          <div className="source-card">
+-            <span className={`source-dot ${source !== 'none' && videoReady ? 'is-live' : ''}`} aria-hidden="true" />
+-            <div className="source-card__copy">
+-              <strong>{sourceLabel}</strong>
+-              <span>{sourceSub}</span>
+-            </div>
+-            <span className="source-badge">{sourceBadge}</span>
+-          </div>
+-          <div className="source-actions source-actions--two">
+-            <button type="button" className="button button--solid" onClick={onUpload}>
+-              <Icon name="upload" size={14} />
+-              Choose video
+-            </button>
++    <div className={styles.app} data-placement={placement} data-chrome={CHROME_VISIBLE ? 'on' : 'off'}>
++      {CHROME_VISIBLE && (
++        <header className={styles.chrome} data-testid="demo-chrome">
++          <div className={styles.brandBlock}>
++            <span className={styles.brandMark} aria-hidden="true"><span>+</span><span>#</span><span>@</span></span>
++            <span className={styles.brandCopy}>
++              <strong>ASCII WAVES</strong>
++              <small>REACT 01 / FLOWER EXTRACTION</small>
++            </span>
++          </div>
++
++          <nav className={styles.placementNav} aria-label="Demo placement">
++            {PLACEMENTS.map((value, index) => (
++              <button
++                key={value}
++                type="button"
++                className={styles.placementButton}
++                aria-pressed={placement === value}
++                onClick={() => setPlacement(value)}
++                data-testid={`placement-${value}`}
++              >
++                <span aria-hidden="true">{String.fromCharCode(65 + index)}</span>
++                {PLACEMENT_LABELS[value]}
++              </button>
++            ))}
++          </nav>
++
++          <div className={styles.chromeControls}>
++            <label className={styles.selectField}>
++              <span>MOTION</span>
++              <select
++                value={preset}
++                onChange={(event) => choosePreset(event.target.value as AsciiWavesPresetId)}
++                aria-label="Motion preset"
++                data-testid="preset-select"
++              >
++                {ASCII_WAVES_PRESET_ORDER.map((id) => (
++                  <option key={id} value={id}>
++                    {ASCII_WAVES_PRESETS[id].title}{ASCII_WAVES_PRESETS[id].loved ? ' — LOVED' : ' — experimental'}
++                  </option>
++                ))}
++              </select>
++            </label>
++
++            <label className={styles.selectField}>
++              <span>QUALITY</span>
++              <select
++                value={quality}
++                onChange={(event) => setQuality(event.target.value as AsciiWavesQuality)}
++                aria-label="Render quality"
++                data-testid="quality-select"
++              >
++                {QUALITIES.map((value) => (
++                  <option key={value} value={value}>
++                    {value === 'high' ? 'High · DPR 2' : value === 'balanced' ? 'Balanced · DPR 1.5' : 'Efficient · DPR 1'}
++                  </option>
++                ))}
++              </select>
++            </label>
++
+             <button
+               type="button"
+-              className={`button button--ghost ${source === 'none' ? 'is-selected' : ''}`}
+-              onClick={onClear}
+-              aria-pressed={source === 'none'}
++              className={styles.playButton}
++              onClick={() => setPlaying((value) => !value)}
++              aria-label={playing ? 'Pause animation' : 'Play animation'}
++              data-testid="play-toggle"
+             >
+-              No video
++              <span className={styles.playGlyph} aria-hidden="true">{playing ? 'Ⅱ' : '▶'}</span>
++              {playing ? 'PAUSE' : 'PLAY'}
+             </button>
+-          </div>
+-          <div className="sheet-transport" aria-label="Video playback">
++
+             <button
+               type="button"
+-              className="sheet-transport__play"
+-              onClick={onTogglePlay}
+-              disabled={transportDisabled}
+-              aria-label={playing ? 'Pause video' : 'Play video'}
++              className={styles.motionButton}
++              onClick={() => setMotionMode((value) => (value === 'system' ? 'play' : 'system'))}
++              aria-pressed={motionMode === 'play'}
++              title="Override the operating system's reduced-motion preference"
+             >
+-              <Icon name={playing ? 'pause' : 'play'} size={16} />
+-              <span>{playing ? 'Pause' : 'Play'}</span>
++              {motionMode === 'system' ? 'MOTION: SYSTEM' : 'MOTION: FORCED'}
+             </button>
+-            <button
+-              type="button"
+-              className="sheet-icon"
+-              onClick={onToggleMute}
+-              disabled={transportDisabled}
+-              aria-label={muted ? 'Unmute video' : 'Mute video'}
+-              aria-pressed={!muted}
+-            >
+-              <Icon name={muted ? 'muted' : 'volume'} size={16} />
+-            </button>
+-            <button
+-              type="button"
+-              className={`sheet-icon ${loop ? 'is-active' : ''}`}
+-              onClick={onToggleLoop}
+-              disabled={transportDisabled}
+-              aria-label={loop ? 'Disable loop' : 'Enable loop'}
+-              aria-pressed={loop}
+-            >
+-              <Icon name="loop" size={16} />
+-            </button>
+-          </div>
+-
+-          <div className="motion-shelf">
+-            <div className="motion-shelf__head">
+-              <span>Motion shelf</span>
+-              <span>{String(motifs.length).padStart(2, '0')} LOCAL REELS</span>
++          </div>
++
++          <div className={styles.statusLine} data-testid="demo-status">
++            <span className={`${styles.livePip} ${ready ? styles.livePipOn : ''}`} aria-hidden="true" />
++            <span>{sourceLabel}</span>
++            <span className={styles.statusDivider} aria-hidden="true" />
++            <span>{statsLabel}</span>
++            <span className={styles.statusDivider} aria-hidden="true" />
++            <span>{videoState ? `${videoState.currentTime.toFixed(1)}s` : '0.0s'}</span>
++            {presetInfo.experimental && <span className={styles.experimental}>EXPERIMENTAL</span>}
++          </div>
++        </header>
++      )}
++
++      {placement === 'hero' && (
++        <section className={styles.heroStage} data-testid="placement-hero">
++          <div className={styles.fieldLayer}>
++            <AsciiWaves
++              ref={wavesRef}
++              {...sharedProps}
++              ariaLabel="ASCII Waves Flower field behind the hero headline"
++            />
++          </div>
++          <div className={styles.heroScrim} aria-hidden="true" />
++          <div className={styles.heroContent}>
++            <p className={styles.eyebrow}><span aria-hidden="true" /> THE FLOWER, PRESERVED</p>
++            <h1>Characters<br />in motion.</h1>
++            <p className={styles.heroCopy}>
++              The owner-approved ASCII Waves field, now one reusable React component.
++              Same source. Same glyphs. Same Flower. One API for hero, card and fullscreen.
++            </p>
++            <div className={styles.heroActions}>
++              <button
++                type="button"
++                className={styles.primaryAction}
++                onClick={() => {
++                  setNotice('Fullscreen Flower opened.');
++                  setPlacement('fullscreen');
++                }}
++                data-testid="hero-cta"
++              >
++                Enter fullscreen <span aria-hidden="true">↗</span>
++              </button>
++              <button
++                type="button"
++                className={styles.secondaryAction}
++                onClick={() => setPlacement('card')}
++              >
++                See it in a card
++              </button>
+             </div>
+-            <div className="motion-grid">
+-              {motifs.map((motif) => {
+-                const selected = source === 'demo' && activeMotif?.id === motif.id;
+-                return (
+-                  <button
+-                    key={motif.id}
+-                    type="button"
+-                    className={`motion-card ${selected ? 'is-selected' : ''} ${motif.loved ? 'is-loved' : ''}`}
+-                    onClick={() => onMotif(motif)}
+-                    aria-pressed={selected}
+-                    aria-label={`Play ${motif.title}${motif.loved ? ', saved favourite' : ''}`}
+-                    title={`${motif.title} · ${motif.subtitle} · ${motif.credit}`}
+-                  >
+-                    <span className="motion-card__art">
+-                      <img src={motif.poster} alt="" loading="lazy" decoding="async" />
+-                      <span className="motion-card__badge">{motif.badge}</span>
+-                      {motif.loved && (
+-                        <span className="motion-card__heart" aria-hidden="true">
+-                          <Icon name="heart" size={11} />
+-                        </span>
+-                      )}
+-                    </span>
+-                    <span className="motion-card__title">{motif.title}</span>
+-                  </button>
+-                );
+-              })}
++            <p className={styles.lovedLine}><span aria-hidden="true">♥</span> FLOWER IS THE SAVED DEFAULT · CC0</p>
++          </div>
++          <div className={styles.heroFooter} aria-hidden="true">
++            <span>MOVE POINTER TO DISTURB FIELD</span>
++            <span>ASCII WAVES / REACT 01</span>
++          </div>
++        </section>
++      )}
++
++      {placement === 'card' && (
++        <section className={styles.cardStage} data-testid="placement-card">
++          <article className={styles.contentCard}>
++            <div className={styles.cardCopy}>
++              <p className={styles.cardEyebrow}>THE COMPONENT / IN CONTENT</p>
++              <h2>A field that belongs<br />to the layout.</h2>
++              <p>
++                A responsive card, a fixed aspect ratio, and the same Flower renderer.
++                No global styles, no page-level canvas, no competing animation loop.
++              </p>
++              <dl className={styles.cardFacts}>
++                <div><dt>Preset</dt><dd>{presetInfo.title}</dd></div>
++                <div><dt>Licence</dt><dd>{presetInfo.license}</dd></div>
++                <div><dt>Source</dt><dd>{presetInfo.credit}</dd></div>
++              </dl>
++              <div className={styles.cardActions}>
++                <button type="button" className={styles.primaryActionDark} onClick={() => setPlacement('fullscreen')}>
++                  Open fullscreen <span aria-hidden="true">↗</span>
++                </button>
++                <button type="button" className={styles.textAction} onClick={() => setPlacement('hero')}>
++                  Back to hero
++                </button>
++              </div>
+             </div>
+-            <div className="motion-credit">
+-              {credit ? (
+-                <>
+-                  <span>{credit.credit} · {credit.license}</span>
+-                  <a href={credit.sourceUrl} target="_blank" rel="noreferrer">SOURCE</a>
+-                </>
+-              ) : source === 'file' ? (
+-                <span>Local file · stays on this device</span>
+-              ) : (
+-                <span>Generated entirely in the shader</span>
+-              )}
++            <figure className={styles.cardMedia} data-testid="card-field-frame">
++              <div className={styles.cardField}>
++                <AsciiWaves
++                  ref={wavesRef}
++                  {...sharedProps}
++                  ariaLabel="ASCII Waves Flower field inside a responsive content card"
++                />
++              </div>
++              <figcaption>
++                <span><span aria-hidden="true" /> {presetInfo.title.toUpperCase()} / LIVE FIELD</span>
++                <span>{statsLabel.split(' · ')[0]}</span>
++              </figcaption>
++            </figure>
++          </article>
++          <p className={styles.cardFootnote}>ASCII WAVES / REACT 01 · COMPONENT IN A RESPONSIVE CONTENT CARD</p>
++        </section>
++      )}
++
++      {placement === 'fullscreen' && (
++        <section className={styles.fullscreenStage} data-testid="placement-fullscreen">
++          <div className={styles.fullscreenField}>
++            <AsciiWaves
++              ref={wavesRef}
++              {...sharedProps}
++              ariaLabel="Fullscreen ASCII Waves Flower field"
++            />
++          </div>
++          {CHROME_VISIBLE && (
++            <>
++              <div className={styles.fullscreenScrimTop} aria-hidden="true" />
++              <div className={styles.fullscreenScrimBottom} aria-hidden="true" />
++            </>
++          )}
++          {CHROME_VISIBLE && (
++            <div className={styles.fullscreenMeta} aria-hidden="true">
++              <div className={styles.fullscreenTitle}>
++                <span className={styles.fullscreenKicker}>SAVED DEFAULT / LOVED</span>
++                <strong>FLOWER</strong>
++                <span>{presetInfo.subtitle} · {presetInfo.license}</span>
++              </div>
++              <div className={styles.fullscreenHint}>MOVE POINTER TO DISTURB FIELD</div>
++              <div className={styles.fullscreenFoot}>ASCII WAVES / REACT 01</div>
+             </div>
+-          </div>
+-          <p className="field-note">MP4 or WebM. Files stay in this browser; nothing is uploaded.</p>
+-        </Section>
+-
+-        <Section index="02" title="Glyphs">
+-          <label className="field field--text">
+-            <span className="field__top"><span>Characters</span><output>{Array.from(settings.characters).length}</output></span>
+-            <input
+-              type="text"
+-              value={settings.characters}
+-              maxLength={32}
+-              spellCheck={false}
+-              autoComplete="off"
+-              aria-label="Characters"
+-              onChange={(event) => onSettings({ characters: event.target.value })}
++          )}
++        </section>
++      )}
++
++      <p className={styles.notice} role="status" aria-live="polite">{notice}</p>
++    </div>
++  );
++}
++
++function MultiInstanceTest() {
++  const ids: AsciiWavesPresetId[] = ['flower', 'jellyfish', 'koi', 'orion'];
++  return (
++    <div className={styles.multiStage} data-testid="multi-instance-stage">
++      {ids.map((id, index) => (
++        <section key={id} className={styles.multiCell} data-testid={`instance-${index}`}>
++          <div className={styles.multiLabel}>
++            {String(index + 1).padStart(2, '0')} / {ASCII_WAVES_PRESETS[id].title.toUpperCase()}
++          </div>
++          <div className={styles.multiField}>
++            <AsciiWaves
++              preset={id}
++              cellSize={12}
++              playing
++              muted
++              loop
++              ariaLabel={`Independent ASCII Waves field for ${ASCII_WAVES_PRESETS[id].title}`}
+             />
+-          </label>
+-          <div className="field row-field">
+-            <span className="row-field__label">Colour</span>
+-            <span className="colour-control">
+-              <input
+-                type="color"
+-                value={settings.color}
+-                aria-label="Colour"
+-                onChange={(event) => onSettings({ color: event.target.value })}
+-              />
+-              <code>{settings.color.toUpperCase()}</code>
+-            </span>
+-          </div>
+-          <Toggle label="Invert mapping" checked={settings.invert} onChange={(value) => onSettings({ invert: value })} />
+-          <Slider
+-            label="Element size"
+-            value={settings.cellSize}
+-            min={8}
+-            max={32}
+-            step={1}
+-            format={(value) => `${value.toFixed(0)} px`}
+-            onChange={(value) => onSettings({ cellSize: value })}
+-          />
+-        </Section>
+-
+-        <Section index="03" title="Wave">
+-          <Slider
+-            label="Intensity"
+-            value={settings.intensity}
+-            min={0}
+-            max={2}
+-            step={0.01}
+-            onChange={(value) => onSettings({ intensity: value })}
+-          />
+-          <Slider
+-            label="Speed"
+-            value={settings.speed}
+-            min={0}
+-            max={2}
+-            step={0.01}
+-            onChange={(value) => onSettings({ speed: value })}
+-          />
+-          <Slider
+-            label="Wave tension"
+-            value={settings.waveTension}
+-            min={0.1}
+-            max={2}
+-            step={0.01}
+-            onChange={(value) => onSettings({ waveTension: value })}
+-          />
+-          <Slider
+-            label="Wave twist"
+-            value={settings.waveTwist}
+-            min={0}
+-            max={1}
+-            step={0.01}
+-            onChange={(value) => onSettings({ waveTwist: value })}
+-          />
+-          <Slider
+-            label="Noise scale"
+-            value={settings.noiseScale}
+-            min={0.1}
+-            max={5}
+-            step={0.1}
+-            format={(value) => value.toFixed(1)}
+-            onChange={(value) => onSettings({ noiseScale: value })}
+-          />
+-        </Section>
+-
+-        <Section index="04" title="Cursor">
+-          <Toggle
+-            label="Cursor interaction"
+-            checked={settings.cursorInteraction}
+-            onChange={(value) => onSettings({ cursorInteraction: value })}
+-          />
+-          <Slider
+-            label="Pointer response"
+-            value={settings.interactionIntensity}
+-            min={0}
+-            max={2}
+-            step={0.01}
+-            onChange={(value) => onSettings({ interactionIntensity: value })}
+-          />
+-          <p className="field-note">Move across the field. The distortion lets go slowly when you leave.</p>
+-        </Section>
+-
+-        <div className="panel-footer">
+-          <button type="button" className="reset-button" onClick={onReset}>
+-            <Icon name="reset" size={15} />
+-            Reset field defaults
+-          </button>
+-          <p className="proof-note">Proof 03 · local only<br />Original implementation · no paid source accessed.</p>
+-        </div>
+-      </div>
+-    </aside>
++          </div>
++        </section>
++      ))}
++    </div>
+   );
+ }

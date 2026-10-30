@@ -1,0 +1,149 @@
+{
+  "method": "RGB pixel differences of the full CSS-size browser PNGs. The comparison sheets alone are resized for review; all metrics use the untouched full-resolution captures.",
+  "pairs": [
+    {
+      "scene": "desktop-0",
+      "pose": {
+        "videoTime": 2.2,
+        "waveClock": 0
+      },
+      "width": 1440,
+      "height": 900,
+      "mae": 0.0,
+      "maxChannelDifference": 0,
+      "exactPixelsPercent": 100.0,
+      "changedPixelsPercent": 0.0
+    },
+    {
+      "scene": "desktop-1",
+      "pose": {
+        "videoTime": 2.7,
+        "waveClock": 0.5
+      },
+      "width": 1440,
+      "height": 900,
+      "mae": 0.0,
+      "maxChannelDifference": 0,
+      "exactPixelsPercent": 100.0,
+      "changedPixelsPercent": 0.0
+    },
+    {
+      "scene": "desktop-2",
+      "pose": {
+        "videoTime": 3.2,
+        "waveClock": 1
+      },
+      "width": 1440,
+      "height": 900,
+      "mae": 0.0,
+      "maxChannelDifference": 0,
+      "exactPixelsPercent": 100.0,
+      "changedPixelsPercent": 0.0
+    },
+    {
+      "scene": "desktop-3",
+      "pose": {
+        "videoTime": 4.2,
+        "waveClock": 2
+      },
+      "width": 1440,
+      "height": 900,
+      "mae": 0.0,
+      "maxChannelDifference": 0,
+      "exactPixelsPercent": 100.0,
+      "changedPixelsPercent": 0.0
+    },
+    {
+      "scene": "desktop-4",
+      "pose": {
+        "videoTime": 3.2,
+        "waveClock": 1,
+        "pointer": [
+          0.7,
+          0.35
+        ]
+      },
+      "width": 1440,
+      "height": 900,
+      "mae": 0.0,
+      "maxChannelDifference": 0,
+      "exactPixelsPercent": 100.0,
+      "changedPixelsPercent": 0.0
+    },
+    {
+      "scene": "mobile-0",
+      "pose": {
+        "videoTime": 2.7,
+        "waveClock": 0.5
+      },
+      "width": 390,
+      "height": 844,
+      "mae": 0.0,
+      "maxChannelDifference": 0,
+      "exactPixelsPercent": 100.0,
+      "changedPixelsPercent": 0.0
+    },
+    {
+      "scene": "mobile-1",
+      "pose": {
+        "videoTime": 4.2,
+        "waveClock": 2
+      },
+      "width": 390,
+      "height": 844,
+      "mae": 0.0,
+      "maxChannelDifference": 0,
+      "exactPixelsPercent": 100.0,
+      "changedPixelsPercent": 0.0
+    },
+    {
+      "scene": "desktop-dpr1",
+      "pose": {
+        "videoTime": 3.2,
+        "waveClock": 1
+      },
+      "dpr": 1,
+      "width": 1440,
+      "height": 900,
+      "mae": 0.0,
+      "maxChannelDifference": 0,
+      "exactPixelsPercent": 100.0,
+      "changedPixelsPercent": 0.0
+    },
+    {
+      "scene": "desktop-dpr2-native-device-pixels",
+      "pose": {
+        "videoTime": 3.2,
+        "waveClock": 1
+      },
+      "dpr": 2,
+      "scale": "device",
+      "width": 2880,
+      "height": 1800,
+      "mae": 0.0,
+      "maxChannelDifference": 0,
+      "exactPixelsPercent": 100.0,
+      "changedPixelsPercent": 0.0
+    }
+  ],
+  "paused": [
+    {
+      "scene": "home",
+      "width": 487,
+      "height": 434,
+      "mae": 3.311916274756574e-05,
+      "maxChannelDifference": 1,
+      "exactPixelsPercent": 99.99006425117572,
+      "changedPixelsPercent": 0.009935748824269723
+    },
+    {
+      "scene": "lab",
+      "width": 937,
+      "height": 586,
+      "mae": 2.6104176303964313e-05,
+      "maxChannelDifference": 2,
+      "exactPixelsPercent": 99.9936257243909,
+      "changedPixelsPercent": 0.006374275609107565
+    }
+  ]
+}

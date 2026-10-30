@@ -1,0 +1,146 @@
+--- proof03-shelf/presets/motifs
++++ react01/presets/motifs
+@@ -1,84 +1,106 @@
+-export interface Motif {
+-  id: string;
++export type AsciiWavesPresetId = 'flower' | 'jellyfish' | 'koi' | 'smoke' | 'orion';
++
++export interface AsciiWavesPreset {
++  id: AsciiWavesPresetId;
+   title: string;
+   subtitle: string;
+-  file: string;
++  src: string;
+   poster: string;
+-  badge: string;
++  startTime: number;
+   credit: string;
+   license: string;
+   sourceUrl: string;
+-  startTime: number;
+-  loved?: boolean;
++  /** Flower is the owner-approved default and the fidelity baseline. */
++  loved: boolean;
++  /** The four reels the owner marked experimental. */
++  experimental: boolean;
+ }
+ 
+ /**
+- * Locally bundled motion shelf. Each clip is trimmed and lightly graded for
+- * legibility through the ASCII field; no network media is loaded at runtime.
+- * Sources and licences are repeated in CREDITS.md.
++ * The motion shelf from Proof 03, carried over byte-for-byte. The presets use
++ * the same public `/media` layout as the approved app so the component can be
++ * consumed by Next, Vite or any static host. Copy `public/media` with the
++ * component, or pass a custom `src`/`fallbackImage`.
+  */
+-export const MOTIFS: Motif[] = [
+-  {
++export const ASCII_WAVES_PRESETS: Record<AsciiWavesPresetId, AsciiWavesPreset> = {
++  flower: {
+     id: 'flower',
+     title: 'Flower',
+     subtitle: 'Parrot bloom',
+-    file: '/media/flower.mp4',
++    src: '/media/flower.mp4',
+     poster: '/media/motifs/flower-poster.jpg',
+-    badge: 'CC0',
+-    credit: 'MDN',
+-    license: 'CC0',
++    startTime: 2.2,
++    credit: 'MDN contributors',
++    license: 'CC0 1.0',
+     sourceUrl: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',
+-    startTime: 2.2,
+     loved: true,
++    experimental: false,
+   },
+-  {
++  jellyfish: {
+     id: 'jellyfish',
+     title: 'Jellyfish',
+     subtitle: 'Blue drift',
+-    file: '/media/motifs/jellyfish.mp4',
++    src: '/media/motifs/jellyfish.mp4',
+     poster: '/media/motifs/jellyfish-poster.jpg',
+-    badge: 'PEXELS',
++    startTime: 0.4,
+     credit: 'Soly Moses / Pexels',
+     license: 'Pexels License',
+     sourceUrl: 'https://www.pexels.com/video/jellyfish-tank-28156785/',
+-    startTime: 0.4,
++    loved: false,
++    experimental: true,
+   },
+-  {
++  koi: {
+     id: 'koi',
+     title: 'Koi',
+     subtitle: 'Pond',
+-    file: '/media/motifs/koi.mp4',
++    src: '/media/motifs/koi.mp4',
+     poster: '/media/motifs/koi-poster.jpg',
+-    badge: 'PEXELS',
+-    credit: 'Pexels',
++    startTime: 0.4,
++    credit: 'Pexels contributor',
+     license: 'Pexels License',
+     sourceUrl: 'https://www.pexels.com/video/6392574/',
+-    startTime: 0.4,
++    loved: false,
++    experimental: true,
+   },
+-  {
++  smoke: {
+     id: 'smoke',
+     title: 'Smoke',
+     subtitle: 'Colour plumes',
+-    file: '/media/motifs/smoke.mp4',
++    src: '/media/motifs/smoke.mp4',
+     poster: '/media/motifs/smoke-poster.jpg',
+-    badge: 'PEXELS',
+-    credit: 'Pexels',
++    startTime: 0.4,
++    credit: 'Pexels contributor',
+     license: 'Pexels License',
+     sourceUrl: 'https://www.pexels.com/video/2328902/',
+-    startTime: 0.4,
++    loved: false,
++    experimental: true,
+   },
+-  {
+-    id: 'nebula',
++  orion: {
++    id: 'orion',
+     title: 'Orion',
+     subtitle: 'Nebula flight',
+-    file: '/media/motifs/nebula.mp4',
++    src: '/media/motifs/nebula.mp4',
+     poster: '/media/motifs/nebula-poster.jpg',
+-    badge: 'NASA',
+-    credit: "NASA's Scientific Visualization Studio",
++    startTime: 0.2,
++    credit: "NASA's Scientific Visualization Studio / Paul Morris",
+     license: 'Public domain',
+     sourceUrl: 'https://commons.wikimedia.org/wiki/File:Flight_Through_the_Orion_Nebula_in_Visible_Light_(Dome_Version)_(SVS14658).webm',
+-    startTime: 0.2,
++    loved: false,
++    experimental: true,
+   },
++};
++
++export const ASCII_WAVES_PRESET_ORDER: AsciiWavesPresetId[] = [
++  'flower',
++  'jellyfish',
++  'koi',
++  'smoke',
++  'orion',
+ ];
+ 
+-export const DEFAULT_MOTIF = MOTIFS[0];
++export const DEFAULT_ASCII_WAVES_PRESET: AsciiWavesPresetId = 'flower';
++
++export function resolvePreset(id: AsciiWavesPresetId | undefined): AsciiWavesPreset {
++  return ASCII_WAVES_PRESETS[id ?? DEFAULT_ASCII_WAVES_PRESET]
++    ?? ASCII_WAVES_PRESETS[DEFAULT_ASCII_WAVES_PRESET];
++}

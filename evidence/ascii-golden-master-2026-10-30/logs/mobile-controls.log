@@ -1,0 +1,12 @@
+[
+  {
+    "name": "home",
+    "pass": true,
+    "errors": []
+  },
+  {
+    "name": "lab",
+    "pass": true,
+    "errors": []
+  }
+]

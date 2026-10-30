@@ -1,0 +1,242 @@
+{
+  "events": [
+    {
+      "event": "loadedmetadata",
+      "time": 0,
+      "src": "http://127.0.0.1:3220/media/flower.mp4",
+      "now": 723.8999999999069
+    },
+    {
+      "event": "loadedmetadata-microtask",
+      "time": 0,
+      "src": "http://127.0.0.1:3220/media/flower.mp4",
+      "now": 723.8999999999069
+    }
+  ],
+  "stage": {
+    "testid": "home-field",
+    "asciiStage": "true",
+    "loaded": "true",
+    "ready": "true",
+    "live": "true",
+    "playback": "live",
+    "videoTime": "0.213",
+    "frameCount": "46",
+    "waveClock": "0.409",
+    "pointerStrength": "0"
+  },
+  "canvas": {
+    "css": [
+      485.734375,
+      433.6875
+    ],
+    "backing": [
+      971,
+      867
+    ]
+  },
+  "api": true,
+  "refs": [
+    {
+      "name": 5,
+      "keys": [
+        "__reactFiber$9sq6e9mcf08",
+        "__reactProps$9sq6e9mcf08"
+      ]
+    },
+    {
+      "name": "AsciiWaves",
+      "keys": [
+        "getMetrics",
+        "getSnapshot",
+        "getVideoState",
+        "getWaveClock",
+        "play",
+        "pause",
+        "seek",
+        "setFrozenTime",
+        "setPointer",
+        "setPointerActive",
+        "markVideoDirty"
+      ]
+    },
+    {
+      "name": 11,
+      "keys": [
+        "getMetrics",
+        "getSnapshot",
+        "getVideoState",
+        "getWaveClock",
+        "play",
+        "pause",
+        "seek",
+        "setFrozenTime",
+        "setPointer",
+        "setPointerActive",
+        "markVideoDirty"
+      ]
+    },
+    {
+      "name": "o",
+      "keys": []
+    },
+    {
+      "name": 22,
+      "keys": []
+    },
+    {
+      "name": 13,
+      "keys": []
+    },
+    {
+      "name": "LoadableComponent",
+      "keys": [
+        "getMetrics",
+        "getSnapshot",
+        "getVideoState",
+        "getWaveClock",
+        "play",
+        "pause",
+        "seek",
+        "setFrozenTime",
+        "setPointer",
+        "setPointerActive",
+        "markVideoDirty"
+      ]
+    },
+    {
+      "name": 5,
+      "keys": [
+        "__reactFiber$9sq6e9mcf08",
+        "__reactProps$9sq6e9mcf08"
+      ]
+    },
+    {
+      "name": "AsciiWavesCanvas",
+      "keys": [
+        "play",
+        "pause",
+        "retry"
+      ]
+    },
+    {
+      "name": 5,
+      "keys": []
+    },
+    {
+      "name": 5,
+      "keys": []
+    },
+    {
+      "name": 5,
+      "keys": []
+    },
+    {
+      "name": 0,
+      "keys": []
+    },
+    {
+      "name": 5,
+      "keys": []
+    },
+    {
+      "name": 5,
+      "keys": []
+    },
+    {
+      "name": 5,
+      "keys": []
+    },
+    {
+      "name": 5,
+      "keys": []
+    },
+    {
+      "name": 7,
+      "keys": []
+    },
+    {
+      "name": 7,
+      "keys": []
+    },
+    {
+      "name": 10,
+      "keys": []
+    },
+    {
+      "name": "_",
+      "keys": []
+    },
+    {
+      "name": "d",
+      "keys": []
+    },
+    {
+      "name": "p",
+      "keys": []
+    },
+    {
+      "name": "i",
+      "keys": []
+    },
+    {
+      "name": "s",
+      "keys": []
+    }
+  ],
+  "snapshot": {
+    "width": 971,
+    "height": 867,
+    "dpr": 2,
+    "maxDpr": 2,
+    "cellSize": 12,
+    "waveClock": 0.4156,
+    "frameCount": 47,
+    "pointer": {
+      "x": 0.5,
+      "y": 0.5,
+      "strength": 0
+    },
+    "settings": {
+      "characters": " .:-+*=%@#",
+      "color": "#ffffff",
+      "invert": false,
+      "cellSize": 12,
+      "noiseScale": 2,
+      "speed": 1,
+      "waveTension": 0.5,
+      "waveTwist": 0.1,
+      "intensity": 1,
+      "cursorInteraction": true,
+      "interactionIntensity": 1
+    }
+  },
+  "video": {
+    "ready": true,
+    "playing": true,
+    "currentTime": 0.224106,
+    "duration": 5.055,
+    "readyState": 4,
+    "src": "http://127.0.0.1:3220/media/flower.mp4",
+    "muted": true,
+    "loop": true
+  },
+  "metrics": {
+    "fps": 98.4,
+    "frameMs": 10.17,
+    "drawCalls": 1,
+    "width": 971,
+    "height": 867,
+    "dpr": 2,
+    "maxDpr": 2,
+    "columns": 41,
+    "rows": 37,
+    "cellPx": 12,
+    "videoEnabled": true,
+    "videoTime": 0.224106,
+    "videoPaused": false,
+    "videoUploads": 7,
+    "webglRenderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4060 Laptop GPU/PCIe/SSE2, OpenGL ES 3.2)",
+    "running": true
+  }
+}

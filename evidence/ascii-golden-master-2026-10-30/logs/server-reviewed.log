@@ -1,0 +1,10 @@
+$ next start --hostname 127.0.0.1 --port 3220
+▲ Next.js 16.4.3
+- Local:         http://127.0.0.1:3220
+- Network:       http://127.0.0.1:3220
+✓ Ready in 86ms
+✓ Running next.config.ts took 22ms
+[nullworx:event] {"event":"effect_page_viewed","path":"/lab/ascii-waves","effectSlug":"ascii-waves","location":"effect-preview","at":"2026-10-30T16:16:56.064Z"}
+[nullworx:event] {"event":"effect_page_viewed","path":"/lab/ascii-waves","effectSlug":"ascii-waves","location":"effect-preview","at":"2026-10-30T16:16:57.713Z"}
+[nullworx:event] {"event":"effect_page_viewed","path":"/lab/ascii-waves","effectSlug":"ascii-waves","location":"effect-preview","at":"2026-10-30T16:25:33.872Z"}
+[nullworx:event] {"event":"preview_interacted","path":"/lab/ascii-waves","effectSlug":"ascii-waves","location":"effect-preview","at":"2026-10-30T16:25:35.121Z"}

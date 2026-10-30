@@ -1,0 +1,11 @@
+--- consolidated-HEAD/homepage wrapper
++++ consolidated-working/homepage wrapper
+@@ -103,7 +103,7 @@
+             preset="flower"
+             cellSize="auto"
+             speed={1}
+-            quality="efficient"
++            quality="high"
+             pointerInteraction
+             reducedMotion="system"
+             playing={playing}

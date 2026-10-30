@@ -1,0 +1,62 @@
+{
+  "generatedAt": "2026-10-29T22:26:29.312Z",
+  "method": "sha256(file bytes)",
+  "groups": [
+    {
+      "id": "holotype",
+      "source": "/home/swirky/DevHub/experiments/ui-forge-expansion-02/experiments/holotype",
+      "destination": "experiments/holotype",
+      "fileCount": 8,
+      "matches": 8,
+      "mismatches": []
+    },
+    {
+      "id": "crt-material-lab",
+      "source": "/home/swirky/DevHub/experiments/ui-forge-expansion-02/experiments/crt-material-lab",
+      "destination": "experiments/crt-material-lab",
+      "fileCount": 6,
+      "matches": 6,
+      "mismatches": []
+    },
+    {
+      "id": "pearl-caustics",
+      "source": "/home/swirky/DevHub/experiments/ui-forge-pearl-caustics-proof02/src/pearl-caustics",
+      "destination": "experiments/pearl-caustics",
+      "fileCount": 3,
+      "matches": 3,
+      "mismatches": []
+    },
+    {
+      "id": "ui-forge-primitives",
+      "source": "/home/swirky/Documents/deepseek-harness/default-workspace/nullworx-g3a/registry/new-york",
+      "destination": "registry/new-york",
+      "fileCount": 6,
+      "matches": 6,
+      "mismatches": []
+    },
+    {
+      "id": "terminal-rain",
+      "source": "/home/swirky/DevHub/experiments/living-stencils-proof01",
+      "destination": "experiments/living-stencils",
+      "fileCount": 4,
+      "matches": 4,
+      "mismatches": []
+    },
+    {
+      "id": "ascii-waves",
+      "source": "/home/swirky/DevHub/experiments/ui-forge-flower-integration-01/registry/new-york/ascii-waves",
+      "destination": "components/effects/ascii-waves",
+      "fileCount": 5,
+      "matches": 5,
+      "mismatches": []
+    },
+    {
+      "id": "third-party-notices",
+      "source": "/home/swirky/Documents/deepseek-harness/default-workspace/nullworx-g3a/third_party",
+      "destination": "third_party",
+      "fileCount": 5,
+      "matches": 5,
+      "mismatches": []
+    }
+  ]
+}
