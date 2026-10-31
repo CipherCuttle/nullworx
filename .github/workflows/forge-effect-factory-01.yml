@@ -1,0 +1,53 @@
+name: forge-effect-factory-01
+
+on:
+  pull_request:
+    branches: [feat/consolidation-01]
+    paths:
+      - 'app/lab/forge-factory-01/**'
+      - 'components/forge-factory-01/**'
+      - 'tests/unit/forgeFactory01.test.tsx'
+      - 'tests/e2e/forge-factory-01.spec.ts'
+      - 'docs/FORGE_FACTORY_01.md'
+      - '.github/workflows/forge-effect-factory-01.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  isolated-forge:
+    if: github.head_ref == 'experiment/forge-effect-factory-01'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 12.15.0
+      - name: Frozen dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Entire existing lint/typecheck/manifest/unit/build/secrets gate
+        run: pnpm verify
+      - name: Install Chromium for visual smoke
+        run: pnpm exec playwright install --with-deps chromium
+      - name: Only new Forge browser proof
+        run: pnpm exec playwright test tests/e2e/forge-factory-01.spec.ts
+      - name: Whitespace and scope
+        run: git diff --check HEAD^ HEAD
+      - name: Owner review screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: forge-effect-factory-01-${{ github.event.pull_request.head.sha }}
+          path: |
+            test-results/forge-factory-01/*.png
+            test-results/**/*.png
+            test-results/**/*.zip
+          retention-days: 7
+          if-no-files-found: ignore
