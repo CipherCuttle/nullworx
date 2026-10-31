@@ -17,15 +17,21 @@ for (const size of sizes) {
     await expect(page.getByRole("heading", { name: /Good effects/i })).toBeVisible();
     await expect(page.locator('[data-forge-factory="01"]')).toHaveCSS("background-color", "rgb(247, 247, 242)");
     await expect(page.getByTestId("glyph-morph-visible")).toBeVisible();
+    await expect(page.getByTestId("glyph-morph-visible")).toHaveText("HELLO WORLD", { timeout: 5000 });
+    await mkdir("test-results/forge-factory-01", { recursive: true });
+    await page.screenshot({ path: `test-results/forge-factory-01/${size.label}-glyph.png`, fullPage: true, animations: "disabled" });
     for (const effect of ["prism", "magnetic", "glyph"]) {
       await page.getByTestId(`select-${effect}`).click();
       await expect(page.locator(`[data-effect="${effect === "glyph" ? "glyph-morph" : effect === "prism" ? "prism-text" : "magnetic-focus"}"]`)).toBeVisible();
       await expect(page.locator('[role="tab"][aria-selected="true"]')).toHaveCount(1);
+      if (effect === "glyph") {
+        await expect(page.getByTestId("glyph-morph-visible")).toHaveText("HELLO WORLD", { timeout: 5000 });
+      }
+      await page.screenshot({ path: `test-results/forge-factory-01/${size.label}-${effect}.png`, fullPage: true, animations: "disabled" });
     }
     await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)).toBe(true);
     expect(errors).toEqual([]);
-    await mkdir("test-results/forge-factory-01", { recursive: true });
-    await page.screenshot({ path: `test-results/forge-factory-01/${size.label}.png`, fullPage: true, animations: "disabled" });
+
   });
 }
 
