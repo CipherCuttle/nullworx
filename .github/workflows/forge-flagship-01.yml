@@ -47,5 +47,6 @@ jobs:
           path: |
             test-results/forge-flagship-01/**
             test-results/**/*.zip
+            test-results/**/*.webm
           if-no-files-found: ignore
           retention-days: 7

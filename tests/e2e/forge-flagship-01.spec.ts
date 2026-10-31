@@ -1,6 +1,8 @@
 import { test, expect } from "@playwright/test";
 import { mkdir, writeFile } from "node:fs/promises";
 
+test.use({ video: "on" });
+
 const route = "/lab/forge-flagship-01";
 const sizes = [
   { label: "desktop", width: 1440, height: 900 },
