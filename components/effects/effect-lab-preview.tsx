@@ -2,7 +2,7 @@
 
 import { useId, useRef, useState } from "react";
 import { trackClientEvent } from "@/lib/analytics/client";
-import { AsciiWavesCanvas, type FieldPlaybackState } from "./ascii-waves-canvas";
+import { AsciiWavesCanvas, type AsciiWavesCanvasHandle, type FieldPlaybackState } from "./ascii-waves-canvas";
 import { CopyButton } from "./copy-button";
 import styles from "./effect-lab-preview.module.css";
 
@@ -36,6 +36,7 @@ export function EffectLabPreview({
   const qualityId = useId();
   const speedId = useId();
   const stageRef = useRef<HTMLDivElement>(null);
+  const fieldRef = useRef<AsciiWavesCanvasHandle>(null);
   const interacted = useRef(false);
   const [settings, setSettings] = useState<Settings>(defaults);
   const [fieldState, setFieldState] = useState<FieldPlaybackState | null>(null);
@@ -74,6 +75,8 @@ export function EffectLabPreview({
                 ? "Field paused"
                 : phase === "blocked"
                   ? "Autoplay blocked"
+                  : phase === "stalled"
+                    ? "Playback stalled"
                   : phase === "error"
                     ? "Fallback / poster"
                     : phase === "offscreen"
@@ -89,6 +92,8 @@ export function EffectLabPreview({
               ? "WEBGL2 / PAUSED OFFSCREEN"
               : phase === "blocked"
                 ? "START REQUIRED"
+                : phase === "stalled"
+                  ? "RESTART REQUIRED"
                 : phase === "reduced"
                   ? "REDUCED / STILL"
                   : phase === "paused"
@@ -99,6 +104,18 @@ export function EffectLabPreview({
                         ? "WEBGL2 / PAUSED HIDDEN"
                         : "LOADING FIELD"}
         </span>
+        {phase === "blocked" || phase === "stalled" ? (
+          <button
+            className={styles.reset}
+            type="button"
+            onClick={() => {
+              update("playing", true);
+              void fieldRef.current?.play();
+            }}
+          >
+            {phase === "stalled" ? "Restart live field" : "Start live field"}
+          </button>
+        ) : null}
         <button
           className={styles.reset}
           type="button"
@@ -118,6 +135,7 @@ export function EffectLabPreview({
         data-testid="effect-preview"
       >
         <AsciiWavesCanvas
+          ref={fieldRef}
           poster={poster}
           preset="flower"
           cellSize={settings.cellSize === "auto" ? "auto" : (Number(settings.cellSize) as 12 | 16 | 20)}
@@ -139,6 +157,8 @@ export function EffectLabPreview({
                 ? "MOTION / HELD"
                 : phase === "blocked"
                   ? "AUTOPLAY / BLOCKED"
+                  : phase === "stalled"
+                    ? "PLAYBACK / STALLED"
                   : phase === "hidden"
                     ? "MOTION / PAGE HIDDEN"
                     : phase === "offscreen"

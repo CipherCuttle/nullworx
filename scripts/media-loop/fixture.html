@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>Flower media loop isolation</title>
+<video muted playsinline preload="auto" width="480" height="270"></video>
+<script>
+  // Deliberately no React, renderer, application wrapper or autoplay attribute.
+  const options = new URLSearchParams(location.search);
+  const mode = options.get('mode') || 'native';
+  const video = document.querySelector('video');
+  video.loop = mode === 'native';
+  video.muted = true;
+  window.fixture = { mode, actions: [], errors: [] };
+  const action = (name) => window.fixture.actions.push({ name, at: performance.now(), time: video.currentTime });
+  const play = () => video.play().catch(error => window.fixture.errors.push({ name: error.name, message: error.message }));
+  const seekAndResume = () => {
+    action('seek-zero');
+    video.pause();
+    video.addEventListener('seeked', () => { action('resume-after-seeked'); void play(); }, { once: true });
+    video.currentTime = 0;
+  };
+  video.addEventListener('loadedmetadata', () => { action('initial-offset'); video.currentTime = 2.2; }, { once: true });
+  video.addEventListener('canplay', () => {
+    action('initial-play');
+    void play();
+    if (mode === 'controlled') setTimeout(seekAndResume, 1000);
+  }, { once: true });
+  video.addEventListener('ended', () => {
+    action('ended');
+    if (mode === 'ended') {
+      video.currentTime = 0;
+      action('immediate-resume');
+      void play();
+    } else if (mode === 'seeked' || mode === 'controlled') seekAndResume();
+  });
+  video.src = '/media/flower.' + (options.get('format') || 'webm');
+</script>
+</html>

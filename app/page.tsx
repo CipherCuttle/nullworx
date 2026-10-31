@@ -258,7 +258,7 @@ export default function HomePage() {
               <div className={styles.gateCandidate}>
                 <div>
                   <span className="mono">Candidate 001 / ASCII Waves</span>
-                  <p>Flower field. Technically verified; release approval not recorded.</p>
+                  <p>Jellyfish on the homepage, Flower in the lab. Release approval not recorded.</p>
                 </div>
                 <Link className="text-link" href="/lab/ascii-waves">
                   Unlisted preview <span aria-hidden="true">↗</span>

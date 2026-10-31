@@ -7,7 +7,7 @@ import styles from "../legal.module.css";
 export const metadata: Metadata = createPageMetadata({
   title: "Licenses",
   description:
-    "Nullworx code, Flower media, typefaces and direct dependencies: MIT code, CC0 media, SIL Open Font License and the licenses of the tools used to build the site.",
+    "Nullworx code, Jellyfish and Flower media, typefaces and dependencies: source credits, MIT, Pexels, CC0 and open font licenses.",
   path: "/licenses",
 });
 
@@ -45,7 +45,7 @@ export default function LicensesPage() {
         <section className="container page-intro" aria-labelledby="licenses-title">
           <div className="page-intro__meta">
             <p className="eyebrow">Licenses / Source &amp; assets</p>
-            <span className="mono">Last updated 2026-10-28</span>
+            <span className="mono">Last updated 2026-10-30</span>
           </div>
           <h1 id="licenses-title" className="display">
             Take the code. <em>Keep the credit.</em>
@@ -53,8 +53,8 @@ export default function LicensesPage() {
           <div className="page-intro__lede">
             <p>
               Nullworx is intended to be copied, changed and learned from. The effect code is open
-              source; the Flower media is public domain; the typefaces are open fonts. Each asset
-              keeps its own terms.
+              source; the media keeps its source licenses; the typefaces are open fonts.
+              Each asset keeps its own terms.
             </p>
             <div className="page-intro__aside mono">No effect has been released yet</div>
           </div>
@@ -106,12 +106,12 @@ export default function LicensesPage() {
             </section>
 
             <section id="media">
-              <h2>Flower media</h2>
+              <h2>ASCII Waves media</h2>
               <p>
-                ASCII Waves currently uses the MDN sample <code>flower.mp4</code> and a poster
-                derivative from the approved UI Forge review. Both are <strong>CC0 1.0</strong>.
-                The video is byte-identical to the reviewed copy and retains an AAC audio track;
-                the Nullworx usage mutes it, and the component defaults to muted playback.
+                The homepage uses a loop derivative of Jellyfish Tank by Soly Moses / Pexels.
+                Flower remains the lab and download reference under <strong>CC0 1.0</strong>.
+                The original Flower video and poster are preserved. The site uses separate
+                cyclic derivatives for continuous playback; all videos play muted.
               </p>
               <table className={styles.dataTable}>
                 <thead>
@@ -122,6 +122,18 @@ export default function LicensesPage() {
                   </tr>
                 </thead>
                 <tbody>
+                  <tr>
+                    <td>Jellyfish loop and poster</td>
+                    <td>
+                      <a href="https://www.pexels.com/video/jellyfish-tank-28156785/" target="_blank" rel="noopener noreferrer">
+                        Soly Moses / Pexels
+                      </a>
+                    </td>
+                    <td>
+                      <a href="https://www.pexels.com/license/" target="_blank" rel="noopener noreferrer">Pexels License</a>
+                      {" "}· modified loop and luma
+                    </td>
+                  </tr>
                   <tr>
                     <td>flower.mp4</td>
                     <td>
@@ -136,12 +148,25 @@ export default function LicensesPage() {
                     <td>Poster derivative from the approved review</td>
                     <td>CC0 1.0 · SHA-256 fb34be9b…919a</td>
                   </tr>
+                  <tr>
+                    <td>Koi and Smoke review loops</td>
+                    <td>Existing Pexels reels from the preserved experiments</td>
+                    <td>Pexels License · source credits in the loop inventory</td>
+                  </tr>
+                  <tr>
+                    <td>Orion review loop</td>
+                    <td>
+                      <a href="https://svs.gsfc.nasa.gov/14658/" target="_blank" rel="noopener noreferrer">NASA Scientific Visualization Studio</a>
+                    </td>
+                    <td>Public domain · NASA / Paul Morris</td>
+                  </tr>
                 </tbody>
               </table>
               <p>
-                No Pexels footage is included. Those reels were excluded because their
-                redistribution status was not independently confirmed. The original experiments are
-                preserved locally and are not part of this build.
+                The <a href="/media/credits/demo-loops.md">loop inventory</a> records the source
+                links and modifications for each reel. Jellyfish uses a finer ASCII grid and a
+                brighter derived source. The original experiments and the Flower download
+                package remain unchanged. No endorsement by a source creator is implied.
               </p>
             </section>
 
@@ -221,7 +246,7 @@ export default function LicensesPage() {
                 options; see the architecture notes in the repository.
               </p>
               <p>
-                No paid component source, unlicensed font, stock footage or copied marketing copy is
+                No paid component source, unlicensed font, unlicensed footage or copied marketing copy is
                 knowingly included. If you believe an asset is missing a credit, contact the owner
                 through the repository.
               </p>

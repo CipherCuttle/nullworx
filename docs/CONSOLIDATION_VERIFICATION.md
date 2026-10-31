@@ -1,8 +1,18 @@
 # Consolidation 01 — verification receipts
 
-Date: 2026-10-29 Europe/Stockholm. Production build: `next build` on Next 16.4.3,
+Updated: 2026-10-31 Europe/Stockholm. Production build: `next build` on Next 16.4.3,
 React 19.3.1, Zod 4.6.7. Server: `pnpm start --port 3200` on
 `http://127.0.0.1:3200`.
+
+The earlier claim of sustained WebKit LIVE playback was incorrect. At `059db3d`,
+a fresh isolated baseline build reproduces **355/359** checks, with four WebKit
+homepage failures. Native VP9 looping presents frames but leaves `currentTime`
+at EOF; the wrapper subsequently pauses it and mislabels it as autoplay blocked.
+The expanded repair remains **FAILED_VERIFICATION**, local and uncommitted.
+Standalone reel checks pass 213/213 and WebKit startup stress passes 10/10, but
+the integrated WebKit reference banks fail before three-cycle proof completes.
+Final end-to-end and exact golden reruns are still required. Details are in
+[the repair receipt](../evidence/webkit-media-loop-01/RECEIPT.md).
 
 ## Commands and results
 
@@ -15,15 +25,16 @@ React 19.3.1, Zod 4.6.7. Server: `pnpm start --port 3200` on
 | `pnpm test` | pass; **51/51** unit/integrity tests |
 | `pnpm build` | pass; all public and lab routes generated |
 | `pnpm check:secrets` | pass; no credential patterns in source or built client assets |
-| `pnpm test:e2e` | pass; **26/26** production Playwright tests |
+| `pnpm test:e2e` | final rerun pending; historical prototype **26/26** is superseded |
 | `pnpm verify:home` | pass; **49/49** G1 temporal/negative-control checks |
-| `pnpm verify:labs` | pass; **359/359** route, interaction, cross-browser and resource checks |
+| `pnpm verify:labs` | **FAILED: 712/715**; original 359 pass; three integrated WebKit reference-video decoding checks fail. Original `059db3d`: **355/359** |
 | `node scripts/verify-import-integrity.mjs` | pass; **37/37** copied files byte-identical |
 | `pnpm preservation` | pass; **8/8** preserved roots unchanged |
-| `pnpm audit --prod` | **0** info/low/moderate/high/critical vulnerabilities |
+| `pnpm audit --prod` | historical consolidation receipt in `evidence/g5/`; not rerun for this repair |
 
 Raw machine receipts:
 
+- `evidence/webkit-media-loop-01/` contains the fresh repair receipts, raw media traces, command logs and nine controlled image pairs.
 - `evidence/g4/home/home-verification.json`
 - `evidence/g4/labs/lab-verification.json`
 - `evidence/tests/playwright-results.json`
@@ -33,6 +44,10 @@ Raw machine receipts:
 - `evidence/g5/recordings/manifest.json`
 
 ## G1 — homepage temporal proof
+
+The numeric pixel samples below are historical (2026-10-29). Fresh repair runs
+cover the Jellyfish homepage; the media gate independently verifies its 1-second
+opening and Flower's 2.2-second lab opening. See `evidence/webkit-media-loop-01/home.json` and `verification.json`.
 
 Chromium 156, RTX 4060 Laptop, ANGLE/GL hardware path
 (`ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4060 Laptop GPU/PCIe/SSE2, OpenGL ES 3.2)`).
@@ -49,9 +64,10 @@ Additional checks: canvas paints above the poster (center hit test is `CANVAS`),
 pointer strength rises to `0.985` and settles to `0.012`, hide/show pauses and
 resumes, mobile 390×844 animates, and no application console/page errors occur.
 
-The `LIVE` badge is now derived from actual progress in both the source video
-timeline and the renderer frame counter. A `canplay` event alone is not enough.
-Blocked autoplay exposes a real `Start live field` control; reduced motion is
+The `LIVE` badge requires actual presented media progress and an advancing
+renderer frame counter. A `canplay` event alone is not enough.
+Blocked autoplay exposes a real `Start live field` control; a post-start stall
+uses `Restart live field` and a distinct `playback-stalled` reason; reduced motion is
 labelled `REDUCED MOTION / STILL`; context loss is labelled `FALLBACK / POSTER`.
 
 Before/after homepage recordings and a contact sheet are in
@@ -66,6 +82,9 @@ shared the brand header/main/footer, had zero horizontal overflow and zero
 application console/page/network errors. Every preview is noindexed and states
 that no release approval is recorded. The lab index has **9** integrated links and
 explicit blocked/deferred entries.
+
+The per-effect pixel percentages and resource samples below are historical
+consolidation receipts; fresh acceptance counts and raw traces are linked above.
 
 Per-effect interaction checks passed:
 
@@ -88,18 +107,59 @@ Per-effect interaction checks passed:
 ## G4 — cross-browser and resources
 
 Each engine ran the homepage and all nine previews at **1440×900** and
-**390×844**. All six homepage runs reported `LIVE`, advancing video time and
-frame counts, no overflow and no application errors.
+**390×844**. The original short observations did not prove continued playback.
+Chromium and Firefox looped normally. WebKit could initially reach LIVE but
+lost it after the first native VP9 loop; the four failures above supersede the
+previous claim that all six homepage observations established sustained LIVE.
 
 | Engine | Homepage source | Reported WebGL renderer | Result |
 | --- | --- | --- | --- |
-| Chromium 156 | `flower.mp4` | `ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4060 Laptop GPU/PCIe/SSE2, OpenGL ES 3.2)` | live; hardware path |
-| Firefox 157 | `flower.mp4` | `NVIDIA GeForce GTX 980, or similar` (Firefox generic string) | live; renderer string masked by browser |
-| WebKit 27.2 | `flower.webm` | `Apple GPU` (WebKit generic string) | live; H.264 unavailable, VP9 fallback selected |
+| Chromium 156 | cyclic `jellyfish.mp4` | `ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4060 Laptop GPU/PCIe/SSE2, OpenGL ES 3.2)` | live; hardware path |
+| Firefox 157 | cyclic `jellyfish.mp4` | `NVIDIA GeForce GTX 980, or similar` (Firefox generic string) | live; renderer string masked by browser |
+| WebKit 27.2 | cyclic `jellyfish.webm` | `Apple GPU` (WebKit generic string) | original: clock sticks at EOF, wrapper pauses; repair gate: three actual source cycles, continuous LIVE, desktop/mobile |
 
-WebKit on Linux has no H.264 decoder. The wrapper selects the CC0 VP9 derivative
-only when `canPlayType` reports no H.264 support; the renderer, shader, preset
-and timing are unchanged. This is recorded in `public/media/credits/flower.md`.
+This Playwright WebKit installation reports no H.264 decoder. The wrapper
+probes the actual media profile and uses VP9 when necessary. Flower prefers its
+lossless VP9 copy for portable MSE decoding. Supported engines receive a cyclic
+MediaSource: encoded copies append onto a continuous timeline, with no seek,
+play call or HTML EOF at cycle boundaries. Initial Flower playback starts at
+2.2 seconds exactly once. Jellyfish is the homepage default at the owner's
+request, starts at 1 second and uses a finer 8 px grid at High quality. A
+separate Jellyfish source derivative lifts saturated blue for clearer glyphs.
+The renderer, shader, atlas, original media and approved Flower parameters remain
+unchanged. The download package remains the original Flower component.
+
+All five existing ASCII reels (Flower, Jellyfish, Koi, Smoke, Orion) have new
+cyclic derivatives under `public/media/loops/`. A cosine-eased tail/head blend
+removes the source content cut; their actual last-to-first boundary uses adjacent
+prepared source frames. Decoded MD5 verifies the masters. Delivery copies meet
+40 dB PSNR against those masters; Flower remains lossless. The original media
+files and source trees are untouched. Source credits and modifications are
+listed on `/licenses` and in `public/media/credits/`.
+
+`verify:labs` requires three real source cycles at normal speed in nine app
+cases and all five reels in all three engines. Clock normalization alone cannot
+pass: the gate independently hashes decoded beginning pictures, requires at
+least eight presented frames/five distinct hashes after every cycle, advancing
+renderer frames, continuous LIVE and no pauses/seeks at the seams. Every seam
+has an unchanged 80 ms maximum changing-picture and sampling gap. It also checks one initial
+seek, bounded buffering/one fetch, no retries/reloads and one unchanged WebGL
+context. The command always runs all three engines; there is no engine-subset
+environment bypass.
+
+Lifecycle negatives cover Pause near the source end, native reduced-motion
+emulation, real scrolling out of view, a labelled document.hidden simulation,
+pause at an actual cycle boundary followed by duplicate ended events, and an
+injected decoder hold. Held states do not recover automatically. A real
+NotAllowedError is `autoplay-blocked`; a stopped source is `playback-stalled`.
+Neither negative is accepted as successful motion. The lab also has direct
+Start/Restart controls. Native OS background scheduling is outside the labelled
+visibility simulation claim. Linux WPE results are not Safari/macOS/iOS claims.
+
+The [media receipt](../evidence/webkit-media-loop-01/RECEIPT.md) records the exact
+original defect, upstream research, versions, intervention and final command
+receipts. [Encoding and browser evidence](../evidence/seamless-demos-2026-10-30/)
+records original/output hashes, fidelity and all fifteen bare-video cases.
 
 Resource accounting used client-side App Router navigation (no full reloads) over
 three cycles of Paper → Pearl → Terminal Rain → Composition:
@@ -150,6 +210,9 @@ visual comparison, not an owner approval. Preserved renderer bytes are verified 
 - The full Living Stencils compositor is not integrated (CC BY 2.0 attribution
   surface and Vite-specific FlowerMaterial wrapper). Terminal Rain is integrated
   standalone.
-- No owner visual approval is recorded. Every route remains noindexed and unreleased.
+- No owner visual approval is recorded. Experimental previews remain noindexed and unreleased.
 - No public deployment, merge, publication, marketplace, checkout or newsletter
   activation was performed.
+
+Final repair status is recorded in [final-status.json](../evidence/webkit-media-loop-01/final-status.json).
+PR #6 remains DRAFT; no commit, push, merge or deployment was performed.

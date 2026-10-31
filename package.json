@@ -25,6 +25,7 @@
     "bundle:effects": "tsx scripts/build-effect-bundles.ts",
     "verify:home": "node scripts/verify-home.mjs",
     "verify:labs": "node scripts/verify-labs.mjs",
+    "verify:media": "node scripts/media-loop/verify.mjs",
     "verify:consolidation": "node scripts/verify-home.mjs && node scripts/verify-labs.mjs",
     "capture:media": "node scripts/capture-media.mjs",
     "preservation": "node scripts/source-preservation.mjs --output evidence/g0/source-preservation-final.json"

@@ -15,7 +15,8 @@ import type {
   AsciiWavesProps,
   AsciiWavesVideoState,
 } from "./ascii-waves/ascii-waves";
-import { resolvePreset } from "./ascii-waves/presets";
+import { FLOWER_MEDIA, type FieldMedia } from "./field-media";
+import { createCyclicMediaSource } from "./cyclic-media-source";
 import styles from "./ascii-waves-canvas.module.css";
 
 const AsciiWavesRuntime = dynamic(
@@ -53,6 +54,7 @@ export type FieldPlaybackPhase =
   | "paused"
   | "reduced"
   | "blocked"
+  | "stalled"
   | "hidden"
   | "offscreen"
   | "error";
@@ -60,6 +62,7 @@ export type FieldPlaybackPhase =
 export interface FieldPlaybackState {
   phase: FieldPlaybackPhase;
   videoTime: number;
+  nativeVideoTime: number;
   frameCount: number;
   waveClock: number;
   videoPlaying: boolean;
@@ -74,6 +77,7 @@ export interface AsciiWavesCanvasHandle {
 }
 
 export interface AsciiWavesCanvasProps extends RuntimeProps {
+  media?: FieldMedia;
   poster: { src: string; alt: string };
   className?: string;
   testId?: string;
@@ -87,6 +91,7 @@ export interface AsciiWavesCanvasProps extends RuntimeProps {
 const EMPTY_STATE: FieldPlaybackState = {
   phase: "loading",
   videoTime: 0,
+  nativeVideoTime: 0,
   frameCount: 0,
   waveClock: 0,
   videoPlaying: false,
@@ -103,13 +108,14 @@ function describeError(error: unknown): string {
  * the field mounted and the Start control available instead of falling back.
  */
 function isPlaybackBlocked(error: unknown): boolean {
-  return error instanceof DOMException && (error.name === "NotAllowedError" || error.name === "AbortError");
+  return error instanceof DOMException && error.name === "NotAllowedError";
 }
 
 export const AsciiWavesCanvas = forwardRef<AsciiWavesCanvasHandle, AsciiWavesCanvasProps>(
   function AsciiWavesCanvas(
     {
       poster,
+      media = FLOWER_MEDIA,
       className,
       testId,
       priority = false,
@@ -131,12 +137,16 @@ export const AsciiWavesCanvas = forwardRef<AsciiWavesCanvasHandle, AsciiWavesCan
     onReadyRef.current = onReady;
 
     const [shouldLoad, setShouldLoad] = useState(false);
+    const [mayInitializeMedia, setMayInitializeMedia] = useState(false);
     const [selectedSrc, setSelectedSrc] = useState<string | null>(null);
+    const [selectedFile, setSelectedFile] = useState<string | null>(null);
+    const [streaming, setStreaming] = useState(false);
+    const loopSourceRef = useRef<ReturnType<typeof createCyclicMediaSource> | null>(null);
     const [loaded, setLoaded] = useState(false);
     const [runtimeError, setRuntimeError] = useState<string | null>(null);
     const [blockedHold, setBlockedHold] = useState(false);
     const [systemReduced, setSystemReduced] = useState(false);
-    const [visible, setVisible] = useState(true);
+    const [visible, setVisible] = useState(false);
     const [pageHidden, setPageHidden] = useState(
       () => typeof document !== "undefined" && document.hidden,
     );
@@ -150,6 +160,10 @@ export const AsciiWavesCanvas = forwardRef<AsciiWavesCanvasHandle, AsciiWavesCan
     const loadedAt = useRef(0);
     const lastReportedPhase = useRef<FieldPlaybackPhase>("loading");
     const readyNotified = useRef(false);
+    const autoplayDenied = useRef(false);
+    const hasPlayed = useRef(false);
+    const presented = useRef({ at: 0, time: 0, count: 0 });
+    const frameObserverActive = useRef(false);
 
     const reduced = reducedMotion === "system" && systemReduced;
     const presetId = props.preset ?? "flower";
@@ -158,27 +172,58 @@ export const AsciiWavesCanvas = forwardRef<AsciiWavesCanvasHandle, AsciiWavesCan
     // Probing chooses a codec for the bundled preset. Passing that URL as src
     // otherwise makes the preserved component treat it as a custom clip and
     // start at zero, losing Flower's reviewed opening frame.
-    const effectiveStartTime = props.startTime ?? (needsSourceProbe ? resolvePreset(presetId).startTime : undefined);
+    const effectiveStartTime = props.startTime ?? (needsSourceProbe ? media.startTime : undefined);
     const sourceSelected = !needsSourceProbe || selectedSrc !== null;
+    const playbackAllowed = playing && !blockedHold && !reduced && visible && !pageHidden && !runtimeError;
+    const playbackAllowedRef = useRef(playbackAllowed);
+    playbackAllowedRef.current = playbackAllowed;
 
-    // The CDN-free site serves H.264 first because it is the reviewed source.
-    // WebKit on Linux has no H.264 decoder, so a CC0 VP9 derivative is chosen
-    // only when the browser cannot play the reviewed file. This is source
-    // selection, not a renderer change.
+    // Serve the appropriate local cyclic derivative. Probe its actual H.264
+    // profile; the VP9 branch also covers this Linux WebKit installation.
     useEffect(() => {
       if (props.src !== undefined) {
         setSelectedSrc(props.src);
+        setSelectedFile(props.src);
+        setStreaming(false);
         return;
       }
       if (presetId !== "flower") {
         setSelectedSrc(null);
+        setSelectedFile(null);
+        setStreaming(false);
         return;
       }
+      if (!shouldLoad || !mayInitializeMedia) return undefined;
       const probe = document.createElement("video");
-      const mp4 = probe.canPlayType('video/mp4; codecs="avc1.42E01E"');
+      const mp4 = probe.canPlayType(`video/mp4; codecs="${media.mp4Codec ?? "avc1.64001F"}"`);
       const webm = probe.canPlayType('video/webm; codecs="vp9"');
-      setSelectedSrc(mp4 ? "/media/flower.mp4" : webm ? "/media/flower.webm" : "/media/flower.mp4");
-    }, [presetId, props.src]);
+      const useMp4 = Boolean(mp4) && !(media.preferWebm && webm);
+      const file = useMp4 ? media.mp4 : webm ? media.webm : media.mp4;
+      const mime = useMp4 ? `video/mp4; codecs="${media.mp4Codec ?? "avc1.64001F"}"` : 'video/webm; codecs="vp9"';
+      setSelectedFile(file);
+      if (typeof MediaSource !== "undefined" && MediaSource.isTypeSupported(mime)) {
+        const loop = createCyclicMediaSource({
+          file, mime, duration: media.duration,
+          getVideo: () => rootRef.current?.querySelector("video") ?? null,
+          onError: error => setRuntimeError(describeError(error)),
+        });
+        loopSourceRef.current = loop;
+        setStreaming(true);
+        setSelectedSrc(loop.url);
+        return () => { loop.dispose(); if (loopSourceRef.current === loop) loopSourceRef.current = null; };
+      }
+      setStreaming(false);
+      setSelectedSrc(file);
+      return undefined;
+    }, [mayInitializeMedia, media.duration, media.mp4, media.mp4Codec, media.preferWebm, media.webm, presetId, props.src, shouldLoad]);
+
+    // WPE can reject a paused MSE seek when its video is initially offscreen.
+    // Prime the decoder only after the field first enters the foreground
+    // viewport. This is sticky: later visibility changes pause the existing
+    // media and renderer without recreating either one.
+    useEffect(() => {
+      if (visible && !pageHidden) setMayInitializeMedia(true);
+    }, [pageHidden, visible]);
 
     useEffect(() => {
       if (disabled) return undefined;
@@ -192,8 +237,8 @@ export const AsciiWavesCanvas = forwardRef<AsciiWavesCanvasHandle, AsciiWavesCan
       const observer = new IntersectionObserver(
         (entries) => {
           if (entries.some((entry) => entry.isIntersecting)) {
-            // The 360px prefetch margin mounts the effect early; it must not
-            // assert that the stage is visible. The second observer owns that.
+            // Near-viewport readiness is separate from actual visibility.
+            // The second observer owns initial decoder activation.
             setShouldLoad(true);
             observer.disconnect();
           }
@@ -220,7 +265,11 @@ export const AsciiWavesCanvas = forwardRef<AsciiWavesCanvasHandle, AsciiWavesCan
 
     useEffect(() => {
       const root = rootRef.current;
-      if (!root || typeof IntersectionObserver === "undefined") return undefined;
+      if (!root) return undefined;
+      if (typeof IntersectionObserver === "undefined") {
+        setVisible(true);
+        return undefined;
+      }
       const observer = new IntersectionObserver(
         (entries) => {
           const entry = entries[0];
@@ -235,6 +284,43 @@ export const AsciiWavesCanvas = forwardRef<AsciiWavesCanvasHandle, AsciiWavesCan
     const reportError = useCallback((error: unknown) => {
       setRuntimeError(describeError(error));
     }, []);
+
+    const playRuntime = useCallback(async () => {
+      try {
+        await runtimeRef.current?.play();
+        autoplayDenied.current = false;
+      } catch (error) {
+        if (isPlaybackBlocked(error)) autoplayDenied.current = true;
+        // pause(), seeking and visibility changes can interrupt pending play().
+        else if (!(error instanceof DOMException && error.name === "AbortError")) reportError(error);
+      }
+    }, [reportError]);
+
+    useEffect(() => {
+      const video = rootRef.current?.querySelector("video");
+      if (!loaded || !video || typeof video.requestVideoFrameCallback !== "function") return undefined;
+      presented.current = { at: 0, time: 0, count: 0 };
+      frameObserverActive.current = true;
+      let callback: number;
+      const onFrame: VideoFrameRequestCallback = (now, metadata) => {
+        // Native GStreamer loops can present frames with their HTML clock
+        // stuck at EOF. Observe actual frames without flushing seeks,
+        // restarting playback, or changing the preserved renderer's clock.
+        const previous = presented.current;
+        const moved = previous.count > 0 && Math.abs(metadata.mediaTime - previous.time) > 0.004;
+        presented.current = {
+          at: moved && !video.paused ? now : previous.at,
+          time: metadata.mediaTime,
+          count: previous.count + 1,
+        };
+        callback = video.requestVideoFrameCallback(onFrame);
+      };
+      callback = video.requestVideoFrameCallback(onFrame);
+      return () => {
+        frameObserverActive.current = false;
+        video.cancelVideoFrameCallback(callback);
+      };
+    }, [effectiveSrc, loaded]);
 
     // A decode or renderer failure must be visible even if the media never
     // reaches canplay, so this path does not wait for `loaded`.
@@ -257,6 +343,11 @@ export const AsciiWavesCanvas = forwardRef<AsciiWavesCanvasHandle, AsciiWavesCan
         setState((current) => (current.phase === "error" ? current : next));
         return undefined;
       }
+
+      // A deliberate pause can outlast the progress window. Give resumed
+      // playback the same existing startup grace before diagnosing a stall.
+      // This never calls play() or retries media while intent is held.
+      loadedAt.current = performance.now();
 
       const sample = () => {
         const runtime = runtimeRef.current;
@@ -281,9 +372,24 @@ export const AsciiWavesCanvas = forwardRef<AsciiWavesCanvasHandle, AsciiWavesCan
           }
         }
 
-        const frameAdvancing = now - lastFrameMoveAt.current < 650;
-        const videoAdvancing = now - lastVideoMoveAt.current < 650;
+        const frameAdvancing = lastFrameMoveAt.current > 0 && now - lastFrameMoveAt.current < 650;
+        const presentedAdvancing = presented.current.at > 0 && now - presented.current.at < 650;
+        const videoAdvancing = frameObserverActive.current
+          ? presentedAdvancing
+          : lastVideoMoveAt.current > 0 && now - lastVideoMoveAt.current < 650;
+        // Firefox can report cumulative rVFC mediaTime after native loops. Use
+        // frame time only while it is within the source's own duration.
+        const frameTime = frameObserverActive.current && presented.current.count > 0 ? presented.current.time : video.currentTime;
+        // The continuous timeline has a reliable native clock. A paused frame
+        // callback can preroll the next picture, so it must not move the held
+        // source position reported to controls and reduced-motion consumers.
+        const sourceTime = streaming ? video.currentTime % media.duration
+          : frameTime <= video.duration ? frameTime : video.currentTime;
         const settled = now - loadedAt.current > 1200;
+        if (videoAdvancing && frameAdvancing) {
+          hasPlayed.current = true;
+          autoplayDenied.current = false;
+        }
 
         let phase: FieldPlaybackPhase;
         if (runtimeError) phase = "error";
@@ -292,15 +398,16 @@ export const AsciiWavesCanvas = forwardRef<AsciiWavesCanvasHandle, AsciiWavesCan
         else if (reduced) phase = "reduced";
         else if (!playing) phase = "paused";
         else if (videoAdvancing && frameAdvancing) phase = "live";
-        else if (settled) phase = "blocked";
+        else if (settled) phase = autoplayDenied.current && !hasPlayed.current ? "blocked" : "stalled";
         else phase = "loading";
 
-        if (phase === "blocked") setBlockedHold(true);
+        if (phase === "blocked" || phase === "stalled") setBlockedHold(true);
         else if (phase === "live" || phase === "paused" || phase === "reduced") setBlockedHold(false);
 
         const next: FieldPlaybackState = {
           phase,
-          videoTime: Number(video.currentTime.toFixed(3)),
+          videoTime: Number(sourceTime.toFixed(3)),
+          nativeVideoTime: Number(video.currentTime.toFixed(3)),
           frameCount: snapshot.frameCount,
           waveClock: Number(snapshot.waveClock.toFixed(3)),
           videoPlaying: video.playing,
@@ -308,6 +415,8 @@ export const AsciiWavesCanvas = forwardRef<AsciiWavesCanvasHandle, AsciiWavesCan
           message:
             phase === "blocked"
               ? "Autoplay did not start. Press Start live field to begin playback."
+              : phase === "stalled"
+                ? "Playback stopped advancing. Use the playback control to restart the field."
               : runtimeError,
         };
 
@@ -315,6 +424,7 @@ export const AsciiWavesCanvas = forwardRef<AsciiWavesCanvasHandle, AsciiWavesCan
           if (
             current.phase === next.phase &&
             current.videoTime === next.videoTime &&
+            current.nativeVideoTime === next.nativeVideoTime &&
             current.frameCount === next.frameCount &&
             current.waveClock === next.waveClock &&
             current.videoPlaying === next.videoPlaying &&
@@ -342,16 +452,13 @@ export const AsciiWavesCanvas = forwardRef<AsciiWavesCanvasHandle, AsciiWavesCan
       sample();
       const timer = window.setInterval(sample, 250);
       return () => window.clearInterval(timer);
-    }, [disabled, loaded, pageHidden, playing, reduced, runtimeError, shouldLoad, visible]);
+    }, [disabled, loaded, media.duration, pageHidden, playing, reduced, runtimeError, shouldLoad, streaming, visible]);
 
     useImperativeHandle(ref, () => ({
       play: async () => {
         setBlockedHold(false);
-        try {
-          await runtimeRef.current?.play();
-        } catch (error) {
-          if (!isPlaybackBlocked(error)) reportError(error);
-        }
+        loadedAt.current = performance.now();
+        await playRuntime();
       },
       pause: () => runtimeRef.current?.pause(),
       retry: async () => {
@@ -360,13 +467,9 @@ export const AsciiWavesCanvas = forwardRef<AsciiWavesCanvasHandle, AsciiWavesCan
         loadedAt.current = performance.now();
         readyNotified.current = false;
         lastReportedPhase.current = "loading";
-        try {
-          await runtimeRef.current?.play();
-        } catch (error) {
-          if (!isPlaybackBlocked(error)) reportError(error);
-        }
+        await playRuntime();
       },
-    }), [reportError]);
+    }), [playRuntime]);
 
     const settled =
       state.phase === "live" ||
@@ -385,7 +488,17 @@ export const AsciiWavesCanvas = forwardRef<AsciiWavesCanvasHandle, AsciiWavesCan
         data-ready={settled ? "true" : "false"}
         data-live={state.phase === "live" ? "true" : "false"}
         data-playback={state.phase}
+        data-playback-reason={state.phase === "blocked" ? "autoplay-blocked" : state.phase === "stalled" ? "playback-stalled" : undefined}
         data-video-time={state.videoTime}
+        data-native-video-time={state.nativeVideoTime}
+        data-source-url={selectedFile ?? props.src}
+        data-loop-mode={streaming ? "buffered" : "native"}
+        data-cycle-duration={media.duration}
+        data-loop-appends={loopSourceRef.current?.stats.appends ?? 0}
+        data-loop-cycles={loopSourceRef.current?.stats.cycles ?? 0}
+        data-loop-fetches={loopSourceRef.current?.stats.fetches ?? 0}
+        data-loop-removals={loopSourceRef.current?.stats.removals ?? 0}
+        data-loop-buffer-seconds={loopSourceRef.current?.stats.bufferedSeconds ?? 0}
         data-frame-count={state.frameCount}
         data-wave-clock={state.waveClock}
         data-pointer-strength={state.pointerStrength}
@@ -401,11 +514,13 @@ export const AsciiWavesCanvas = forwardRef<AsciiWavesCanvasHandle, AsciiWavesCan
         />
         <span className={styles.vignette} aria-hidden="true" />
         <span className={styles.scan} aria-hidden="true" />
-        {shouldLoad && sourceSelected ? (
+        {shouldLoad && mayInitializeMedia && sourceSelected ? (
           <AsciiWavesRuntime
             {...props}
             src={effectiveSrc}
             startTime={effectiveStartTime}
+            loop={!streaming}
+            fallbackImage={poster.src}
             ref={runtimeRef}
             playing={playing && !blockedHold}
             reducedMotion={reducedMotion}
@@ -414,6 +529,9 @@ export const AsciiWavesCanvas = forwardRef<AsciiWavesCanvasHandle, AsciiWavesCan
             onReady={() => {
               loadedAt.current = performance.now();
               setLoaded(true);
+              // Observe the actual policy rejection; a silent clock stall is
+              // never enough evidence to label autoplay as blocked.
+              if (playbackAllowedRef.current) void playRuntime();
             }}
             onError={(error) => {
               reportError(error);

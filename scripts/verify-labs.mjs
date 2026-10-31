@@ -7,6 +7,7 @@ import { chromium, firefox, webkit } from "@playwright/test";
 import { execFileSync } from "node:child_process";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
+import { verifyMediaLoops } from "./media-loop/verify.mjs";
 
 const BASE = process.env.BASE_URL ?? "http://127.0.0.1:3200";
 const OUT = resolve("evidence/g4/labs");
@@ -498,6 +499,9 @@ for (const { name, engine, options } of engines) {
 }
 
 await browser.close();
+// Loop proof is a required gate, separate from the route matrix's readiness
+// snapshots. It runs at 1x across >=3 real boundaries and keeps negative controls.
+const mediaLoops = await verifyMediaLoops({ baseURL: BASE, check });
 const result = {
   generatedAt: new Date().toISOString(),
   baseUrl: BASE,
@@ -507,6 +511,7 @@ const result = {
   failed: checks.filter((item) => !item.pass).length,
   errors: checks.filter((item) => !item.pass),
   crossBrowser,
+  mediaLoops,
 };
 writeFileSync(`${OUT}/lab-verification.json`, `${JSON.stringify(result, null, 2)}\n`);
 console.log(JSON.stringify({ total: result.total, passed: result.passed, failed: result.failed, errors: result.errors }, null, 2));

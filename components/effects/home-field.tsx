@@ -9,6 +9,7 @@ import {
   type FieldPlaybackState,
 } from "./ascii-waves-canvas";
 import styles from "./home-field.module.css";
+import { JELLYFISH_MEDIA } from "./field-media";
 
 const READOUT: Record<FieldPlaybackPhase, { label: string; note: string }> = {
   loading: {
@@ -31,6 +32,10 @@ const READOUT: Record<FieldPlaybackPhase, { label: string; note: string }> = {
     label: "AUTOPLAY BLOCKED / START",
     note: "The browser did not start muted autoplay. Press Start live field to begin.",
   },
+  stalled: {
+    label: "PLAYBACK STALLED / RESTART",
+    note: "The source stopped advancing. Press Restart live field to try again.",
+  },
   hidden: {
     label: "PAUSED / PAGE HIDDEN",
     note: "Playback pauses while the page is in the background.",
@@ -52,6 +57,7 @@ export function HomeField() {
   const phase = state?.phase ?? "loading";
   const reduced = phase === "reduced";
   const blocked = phase === "blocked";
+  const stalled = phase === "stalled";
   const failed = phase === "error";
   const readout = READOUT[phase];
 
@@ -71,11 +77,11 @@ export function HomeField() {
   }
 
   return (
-    <figure className={styles.figure} data-home-field data-playback={phase}>
+    <figure className={styles.figure} data-home-field data-playback={phase} data-motif="jellyfish">
       <div className={styles.frame}>
         <div className={styles.topbar}>
           <span>FIELD 001 / ASCII WAVES</span>
-          <span className={styles.license}>FLOWER / CC0</span>
+          <span className={styles.license}>JELLYFISH / PEXELS</span>
           {reduced ? (
             <span className={styles.motionState}>MOTION / REDUCED</span>
           ) : (
@@ -96,19 +102,20 @@ export function HomeField() {
             ref={fieldRef}
             testId="home-field"
             priority
+            media={JELLYFISH_MEDIA}
             poster={{
-              src: "/media/motifs/flower-poster.jpg",
-              alt: "A still from the CC0 flower film used to generate the ASCII Waves field.",
+              src: "/media/motifs/jellyfish-poster.jpg",
+              alt: "Jellyfish drifting through blue light, rebuilt from moving characters.",
             }}
             preset="flower"
-            cellSize="auto"
+            cellSize={8}
             speed={1}
             quality="high"
             pointerInteraction
             reducedMotion="system"
             playing={playing}
             onStateChange={setState}
-            ariaLabel="Live ASCII Waves field: a flower film rebuilt from moving characters."
+            ariaLabel="Live ASCII Waves field: jellyfish drifting through blue light, rebuilt from moving characters."
           />
           <div className={styles.corners} aria-hidden="true">
             <span>+</span>
@@ -134,10 +141,10 @@ export function HomeField() {
             Y / 059
           </span>
 
-          {blocked ? (
+          {blocked || stalled ? (
             <button className={styles.startOverlay} type="button" onClick={startField}>
-              <strong>Start live field</strong>
-              <small>The browser paused muted autoplay. One press begins the source timeline.</small>
+              <strong>{stalled ? "Restart live field" : "Start live field"}</strong>
+              <small>{stalled ? "Playback stopped advancing. Press to restart the source timeline." : "The browser paused muted autoplay. One press begins the source timeline."}</small>
             </button>
           ) : null}
 
@@ -157,11 +164,11 @@ export function HomeField() {
         <figcaption className={styles.footer}>
           <div>
             <span className={styles.captionLabel}>CURRENT STUDY</span>
-            <span>ASCII Waves / Flower</span>
+            <span>ASCII Waves / Jellyfish</span>
           </div>
           <div className={styles.footerLinks}>
             <Link className={styles.open} href="/lab/ascii-waves">
-              Open unlisted preview <span aria-hidden="true">↗</span>
+              Open ASCII Waves lab <span aria-hidden="true">↗</span>
             </Link>
             <Link className={styles.open} href="/lab">
               All lab previews <span aria-hidden="true">↗</span>
