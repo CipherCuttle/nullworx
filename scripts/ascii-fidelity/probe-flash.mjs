@@ -22,6 +22,7 @@ try {
   page.on('pageerror', e => pageErrors.push(e.message));
   page.on('console', e => { if (e.type() === 'error') pageErrors.push(e.text()); });
   await page.goto(new URL(route,base).href, { waitUntil:'networkidle' });
+  await page.locator('[data-ascii-stage]').scrollIntoViewIfNeeded();
   await page.waitForSelector('[data-ascii-stage] canvas');
   await page.waitForFunction(() => Number(document.querySelector('[data-ascii-stage]')?.dataset.cycleDuration) > 0, null, {timeout:25_000});
   const report = await page.evaluate(async () => {
