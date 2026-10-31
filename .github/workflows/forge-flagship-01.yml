@@ -1,0 +1,51 @@
+name: forge-flagship-01
+
+on:
+  pull_request:
+    branches: [experiment/forge-effect-factory-01]
+    paths:
+      - 'app/lab/forge-flagship-01/**'
+      - 'components/forge-flagship-01/**'
+      - 'tests/e2e/forge-flagship-01.spec.ts'
+      - 'docs/FORGE_FLAGSHIP_01.md'
+      - '.github/workflows/forge-flagship-01.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  isolated-flagships:
+    if: github.head_ref == 'experiment/forge-flagship-shaders-01'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 12.15.0
+      - name: Frozen dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Lint, typecheck, unit, build, secrets
+        run: pnpm verify
+      - name: Install Chromium
+        run: pnpm exec playwright install --with-deps chromium
+      - name: Animated screenshot and browser proof
+        run: pnpm exec playwright test tests/e2e/forge-flagship-01.spec.ts
+      - name: Scope check
+        run: git diff --check HEAD^ HEAD
+      - name: Visual review artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: forge-flagship-01-${{ github.event.pull_request.head.sha }}
+          path: |
+            test-results/forge-flagship-01/**
+            test-results/**/*.zip
+          if-no-files-found: ignore
+          retention-days: 7
