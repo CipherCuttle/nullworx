@@ -42,7 +42,7 @@ export function ShaderCanvas({
   const paramsRef = useRef({ paused, speed, intensity });
   const [status, setStatus] = useState<Status>("loading");
   const [retry, setRetry] = useState(0);
-  paramsRef.current = { paused, speed, intensity };
+  useEffect(() => { paramsRef.current = { paused, speed, intensity }; }, [paused, speed, intensity]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -55,8 +55,9 @@ export function ShaderCanvas({
     let visible = true;
     let reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const scheduleStatus = (next: Status) => window.requestAnimationFrame(() => { if (!disposed) setStatus(next); });
     const gl = canvas.getContext("webgl2", { alpha: false, antialias: false, powerPreference: "low-power" });
-    if (!gl) { setStatus("fallback"); return; }
+    if (!gl) { scheduleStatus("fallback"); return () => { disposed = true; }; }
     let program: WebGLProgram | null = null;
     let buffer: WebGLBuffer | null = null;
     let vs: WebGLShader | null = null;
@@ -126,7 +127,7 @@ export function ShaderCanvas({
       io = new IntersectionObserver((entries) => { visible = entries[0]?.isIntersecting ?? true; last = 0; }, { threshold: .01 });
       io.observe(canvas);
       resize();
-      setStatus("webgl2");
+      scheduleStatus("webgl2");
       frame = window.requestAnimationFrame(draw);
       return () => {
         disposed = true;
@@ -146,12 +147,12 @@ export function ShaderCanvas({
       };
     } catch (error) {
       console.warn("[forge-flagship-01] WebGL unavailable:", error);
-      setStatus("fallback");
+      scheduleStatus("fallback");
       if (buffer) gl.deleteBuffer(buffer);
       if (program) gl.deleteProgram(program);
       if (vs) gl.deleteShader(vs);
       if (fs) gl.deleteShader(fs);
-      return;
+      return () => { disposed = true; };
     }
   }, [fragment, retry]);
 
