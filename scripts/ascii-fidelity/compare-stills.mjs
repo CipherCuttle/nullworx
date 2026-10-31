@@ -26,6 +26,7 @@ const browser = await chromium.launch({ headless: true, channel: process.env.CHA
 try {
   const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 });
   await page.goto(new URL(route, baseURL).href, { waitUntil: 'networkidle' });
+  await page.locator('[data-ascii-stage]').scrollIntoViewIfNeeded();
   await page.waitForFunction(() => Boolean(document.querySelector('[data-ascii-stage]')?.dataset.sourceUrl), null, { timeout: 20000 });
   const source = await page.locator('[data-ascii-stage]').getAttribute('data-source-url');
   if (!source || !/^\/|^https?:/.test(source)) throw new Error('A normal video source URL is required: ' + source);
