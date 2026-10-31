@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 import { SpectralField, spectralPresets } from "@/components/forge-flagship-01/spectral-field";
 import { LiquidRefraction, liquidPresets } from "@/components/forge-flagship-01/liquid-refraction";
 import { RefractionCard } from "@/components/forge-flagship-01/refraction-card";
@@ -32,7 +33,7 @@ export function FlagshipGallery() {
  const current=names.find((e)=>e.id===selected)!;
  return <main id="main" tabIndex={-1} className={styles.page} data-forge-flagship="01">
   <div className={styles.wrap}>
-   <header className={styles.top}><a href="/lab/forge-factory-01">UI FORGE<span>.</span></a><small>FLAGSHIP STUDIES / 02</small><small>PROOF ONLY · NOINDEX</small></header>
+   <header className={styles.top}><Link href="/lab/forge-factory-01">UI FORGE<span>.</span></Link><small>FLAGSHIP STUDIES / 02</small><small>PROOF ONLY · NOINDEX</small></header>
    <div className={styles.hero}><div><span className={styles.kicker}>BATCH B / OPTICAL SYSTEMS</span><h1>Light behaves <em>differently.</em></h1><p>Three original material experiments. Tunable, responsive, and intentionally unreleased. Judge the motion, not only the still frame.</p></div><strong>06<span>/12</span></strong></div>
    <div className={styles.workbench}>
     <aside className={styles.side}>
