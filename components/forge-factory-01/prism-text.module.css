@@ -1,0 +1,25 @@
+.prism {
+  display: inline-block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  font-family: Georgia, "Iowan Old Style", serif;
+  font-size: clamp(3.6rem, 10.5vw, 9.4rem);
+  font-style: italic;
+  font-weight: 650;
+  letter-spacing: -0.085em;
+  line-height: 1.02;
+  background-image:
+    linear-gradient(115deg, #263d3d 0%, #98c7b8 12%, #f0e2c7 24%, #c18baf 38%, #6e98c8 50%, #dcd4a0 68%, #5d9391 84%, #273a36 100%);
+  background-size: 350% 100%;
+  background-position: 0% 50%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: sweep 11s cubic-bezier(0.44, 0, 0.56, 1) infinite alternate;
+  text-shadow: 0 22px 30px rgb(29 87 91 / 0.07);
+}
+@keyframes sweep { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
+@media (prefers-reduced-motion: reduce) {
+  .prism { animation: none !important; background-position: 42% 50%; }
+}

@@ -1,0 +1,23 @@
+.morph {
+  display: inline-block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  font-family: ui-monospace, "SFMono-Regular", "Cascadia Code", monospace;
+  font-size: clamp(2.2rem, 8vw, 7.8rem);
+  font-weight: 750;
+  letter-spacing: -0.095em;
+  line-height: 1.1;
+  color: #0f2723;
+  font-variant-ligatures: none;
+}
+.screenReader {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
