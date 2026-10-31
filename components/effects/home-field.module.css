@@ -412,3 +412,13 @@
     gap: 12px;
   }
 }
+
+
+/* Fidelity proof 01: maximize source detail per visible glyph cell at desktop
+   widths. This is a presentation study, not a new media scale or shader. */
+@media (min-width: 761px) {
+  .stage {
+    aspect-ratio: 16 / 9;
+    min-height: 0;
+  }
+}
