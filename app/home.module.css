@@ -854,3 +854,35 @@
     width: fit-content;
   }
 }
+
+
+/* ASCII fidelity proof 01: make the actual field larger, not just its backing DPR.
+   Review-only layout; original Effect/Flower source and mobile layout are unchanged. */
+@media (min-width: 941px) {
+  .heroGrid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(30px, 4.5vw, 64px);
+  }
+
+  .heroCopy {
+    min-height: 0;
+  }
+
+  .heroLede {
+    margin-top: 0;
+    padding-top: clamp(28px, 3.6vw, 48px);
+  }
+
+  .heroField {
+    width: 100%;
+    max-width: 1080px;
+    margin-inline: auto;
+    padding-top: 0;
+  }
+}
+
+@media (min-width: 761px) and (max-width: 940px) {
+  .heroField {
+    max-width: 900px;
+  }
+}
