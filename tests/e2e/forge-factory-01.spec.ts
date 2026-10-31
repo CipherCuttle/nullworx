@@ -24,6 +24,9 @@ for (const size of sizes) {
       await page.getByTestId(`select-${effect}`).click();
       await expect(page.locator(`[data-effect="${effect === "glyph" ? "glyph-morph" : effect === "prism" ? "prism-text" : "magnetic-focus"}"]`)).toBeVisible();
       await expect(page.locator('[role="tab"][aria-selected="true"]')).toHaveCount(1);
+      if (effect === "magnetic") {
+        await expect(page.locator('[data-effect="magnetic-focus"]')).toHaveCSS("color", "rgb(241, 248, 238)");
+      }
       if (effect === "glyph") {
         await expect(page.getByTestId("glyph-morph-visible")).toHaveText("HELLO WORLD", { timeout: 5000 });
       }
