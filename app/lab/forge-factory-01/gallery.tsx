@@ -126,7 +126,7 @@ export function ForgeFactoryGallery() {
         <section className={styles.under}>
           <div>
             <div className={styles.sectionTitle}><span>03</span> SOURCE CONTRACT</div>
-            <h2>Built for other<br /><em>people's projects.</em></h2>
+            <h2>Built for other<br /><em>people&apos;s projects.</em></h2>
             <p>Each effect is independently importable, framework-neutral React code (no Next-specific import), with separately scoped styles. Packages are not published until a clean external-consumer test and explicit owner approval.</p>
           </div>
           <div className={styles.filelist}>
